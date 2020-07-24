@@ -1,16 +1,28 @@
 package OCR;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.highgui.HighGui;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+
 public class Teste {
 
 	public static void main(String[] args) {
 
 
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // Sempre tem que inicializar...
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME); // Biblioteca Nativa do OpenCV
 
 		// Caminho para a imagem que queremos mostar
-		String localimg="C:\\Users\\Cliente\\Desktop\\testeTcc\\honda-civic.jpg";
+		String localimg="C:\\BACKUP\\Git\\TCC\\Projeto_TCC\\bib\\img\\honda-civic.jpg";
 
 
+		/*
+		 * A classe Mat representa um arranjo numérico denso e único canal ou multicanal n-dimensional. 
+		 * Pode ser usado para armazenar vetores e matrizes reais ou complexos, 
+		 * imagens em escala de cinza ou em cores, volumes voxel, campos vetoriais, 
+		 * nuvens de pontos, tensores, histogramas.*/
 		Mat img = Imgcodecs.imread(localimg);				     
 		HighGui.namedWindow("placa_Normal", HighGui.WINDOW_AUTOSIZE);
 		HighGui.imshow("placa_Normal", img);
@@ -19,8 +31,6 @@ public class Teste {
 
 		Mat imgGrey = new Mat();
 		Imgproc.cvtColor(img, imgGrey, Imgproc.COLOR_BGR2GRAY);			          
-		HighGui.namedWindow("Placa_em_Cinza", HighGui.WINDOW_AUTOSIZE);
-		HighGui.imshow("Placa_em_Cinza", imgGrey);				     
 
 		Mat imgBinary = new Mat();
 		Imgproc.GaussianBlur(imgGrey, imgBinary, new Size(5,5), 0);

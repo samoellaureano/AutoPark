@@ -57,6 +57,13 @@ public class Teste {
 		Imgproc.blur(imgBinary, imgGreyDesfoq, new Size(3,3));		          
 		HighGui.namedWindow("Placa_desfocado", HighGui.WINDOW_AUTOSIZE);
 		HighGui.imshow("Placa_desfocado", imgGreyDesfoq);
+		
+		Mat imgDilate = new Mat();
+		Imgproc.dilate(imgBinary, imgDilate, null);
+		HighGui.namedWindow("Placa_Dilatado", HighGui.WINDOW_AUTOSIZE);
+		HighGui.imshow("Placa_Dilatado", imgDilate);
+		
+
 
 		HighGui.waitKey(0);         
 	}
