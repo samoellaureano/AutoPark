@@ -1,0 +1,21 @@
+Exemplo:
+
+CONTEXTO: A Web é abundante em páginas que armazenam
+dados de forma implícita.
+
+PROBLEMA: Em muitos casos, estes dados estão presentes em
+textos semiestruturados sem a presença de delimitadores
+explícitos e organizados em uma estrutura também implícita.
+
+SOLUÇÃO: Neste artigo apresentamos uma nova abordagem
+para extração em textos semi-estruturados baseada em
+Modelos de Markov Ocultos (Hidden Markov Models - HMM).
+
+ESTADO-DA-ARTE e MÉTODO PROPOSTO: Ao contrário
+de outros trabalhos baseados em HMM, nossa abordagem dá
+ênfase à extração de metadados além dos dados propriamente
+ditos. Esta abordagem consiste no uso de uma estrutura aninhada
+de HMMs, onde um HMM principal identifica os atributos no texto
+e HMMs internos, um para cada atributo, identificam os dados e
+metadados. Os HMMs são gerados a partir de um treinamento
+com uma fração de amostras da base a ser extraída.
