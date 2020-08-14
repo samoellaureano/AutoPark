@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AutoPark</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/alertToast.css">
+</head>
+<body><div class="container" id="telaCadastro">
+    <span>Cadastrar Cliente</span>
+    <img id="profile-img" src="img/newClient.png" />
+
+    <form id="cadastro">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" required autofocus>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+        <label for="identificacao">CPF/CNPJ:</label>
+        <input type="text" id="identificacao" name="identificacao" required autofocus>
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" required autofocus>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" placeholder="******" required>
+        <label for="reSenha">Repetir a Senha:</label>
+        <input type="password" id="reSenha" name="reSenha" placeholder="******" required>
+        <div>
+            <button type="button" onclick="">ENVIAR</button>
+        </div>
+    </form>
+    <a href="index.html">VOLTAR</a>      
+</div>
+<div id="msgCadastro" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/login.js"></script>
+</html>

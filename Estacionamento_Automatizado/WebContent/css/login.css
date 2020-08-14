@@ -12,6 +12,13 @@ html,body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px;
+}
+
+.container > span {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
 }
 
 .container > a {
@@ -39,7 +46,7 @@ html,body{
 }
 
 .container > form > input {
-  width: 20rem;
+  width: 18rem;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -55,7 +62,16 @@ html,body{
 
 .container > form > div {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container > form > div > a {
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
 }
 
 .container > form > div > button{
