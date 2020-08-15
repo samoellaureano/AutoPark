@@ -32,7 +32,47 @@ body {
 
 .container > div {
   display: flex;
+  align-content: center;
+  height: auto;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 2px solid #04263c;
+  margin: 1rem;
+
 }
+
+.container > div > label:nth-child(1){
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.container > div > label:nth-child(2){
+  text-align:left;
+  margin-bottom: 1rem;
+}
+
+.container > div > label {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: 14px;
+}
+
+
+.container > div > div > label {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;  
+  }
+
+  .container > div > div {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    margin: 0px 0px 10px 0px;    
+  }
+
+  .container > div > div > img {
+    margin: 0px 10px 0px 0px;
+  }
 
 .container > div > a {
   margin-top: 19px;
@@ -101,3 +141,7 @@ option {
   position: fixed;
   width: 95%;
 }
+
+/* Css do daschboard-Cliente */
+
+
