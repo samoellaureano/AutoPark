@@ -1,3 +1,5 @@
 $(document).ready(function(){
-    $("#menu").load("../menu.html");
+    $("#menu").load("../cliente/menu/menu.html");
+    
+    
 });
