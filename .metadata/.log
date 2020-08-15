@@ -8418,3 +8418,118 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2020-08-15 13:46:35.363 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=1.8.0_212
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jface 2 0 2020-08-15 13:46:45.268
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-15 13:46:45.268
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5527dbb0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@483fe83a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-08-15 13:46:55.077
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Samoel'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-08-15 13:47:14.080
+!MESSAGE Unable to start language server: Angular Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-server\index.js, --ngProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-service, --tsProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\typescript, --stdio, --logVerbosity, terse], workingDir=C:\Windows\System32]
+!STACK 0
+java.io.IOException: Unable to start language server: Angular Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-server\index.js, --ngProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-service, --tsProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\typescript, --stdio, --logVerbosity, terse], workingDir=C:\Windows\System32]
+	at org.eclipse.lsp4e.server.ProcessStreamConnectionProvider.start(ProcessStreamConnectionProvider.java:50)
+	at org.eclipse.lsp4e.LanguageServerWrapper.start(LanguageServerWrapper.java:213)
+	at org.eclipse.lsp4e.LanguageServerWrapper.getInitializedServer(LanguageServerWrapper.java:667)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.lambda$14(LanguageServiceAccessor.java:589)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Iterator.forEachRemaining(Iterator.java:116)
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:546)
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:438)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.getLanguageServers(LanguageServiceAccessor.java:602)
+	at org.eclipse.lsp4e.ConnectDocumentToLanguageServerSetupParticipant$2.run(ConnectDocumentToLanguageServerSetupParticipant.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-08-15 13:47:14.855
+!MESSAGE Unable to start language server: HTML Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\vscode-html-languageserver\dist\htmlServerMain.js, --stdio], workingDir=C:\Windows\System32]
+!STACK 0
+java.io.IOException: Unable to start language server: HTML Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\vscode-html-languageserver\dist\htmlServerMain.js, --stdio], workingDir=C:\Windows\System32]
+	at org.eclipse.lsp4e.server.ProcessStreamConnectionProvider.start(ProcessStreamConnectionProvider.java:50)
+	at org.eclipse.lsp4e.LanguageServerWrapper.start(LanguageServerWrapper.java:213)
+	at org.eclipse.lsp4e.LanguageServerWrapper.getInitializedServer(LanguageServerWrapper.java:667)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.lambda$14(LanguageServiceAccessor.java:589)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Iterator.forEachRemaining(Iterator.java:116)
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:546)
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:438)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.getLanguageServers(LanguageServiceAccessor.java:602)
+	at org.eclipse.lsp4e.ConnectDocumentToLanguageServerSetupParticipant$2.run(ConnectDocumentToLanguageServerSetupParticipant.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-08-15 13:47:14.863
+!MESSAGE Unable to start language server: Angular Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-server\index.js, --ngProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-service, --tsProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\typescript, --stdio, --logVerbosity, terse], workingDir=C:\Windows\System32]
+!STACK 0
+java.io.IOException: Unable to start language server: Angular Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-server\index.js, --ngProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\@angular\language-service, --tsProbeLocations, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\typescript, --stdio, --logVerbosity, terse], workingDir=C:\Windows\System32]
+	at org.eclipse.lsp4e.server.ProcessStreamConnectionProvider.start(ProcessStreamConnectionProvider.java:50)
+	at org.eclipse.lsp4e.LanguageServerWrapper.start(LanguageServerWrapper.java:213)
+	at org.eclipse.lsp4e.LanguageServerWrapper.getInitializedServer(LanguageServerWrapper.java:667)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.lambda$14(LanguageServiceAccessor.java:589)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Iterator.forEachRemaining(Iterator.java:116)
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:546)
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:438)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.getLanguageServers(LanguageServiceAccessor.java:602)
+	at org.eclipse.lsp4e.ConnectDocumentToLanguageServerSetupParticipant$2.run(ConnectDocumentToLanguageServerSetupParticipant.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-08-15 13:47:15.285
+!MESSAGE Unable to start language server: HTML Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\vscode-html-languageserver\dist\htmlServerMain.js, --stdio], workingDir=C:\Windows\System32]
+!STACK 0
+java.io.IOException: Unable to start language server: HTML Language Server: ProcessStreamConnectionProvider [commands=[null, C:\Users\Samoel\eclipse\jee-2020-06\eclipse\..\..\..\.p2\pool\plugins\org.eclipse.wildwebdeveloper_0.5.8.202005190736\node_modules\vscode-html-languageserver\dist\htmlServerMain.js, --stdio], workingDir=C:\Windows\System32]
+	at org.eclipse.lsp4e.server.ProcessStreamConnectionProvider.start(ProcessStreamConnectionProvider.java:50)
+	at org.eclipse.lsp4e.LanguageServerWrapper.start(LanguageServerWrapper.java:213)
+	at org.eclipse.lsp4e.LanguageServerWrapper.getInitializedServer(LanguageServerWrapper.java:667)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.lambda$14(LanguageServiceAccessor.java:589)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Iterator.forEachRemaining(Iterator.java:116)
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:546)
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:438)
+	at org.eclipse.lsp4e.LanguageServiceAccessor.getLanguageServers(LanguageServiceAccessor.java:602)
+	at org.eclipse.lsp4e.ConnectDocumentToLanguageServerSetupParticipant$2.run(ConnectDocumentToLanguageServerSetupParticipant.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
