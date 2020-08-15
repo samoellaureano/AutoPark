@@ -1,0 +1,118 @@
+html,
+body {
+  display: flex;
+  width: 100%;
+  height: 98%;
+  background-color: #0c4304;
+  background-image: url(../../../img/logo.png);
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 50px 0px 50px;
+  width: 100%;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 4rem;
+}
+
+.filial{
+    display: flex;
+    flex-direction: column;
+    height: 7rem;
+    align-items: center;
+}
+
+.item{
+    text-align: center;
+    display: contents;
+}
+
+.item2{
+  background-color: #fff;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 3rem;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    border: 2px solid;
+    margin: -40px 0rem 0rem 106px;
+    display: flex;
+}
+
+.medidores{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.check{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.check > button {
+  padding: 1rem;
+  margin: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #fff;
+  border-radius: 2rem;
+  cursor: pointer;
+  color: #fff;
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
+.check > button:nth-child(1){
+  background-color: #880000;
+}
+
+.check > button:nth-child(2){
+  background-color: #027c31;
+}
+
+.circulo{  
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: fit-content;
+    min-width: 3rem;
+}
+
+.circulo > span{
+  color: black;
+  font-size: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+select {
+  width: fit-content;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
+option {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menu {
+  position: fixed;
+  width: 95%;
+}

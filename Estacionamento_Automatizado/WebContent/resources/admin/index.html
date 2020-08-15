@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoPark</title>
-    <link rel="stylesheet" href="css/admin-mobile.css" media="screen and (min-device-width: 200px)">
     <link rel="stylesheet" href="css/admin-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/admin-mobile.css" media="screen and (max-device-width: 600px)">
+    
 
     <script src="../../js/jquery.js"></script>
     <script src="js/admin.js"></script>
@@ -24,25 +25,29 @@
         <div class="medidores">
             <div class="item">
                 <div class="circulo">
-                    <label for=""></label>
+                    <span id="vagaDisponivel">16</span>
                 </div>
                 <label for="">Vagas Disponivies</label>
             </div>
             <div class="item">
-                <div class="circulo"></div>
+                <div class="circulo">
+                    <span id="vagaDisponivel">350</span>
+                </div>
                 <label for="">Clientes no Dia</label>
             </div>
             <div class="item">
-                <div class="circulo"></div>
+                <div class="circulo">
+                    <span id="vagaDisponivel">200,00</span>
+                </div>
                 <label for="">Receita</label>
                 <div><label class="item2" for="">R$</label></div>
                 
             </div>
             
         </div>
-        <div>
-            <button type="button">Check-in</button>
+        <div class="check">
             <button type="button">Check-out</button>
+            <button type="button">Check-in</button>            
         </div>
     </div>
     <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
