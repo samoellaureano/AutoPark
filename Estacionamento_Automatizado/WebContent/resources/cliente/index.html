@@ -6,8 +6,28 @@
     <title>AutoPark</title>
     <link rel="stylesheet" href="css/cliente-mobile.css" media="screen and (min-device-width: 200px)">
     <link rel="stylesheet" href="css/cliente-desktop.css" media="screen and (min-device-width:600px)">
+
+    <script src="../../js/jquery.js"></script>
+    <script src="js/cliente.js"></script>
 </head>
 <body>
+    <div class="menu" id="menu"></div>
     
+    <div class="container" id="telaLogin">
+        <form id="login">
+            <label for="inputCPF">Login:</label>
+            <input type="text" id="inputCPF" name="inputCPF" placeholder="CPF/CNPJ" required autofocus>
+            <label for="inputPassword">Senha:</label>
+            <input type="password" id="inputPassword" name="inputPassword" placeholder="******" required>
+            <div>
+                
+                <button type="button" onclick="assistencia.login()">Entrar</button>
+                <a href="cadastrar.html">CADASTRAR</a>
+            </div>
+        </form>
+        
+        <div><a href="esqueciSenha.html">ESQUECI A SENHA</a></div>        
+    </div>
+    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
 </body>
 </html>

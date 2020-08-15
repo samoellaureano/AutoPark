@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AutoPark</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/alertToast.css">
+</head>
+
+<body>
+    <div class="container" id="telaCadastro">
+        <span>Cadastrar Veículo</span>
+        <img id="profile-img" src="img/newVeiculo.png" />
+
+        <form id="cadastro" action="index.html">
+            <label for="nome">Marca:</label>
+            <select name="marca" id="marca" required>
+                <option value="Ford">Ford</option>
+            </select>
+            <label for="nome">Modelo:</label>
+            <select name="modelo" id="modelo" required>
+                <option value="Ka">Ka</option>
+            </select>
+            <label for="nome">Ano:</label>
+            <select name="ano" id="ano" required>
+                <option value="2006">2006</option>
+            </select>
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" required>
+            <div>
+                <button type="submit" onclick="">ENVIAR</button>
+            </div>
+        </form>
+        <a href="index.html">VOLTAR</a>
+    </div>
+    <div id="msgCadastro" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/login.js"></script>
+
+</html>
