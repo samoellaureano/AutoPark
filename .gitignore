@@ -53,3 +53,9 @@ Servers/.settings/org.eclipse.wst.server.core.prefs
 .metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties
 .metadata/version.ini
 *.prefs
+*.index
+*.index
+*.resources
+*.prefs
+*.xml
+*.xmi
