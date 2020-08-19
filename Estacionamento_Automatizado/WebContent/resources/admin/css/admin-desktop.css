@@ -63,6 +63,11 @@ body {
   margin-bottom: 2rem;
 }
 
+.medidorValor{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .check{
   display: flex;
   flex-wrap: wrap;

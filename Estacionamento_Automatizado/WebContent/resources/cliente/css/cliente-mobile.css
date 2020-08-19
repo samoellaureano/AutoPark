@@ -8,6 +8,14 @@ body {
   background-repeat: no-repeat;
 }
 
+.logo{
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  width: 100%;
+  justify-content: flex-end;
+}
+
 .container {
   margin: auto;
   display: flex;
