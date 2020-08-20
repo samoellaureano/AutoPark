@@ -27,6 +27,7 @@ body {
   width: 100%;
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 10;
 }
 
 .filial{
@@ -56,11 +57,15 @@ body {
 
 .medidores{
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: 2rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 2rem;
+    border: 0.5px solid #fff;
+    border-radius: 9rem;
+    background-color: #0121018a;
+    padding: 2rem;
 }
 
 .medidorValor{
@@ -82,7 +87,8 @@ body {
   border-radius: 2rem;
   cursor: pointer;
   color: #fff;
-  outline: 0px auto -webkit-focus-ring-color;
+  outline: 0px auto -webkit-focus-ring-color;  
+  width: 7rem;
 }
 
 .check > button:nth-child(1){
@@ -91,6 +97,10 @@ body {
 
 .check > button:nth-child(2){
   background-color: #027c31;
+}
+
+.box-check{
+  
 }
 
 .circulo{  
@@ -127,4 +137,5 @@ option {
   flex-wrap: nowrap;
   position: fixed;
   width: 95%;
+  z-index: 11;
 }
