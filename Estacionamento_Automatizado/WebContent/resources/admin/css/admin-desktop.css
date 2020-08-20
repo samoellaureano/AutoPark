@@ -63,7 +63,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 2rem;
     border: 0.5px solid #fff;
-    border-radius: 9rem;
+    border-radius: 1rem;
     background-color: #0121018a;
     padding: 2rem;
 }
@@ -100,7 +100,46 @@ body {
 }
 
 .box-check{
-  
+  display: none;
+  width: 100%;
+  justify-content: center;
+}
+
+.exibirBox-check{
+  display: flex;
+}
+
+.box-check > div {
+  border: 0.5px solid #fff;
+  border-radius: 1rem;
+  background-color: #0121018a;
+  padding: 1rem;
+  width: 8rem;
+}
+
+.box-check > div > form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.box-check > div > form > label{
+  margin-bottom: 10px;
+}
+
+.box-check > div > form > a{
+  color: white;
+  margin: 1rem 0rem 0.2rem;
+}
+
+.box-check > div > form > button{
+  margin: auto;
+  width: 5rem;
+    background-color: whitesmoke;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
 }
 
 .circulo{  

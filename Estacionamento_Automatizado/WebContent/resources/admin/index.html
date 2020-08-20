@@ -47,16 +47,18 @@
             </div>
             
         </div>
-        <div class="box-check">
-            <form action="">
-                <label for="placa">Placa do Veículo</label>
-            <input type="text" placeholder="Placa">
-            <button>Cancelar</button>
-            <button>Confirmar</button>
-            </form>
+        <div class="box-check" id="box-check">
+            <div>
+                <form action="">
+                    <label for="placa">Placa do Veículo</label>
+                <input type="text" placeholder="Placa">
+                <a href="">Cancelar</a>
+                <button>Confirmar</button>
+                </form>
+            </div>
         </div>
         <div class="check">
-            <button type="button">Check-out</button>
+            <button type="button" onclick="document.querySelector('#box-check').classList.add('exibirBox-check')">Check-out</button>
             <button type="button">Check-in</button>            
         </div>
     </div>
