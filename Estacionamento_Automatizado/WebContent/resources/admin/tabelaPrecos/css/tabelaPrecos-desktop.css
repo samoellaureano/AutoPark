@@ -79,7 +79,7 @@ body {
   justify-content: center;
 }
 
-.check > label {
+.check > button {
   padding: 1rem;
   margin: 10px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -89,14 +89,13 @@ body {
   color: #fff;
   outline: 0px auto -webkit-focus-ring-color;  
   width: 7rem;
-  text-align: center;
 }
 
-.check > label:nth-child(2){
+.check > button:nth-child(1){
   background-color: #880000;
 }
 
-.check > label:nth-child(4){
+.check > button:nth-child(2){
   background-color: #027c31;
 }
 
@@ -106,13 +105,7 @@ body {
   justify-content: center;
 }
 
-.pai-check #check-out:checked ~ div{
-  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "check-out"*/
-  display: flex;
-}
-
-.pai-check #check-in:checked ~ div{
-  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "check-out"*/
+.exibirBox-check{
   display: flex;
 }
 
