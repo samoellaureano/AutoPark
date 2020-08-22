@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AutoPark</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login.css">
+    
+</head>
+<body><div class="container" id="Cadastro_cliente">
+    <span>Cadastrar Cliente</span>
+    <img id="profile-img" src="img/newClient.png" />
+
+    <form id="cadastro" class="pesquisa" action="cadastrarVeiculo.html">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+      
+        <label for="tel">Telefone</label>
+        <input type="text" id="tel" name="tel" placeholder="(00) 0 0000-0000" required>
+        <label for="email">E-mail</label>
+        <input type="text" id="cliente" name="cliente" placeholder="E-mail" required>
+        <div>
+            <button type="submit" onclick="">Enviar</button>
+        </div>
+    </form>
+    <a href="index.html">VOLTAR</a>      
+</div>
+<div id="msgCadastro" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
+
+</html>
