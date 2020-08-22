@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.opencv.imgcodecs.Imgcodecs"/>
-<fullyQualifiedTypeName name="org.opencv.core.Mat"/>
-<fullyQualifiedTypeName name="org.opencv.core.Core"/>
-<fullyQualifiedTypeName name="org.opencv.core.Size"/>
-<fullyQualifiedTypeName name="org.opencv.imgproc.Imgproc"/>
-<fullyQualifiedTypeName name="org.opencv.highgui.HighGui"/>
+    <fullyQualifiedTypeName name="org.opencv.imgcodecs.Imgcodecs"/>
+    <fullyQualifiedTypeName name="org.opencv.core.Mat"/>
+    <fullyQualifiedTypeName name="org.opencv.core.Core"/>
+    <fullyQualifiedTypeName name="org.opencv.core.Size"/>
+    <fullyQualifiedTypeName name="org.opencv.imgproc.Imgproc"/>
+    <fullyQualifiedTypeName name="org.opencv.highgui.HighGui"/>
 </qualifiedTypeNameHistroy>
