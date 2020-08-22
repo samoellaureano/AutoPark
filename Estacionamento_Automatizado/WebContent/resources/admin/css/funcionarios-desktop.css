@@ -19,59 +19,76 @@ body {
 }
 
 .container {
-  margin: 4rem 0px 0 5rem;
-  display: flex;  
-  flex-direction: column;
-  justify-content: center;
-  padding: 50px;
-  width: 100%;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  z-index: 10;
+      display: flex;
+      justify-content: end;
+      padding: 3rem 0rem 0rem;
+      width: 100%;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      z-index: 10;
+      justify-content: space-around;
+      flex-wrap: wrap;
 }
 
-.filial{
+.container > div:nth-child(1){
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 7rem;
+  align-items: center;
 }
 
-.item{
+h2{
+  margin-bottom: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+button{
+  background-color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 5rem;
+    width: 5rem;
+    font-family: monospace;    
+  outline: 0px auto -webkit-focus-ring-color;
+  cursor: pointer;
+}
+
+.listaFuncionarios{
+  background-color: #aeb7ad42;
+  color: black;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  border-radius: 0.2rem;
 }
 
-.item2{
-  background-color: #fff;
-    height: 1.5rem;
-    width: 1.5rem;
-    padding: 0.5rem;
-    border-radius: 3rem;
-    color: black;
-    text-align: center;
+.listaFuncionarios > ul{
+  background-color: #ffffff;
+    padding: 0.5rem 0rem 0rem;
+    border: 1px solid #efefef;
+    border-radius: 0.2rem;
+    margin: 0.1rem 0rem;
+}
+
+.listaFuncionarios > ul > label{
+  display: block;
     justify-content: center;
-    border: 2px solid;
-    margin: -61px 0rem 0rem 106px;
-    display: flex;
+    padding: 0.2rem 2rem;
 }
 
-.medidores{
-  display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-bottom: 2rem;
-    border: 0.5px solid #fff;
-    border-radius: 1rem;
-    background-color: #0121018a;
-    padding: 2rem;
+.listaFuncionarios li{
+  width: auto;
+    display: none;
+    background-color: #bac1b9ad;
+    padding: 0.4rem 0.2rem;
 }
 
-.medidorValor{
+.itemFuncionario > input:checked ~ li{
   display: flex;
-  justify-content: flex-end;
 }
+
+
+/**/
 
 .check{
   display: flex;

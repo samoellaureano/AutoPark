@@ -19,27 +19,27 @@ body {
 }
 
 .container {
-  display: flex;  
+  margin: 1rem 0rem 0 0rem;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px 50px 0px 50px;
+  align-items: center;
+  padding: 1rem;
   width: 100%;
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 4rem;
-  z-index: 10;
+  z-index: 10;m
 }
 
 .filial{
-    display: flex;
-    flex-direction: column;
-    height: 7rem;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 7rem;
 }
 
 .item{
-    text-align: center;
-    display: contents;
+  text-align: center;
 }
 
 .item2{
@@ -52,23 +52,26 @@ body {
     text-align: center;
     justify-content: center;
     border: 2px solid;
-    margin: -40px 0rem 0rem 106px;
+    margin: -61px 0rem 0rem 106px;
     display: flex;
 }
 
 .medidores{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+  display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 2rem;
     border: 0.5px solid #fff;
-    border-radius: 12rem;
+    border-radius: 1rem;
     background-color: #0121018a;
-    padding: 2rem 0rem 2rem 0rem;
+    padding: 1rem;
+}
+
+.medidorValor{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .check{
@@ -77,7 +80,17 @@ body {
   justify-content: center;
 }
 
-.check > button {
+.check #check-out:not(:checked) ~ label:nth-child(2){
+  background-color: #716d6d;
+  color: #383535;
+}
+
+.check #check-out:checked ~ label:nth-child(4){
+  background-color: #716d6d;
+  color: #383535;
+}
+
+.check > label {
   padding: 1rem;
   margin: 10px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -87,37 +100,78 @@ body {
   color: #fff;
   outline: 0px auto -webkit-focus-ring-color;  
   width: 7rem;
+  text-align: center;
 }
 
-.check > button:nth-child(1){
+.check > label:nth-child(2){
   background-color: #880000;
 }
 
-.check > button:nth-child(2){
+.check > label:nth-child(4){
   background-color: #027c31;
 }
 
 .box-check{
+  display: none;
+  width: 100%;
+  justify-content: center;
+}
+
+.check #check-out:checked ~ div{
+  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "pai-check"*/
+  display: flex;
+}
+
+.check #check-in:checked ~ div{
+  display: flex;
+}
+
+.box-check > div {
   border: 0.5px solid #fff;
-    border-radius: 9rem;
-    background-color: #0121018a;
-    padding: 2rem;
+  border-radius: 1rem;
+  background-color: #0121018a;
+  padding: 1rem;
+  width: 8rem;
+}
+
+.box-check > div > form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.box-check > div > form > label{
+  margin-bottom: 10px;
+}
+
+.box-check > div > form > a{
+  color: white;
+  margin: 1rem 0rem 0.2rem;
+}
+
+.box-check > div > form > button{
+  margin: auto;
+  width: 5rem;
+    background-color: whitesmoke;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
 }
 
 .circulo{  
-    background-color: #fff;
+  background-color: #fff;
     padding: 1rem;
     border-radius: 5rem;
+    margin-bottom: 10px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    width: fit-content;
-    min-width: 3rem;
 }
 
 .circulo > span{
   color: black;
-  font-size: 40px;
+  font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

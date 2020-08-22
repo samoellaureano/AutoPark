@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/funcionarios-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/funcionarios-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="css/menu.css">
+
+    <script src="../../js/jquery.js"></script>
+    <script src="js/funcionarios.js"></script>
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+</head>
+<body>
+    <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
+    <div class="menu" id="menu"></div>    
+    
+    <div class="container">
+        <div>
+            <h2>Funcionários</h2>
+            <button>NOVO</button>
+        </div>
+        <div>
+            <nav class="listaFuncionarios">
+                <h3>Lista de Funcionários</h3>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func1" hidden>
+                    <label for="func1">Samoel Laureano Angélica</label>
+                    <li>Celular: <span>(47) 99738-6549</span></li>
+                    <li>Email: <span>samoellaureano@gmail.com</span></li>
+                    <li>Perfil: <span>Administrador</span></li>
+                    <li>Status: <input type="checkbox"></li>
+                </ul>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func2" hidden>
+                    <label for="func2">Felipe Schulz</label>
+                    <li>Celular: <span>(47) 99738-6549</span></li>
+                    <li>Email: <span>samoellaureano@gmail.com</span></li>
+                    <li>Perfil: <span>Administrador</span></li>
+                    <li>Status: <input type="checkbox"></li>
+                </ul>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func3" hidden>
+                    <label for="func3">Eduardo Mussi</label>
+                    <li>Celular: <span>(47) 99738-6549</span></li>
+                    <li>Email: <span>samoellaureano@gmail.com</span></li>
+                    <li>Perfil: <span>Administrador</span></li>
+                    <li>Status: <input type="checkbox"></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+</html>

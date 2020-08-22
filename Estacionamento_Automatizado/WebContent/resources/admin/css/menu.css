@@ -38,8 +38,21 @@
     overflow: hidden;
     padding-left: -40px !important;
     transition: 0.7s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-    width: 6rem;
+    width: 9rem;
   }
+
+  .menu ul > li > div{
+    display: flex;
+    font-size: 13px;
+    color: white;
+    position: absolute;
+    margin: -2rem 2.5rem;
+    background: black;
+    padding: 0.2rem 0.8rem;
+    border-radius: 1rem;
+    z-index: -1;
+  }
+
   .menu li {
     margin-bottom: 1px;
     position: relative;

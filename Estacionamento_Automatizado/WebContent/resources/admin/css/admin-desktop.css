@@ -79,6 +79,16 @@ body {
   justify-content: center;
 }
 
+.check #check-out:not(:checked) ~ label:nth-child(2){
+  background-color: #716d6d;
+  color: #383535;
+}
+
+.check #check-out:checked ~ label:nth-child(4){
+  background-color: #716d6d;
+  color: #383535;
+}
+
 .check > label {
   padding: 1rem;
   margin: 10px;
@@ -106,13 +116,12 @@ body {
   justify-content: center;
 }
 
-.pai-check #check-out:checked ~ div{
-  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "check-out"*/
+.check #check-out:checked ~ div{
+  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "pai-check"*/
   display: flex;
 }
 
-.pai-check #check-in:checked ~ div{
-  /*(Elemento Pai) (Id do elemento da ação) ~ DIV ----- seleciona todo elemento "div" q é precedido por um elemento "check-out"*/
+.check #check-in:checked ~ div{
   display: flex;
 }
 
