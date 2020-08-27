@@ -30,6 +30,12 @@ body {
   z-index: 10;
 }
 
+.container form{
+  display: inherit;  
+  flex-direction: inherit;
+  justify-content: inherit;
+}
+
 .filial{
   display: flex;
   flex-direction: column;
