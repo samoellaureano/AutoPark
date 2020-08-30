@@ -13,6 +13,32 @@
         <link rel="shortcut icon" href="../../img/logo.ico" />
     </head>
 <body>
+    <div class="menu" id="menu"></div>
+    <div class="container">
+       
+        <img id="profile-img" src="../../img/newVeiculo.png" />
+        <span>Cadastrar Veículo</span>
+        <div id="cadastro" action="index.html">
+            <label for="nome">Marca:</label>
+            <select name="marca" id="marca" required>
+                <option value="Ford">Ford</option>
+            </select>
+            <label for="nome">Modelo:</label>
+            <select name="modelo" id="modelo" required>
+                <option value="Ka">Ka</option>
+            </select>
+            <label for="nome">Ano:</label>
+            <select name="ano" id="ano" required>
+                <option value="2006">2006</option>
+            </select>
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" required>
+            <div>
+                <button type="submit" onclick="">Salvar</button>
+            </div>
+        </div>
+        <a href="index.html">VOLTAR</a>
+    </div>
     
-</body>
+    </body>
 </html>
