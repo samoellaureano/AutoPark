@@ -6,19 +6,62 @@
         <title>AutoPark</title>
         <link rel="stylesheet" href="css/veiculos-desktop.css" media="screen and (min-device-width:600px)">
         <link rel="stylesheet" href="css/veiculos-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="css/menu.css">
-    
+        <link rel="stylesheet" href="css/menu.css">    
         <script src="../../js/jquery.js"></script>
         <script src="js/veiculos.js"></script>
         <link rel="shortcut icon" href="../../img/logo.ico" />
     </head>
 <body>
     <div class="menu" id="menu"></div>
-    <div class="container">
-       
-        <img id="profile-img" src="../../img/newVeiculo.png" />
-        <span>Cadastrar Veículo</span>
-        <div id="cadastro" action="index.html">
+    <div class="container">    
+              
+        <div>
+            <img id="profile-img" src="../../img/newVeiculo.png" />           
+            <button>Novo Veículos</button>
+        </div>
+        <div>
+
+            <nav class="listaFuncionarios">
+                <div>
+                    <h3>Lista de Veiculos</h3>
+                    <input type="text" id="buscarFunc" class="autocomplete" placeholder="Buscar"/>
+                </div>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func1" hidden>
+                    <label for="func1">Gol MDB-4409</label>
+                    <li>Marca: <span>Volkswagen</span></li>
+                    <li>Modelo: <span>Gol</span></li>
+                    <li>Ano: <span>2015</span></li>
+                    <li>Placa:  <span>MDB-4409</span></li>
+                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                </ul>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func2" hidden>
+                    <label for="func2">Ka MTB-4589</label>
+                    <li>Marca: <span>Ford</span></li>
+                    <li>Modelo: <span>Ka</span></li>
+                    <li>Ano: <span>2019</span></li>
+                    <li>Placa:  <span>MTB-4589</span></li>
+                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                </ul>
+                <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func3" hidden>
+                    <label for="func3">UNO ASD-5674</label>
+                    <li>Marca: <span>Fiat</span></li>
+                    <li>Modelo: <span>UNO</span></li>
+                    <li>Ano: <span>2000</span></li>
+                    <li>Placa:  <span>ASD-5674</span></li>
+                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
+             
+    <!--
+    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
+
+        <div id="cadastro" action="index.html" hidden>
             <label for="nome">Marca:</label>
             <select name="marca" id="marca" required>
                 <option value="Ford">Ford</option>
@@ -38,7 +81,10 @@
             </div>
         </div>
         <a href="index.html">VOLTAR</a>
-    </div>
+
+
+
+    </div> -->
     
     </body>
 </html>
