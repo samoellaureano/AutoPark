@@ -14,7 +14,6 @@ body {
   justify-content: flex-end;
 }
 
-
 .container {
   display: flex;
   justify-content: end;
@@ -34,16 +33,17 @@ body {
   align-items: center;
   border: 1px solid white;
   border-radius: 5px;
-  margin: auto;
-  justify-content: end;
-  margin-bottom: inherit;
+  /* margin: auto; */
+  justify-content: unset;
+  margin-bottom: auto;
 }
 
-h2 {
+h3 {
   margin-bottom: 1rem;
   font-family: "Source Sans Pro", sans-serif;
   width: 100%;
   text-align: center;
+  color: white;
 }
 
 button{

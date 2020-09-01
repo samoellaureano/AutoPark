@@ -16,12 +16,10 @@ body {
 }
 
 .container {
-  margin: 150px 0px 0px 200px;
-    display: inline-flex;
-    align-items: start;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    justify-content: space-between;
-    width: 50%;
+  margin: 100px 10px -150px 35px;
+  align-items: baseline;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 75%;
 }
 
 .container > div > span {
@@ -43,13 +41,14 @@ body {
 }
 
 .container > #pagamento {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 1rem;
-    justify-items: center;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 1rem;
+  justify-items: center;
+  color: white;
+  margin: 0px 0px 30px 0px;
 }
 
 .container > #CadastrarPagamento {

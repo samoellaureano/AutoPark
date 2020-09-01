@@ -16,12 +16,11 @@ body {
 }
 
 .container {
-  margin: 125px 0px 0px 240px
-    display: inline-flex;
-    align-items: start;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    justify-content: space-between;
-    width: 50%;
+  margin: 125px 0px 0px 240px;
+  display: inline-flex;
+  align-items: start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: space-between;
 }
 
 .container > div > span {
@@ -49,6 +48,7 @@ body {
     padding: 1rem;
     justify-items: center;
     color: white;
+    margin-right: 120px;
 }
 
 .container > #CadastrarPagamento {
@@ -57,7 +57,7 @@ body {
   border: 1px solid white;
   border-radius: 5px;
   padding: 1rem;
-  align-items: center; 
+  align-items: center;
   color: white;
 }
 
@@ -80,13 +80,6 @@ select {
     border-radius: 5px;
     border: none;
 }
-
-.container > #CadastrarPagamento > div >label{
-background-color:#fff222;
-
-
-}
-
 
 .container > div > label {
   margin: 0px 0px 5px 0px;
