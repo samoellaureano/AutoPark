@@ -12,79 +12,141 @@
         <link rel="shortcut icon" href="../../img/logo.ico" />
     </head>
 <body>
-    <div class="menu" id="menu"></div>
-    <div class="container">    
-              
-        <div>
-            <img id="profile-img" src="../../img/newVeiculo.png" />           
-            <button >Novo Veículo</button>
-        </div>
-        <div>
-
-            <nav class="listaFuncionarios">
+    <div class="menu" id="menu"></div>    
+    <div class="container">
+        <nav class="listaFuncionarios">
                 <div>
-                    <h3>Lista de Veiculos</h3>
-                    <input type="text" id="buscarFunc" class="autocomplete" placeholder="Buscar"/>
+                    <div class="topLista">
+                        <img src="img/equipe.png" alt="equipe">
+                        <h3>Funcionários</h3>
+                    </div>
+                    <div class="novo">
+                        <label for="novoFunc"><img src="img/novoUser.png" alt="novo"></label>
+                        <label for="novoFunc">Novo</label>
+
+                        <input type="checkbox" id="novoFunc" hidden>
+                        <div class="box-novo">
+                            <form action="">
+                                <h3>Novo Funcionário</h3>
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome">
+                                <label for="celular">Celular</label>
+                                <input type="text" id="celular">
+                                <label for="email">E-mail</label>
+                                <input type="text" id="email">
+                                <label for="empresa">Empresa</label>
+                                <select name="empresa" id="empresa">
+                                    <option value="001">Empresa 001</option>
+                                    <option value="002">Empresa 002</option>
+                                    <option value="003">Empresa 003</option>
+                                </select>
+                                <div>
+                                    <a href="">Cancelar</a>
+                                    <button>Confirmar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <label for="buscarFunc">Buscar:</label>
+                    <input type="text" id="buscarFunc" class="autocomplete" placeholder="Digite aqui..." />
                 </div>
-                <ul class="itemFuncionario">
-                    <input type="radio" name="funcionario" id="func1" hidden>
-                    <label for="func1">Gol MDB-4409</label>
-                    <li>Marca: <span>Volkswagen</span></li>
-                    <li>Modelo: <span>Gol</span></li>
-                    <li>Ano: <span>2015</span></li>
-                    <li>Placa:  <span>MDB-4409</span></li>
-                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                <label for="">Lista de Funcionários:</label>
+                <ul class="fecharDados">
+                    <input type="radio" name="funcionario" id="menos" hidden>
+                    <label for="menos">Fechar Dados</label>
                 </ul>
                 <ul class="itemFuncionario">
+                    <input type="radio" name="funcionario" id="func1" hidden>
+                    <label for="func1">Samoel Laureano Angélica</label>
+                    <li>
+                        <label for="editar">Editar</label>
+                        <input type="checkbox" name="editar" id="editar" hidden>
+
+                        <div>
+                            <form action="">
+                                <label for="nome">Nome:</label><input type="text" id="nome"
+                                    value="Samoel Laureano Angélica">
+                                <label for="celular">Celular:</label><input type="text" id="celular"
+                                    value="(47) 99738-6549">
+                                <label for="email">Email:</label><input type="text" id="email"
+                                    value="samoellaureano@gmail.com">
+                                <label for="perfil">Perfil:</label>
+                                <select name="perfil" id="perfil">
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Funcionario</option>
+                                    <option value="3">Cliente</option>
+                                </select>
+                                <label for="status">Status:<input type="checkbox" id="status"></label>
+                                <div>
+                                    <a href="">Cancelar</a>
+                                    <button>Confirmar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul><ul class="itemFuncionario">
                     <input type="radio" name="funcionario" id="func2" hidden>
-                    <label for="func2">Ka MTB-4589</label>
-                    <li>Marca: <span>Ford</span></li>
-                    <li>Modelo: <span>Ka</span></li>
-                    <li>Ano: <span>2019</span></li>
-                    <li>Placa:  <span>MTB-4589</span></li>
-                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                    <label for="func2">Felipe Schulz</label>
+                    <li>
+                        <label for="editar2">Editar</label>
+                        <input type="checkbox" name="editar" id="editar2" hidden>
+
+                        <div>
+                            <form action="">
+                                <label for="nome">Nome:</label><input type="text" id="nome"
+                                    value="Felipe Schulz">
+                                <label for="celular">Celular:</label><input type="text" id="celular"
+                                    value="(47) 99738-6549">
+                                <label for="email">Email:</label><input type="text" id="email"
+                                    value="felipeschulz@gmail.com">
+                                <label for="perfil">Perfil:</label>
+                                <select name="perfil" id="perfil">
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Funcionario</option>
+                                    <option value="3">Cliente</option>
+                                </select>
+                                <label for="status">Status:<input type="checkbox" id="status"></label>
+                                <div>
+                                    <a href="">Cancelar</a>
+                                    <button>Confirmar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
                 <ul class="itemFuncionario">
                     <input type="radio" name="funcionario" id="func3" hidden>
-                    <label for="func3">UNO ASD-5674</label>
-                    <li>Marca: <span>Fiat</span></li>
-                    <li>Modelo: <span>UNO</span></li>
-                    <li>Ano: <span>2000</span></li>
-                    <li>Placa:  <span>ASD-5674</span></li>
-                    <li><div>Editar <img src="img/editar.png" alt=""></div></li>
+                    <label for="func3">Eduardo Mussi</label>
+                    <li>
+                        <label for="editar3">Editar</label>
+                        <input type="checkbox" name="editar" id="editar3" hidden>
+
+                        <div>
+                            <form action="">
+                                <label for="nome">Nome:</label><input type="text" id="nome"
+                                    value="Eduardo Mussi">
+                                <label for="celular">Celular:</label><input type="text" id="celular"
+                                    value="(47) 99738-6549">
+                                <label for="email">Email:</label><input type="text" id="email"
+                                    value="eduardomussi@gmail.com">
+                                <label for="perfil">Perfil:</label>
+                                <select name="perfil" id="perfil">
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Funcionario</option>
+                                    <option value="3">Cliente</option>
+                                </select>
+                                <label for="status">Status:<input type="checkbox" id="status"></label>
+                                <div>
+                                    <a href="">Cancelar</a>
+                                    <button>Confirmar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
-            </nav>
-        </div>
+                <a href="" id="carrega-listaFuncionario">Ver Mais</a>
+            </nav>        
     </div>
     <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-             
-    <!--
-    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-
-        <div id="cadastro" action="index.html" hidden>
-            <label for="nome">Marca:</label>
-            <select name="marca" id="marca" required>
-                <option value="Ford">Ford</option>
-            </select>
-            <label for="nome">Modelo:</label>
-            <select name="modelo" id="modelo" required>
-                <option value="Ka">Ka</option>
-            </select>
-            <label for="nome">Ano:</label>
-            <select name="ano" id="ano" required>
-                <option value="2006">2006</option>
-            </select>
-            <label for="placa">Placa:</label>
-            <input type="text" id="placa" name="placa" required>
-            <div>
-                <button type="submit" onclick="">Salvar</button>
-            </div>
-        </div>
-        <a href="index.html">VOLTAR</a>
-
-
-
-    </div> -->
-    
     </body>
 </html>
