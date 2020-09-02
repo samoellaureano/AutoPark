@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
     <link rel="shortcut icon" href="../../img/logo.ico" />
     <script src="js/autoComplete.js"></script>
 </head>
+
 <body>
     <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
     <div class="menu" id="menu"></div>
@@ -24,28 +26,37 @@
             <nav class="listaPrecos">
                 <div>
                     <div class="topLista">
-                        <img src="img/equipe.png" alt="equipe">
+                        <img src="img/valorIcone.png" alt="equipe">
                         <h3>Tabela de Preços</h3>
                     </div>
                     <div class="novo">
-                        <label for="novoPreco"><img src="img/novoUser.png" alt="novo"></label>
+                        <label for="novoPreco"><img src="img/novoValor.png" alt="novo"></label>
                         <label for="novoPreco">Novo</label>
 
                         <input type="checkbox" id="novoPreco" hidden>
                         <div class="box-novo">
                             <form action="">
                                 <h3>Novo Preço</h3>
-                                <label for="nome">Nome Completo</label>
-                                <input type="text" id="nome">
-                                <label for="celular">Celular</label>
-                                <input type="text" id="celular">
-                                <label for="email">E-mail</label>
-                                <input type="text" id="email">
-                                <label for="empresa">Empresa</label>
-                                <select name="empresa" id="empresa">
-                                    <option value="001">Empresa 001</option>
-                                    <option value="002">Empresa 002</option>
-                                    <option value="003">Empresa 003</option>
+                                <label for="valor">Valor:</label>
+                                <input type="text" id="valor">
+                                <label for="valor">Tipo de Veículo:</label>
+                                <select name="tipoVeiculo" id="tipoVeiculo">
+                                    <option value="001">Carro</option>
+                                    <option value="002">Moto</option>
+                                    <option value="003">Outro</option>
+                                </select>
+                                <label for="estacionamento">Estacionamento:</label>
+                                <select name="estacionamento" id="estacionamento">
+                                    <option value="001">Estacionamento 01</option>
+                                    <option value="002">Estacionamento 02</option>
+                                    <option value="003">Estacionamento 03</option>
+                                </select>
+                                <label for="tipoCobranca">Tipo de Cobrança:</label>
+                                <select name="estacionamento" id="tipoCobranca">
+                                    <option value="001">Hora</option>
+                                    <option value="002">Dia</option>
+                                    <option value="003">Semana</option>
+                                    <option value="004">Mês</option>
                                 </select>
                                 <div>
                                     <a href="">Cancelar</a>
@@ -54,102 +65,160 @@
                             </form>
                         </div>
                     </div>
-                    <label for="buscarPreco">Buscar:</label>
-                    <input type="text" id="buscarPreco" class="autocomplete" placeholder="Digite aqui..." />
+                    <label for="buscarEst">Buscar:</label>
+                    <input type="text" id="buscarEst" class="autocomplete" placeholder="Digite aqui..." />
                 </div>
                 <label for="">Lista de Preços:</label>
                 <ul class="fecharDados">
-                    <input type="radio" name="preco" id="menos" hidden>
+                    <input type="radio" name="estac" id="menos" hidden>
                     <label for="menos">Fechar Dados</label>
                 </ul>
-                <ul class="itemPreco">
-                    <input type="radio" name="preco" id="prec1" hidden>
-                    <label for="prec1">Samoel Laureano Angélica</label>
+                <ul class="itemEstac">
+                    <input type="radio" name="estac" id="est01" hidden>
+                    <label for="est01">Estacionamento 01</label>
                     <li>
-                        <label for="editar">Editar</label>
-                        <input type="checkbox" name="editar" id="editar" hidden>
+                        <input type="checkbox" name="preco" id="prec1" hidden>
+                        <label for="prec1">Moto/hora</label>
+                        <ul>
+                            <label for="editar1">Editar</label>
+                            <input type="checkbox" id="editar1" hidden>
 
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Samoel Laureano Angélica">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 99738-6549">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="samoellaureano@gmail.com">
-                                <label for="perfil">Perfil:</label>
-                                <select name="perfil" id="perfil">
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Funcionario</option>
-                                    <option value="3">Cliente</option>
-                                </select>
-                                <label for="status">Status:<input type="checkbox" id="status"></label>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div>
+                                <form action="">
+                                    <label for="valor">Valor:</label>
+                                    <input type="text" id="valor">
+                                    <label for="valor">Tipo de Veículo:</label>
+                                    <select name="tipoVeiculo" id="tipoVeiculo">
+                                        <option value="001">Carro</option>
+                                        <option value="002">Moto</option>
+                                        <option value="003">Outro</option>
+                                    </select>
+                                    <label for="tipoCobranca">Tipo de Cobrança:</label>
+                                    <select name="estacionamento" id="tipoCobranca">
+                                        <option value="001">Hora</option>
+                                        <option value="002">Dia</option>
+                                        <option value="003">Semana</option>
+                                        <option value="003">Mês</option>
+                                    </select>
+                                    <label for="status">Status:<input type="checkbox" id="status"></label>
+                                    <div>
+                                        <a href="">Cancelar</a>
+                                        <button>Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </ul>
                     </li>
-                </ul><ul class="itemPreco">
-                    <input type="radio" name="preco" id="prec2" hidden>
-                    <label for="prec2">Felipe Schulz</label>
                     <li>
-                        <label for="editar2">Editar</label>
-                        <input type="checkbox" name="editar" id="editar2" hidden>
+                        <input type="checkbox" name="preco" id="prec2" hidden>
+                        <label for="prec2">Carro/hora</label>
+                        <ul>
+                            <label for="editar2">Editar</label>
+                            <input type="checkbox" id="editar2" hidden>
 
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Felipe Schulz">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 99738-6549">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="felipeschulz@gmail.com">
-                                <label for="perfil">Perfil:</label>
-                                <select name="perfil" id="perfil">
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Funcionario</option>
-                                    <option value="3">Cliente</option>
-                                </select>
-                                <label for="status">Status:<input type="checkbox" id="status"></label>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div>
+                                <form action="">
+                                    <label for="valor">Valor:</label>
+                                    <input type="text" id="valor">
+                                    <label for="valor">Tipo de Veículo:</label>
+                                    <select name="tipoVeiculo" id="tipoVeiculo">
+                                        <option value="001">Carro</option>
+                                        <option value="002">Moto</option>
+                                        <option value="003">Outro</option>
+                                    </select>
+                                    <label for="tipoCobranca">Tipo de Cobrança:</label>
+                                    <select name="estacionamento" id="tipoCobranca">
+                                        <option value="001">Hora</option>
+                                        <option value="002">Dia</option>
+                                        <option value="003">Semana</option>
+                                        <option value="003">Mês</option>
+                                    </select>
+                                    <label for="status">Status:<input type="checkbox" id="status"></label>
+                                    <div>
+                                        <a href="">Cancelar</a>
+                                        <button>Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </ul>
                     </li>
+
                 </ul>
-                <ul class="itemPreco">
-                    <input type="radio" name="preco" id="prec3" hidden>
-                    <label for="prec3">Eduardo Mussi</label>
+                <ul class="itemEstac">
+                    <input type="radio" name="estac" id="est02" hidden>
+                    <label for="est02">Estacionamento 02</label>
                     <li>
-                        <label for="editar3">Editar</label>
-                        <input type="checkbox" name="editar" id="editar3" hidden>
+                        <input type="checkbox" name="preco" id="prec2" hidden>
+                        <label for="prec2">Moto/hora</label>
+                        <ul>
+                            <label for="editar2">Editar</label>
+                            <input type="checkbox" id="editar2" hidden>
 
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Eduardo Mussi">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 99738-6549">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="eduardomussi@gmail.com">
-                                <label for="perfil">Perfil:</label>
-                                <select name="perfil" id="perfil">
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Funcionario</option>
-                                    <option value="3">Cliente</option>
-                                </select>
-                                <label for="status">Status:<input type="checkbox" id="status"></label>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div>
+                                <form action="">
+                                    <label for="valor">Valor:</label>
+                                    <input type="text" id="valor">
+                                    <label for="valor">Tipo de Veículo:</label>
+                                    <select name="tipoVeiculo" id="tipoVeiculo">
+                                        <option value="001">Carro</option>
+                                        <option value="002">Moto</option>
+                                        <option value="003">Outro</option>
+                                    </select>
+                                    <label for="tipoCobranca">Tipo de Cobrança:</label>
+                                    <select name="estacionamento" id="tipoCobranca">
+                                        <option value="001">Hora</option>
+                                        <option value="002">Dia</option>
+                                        <option value="003">Semana</option>
+                                        <option value="003">Mês</option>
+                                    </select>
+                                    <label for="status">Status:<input type="checkbox" id="status"></label>
+                                    <div>
+                                        <a href="">Cancelar</a>
+                                        <button>Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </ul>
                     </li>
+
+                </ul>
+                <ul class="itemEstac">
+                    <input type="radio" name="estac" id="est03" hidden>
+                    <label for="est03">Estacionamento 03</label>
+                    <li>
+                        <input type="checkbox" name="preco" id="prec3" hidden>
+                        <label for="prec3">Moto/hora</label>
+                        <ul>
+                            <label for="editar3">Editar</label>
+                            <input type="checkbox" id="editar3" hidden>
+
+                            <div>
+                                <form action="">
+                                    <label for="valor">Valor:</label>
+                                    <input type="text" id="valor">
+                                    <label for="valor">Tipo de Veículo:</label>
+                                    <select name="tipoVeiculo" id="tipoVeiculo">
+                                        <option value="001">Carro</option>
+                                        <option value="002">Moto</option>
+                                        <option value="003">Outro</option>
+                                    </select>
+                                    <label for="tipoCobranca">Tipo de Cobrança:</label>
+                                    <select name="estacionamento" id="tipoCobranca">
+                                        <option value="001">Hora</option>
+                                        <option value="002">Dia</option>
+                                        <option value="003">Semana</option>
+                                        <option value="003">Mês</option>
+                                    </select>
+                                    <label for="status">Status:<input type="checkbox" id="status"></label>
+                                    <div>
+                                        <a href="">Cancelar</a>
+                                        <button>Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </ul>
+                    </li>
+
                 </ul>
                 <a href="" id="carrega-listaPrecos">Ver Mais</a>
             </nav>

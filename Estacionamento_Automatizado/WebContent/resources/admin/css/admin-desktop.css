@@ -79,12 +79,12 @@ body {
   justify-content: center;
 }
 
-.check #check-out:not(:checked) ~ label:nth-child(2){
+.check #check-in:not(:checked) ~ label:nth-child(2){
   background-color: #716d6d;
   color: #383535;
 }
 
-.check #check-out:checked ~ label:nth-child(4){
+.check #check-in:checked ~ label:nth-child(4){
   background-color: #716d6d;
   color: #383535;
 }
@@ -103,11 +103,11 @@ body {
 }
 
 .check > label:nth-child(2){
-  background-color: #880000;
+  background-color: #027c31;
 }
 
 .check > label:nth-child(4){
-  background-color: #027c31;
+  background-color: #880000;
 }
 
 .box-check{

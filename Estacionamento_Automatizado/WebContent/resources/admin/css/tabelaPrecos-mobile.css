@@ -114,14 +114,14 @@ h2{
 
 .autocomplete{
   outline: 0px auto -webkit-focus-ring-color;
-    padding: 0.5rem;
-    font-family: inherit;
-    border-radius: 0.2rem;
-    border: none;
-    margin-bottom: 2rem;
-    width: 95%;
-    display: flex;
-    flex-wrap: nowrap;
+  padding: 0.5rem;
+  font-family: inherit;
+  border-radius: 0.2rem;
+  border: none;
+  margin-bottom: 2rem;
+  width: 95%;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .listaPrecos{
@@ -212,14 +212,27 @@ h2{
   cursor: pointer;
 }
 
-.listaPrecos li{
+.listaPrecos li {
+  display: none;
   flex-direction: column;
-  width: auto;
-    display: none;
-    padding: 0.4rem 0.2rem;
+  background-color: #acd472;
+  border: 1px solid gray;
+  padding: 0.2rem;
 }
 
-.itemPreco > li > label{
+.listaPrecos li > ul{
+  flex-direction: column;
+  width: auto;
+  display: none;
+  padding: 0.4rem 0.2rem;
+}
+
+
+.itemEstac > li input:checked ~ ul{
+  display: flex;
+}
+
+.itemEstac > li > ul > label{
   background-color: #a7160a;
     color: white;
     padding: 0.2rem 0rem;
@@ -231,11 +244,11 @@ h2{
     user-select: none;
 }
 
-.itemPreco > input:checked ~ li{
+.itemEstac > input:checked ~ li{
   display: flex;
 }
 
-.itemPreco > li > div > form{
+.itemEstac form{
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -245,13 +258,13 @@ h2{
    margin: 0rem 1rem;
 }
 
-.itemPreco > li > div > form > div{
+.itemEstac form > div{
   display: flex;
     width: 100%;
     justify-content: space-evenly;
 }
 
-.itemPreco > li > div > form > div > button{
+.itemEstac form > div > button{
   border: none;
     background-color: green;
     border-radius: 0.4rem;
@@ -260,30 +273,30 @@ h2{
     cursor: pointer;
 }
 
-.itemPreco > li > div > form > div > a {
+.itemEstac form > div > a {
   text-decoration: none;
   font-size: 0.7rem;
   color: #940505;
   padding: 0.4rem;
 }
 
-.itemPreco > li > div > form > input{
+.itemEstac form > input{
   background-color: #9e9b95;
     color: #5a5a59;
     font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemPreco > li > div > form > select{
+.itemEstac form > select{
   font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemPreco > li > input:checked ~ div > form{
+.itemEstac > li > ul > input:checked ~ div > form{
   cursor: auto;
   pointer-events: auto;
 }
-.itemPreco > li > input:checked ~ div > form > input{
+.itemEstac > li > ul > input:checked ~ div > form > input{
   background-color: #fff;
     color: #000;
 }

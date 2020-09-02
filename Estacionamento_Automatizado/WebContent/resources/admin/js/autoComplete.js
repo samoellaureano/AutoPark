@@ -1,10 +1,21 @@
 $(function() {
-  var esportes = [
+  var funcionarios = [
     "Samoel Laureano Angélica",
     "Felipe Schulz",
     "Eduardo Mussi"
   ];
   $("#buscarFunc" ).autocomplete({
-    source: esportes
+    source: funcionarios
+  });
+});
+
+$(function() {
+  var estacionamento = [
+    "Estacionamento 001",
+    "Estacionamento 002",
+    "Estacionamento 003"
+  ];
+  $("#buscarEst" ).autocomplete({
+    source: estacionamento
   });
 });

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/config-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/config-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="css/menu.css">
+
+    <script src="../../js/jquery.js"></script>
+    <script src="js/config.js"></script>
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+</head>
+
+<body>
+    <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
+    <div class="menu" id="menu"></div>
+
+    <div class="container">
+        <div>
+            <nav class="dados">
+                <div>
+                    <div class="topLista">
+                        <img src="img/configIcone.png" alt="equipe">
+                        <h3>Configurações</h3>
+                    </div>
+                </div>
+                <ul class="fecharDados">
+                    <input type="radio" name="dados" id="menos" hidden>
+                    <label for="menos">Fechar Dados</label>
+                </ul>
+                <ul class="itemDados">
+                    <input type="radio" name="dados" id="item1" hidden>
+                    <label for="item1">Dados do Usuário</label>
+                    <li>
+                        <div>
+                            <form action="">
+                                <label for="nomeEdit">Nome</label>
+                                <input type="text" id="nomeEdit" name="nomeEdit" placeholder="Nome completo" required>
+
+                                <label for="cpfEdit">CPF</label>
+                                <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required>
+
+                                <label for="telEdit">Telefone</label>
+                                <input type="text" id="telEdit" name="telEdit" placeholder="(00) 0 0000-0000" required>
+                                <label for="emailEdit">E-mail</label>
+                                <input type="text" id="emailEdit" name="emailEdit" placeholder="E-mail" required>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="itemDados">
+                    <input type="radio" name="dados" id="item2" hidden>
+                    <label for="item2">Alterar Senha</label>
+                    <li>
+                        <div>
+                            <form action="">
+                                <label for="senha">Senha Atual:</label><input type="password" id="senha">
+                                <label for="novaSenha">Nova Senha:</label><input type="password" id="novaSenha">
+                                <label for="ConfSenha">Confirme a Senha:</label><input type="password" id="ConfSenha">
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <a href="" id="salvarAlteracoes">Salvar Alterações</a>
+            </nav>
+        </div>
+    </div>
+    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
+</html>
