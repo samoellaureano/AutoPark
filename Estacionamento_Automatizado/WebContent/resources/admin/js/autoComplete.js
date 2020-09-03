@@ -10,12 +10,22 @@ $(function() {
 });
 
 $(function() {
-  var estacionamento = [
+  var estacionamentos = [
     "Estacionamento 001",
     "Estacionamento 002",
     "Estacionamento 003"
   ];
   $("#buscarEst" ).autocomplete({
-    source: estacionamento
+    source: estacionamentos
+  });
+});
+
+$(function() {
+  var registros = [
+    "Samoel Laureano Angélica",
+    "Felipe Schulz"
+  ];
+  $("#buscarReg" ).autocomplete({
+    source: registros
   });
 });

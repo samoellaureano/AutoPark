@@ -1,67 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoPark</title>
-    <link rel="stylesheet" href="css/admin-desktop.css" media="screen and (min-device-width:600px)">
-    <link rel="stylesheet" href="css/admin-mobile.css" media="screen and (max-device-width: 600px)">
-    <link rel="stylesheet" href="css/menu.css">
-
-    <script src="../../js/jquery.js"></script>
-    <script src="js/admin.js"></script>
-    <link rel="shortcut icon" href="../../img/logo.ico" />
-</head>
-<body>
-    <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
-    <div class="menu" id="menu"></div>    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoPark</title>
+        <link rel="stylesheet" href="css/relatorio-desktop.css" media="screen and (min-device-width:600px)">
+        <link rel="stylesheet" href="css/relatorio-mobile.css" media="screen and (max-device-width: 600px)">
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="../../css/calendar.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     
-    <div class="container">
-        <div class="filial">
-            <label for="listaFilial">Filial:</label>
-            <select name="listaFilial" id="listaFilial">
-                <option value="">Estacionamento 001</option>
-            </select>
-        </div>
-        
-        <div class="medidores">
-            <div class="item">
-                <div class="circulo">
-                    <span id="vagaDisponivel">16</span>
-                </div>
-                <label for="">Vagas Disponivies</label>
-            </div>
-            <div class="item">
-                <div class="circulo">
-                    <span id="vagaDisponivel">350</span>
-                </div>
-                <label for="">Clientes no Dia</label>
-            </div>
-            <div class="item">
-                <div class="circulo">
-                    <span id="vagaDisponivel">200,00</span>
-                </div>
-                <label for="">Receita</label>
-                <div class="medidorValor"><label class="item2" for="">R$</label></div>
-                
-            </div>
-            
-        </div>
-        <div class="box-check" id="box-check">
+        <script src="../../js/jquery.js"></script>
+        <script src="../../js/jquery-ui.js"></script>
+        <script src="js/relatorio.js"></script>
+        <link rel="shortcut icon" href="../../img/logo.ico" />
+        <script src="js/autoComplete.js"></script>
+    </head>
+    
+    <body>
+        <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
+        <div class="menu" id="menu"></div>
+    
+        <div class="container">
             <div>
-                <form action="">
-                    <label for="placa">Placa do Veículo</label>
-                <input type="text" placeholder="Placa">
-                <a href="">Cancelar</a>
-                <button>Confirmar</button>
-                </form>
+                <nav class="listaRegistros">
+                    <div>
+                        <div class="topLista">
+                            <img src="img/registroIcone.png" alt="registro">
+                            <h3>Registros</h3>
+                        </div>
+                        <label for="buscarReg">Buscar:</label>
+                        <input type="text" id="buscarReg" class="autocomplete" placeholder="Digite aqui..." />
+                        <label for="buscarDataInicial">Data Inicial:</label>
+                        <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
+                        <label for="buscarDataFinal">Data Final</label>
+                        <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal">
+                    </div>
+                    <label for="">Lista de Registros:</label>
+                    <ul class="fecharDados">
+                        <input type="radio" name="registro" id="menos" hidden>
+                        <label for="menos">Fechar Dados</label>
+                    </ul>
+                    <ul class="itemRegistro">
+                        <input type="radio" name="registro" id="reg1" hidden>
+                        <label for="reg1">Samoel Laureano Angélica</label>
+                        <li>    
+                            <div>
+                                <form action="">
+                                    <label for="nome">Veiculo:<span>AAA-2222</span></label>
+                                    <label for="nome">Check-in:<span>09/08/2020</span></label>
+                                    <label for="nome">Check-out:<span>09/08/2020</span></label>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="itemRegistro">
+                        <input type="radio" name="registro" id="reg2" hidden>
+                        <label for="reg2">Samoel Laureano Angélica</label>
+                        <li>    
+                            <div>
+                                <form action="">
+                                    <label for="nome">Veiculo:<span>AAA-2222</span></label>
+                                    <label for="nome">Check-in:<span>09/08/2020</span></label>
+                                    <label for="nome">Check-out:<span>09/08/2020</span></label>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="itemRegistro">
+                        <input type="radio" name="registro" id="reg3" hidden>
+                        <label for="reg3">Felipe Schulz</label>
+                        <li>    
+                            <div>
+                                <form action="">
+                                    <label for="nome">Veiculo:<span>AAA-2222</span></label>
+                                    <label for="nome">Check-in:<span>09/08/2020</span></label>
+                                    <label for="nome">Check-out:<span>09/08/2020</span></label>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="" id="carrega-listaFuncionario">Gerar Relatório</a>
+                </nav>
             </div>
         </div>
-        <div class="check">
-            <button type="button" onclick="document.querySelector('#box-check').classList.add('exibirBox-check')">Check-out</button>
-            <button type="button">Check-in</button>            
-        </div>
-    </div>
-    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-</body>
+        <div id="msgFuncionarios" class="msg" style="display: none; z-index: 10;"></div>
+    </body>
 </html>
