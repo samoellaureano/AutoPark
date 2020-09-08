@@ -4,6 +4,7 @@ body {
   width: 100%;
   height: 98%;
   background-color: #0c4304;
+  outline: 0px auto -webkit-focus-ring-color; 
 }
 
 .logo{
@@ -19,120 +20,201 @@ body {
 }
 
 .container {
-  display: flex;  
-  flex-direction: column;
+  display: flex;
   justify-content: center;
-  padding: 50px 50px 0px 50px;
+  /* padding: 3rem 0rem 0rem; */
   width: 100%;
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 4rem;
   z-index: 10;
-}
-
-.filial{
-    display: flex;
-    flex-direction: column;
-    height: 7rem;
-    align-items: center;
-}
-
-.item{
-    text-align: center;
-    display: contents;
-}
-
-.item2{
-  background-color: #fff;
-    height: 1.5rem;
-    width: 1.5rem;
-    padding: 0.5rem;
-    border-radius: 3rem;
-    color: black;
-    text-align: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: -40px 0rem 0rem 106px;
-    display: flex;
-}
-
-.medidores{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: 0.5px solid #fff;
-    border-radius: 12rem;
-    background-color: #0121018a;
-    padding: 2rem 0rem 2rem 0rem;
-}
-
-.check{
-  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* margin: 0rem 6rem;*/
 }
 
-.check > button {
-  padding: 1rem;
-  margin: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 1px solid #fff;
-  border-radius: 2rem;
-  cursor: pointer;
-  color: #fff;
-  outline: 0px auto -webkit-focus-ring-color;  
-  width: 7rem;
+.container > div{
+  width: inherit;
 }
 
-.check > button:nth-child(1){
-  background-color: #880000;
+h2{
+  margin-bottom: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-.check > button:nth-child(2){
-  background-color: #027c31;
-}
-
-.box-check{
-  border: 0.5px solid #fff;
-    border-radius: 9rem;
-    background-color: #0121018a;
-    padding: 2rem;
-}
-
-.circulo{  
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 5rem;
+.autocomplete{
+  outline: 0px auto -webkit-focus-ring-color;
+    padding: 0.5rem;
+    font-family: inherit;
+    border-radius: 0.2rem;
+    border: none;
+    margin-bottom: 2rem;
+    width: 17rem;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
-    width: fit-content;
-    min-width: 3rem;
 }
 
-.circulo > span{
+.listaRegistros{
+  background-color: #aeb7ad42;
   color: black;
-  font-size: 40px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 0.2rem;
+  /*margin: 0rem 5rem;*/
+  margin: -8px;
 }
 
-select {
-  width: fit-content;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
+.listaRegistros > a{
+  margin: 1rem 5rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #fff;
+  padding: 0.7rem;
+  background-color: #07a72d;
+  border-radius: 0.3rem;
+  user-select: none;
+}
+
+.topLista{
+  height: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topLista > h3{
+  margin: inherit;
+}
+
+.topLista > img{
+  width: 4rem;
+}
+
+
+.listaRegistros > label{
+  text-align: left;
+  font-family: "Source Sans Pro", sans-serif;
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.4rem 0rem;
+}
+
+.listaRegistros > div > label{
+  display: flex;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.listaRegistros > ul{
+  background-color: #ffffff;
+    padding: 0.5rem 0rem 0rem;
+    border-radius: 0.2rem;
+    margin: 0.1rem 0rem;
+    user-select: none;
+}
+
+.fecharDados{
+  width: 5rem;
+    padding: 0.1rem !important;
+    font-size: 0.7rem;
+    background-color: #a91417 !important;
+    color: white;
+}
+
+.listaRegistros > ul > label{
+  display: block;
+    justify-content: center;
+    padding: 0.2rem 0rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.listaRegistros > li > div:nth-child(2) > label{
+  display: block;
+  cursor: pointer;
+}
+
+.listaRegistros li{
+  flex-direction: column;
+  width: auto;
+    display: none;
+    padding: 0.4rem 0.2rem;
+}
+
+.itemRegistro span{
+  padding: 1rem;
+}
+
+.itemRegistro > li > label{
+  background-color: #a7160a;
+    color: white;
+    padding: 0.2rem 0rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 2rem;
+    width: 4rem;
+    margin: auto;
+    user-select: none;
+}
+
+.itemRegistro > input:checked ~ li{
+  display: flex;
+}
+
+.itemRegistro > li > div > form{
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  cursor: none;
+   user-select: none;
+   align-items: end;   
+   margin: 0rem 1rem;
+}
+
+.itemRegistro > li > div > form > div{
+  display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.itemRegistro > li > div > form > div > button{
   border: none;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  outline: 0px auto -webkit-focus-ring-color;
+    background-color: green;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+    color: white;
+    cursor: pointer;
 }
 
-option {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.itemRegistro > li > div > form > div > a {
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #940505;
+  padding: 0.4rem;
+}
+
+.itemRegistro > li > div > form > input{
+  background-color: #9e9b95;
+    color: #5a5a59;
+    font-family: "Source Sans Pro", sans-serif;
+    padding: 0.2rem;
+}
+
+.itemRegistro > li > div > form > select{
+  font-family: "Source Sans Pro", sans-serif;
+    padding: 0.2rem;
+}
+
+.itemRegistro > li > input:checked ~ div > form{
+  cursor: auto;
+  pointer-events: auto;
+}
+.itemRegistro > li > input:checked ~ div > form > input{
+  background-color: #fff;
+    color: #000;
 }
 
 .menu {

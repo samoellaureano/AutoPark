@@ -36,78 +36,6 @@ h2{
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.novo {
-  display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 100%;
-    align-items: flex-end;
-    cursor: pointer;
-}
-
-.novo #novoFunc:checked ~ div{
-    display: flex;
-}
-
-.novo > label{
-  margin-right: 11px;
-  cursor: pointer;
-  color: white;
-  font-size: 0.6rem;
-}
-
-.novo img {
-  width: 1.5rem;
-}
-
-.novo button{
-  width: 3rem;
-  background: none;
-  border: none;
-  color: white;
-  font-family: "Source Sans Pro", sans-serif;
-  cursor: pointer;
-  outline: 0px auto -webkit-focus-ring-color;  
-}
-
-.box-novo{
-  display: none;
-  width: 100%;
-  justify-content: center;
-  margin-top: 1rem;
-  background-color: #0000004d;
-    border-radius: 0.3rem;
-}
-
-.box-novo > form{
-  display: flex;
-    flex-direction: column;
-}
-
-.box-novo a{
-    text-decoration: none;
-      color: #540101;
-      font-family: "Source Sans Pro", sans-serif;
-      cursor: pointer;
-      outline: 0px auto -webkit-focus-ring-color;
-      font-size: 0.7rem;
-}
-
-.box-novo > form label{
-  text-align: left;
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.2rem 0.2rem;
-}
-
-.box-novo > form > div{
-  display: flex;
-  flex-wrap: wrap;
-  width: 10rem;
-  justify-content: space-between;
-  padding: 0.5rem 0rem;
-}
-
 .autocomplete{
   outline: 0px auto -webkit-focus-ring-color;
     padding: 0.5rem;
@@ -172,8 +100,6 @@ h2{
   margin-bottom: 0.5rem;
   color: white;
 }
-
-
 
 .listaRegistros > ul{
   background-color: #ffffff;
