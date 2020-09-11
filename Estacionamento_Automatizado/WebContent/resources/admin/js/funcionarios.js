@@ -9,7 +9,7 @@ $(document).ready(function(){
         $inputs.each(function() {
             arrayCadFun.push($(this).val());
         });
-        funcionario.name = arrayCadFun[0];
+        funcionario.nome = arrayCadFun[0];
         funcionario.celular = arrayCadFun[1];
         funcionario.email = arrayCadFun[2];
         funcionario.empresa = arrayCadFun[3];
