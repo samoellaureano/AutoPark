@@ -2,17 +2,40 @@ var funcionario = new Object();
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
+    buscar = function(){
+        var valorBusca = $("#buscarFunc").val();
+        var cfg = {
+            type: "POST",
+            url: "../rest/funcionarioRest/buscarFuncionarios/" + valorBusca,
+            success: function (listaDeFuncionarios) {
+                exibirFuncionarios(listaDeFuncionarios);
+            },
+            error: function (err) {
+                alert("Erro ao buscar Funcionarios: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);      
+    }
+
+    exibirFuncionarios = function(listaDeFuncionarios){
+        var funcionariosHTML = "<ul class='itemFuncionario'>";
+        if (listaDeFuncionarios != undefined) {
+            if (listaDeFuncionarios.length > 0) {
+                for (var i = 0; i < listaDeMarcas.length; i++) {
+                    funcionariosHTML += ("<input type='radio' name='funcionario' id='func"+i+"' hidden>");
+                }
+            } else {
+                funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
+            }
+            $("#listaFuncionariosHTML").html(funcionariosHTML + "</ul>");
+        }
+    }
+
     $('#cadFuncionario').click(function(e){
-        var arrayCadFun = [];
-        var $inputs = $('#formCadFuncionario :input');
-        // percorre os inputs
-        $inputs.each(function() {
-            arrayCadFun.push($(this).val());
-        });
-        funcionario.nome = arrayCadFun[0];
-        funcionario.celular = arrayCadFun[1];
-        funcionario.email = arrayCadFun[2];
-        funcionario.empresa = arrayCadFun[3];
+        funcionario.nome = $("#nome").val();
+        funcionario.celular = $("#celular").val();
+        funcionario.email = $("#email").val();
+        funcionario.empresa = $("#empresa").val();
 
         var cfg = {
             url: "../rest/funcionarioRest/addFuncionario",
@@ -29,7 +52,7 @@ $(document).ready(function(){
                     exibirMessagem(resp, 2);
                 }
                 
-                // funcionario.buscar();
+                buscar();
             },
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo funcionário!");
@@ -38,6 +61,8 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     });
+
+    buscar();
 
     $('#carrega-listaFuncionario').click(function(e){
         /*https://tableless.com.br/conteudo-sob-demanda-com-jquery/ */

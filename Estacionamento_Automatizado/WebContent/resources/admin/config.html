@@ -11,7 +11,9 @@
 
     <script src="../../js/jquery.js"></script>
     <script src="js/config.js"></script>
-    <link rel="shortcut icon" href="../../img/logo.ico" />
+    <link rel="shortcut icon" href="../../img/logo.ico" />    
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
 </head>
 
 <body>
@@ -32,19 +34,19 @@
                     <label for="menos">Fechar Dados</label>
                 </ul>
                 <ul class="itemDados">
-                    <input type="radio" name="dados" id="item1" hidden>
+                    <input type="radio" name="dados" id="item1" value="usuario" hidden>
                     <label for="item1">Dados do Usuário</label>
                     <li>
                         <div>
-                            <form action="">
+                            <form>
                                 <label for="nomeEdit">Nome</label>
                                 <input type="text" id="nomeEdit" name="nomeEdit" placeholder="Nome completo" required>
 
                                 <label for="cpfEdit">CPF</label>
                                 <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required>
 
-                                <label for="telEdit">Telefone</label>
-                                <input type="text" id="telEdit" name="telEdit" placeholder="(00) 0 0000-0000" required>
+                                <label for="celEdit">Telefone</label>
+                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" required>
                                 <label for="emailEdit">E-mail</label>
                                 <input type="text" id="emailEdit" name="emailEdit" placeholder="E-mail" required>
                             </form>
@@ -52,11 +54,11 @@
                     </li>
                 </ul>
                 <ul class="itemDados">
-                    <input type="radio" name="dados" id="item2" hidden>
+                    <input type="radio" name="dados" id="item2" value="senha" hidden>
                     <label for="item2">Alterar Senha</label>
                     <li>
                         <div>
-                            <form action="">
+                            <form>
                                 <label for="senha">Senha Atual:</label><input type="password" id="senha">
                                 <label for="novaSenha">Nova Senha:</label><input type="password" id="novaSenha">
                                 <label for="ConfSenha">Confirme a Senha:</label><input type="password" id="ConfSenha">
@@ -64,7 +66,7 @@
                         </div>
                     </li>
                 </ul>
-                <a href="" id="salvarAlteracoes">Salvar Alterações</a>
+                <a id="salvarAlteracoes">Salvar Alterações</a>
             </nav>
         </div>
     </div>

@@ -14,7 +14,9 @@
     <script src="../../js/jquery-ui.js"></script>
     <script src="js/tabelaPrecos.js"></script>
     <link rel="shortcut icon" href="../../img/logo.ico" />
-    <script src="js/autoComplete.js"></script>
+    <script src="js/autoComplete.js"></script>    
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
 </head>
 
 <body>
@@ -41,7 +43,7 @@
                                 <input type="text" id="valor">
                                 <label for="valor">Tipo de Veículo:</label>
                                 <select name="tipoVeiculo" id="tipoVeiculo">
-                                    <option value="001">Carro</option>
+                                    <option value="carro">Carro</option>
                                     <option value="002">Moto</option>
                                     <option value="003">Outro</option>
                                 </select>
@@ -53,14 +55,14 @@
                                 </select>
                                 <label for="tipoCobranca">Tipo de Cobrança:</label>
                                 <select name="estacionamento" id="tipoCobranca">
-                                    <option value="001">Hora</option>
+                                    <option value="hora">Hora</option>
                                     <option value="002">Dia</option>
                                     <option value="003">Semana</option>
                                     <option value="004">Mês</option>
                                 </select>
                                 <div>
                                     <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
+                                    <button type="button" id="cadTabelaPreco">Confirmar</button>
                                 </div>
                             </form>
                         </div>
