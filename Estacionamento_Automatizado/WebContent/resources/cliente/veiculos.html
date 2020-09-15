@@ -22,7 +22,7 @@
                         <img src="img/equipe.png" alt="equipe">
                         <h3>Veiculos</h3>
                     </div>
-                    <div class="novo">
+                    <div id="ListaDeVeiculosHtml" class="novo">
                         <label for="novoVeic"><img src="img/novoUser.png" alt="novo"></label>
                         <label for="novoVeic">Novo</label>
 
@@ -60,7 +60,7 @@
                     <label for="menos">Fechar Dados</label>
                 </ul>
                 <ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="func1" hidden>
+                    <input type="radio" name="funcionario" id="car1" hidden>
                     <label for="func1">Gol MDB-4409</label>
                     <li>
                         <label for="editar">Editar</label>
@@ -90,7 +90,7 @@
                         </div>
                     </li>
                 </ul><ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="func2" hidden>
+                    <input type="radio" name="funcionario" id="car2" hidden>
                     <label for="func2">Ka ACB-1254</label>
                     <li>
                         <label for="editar2">Editar</label>
@@ -98,7 +98,7 @@
                         <div>
                             <form action="">
                                 <label for="marca1">Marca:</label>
-                                <select name="marca" id="marca1" required>
+                                <select onkeyup="id" name="marca" id="marca1" required>
                                     <option value="Ford">Ford</option>
                                 </select>
                                 <label for="modelo">Modelo:</label>
@@ -113,14 +113,14 @@
                                 <input type="text" id="placa1" value="ACB-1254">
                                 <div>
                                     <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
+                                    <button >Confirmar</button>
                                 </div>
                             </form>
                         </div>
                     </li>
                 </ul>
                 <ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="func3" hidden>
+                    <input type="radio" name="funcionario" id="car3" hidden>
                     <label for="func3">Uno MDB-4499</label>
                     <li>
                         <label for="editar3">Editar</label>
