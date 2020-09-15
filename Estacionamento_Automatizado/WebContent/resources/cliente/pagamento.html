@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="css/pagamento-desktop.css" media="screen and (min-device-width:600px)">
         <link rel="stylesheet" href="css/pagamento-mobile.css" media="screen and (max-device-width: 600px)">
         <link rel="stylesheet" href="css/menu.css">
-
         <script src="../../js/jquery.js"></script>
         <script src="js/pagamento.js"></script>
         <link rel="shortcut icon" href="../../img/logo.ico" />
@@ -20,24 +19,23 @@
     <div class="container">
              
         <div id="pagamento" >
-
             <span>Pagamento</span> 
             <label for="preco">Total de Crédito R$:</label>
             <input type="text" id="preco" name="preco" disabled>
-            <button>Cadastar ou Editar</button>            
+           
+            <button id='buscaPagamento'>Cadastar ou Editar</button>            
         </div>
 
         <form id="formCadPagamento" action="#" >
             <!-- alterar o valor via js-->
-            <span id="tituloPagamento">Cadastrar Pagamento</span>
+            <span id="titularPagamento">Cadastrar Pagamento</span>
            
             <label for="cartao">Número do Cartão</label>
             <input type="text" id="cartao" >
 
             <label for="NomeTitular">Nome do Titular</label>
             <input type="text" id="NomeTitular" >
-        
-       
+               
             <label for="validade">Validade</label>
             <input type="text" id="validade" >
 
@@ -53,8 +51,6 @@
 
         </form>
         <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-
-    </div>
-       
+    </div>       
 </body>
 </html>
