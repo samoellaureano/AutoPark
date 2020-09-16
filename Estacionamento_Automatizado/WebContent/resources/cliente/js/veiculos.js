@@ -1,9 +1,9 @@
-var veiculo = new Object();
+var veiculo = null;
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
     $('#cadVeiculo').click(function(e){
-   
+        veiculo = new Object();
         veiculo.marca = $("#marca").val();
         veiculo.modelo = $("#modelo").val();
         veiculo.ano = $("#ano").val();
@@ -46,7 +46,7 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-
+    };
         visualizar=function(listaDeVeiculo){
 
             var veiculoHtml =" <ul class='itemVeiculo'>";
@@ -67,7 +67,7 @@ $(document).ready(function(){
                         +"<label for='placa"+i+"'>Placa:</label>"
                         +"<input type='text' id='placa"+i+"' value='"+listaDeVeiculo[i].placa+"'>"
                         +"<div><a href=''>Cancelar</a><button onclick='atualizaVeiculo("+i+")' id='editCar"+id+"'>Confirmar</button>"
-                        +"</div></form></div></li></ul>";
+                        +"</div></form></div></li>";
                     }
                     veiculoHtml+="<a href='' id='carrega-listaFuncionario'>Ver Mais</a>";
 
@@ -75,17 +75,17 @@ $(document).ready(function(){
 
                     veiculoHtml += "<li style='text-align: center'>Nenhum registro encontrado</li>";
                 };
-                    $("#ListaDeVeiculosHtml").append(funcionariosHTML + "</ul>");
+                    $("#ListaDeVeiculosHtml").append(veiculoHtml);
                 };  
             };
-        };
+        
 
         atualizaVeiculo=function(id){
-           
-            veiculo.marca = $("'#marca"+id+"'").val();
-            veiculo.modelo = $("'#modelo"+id+"'").val();
-            veiculo.ano = $("'#ano"+id+"'").val();
-            veiculo.placa1 = $("'#placa"+id+"'").val();
+            veiculo = new Object();
+            veiculo.marca = $("#marca"+id).val();
+            veiculo.modelo = $("#modelo"+id).val();
+            veiculo.ano = $("#ano"+id).val();
+            veiculo.placa1 = $("#placa"+id).val();
 
             var cfg = {
                 url: "../rest/veiculoRest/updateVeiculo",
@@ -109,37 +109,5 @@ $(document).ready(function(){
             };
             autoPark.ajax.post(cfg);
         };
+        
 });
-
-
-/*
-buscar = function(){
-        var valorBusca = $("#buscarFunc").val();
-        var cfg = {
-            type: "POST",
-            url: "../rest/funcionarioRest/buscarFuncionarios/" + valorBusca,
-            success: function (listaDeFuncionarios) {
-                exibirFuncionarios(listaDeFuncionarios);
-            },
-            error: function (err) {
-                alert("Erro ao buscar Funcionarios: " + err.responseText);
-            }
-        };
-        autoPark.ajax.post(cfg);
-    }
-
-    exibirFuncionarios = function(listaDeFuncionarios){
-        var funcionariosHTML = "<ul class='itemFuncionario'>";
-        if (listaDeFuncionarios != undefined) {
-            if (listaDeFuncionarios.length > 0) {
-                for (var i = 0; i < listaDeMarcas.length; i++) {
-                    funcionariosHTML += ("<input type='radio' name='funcionario' id='func"+i+"' hidden>");
-                }
-            } else {
-                funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
-            }
-            $("#listaFuncionariosHTML").html(funcionariosHTML + "</ul>");
-        }
-    }
-
-*/
