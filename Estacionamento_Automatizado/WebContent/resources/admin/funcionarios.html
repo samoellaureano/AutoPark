@@ -91,7 +91,7 @@
                                     <label for="status">Status:<input type="checkbox" id="status"></label>
                                     <div>
                                         <a href="">Cancelar</a>
-                                        <button>Confirmar</button>
+                                        <button onclick="editarFuncionario(i)">Confirmar</button>
                                     </div>
                                 </form>
                             </div>
@@ -145,13 +145,13 @@
                                     <label for="perfil">Perfil:</label>
                                     <select name="perfil" id="perfil">
                                         <option value="1">Administrador</option>
-                                        <option value="2">Funcionario</option>
+                                        <option value="2" selected>Funcionario</option>
                                         <option value="3">Cliente</option>
                                     </select>
                                     <label for="status">Status:<input type="checkbox" id="status"></label>
                                     <div>
                                         <a href="">Cancelar</a>
-                                        <button>Confirmar</button>
+                                        <button id="editarFuncionario">Confirmar</button>
                                     </div>
                                 </form>
                             </div>
