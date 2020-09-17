@@ -1,123 +1,145 @@
-html,body{
+html,
+body {
+  display: flex;
+  width: 100%;
+  height: 98%;
+  background-color: #0c4304;
+  outline: 0px auto -webkit-focus-ring-color; 
+}
+
+.logo{
+  display: flex;
+  flex-wrap: nowrap;
+  position: absolute;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.logo > img{
+  width: 7rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0rem 0rem;
+  width: 100%;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 10;
+  flex-wrap: wrap;
+  margin: 0rem 6rem;
+}
+
+h2{
+  margin-bottom: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+
+
+
+.listaPerfils{
+  background-color: #aeb7ad42;
+  color: black;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 0.2rem;
+  margin: 0rem 5rem;
+}
+
+.listaPerfils > a{
+  margin: 1rem 5rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #fff;
+  padding: 0.7rem;
+  background-color: #a91417;
+  border-radius: 0.3rem;
+  user-select: none;
+}
+
+.topLista{
+  height: 7rem;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topLista > h3{
+  margin: inherit;
+}
+
+.topLista > img{
+  width: 4rem;
+}
+
+
+
+.listaPerfils > div > label{
+  display: flex;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+
+
+.listaPerfils > ul{
+  background-color: #ffffff;
+    padding: 0.5rem 0rem 0rem;
+    border-radius: 0.2rem;
+    margin: 0.1rem 0rem;
+    user-select: none;
+}
+
+.fecharDados{
+  width: 5rem;
+    padding: 0.1rem !important;
+    font-size: 0.7rem;
+    margin: -2rem auto 0.3rem 12.5rem !important;
+    background-color: #a91417 !important;
+    color: white;
+}
+
+
+
+
+
+
+.listaPerfils li{
+  flex-direction: column;
+  width: auto;
+    display: none;
+    padding: 0.4rem 0.2rem;
+}
+
+
+
+
+
+.itemDados > li > div > form > div{
+  display: flex;
     width: 100%;
-    height: 98%;
-    background-color: #0c4304;
-  }
-  
-  .container{
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-  }
-  
-  .container > span {
+    justify-content: space-evenly;
+}
+
+.itemDados > li > div > form > div > button{
+  border: none;
+    background-color: green;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
-  }
-  
-  .container > a {
-    text-decoration: none;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 13px;
-  }
-  
-  .container > div{
-    display: flex;
-  }
-  
-  .container > div > a {
-    margin-top: 19px;
-    text-decoration: none;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 10px;
-  }
-  
-  .container > form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  select{
-    width: 19.3rem;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  option{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .container > form > input {
-    width: 18rem;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  .container > form > label {
-    margin-bottom: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .container > form > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .container > form > div > a {
-    margin-bottom: 20px;
-    margin-left: 20px;
-    text-decoration: none;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 13px;
-  }
-  
-  .container > form > div > button{
-    padding: 10px;
-    width: 10rem;
-    margin-bottom: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .redefineSenhaOk{
-    color: rgb(3, 88, 3);
-    display: none;
-    background-color: rgb(141, 224, 141);
-    border-radius: 0.5rem;
-    position: static;
-  }
-  
-  .redefineSenhaErro{
-    color: rgb(88, 3, 3);
-    display: none;
-    background-color: rgb(224, 141, 141);
-    border-radius: 0.5rem;
-    position: static;
-  }
-  
-  .carregamentoRedefinirSenha{
-    margin-left: auto ;
-    margin-right: auto;
-    position: inherit !important;
-    color: #ffffff;
-  }
-  
+    cursor: pointer;
+}
+
+
 .menu {
+  display: flex;
+  flex-wrap: nowrap;
   position: fixed;
   width: 95%;
+  z-index: 11;
 }
