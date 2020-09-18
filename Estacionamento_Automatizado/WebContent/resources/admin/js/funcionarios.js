@@ -21,44 +21,43 @@ $(document).ready(function(){
         var funcionariosHTML = "<ul class='itemFuncionario'>";
         if (listaDeFuncionarios != undefined) {
             if (listaDeFuncionarios.length > 0) {
-                for (var i = 0; i < listaDeFuncionarios.length; i++) {
-                    if(listaDeFuncionarios.status){
-                        listaDeFuncionarios.status = "checked";
+                for (var i = 0; i < 0; i++) {
+                    if(listaDeFuncionarios.status[i]){
+                        listaDeFuncionarios.status[i] = "checked";
                     }else{
-                        listaDeFuncionarios.status = "";
+                        listaDeFuncionarios.status[i] = "";
                     }
-
-                    if(listaDeFuncionarios.perfil == 0){
-                        listaDeFuncionarios.perfil = "<option value='0' selected>Administrador</option>"
+                    if(listaDeFuncionarios.perfil[i] == 0){
+                        listaDeFuncionarios.perfil[i] = "<option value='0' selected>Administrador</option>"
                             +"<option value='1'>Funcionario</option>"
                             +"<option value='2'>Cliente</option></select>";
-                    }else if(listaDeFuncionarios.perfil == 1){
-                        listaDeFuncionarios.perfil = "<option value='0'>Administrador</option>"
+                    }else if(listaDeFuncionarios.perfil[i] == 1){
+                        listaDeFuncionarios.perfil[i] = "<option value='0'>Administrador</option>"
                             +"<option value='1' selected>Funcionario</option>"
                             +"<option value='2'>Cliente</option></select>";
                     }else{
-                        listaDeFuncionarios.perfil = "<option value='0'>Administrador</option>"
+                        listaDeFuncionarios.perfil[i] = "<option value='0'>Administrador</option>"
                             +"<option value='1'>Funcionario</option>"
                             +"<option value='2' selected>Cliente</option></select>";
                     }
                     funcionariosHTML += "<input type='radio' name='funcionario' id='func"+i+"' hidden>"
-                    +"<label for='func"+i+"'>"+listaDeFuncionarios.nome+"</label>"
+                    +"<label for='func"+i+"'>"+listaDeFuncionarios.nome[i]+"</label>"
                     +"<li><label for='editar"+i+"'>Editar</label>"
                     +"<input type='checkbox' name='editar' id='editar"+i+"' hidden>"
                     +"<div><form><label for='nome'>Nome:</label><input type='text' id='nome"+i+"'"
-                    +"value='"+listaDeFuncionarios.nome+"'>"
+                    +"value='"+listaDeFuncionarios.nome[i]+"'>"
                     +"<label for='celular'>Celular:</label><input type='text' id='celular"+i+"'"
-                    +"value='"+listaDeFuncionarios.celular+"'>"
+                    +"value='"+listaDeFuncionarios.celular[i]+"'>"
                     +"<label for='email'>Email:</label><input type='text' id='email"+i+"'"
-                    +"value='"+listaDeFuncionarios.email+"'>"
+                    +"value='"+listaDeFuncionarios.email[i]+"'>"
                     +"<label for='perfil'>Perfil:</label>"
                     +"<select name='perfil' id='perfil"+i+"'>"
-                    + listaDeFuncionarios.perfil
-                    +"<label for='status'>Status:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios.status +"></label>"
+                    + listaDeFuncionarios.perfil[i]
+                    +"<label for='status'>Status:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios.status[i] +"></label>"
                     +"<div><a href=''>Cancelar</a>"
                     +"<button onclick='editarFuncionario("+i+")'>Confirmar</button></div></form></div></li>"
                 }
-                funcionariosHTML+="</ul><a href='' id='carrega-listaFuncionario'>Ver Mais</a>";
+                funcionariosHTML+="</ul>";
             } else {
                 funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }

@@ -180,23 +180,24 @@ h2{
 
 
 
-.listaFuncionarios > ul{
+.listaFuncionarios > div > ul{
   background-color: #ffffff;
     padding: 0.5rem 0rem 0rem;
     border-radius: 0.2rem;
-    margin: 0.1rem 0rem;
+    margin: 0.2rem 0rem;
     user-select: none;
 }
 
 .fecharDados{
   width: 5rem;
-    padding: 0.1rem !important;
+    padding: 0.2rem !important;
     font-size: 0.7rem;
     background-color: #a91417 !important;
     color: white;
+    border-radius: 0.2rem;
 }
 
-.listaFuncionarios > ul > label{
+.listaFuncionarios > div > ul > label{
   display: block;
     justify-content: center;
     padding: 0.2rem 0rem;

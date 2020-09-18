@@ -159,7 +159,7 @@ h2{
 }
 
 
-.listaPrecos > label{
+.listaPrecos > div > label{
   text-align: left;
   font-family: "Source Sans Pro", sans-serif;
   color: white;
@@ -175,20 +175,21 @@ h2{
 
 
 
-.listaPrecos > ul{
+.listaPrecos > div > ul{
   background-color: #ffffff;
     padding: 0.5rem 0rem 0rem;
     border-radius: 0.2rem;
-    margin: 0.1rem 0rem;
+    margin: 0.2rem 0rem;
     user-select: none;
 }
 
 .fecharDados{
   width: 5rem;
-    padding: 0.1rem !important;
+    padding: 0.2rem !important;
     font-size: 0.7rem;
     background-color: #a91417 !important;
     color: white;
+    border-radius: 0.2rem;
 }
 
 .listaPrecos > ul > label{
