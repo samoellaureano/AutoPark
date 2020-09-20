@@ -124,7 +124,7 @@ h2{
     flex-wrap: nowrap;
 }
 
-.listaFuncionarios{
+.listaClientes{
   background-color: #aeb7ad42;
   color: black;
   padding: 0.5rem;
@@ -136,7 +136,7 @@ h2{
   margin: -8px;
 }
 
-.listaFuncionarios > a{
+.listaClientes > a{
   margin: 1rem 5rem;
   text-decoration: none;
   font-size: 0.7rem;
@@ -164,7 +164,7 @@ h2{
 }
 
 
-.listaFuncionarios > label{
+.listaClientes > label{
   text-align: left;
   font-family: cursive;
   color: white;
@@ -172,7 +172,7 @@ h2{
   padding: 0.4rem 0rem;
 }
 
-.listaFuncionarios > div > label{
+.listaClientes > div > label{
   display: flex;
   margin-bottom: 0.5rem;
   color: white;
@@ -180,7 +180,7 @@ h2{
 
 
 
-.listaFuncionarios > ul{
+.listaClientes > ul{
   background-color: #ffffff;
     padding: 0.5rem 0rem 0rem;
     border-radius: 0.2rem;
@@ -197,7 +197,7 @@ h2{
     color: white;
 }
 
-.listaFuncionarios > ul > label{
+.listaClientes > ul > label{
   display: block;
     justify-content: center;
     padding: 0.2rem 0rem;
@@ -207,19 +207,19 @@ h2{
 }
 
 
-.listaFuncionarios > li > div:nth-child(2) > label{
+.listaClientes > li > div:nth-child(2) > label{
   display: block;
   cursor: pointer;
 }
 
-.listaFuncionarios li{
+.listaClientes li{
   flex-direction: column;
   width: auto;
     display: none;
     padding: 0.4rem 0.2rem;
 }
 
-.itemFuncionario > li > label{
+.itemCliente > li > label{
   background-color: #a7160a;
     color: white;
     padding: 0.2rem 0rem;
@@ -231,11 +231,11 @@ h2{
     user-select: none;
 }
 
-.itemFuncionario > input:checked ~ li{
+.itemCliente > input:checked ~ li{
   display: flex;
 }
 
-.itemFuncionario > li > div > form{
+.itemCliente > li > div > form{
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -245,13 +245,13 @@ h2{
    margin: 0rem 1rem;
 }
 
-.itemFuncionario > li > div > form > div{
+.itemCliente > li > div > form > div{
   display: flex;
     width: 100%;
     justify-content: space-evenly;
 }
 
-.itemFuncionario > li > div > form > div > button{
+.itemCliente > li > div > form > div > button{
   border: none;
     background-color: green;
     border-radius: 0.4rem;
@@ -260,30 +260,30 @@ h2{
     cursor: pointer;
 }
 
-.itemFuncionario > li > div > form > div > a {
+.itemCliente > li > div > form > div > a {
   text-decoration: none;
   font-size: 0.7rem;
   color: #940505;
   padding: 0.4rem;
 }
 
-.itemFuncionario > li > div > form > input{
+.itemCliente > li > div > form > input{
   background-color: #9e9b95;
     color: #5a5a59;
     font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemFuncionario > li > div > form > select{
+.itemCliente > li > div > form > select{
   font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemFuncionario > li > input:checked ~ div > form{
+.itemCliente > li > input:checked ~ div > form{
   cursor: auto;
   pointer-events: auto;
 }
-.itemFuncionario > li > input:checked ~ div > form > input{
+.itemCliente > li > input:checked ~ div > form > input{
   background-color: #fff;
     color: #000;
 }
