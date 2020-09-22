@@ -5,7 +5,7 @@ $(document).ready(function(){
         var cfg = {
             url: "../rest/registroRest/buscaregistro",
             success: function (listaDeRegistros){
-                 visualizar(listaDeRegistros);
+                visualizarRegistro(listaDeRegistros);
             },
             error: function (errJson) {
                 resp = ("Erro ao buscar um novo Registro!");
@@ -15,9 +15,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     
-        visualizar=function(listaDeRegistros){
+        visualizarRegistro=function(listaDeRegistros){
 
-            var registroHtml=" <ul class='itemVeiculo'>";
+            var registroHtml="";
             var checkout="";
 
             if (listaDeRegistros != undefined) {
@@ -30,22 +30,21 @@ $(document).ready(function(){
                             checkout=listaDeRegistros[i].checkout;
                         };
                         
-                        registroHtml+="<ul class='itemRegistro'><input type='radio' name='registro' id='func1' hidden>"
-                                    +"<input type='radio' name='funcionario' id='func1' hidden>"
-                                    +"<label for='func1'>"+listaDeRegistros[i].estacionamento+"-"+listaDeRegistros[i].data+"</label>"
+                        registroHtml+="<ul class='itemFuncionario'><input type='radio' name='funcionario' id='func"+i+"' hidden>"
+                                    +"<label for='func"+i+"'>"+listaDeRegistros[i].estacionamento+"-"+listaDeRegistros[i].data+"</label>"
                                     +"<li>Check-in: <span>"+listaDeRegistros[i].checkin+"</span></li>"
                                     +"<li>Check-out: <span>"+checkout+"</span></li>"
                                     +"<li>Permanencia: <span>"+listaDeRegistros[i].permanencia+"</span></li>"
                                     +"<li>Valor Hora:  <span>R$:"+listaDeRegistros[i].vlhora+"</span></li></ul>";
-                    };
-
-                    registroHtml+="</ul>";
+                    };                   
                     
                 }else {
 
-                    registroHtml += "<li style='text-align: center'>Nenhum registro encontrado</li>";
+                    registroHtml += "<ul class='itemFuncionario'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
                 };
                     $("#ListaDeVeiculosHtml").append(registroHtml);
             };   
         };
+
+        busca();
 });

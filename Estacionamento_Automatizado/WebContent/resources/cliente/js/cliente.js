@@ -26,5 +26,7 @@ $(document).ready(function(){
                   $("#valorCredito").text(daschboard.valorTotal);
                };                 
             };  
-      };  
+      }; 
+      
+      busca();
 });

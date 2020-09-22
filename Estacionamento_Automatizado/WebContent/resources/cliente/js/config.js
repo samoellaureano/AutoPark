@@ -29,8 +29,7 @@ $(document).ready(function(){
                 }else{
                     resp = ("Erro ao alterar o item!");
                     exibirMessagem(resp, 2);
-                }
-               
+                }               
             },
             error: function (errJson) {
                 resp = ("Erro ao alterar o item!");
@@ -39,4 +38,5 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     });
+    busca();
 });

@@ -22,7 +22,7 @@ $(document).ready(function(){
                 }else{
                     resp = ("Erro ao cadastrar um novo Veiculo!");
                     exibirMessagem(resp, 2);
-                }               
+                };              
             },
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo Veiculo!");
@@ -47,14 +47,14 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-        visualizar=function(listaDeVeiculo){
+        visualizarVeiculos=function(listaDeVeiculo){
 
-            var veiculoHtml =" <ul class='itemVeiculo'>";
+            var veiculoHtml ="";
 
             if (listaDeVeiculo != undefined) {
-                if (listaDeVeiculo.length > 0) {
+               if (listaDeVeiculo.length > 0) {
                     for (var i = 0; i < listaDeVeiculo.length; i++){
-                        veiculoHtml+="<input type='radio' name='carro' id='car"+i+"' hidden>"
+                        veiculoHtml+="<ul class='itemVeiculo'><input type='radio' name='carro' id='car"+i+"' hidden>"
                         +"<label for='car'"+i+"'> "+listaDeVeiculo[i].placa+"</label><li>"
                         +"<label for='editar"+i+"'>Editar</label>"
                         +"<input type='checkbox' name='editar' id='editar'"+i+"' hidden><div>"
@@ -67,20 +67,24 @@ $(document).ready(function(){
                         +"<label for='placa"+i+"'>Placa:</label>"
                         +"<input type='text' id='placa"+i+"' value='"+listaDeVeiculo[i].placa+"'>"
                         +"<div><a href=''>Cancelar</a><button onclick='atualizaVeiculo("+i+")' id='editCar"+id+"'>Confirmar</button>"
-                        +"</div></form></div></li>";
-                    }
+                        +"</div></form></div></li></ul>";
+                    };
                     veiculoHtml+="<a href='' id='carrega-listaFuncionario'>Ver Mais</a>";
 
-                }else {
+               }else {
 
-                    veiculoHtml += "<li style='text-align: center'>Nenhum registro encontrado</li>";
-                };
-                    $("#ListaDeVeiculosHtml").append(veiculoHtml);
-                };  
+                    veiculoHtml += "<ul class='itemVeiculo'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
+                };                    
+                
+            }else{
+                veiculoHtml += "<ul class='itemVeiculo'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
             };
-        
+          console.log(veiculoHtml);
+            $('#ListaDVeiculosHtml').html(veiculoHtml);
+        };
 
         atualizaVeiculo=function(id){
+            
             veiculo = new Object();
             veiculo.marca = $("#marca"+id).val();
             veiculo.modelo = $("#modelo"+id).val();
@@ -100,7 +104,7 @@ $(document).ready(function(){
                     }else{
                         resp = ("Erro ao cadastrar um novo Veiculo!");
                         exibirMessagem(resp, 2);
-                    }               
+                    };            
                 },
                 error: function (errJson) {
                     resp = ("Erro ao cadastrar um novo Veiculo!");
@@ -109,5 +113,8 @@ $(document).ready(function(){
             };
             autoPark.ajax.post(cfg);
         };
+
+     var lista1=undefined;
+     visualizarVeiculos(lista1);
         
 });
