@@ -22,7 +22,7 @@ body {
   width: 75%;
 }
 
-.container > div > span {
+.container > form > span {
     margin: 0px 0px 20px 0px;
     color: #ffffff;
     font-size: 18px;
@@ -61,7 +61,7 @@ body {
   color: white;
 }
 
-.conteiner >div>input{
+.conteiner >form>input{
     width: auto;
 }
 
@@ -73,7 +73,7 @@ select {
   border: none;
 }
 
-.container > div > input {
+.container > form > input {
     width: 11rem;
     padding: 10px;
     margin-bottom: 20px;
@@ -84,11 +84,9 @@ select {
 .container > #CadastrarPagamento > div >label{
 background-color:#fff222;
 
-
 }
 
-
-.container > div > label {
+.container > form > label {
   margin: 0px 0px 5px 0px;
   color: white;
   font-weight: bold;
@@ -96,13 +94,17 @@ background-color:#fff222;
   text-align: initial;
 }
 
-.container > div {
+.container > form {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+    border: 1px solid white;
+    padding: 1rem;
+    border-radius: 5px;
 }
 
-.container > div > a {
+.container > form > a {
   margin-bottom: 20px;
   margin-left: 20px;
   text-decoration: none;
@@ -116,13 +118,13 @@ background-color:#fff222;
   width: 95%;
 }
 
-.container > div >  button {
+.container > form >  button {
     padding: 10px;    
     margin-bottom: 10px;
     align-items: center; 
 }
 
-.container > div > div>  button {
+.container > form > div>  button {
     padding: 10px;    
     margin-bottom: 10px;
     align-items: center; 

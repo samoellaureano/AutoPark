@@ -23,7 +23,7 @@ body {
   justify-content: space-between;
 }
 
-.container > div > span {
+.container > form > span {
     margin: 0px 0px 20px 0px;
     color: #ffffff;
     font-size: 18px;
@@ -49,6 +49,7 @@ body {
     justify-items: center;
     color: white;
     margin-right: 120px;
+  
 }
 
 .container > #CadastrarPagamento {
@@ -61,48 +62,45 @@ body {
   color: white;
 }
 
-.conteiner >div > input{
-    width: auto;
-}
-
-select {
-  width: 19.3rem;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: none;
-}
-
-.container > div > input {
+.container > form > input {
     width: 11rem;
+    width: auto;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: none;
+ 
 }
 
-.container > div > label {
+.container > form > label {
   margin: 0px 0px 5px 0px;
   color: white;
   font-weight: bold;
   width: 100%;
   text-align: initial;
+
 }
 
-.container > div {
+.container > form {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  border: 1px solid white;
+  padding: 1rem;
+  border-radius: 5px;
+ 
+  
 }
 
-.container > div > a {
+
+.container > form > a {
   margin-bottom: 20px;
   margin-left: 20px;
   text-decoration: none;
   color: white;
   font-size: 13px;
 }
-
 
 .menu {
   position: fixed;
@@ -115,16 +113,13 @@ select {
     align-items: center; 
 }
 
-.container > div > div>  button {
+.container > form > div>  button {
     padding: 10px;    
     margin-bottom: 10px;
     align-items: center; 
 }
 
-.menu {
-  position: fixed;
-  width: 95%;
-}
+
 
 
 

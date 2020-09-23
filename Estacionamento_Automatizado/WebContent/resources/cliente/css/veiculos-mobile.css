@@ -45,7 +45,7 @@ h2{
     cursor: pointer;
 }
 
-.novo #novoFunc:checked ~ div{
+.novo #novoVeic:checked ~ div{
     display: flex;
 }
 
@@ -120,7 +120,7 @@ h2{
     flex-wrap: nowrap;
 }
 
-.listaFuncionarios{
+.listaVeiculos{
   background-color: #aeb7ad42;
   color: black;
   padding: 0.5rem;
@@ -131,7 +131,7 @@ h2{
   margin: 0rem 5rem;
 }
 
-.listaFuncionarios > a{
+.listaVeiculos > a{
   margin: 1rem 5rem;
   text-decoration: none;
   font-size: 0.7rem;
@@ -159,7 +159,7 @@ h2{
 }
 
 
-.listaFuncionarios > label{
+.listaVeiculos > label{
   text-align: left;
   font-family: cursive;
   color: white;
@@ -167,7 +167,7 @@ h2{
   padding: 0.4rem 0rem;
 }
 
-.listaFuncionarios > div > label{
+.listaVeiculos > div > label{
   display: flex;
   margin-bottom: 0.5rem;
   color: white;
@@ -175,7 +175,7 @@ h2{
 
 
 
-.listaFuncionarios > ul{
+.listaVeiculos >div>  ul{
   background-color: #ffffff;
     padding: 0.5rem 0rem 0rem;
     border-radius: 0.2rem;
@@ -192,7 +192,7 @@ h2{
     color: white;
 }
 
-.listaFuncionarios > ul > label{
+.listaVeiculos > ul > label{
   display: block;
     justify-content: center;
     padding: 0.2rem 0rem;
@@ -202,19 +202,19 @@ h2{
 }
 
 
-.listaFuncionarios > li > div:nth-child(2) > label{
+.listaVeiculos > li > div:nth-child(2) > label{
   display: block;
   cursor: pointer;
 }
 
-.listaFuncionarios li{
+.listaVeiculos li{
   flex-direction: column;
   width: auto;
     display: none;
     padding: 0.4rem 0.2rem;
 }
 
-.itemFuncionario > li > label{
+.itemVeiculo > li > label{
   background-color: #a7160a;
     color: white;
     padding: 0.2rem 0rem;
@@ -226,11 +226,11 @@ h2{
     user-select: none;
 }
 
-.itemFuncionario > input:checked ~ li{
+.itemVeiculo > input:checked ~ li{
   display: flex;
 }
 
-.itemFuncionario > li > div > form{
+.itemVeiculo > li > div > form{
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -240,13 +240,15 @@ h2{
    margin: 0rem 1rem;
 }
 
-.itemFuncionario > li > div > form > div{
+.itemVeiculo > li > div > form > div{
   display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 5px;
 }
 
-.itemFuncionario > li > div > form > div > button{
+.itemVeiculo > li > div > form > div > button{
   border: none;
     background-color: green;
     border-radius: 0.4rem;
@@ -255,30 +257,30 @@ h2{
     cursor: pointer;
 }
 
-.itemFuncionario > li > div > form > div > a {
+.itemVeiculo > li > div > form > div > a {
   text-decoration: none;
   font-size: 0.7rem;
   color: #940505;
   padding: 0.4rem;
 }
 
-.itemFuncionario > li > div > form > input{
+.itemVeiculo > li > div > form > input{
   background-color: #9e9b95;
     color: #5a5a59;
     font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemFuncionario > li > div > form > select{
+.itemVeiculo > li > div > form > select{
   font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
 
-.itemFuncionario > li > input:checked ~ div > form{
+.itemVeiculo > li > input:checked ~ div > form{
   cursor: auto;
   pointer-events: auto;
 }
-.itemFuncionario > li > input:checked ~ div > form > input{
+.itemVeiculo > li > input:checked ~ div > form > input{
   background-color: #fff;
     color: #000;
 }
