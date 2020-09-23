@@ -16,7 +16,7 @@
     <script src="../../js/jquery-ui.js"></script>
     <script src="js/clientes.js"></script>
     <link rel="shortcut icon" href="../../img/logo.ico" />
-    <script src="autoComplete.js"></script>
+    <script src="js/autoComplete.js"></script>
 </head>
 
 <body>
@@ -32,10 +32,10 @@
                         <h3>Clientes</h3>
                     </div>
                     <div class="novo">
-                        <label for="novoFunc"><img src="img/novoUser.png" alt="novo"></label>
-                        <label for="novoFunc">Novo</label>
+                        <label for="novoCli"><img src="img/novoUser.png" alt="novo"></label>
+                        <label for="novoCli">Novo</label>
 
-                        <input type="checkbox" id="novoFunc" hidden>
+                        <input type="checkbox" id="novoCli" hidden>
                         <div class="box-novo">
                             <form action="">
                                 <h3>Novo Cliente</h3>
@@ -60,93 +60,15 @@
                             </form>
                         </div>
                     </div>
-                    <label for="buscarFunc">Buscar</label>
-                    <input type="text" id="buscarFunc" class="autocomplete" placeholder="Digite aqui..." />
+                    <label for="buscarCli">Buscar</label>
+                    <input type="text" id="buscarCli" class="autocomplete" placeholder="Digite aqui..." />
                 </div>
                 <label for="">Lista de Clientes</label>
                 <ul class="fecharDados">
                     <input type="radio" name="cliente" id="menos" hidden>
                     <label for="menos">Fechar Dados</label>
                 </ul>
-                <ul class="itemCliente">
-                    <input type="radio" name="cliente" id="cli1" hidden>
-                    <label for="cli1">Pedro Alberto</label>
-                    <li>
-                        <label for="editar">Editar</label>
-                        <input type="checkbox" name="editar" id="editar" hidden>
-
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Pedro">
-                                <label for="cpf">Cpf:</label><input type="text" id="cpf"
-                                    value="000.000.000-00">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 9955-4452">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="pedro.abs@gmail.com"><br>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul><ul class="itemCliente">
-                    <input type="radio" name="cliente" id="cli2" hidden>
-                    <label for="cli2">Lucas Henrique</label>
-                    <li>
-                        <label for="editar2">Editar</label>
-                        <input type="checkbox" name="editar" id="editar2" hidden>
-
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Lucas Henrique">
-                                <label for="cpf">Cpf:</label><input type="text" id="cpf"
-                                    value="000.000.000-00">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 9975-3232">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="h.lucas@gmail.com"><br>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="itemCliente">
-                    <input type="radio" name="cliente" id="cli3" hidden>
-                    <label for="cli3">Ezequiel dos Santos</label>
-                    <li>
-                        <label for="editar3">Editar</label>
-                        <input type="checkbox" name="editar" id="editar3" hidden>
-
-                        <div>
-                            <form action="">
-                                <label for="nome">Nome:</label><input type="text" id="nome"
-                                    value="Ezequiel dos Santos">
-                                <label for="celular">Celular:</label><input type="text" id="celular"
-                                    value="(47) 99738-6549">
-                                <label for="email">Email:</label><input type="text" id="email"
-                                    value="eduardomussi@gmail.com">
-                                <label for="perfil">Perfil:</label>
-                                <select name="perfil" id="perfil">
-                                    <option value="1">Administrador</option>
-                                    <option value="2">cliente</option>
-                                    <option value="3">Cliente</option>
-                                </select>
-                                <label for="status">Status:<input type="checkbox" id="status"></label>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button>Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
+                <div id="listaClientesHTML"></div>
                 <a href="" id="carrega-listaCliente">Ver Mais</a>
             </nav>
         </div>
