@@ -7,6 +7,16 @@ body {
   outline: 0px auto -webkit-focus-ring-color; 
 }
 
+#buscarRelatorio{
+  margin: 1rem 0rem;
+    padding: 0.5rem 3rem;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: #37b908cc;
+    color: white;
+    cursor: pointer;
+}
+
 .logo{
   display: flex;
   flex-wrap: nowrap;
