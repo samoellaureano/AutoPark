@@ -38,7 +38,7 @@
     overflow: hidden;
     padding-left: -40px !important;
     transition: 0.7s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-    width: 9rem;
+    width: 11rem;
   }
 
   .menu ul > li > div{

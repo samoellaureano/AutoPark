@@ -62,5 +62,5 @@ $(document).ready(function(){
     });
 
     buscar();
-    $("#menu").load("menu.html");
+    $("#menu").load("menu.html"); 
 });
