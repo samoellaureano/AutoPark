@@ -21,9 +21,9 @@
         <div id="pagamento" >
             <span>Pagamento</span> 
             <label for="preco">Total de Crédito R$:</label>
-            <input type="text" id="preco" name="preco" disabled>
-           
-            <button id='buscaPagamento'>Cadastar ou Editar</button>            
+            <label type="text" id="preco" name="preco" disabled>100</label>
+            
+            <button id='buscaPagamento'>visualizar</button>            
         </div>
 
         <form id="formCadPagamento" action="#" >
@@ -43,12 +43,9 @@
             <input type="text" id="codigoVerificacao" >
         
             <div>
-                <button type="button" id="cadPagamento" >Cadastrar</button>
-                <button >Cancelar</button>
-            </div>     
-
-        <a href="dashboard.html">VOLTAR</a>
-
+                <button type="button" id="cadPagamento" >Salvar</button>               
+                <button id="abilitarEdicao" >Editar</button>
+            </div>
         </form>
         <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
     </div>       

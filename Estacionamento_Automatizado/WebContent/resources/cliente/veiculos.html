@@ -19,11 +19,11 @@
         <nav class="listaVeiculos">
                 <div>
                     <div class="topLista">
-                        <img src="img/carro.png" alt="equipe">
+                        <img src="img/frota2.png" alt="equipe">
                         <h3>Veiculos</h3>
                     </div>
                     <div  class="novo">
-                        <label for="novoVeic"><img src="img/carro.png" alt="novo"></label>
+                        <label for="novoVeic"><img src="img/newVeiculo.png" alt="novo"></label>
                         <label for="novoVeic">Novo</label>
 
                         <input type="checkbox" id="novoVeic" hidden>
@@ -59,99 +59,7 @@
                     <input type="radio" name="funcionario" id="menos" hidden>
                     <label for="menos">Fechar Dados</label>
                 </ul>
-                <div id="ListaDeVeiculosHtml">
-                <ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="car1" hidden>
-                    <label for="car1">Gol MDB-4409</label>
-                    <li>
-                        <label for="editar">Editar</label>
-                        <input type="checkbox" name="editar" id="editar" hidden>
-
-                        <div>
-                            <form  action="">
-                                <label for="marca2">Marca:</label>
-                                <select name="marca" id="marca2" required>
-                                    <option value="Volkswagen">Ford</option>
-                                </select>
-                                <label for="modelo">Modelo:</label>
-                                <select name="modelo2" id="modelo2" required>
-                                    <option value="Gol">Ka</option>
-                                </select>
-                                <label for="ano2">Ano:</label>
-                                <select name="ano" id="ano2" required>
-                                    <option value="2015">2015</option>
-                                </select>
-                                <label for="placa2">Placa:</label>
-                                <input type="text" id="placa2" value="AGH-1984">
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button type="button" onclick="atualizaVeiculo('2')">Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul><ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="car3" hidden>
-                    <label for="car3">Ka ACB-1254</label>
-                    <li>
-                        <label for="editar3">Editar</label>
-                        <input type="checkbox" name="editar" id="editar3" hidden>
-                            <div>
-                            <form action="">
-                                <label for="marca3">Marca:</label>
-                                <select onkeyup='buscaMarca(1)' name="marca" id="marca3" required>
-                                    <option value="Ford">Ford</option>
-                                </select>
-                                <label for="modelo">Modelo:</label>
-                                <select name="modelo" id="modelo3" onkeyup='buscaMarca(1)' required>
-                                    <option value="Ka">Ka</option>
-                                </select>
-                                <label for="ano">Ano:</label>
-                                <select name="ano" id="ano3" required>
-                                    <option value="2010">2010</option>
-                                </select>
-                                <label for="placa">Placa:</label>
-                                <input type="text" id="placa3" value="ACB-1254">
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button type="button" onclick="atualizaVeiculo('2')">Confirmar</button>
-                                </div>
-                            </form>  
-                        </div>                      
-                    </li>
-                </ul>
-                <ul class="itemVeiculo">
-                    <input type="radio" name="funcionario" id="car4" hidden>
-                    <label for="car4">Uno MDB-4499</label>
-                    <li>
-                        <label for="editar4">Editar</label>
-                        <input type="checkbox" name="editar" id="editar4" hidden>
-                        <div>
-                            <form  action="">
-                                
-                                <label for="marca4">Marca:</label>
-                                <select name="marca" id="marca4" required>
-                                    <option value="Fiat">Fiat</option>
-                                </select>
-                                <label for="modelo4">Modelo:</label>
-                                <select name="modelo" id="modelo4" required>
-                                    <option value="Uno">Uno</option>
-                                </select>
-                                <label for="ano4">Ano:</label>
-                                <select name="ano" id="ano4" required>
-                                    <option value="2000">2000</option>
-                                </select>
-                                <label for="placa4">Placa:</label>
-                                <input type="text" id="placa4" value="MDB-4499">
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button type="button" onclick="atualizaVeiculo('2')">Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                <div id="ListaDeVeiculosHtml"></div>
                 <a href="" id="carrega-listaFuncionario">Ver Mais</a>
             </nav>
         </div>

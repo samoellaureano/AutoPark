@@ -1,9 +1,27 @@
 $(document).ready(function(){
-    $("#menu").load("menu.html");  
     
-    busca=function(){
+    $("#buscarRegistros").click(function(e){
+
+      var buscaregistro = new Object();
+      buscaRegistro.dataInicial = $("#buscarDataInicial").val();
+      buscaRegistro.dataFinal = $("#buscarDataFinal").val();
+      
+      buscaRegistro(buscaRegistro);
+
+    });
+
+    $("#menu").load("menu.html");  
+    $("#formCadPagamento").css('display','none');
+    
+    buscaRegistro=function(buscaRegistro){
+      
+        if(buscaRegistro==undefined){
+            buscaregistro=null;
+        };
+
         var cfg = {
             url: "../rest/registroRest/buscaregistro",
+            data:JSON.stringify(buscaRegistro),
             success: function (listaDeRegistros){
                 visualizarRegistro(listaDeRegistros);
             },
@@ -14,7 +32,6 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-    
         visualizarRegistro=function(listaDeRegistros){
 
             var registroHtml="";
@@ -43,8 +60,9 @@ $(document).ready(function(){
                     registroHtml += "<ul class='itemFuncionario'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
                 };
                     $("#ListaDeVeiculosHtml").append(registroHtml);
+                   
             };   
         };
-
-        busca();
+        
+        buscaRegistro(undefined);
 });

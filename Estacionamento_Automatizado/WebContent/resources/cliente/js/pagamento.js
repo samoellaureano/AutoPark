@@ -1,6 +1,10 @@
 var pagamento = new Object();
 $(document).ready(function(){
     $("#menu").load("menu.html");
+   
+    $('#abilitarEdicao').click(function(e){
+        $('input').prop('disabled', false);
+    });
 
     $('#cadPagamento').click(function(e){
        
@@ -32,14 +36,14 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     });
 
-
-    buscar = function(){    
+    
+    $('#buscaPagamento').click(function(){    
        
         var cfg = {
             url: "../rest/pagamentosRest/viewPagamentos",
             data: JSON.stringify(pagamento),
             success: function (pagamento) {
-               visualizar(pagamento);
+                visualizarFormaDPagamento(pagamento);
             },  
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo Pagamento!");
@@ -48,19 +52,22 @@ $(document).ready(function(){
         };
 
         autoPark.ajax.post(cfg);
-    };// fim do buscar
+    });// fim do buscar
 
-    visualizar=function(pagamento){
+    visualizarFormaDPagamento=function(pagamento){
 
-        if( pagamento!=null && pagamento.length>0){
+        if( pagamento!=null && pagamento!=undefined){
 
             $("#cartao").val(pagamento.numCartao);
             $("#NomeTitular").val(pagamento.titular);
             $("#validade").val(pagamento.validade);
-            $("#codigoVerificacao").val(pagamento.codVerificacao);
+            $("#codigoVerificacao").text(pagamento.codVerificacao);
+            $("#formCadPagamento").css('display','none');
         };
     };  // fim do visualizar
-
+    $("#formCadPagamento").css('display','none');
+    $('input'). prop('disabled', true);
     buscar();
+   
 });
 

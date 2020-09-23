@@ -49,6 +49,7 @@ body {
     justify-items: center;
     color: white;
     margin-right: 120px;
+  
 }
 
 .container > #CadastrarPagamento {
@@ -61,14 +62,6 @@ body {
   color: white;
 }
 
-select {
-  width: 19.3rem;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: none;
-}
-
 .container > form > input {
     width: 11rem;
     width: auto;
@@ -76,6 +69,7 @@ select {
     margin-bottom: 20px;
     border-radius: 5px;
     border: none;
+ 
 }
 
 .container > form > label {
@@ -84,6 +78,7 @@ select {
   font-weight: bold;
   width: 100%;
   text-align: initial;
+
 }
 
 .container > form {
@@ -94,7 +89,10 @@ select {
   border: 1px solid white;
   padding: 1rem;
   border-radius: 5px;
+ 
+  
 }
+
 
 .container > form > a {
   margin-bottom: 20px;

@@ -32,6 +32,7 @@ body {
   z-index: 10;
   flex-wrap: wrap;
   margin: 0rem 6rem;
+  align-items: center;
 }
 
 h2{
@@ -155,7 +156,9 @@ h2{
 }
 
 .topLista > h3{
+  
   margin: inherit;
+    color: white;
 }
 
 .topLista > img{
