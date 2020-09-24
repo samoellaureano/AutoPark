@@ -21,7 +21,7 @@ $(document).ready(function(){
         var funcionariosHTML = "<ul class='itemFuncionario'>";
         if (listaDeFuncionarios != undefined) {
             if (listaDeFuncionarios.length > 0) {
-                for (var i = 0; i < 0; i++) {
+                for (var i = 0; i < listaDeFuncionarios.length; i++) {
                     if(listaDeFuncionarios.status[i]){
                         listaDeFuncionarios.status[i] = "checked";
                     }else{

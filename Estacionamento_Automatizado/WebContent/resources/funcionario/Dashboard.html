@@ -20,20 +20,19 @@
         <div class="filial">
             <label for="listaFilial">Filial:</label>
             <select name="listaFilial" id="listaFilial">
-                <option value="">Estacionamento 001</option>
             </select>
         </div>
         
         <div class="medidores">
             <div class="item">
                 <div class="circulo">
-                    <span id="vagaDisponivel">16</span>
+                    <span id="vagaDisponivel"></span>
                 </div>
-                <label for="">Vagas Disponivies</label>
+                <label for="">Vagas Disponiveis</label>
             </div>
             <div class="item">
                 <div class="circulo">
-                    <span id="vagaDisponivel">350</span>
+                    <span id="clienteDia"></span>
                 </div>
                 <label for="">Clientes no Dia</label>
             </div>
@@ -48,11 +47,11 @@
 
                 <div class="box-check">
                     <div>
-                        <form action="">
+                        <form>
                             <label for="placa">Placa do Veículo</label>
-                        <input type="text" placeholder="Placa">
-                        <a href="">Cancelar</a>
-                        <button>Confirmar</button>
+                            <input type="text" id="placa" placeholder="Placa">
+                            <a href="">Cancelar</a>
+                            <button type="button" id="btnCheck">Confirmar</button>
                         </form>
                     </div>
                 </div>         

@@ -21,7 +21,7 @@ $(document).ready(function(){
         var precosHTML = "<ul class='itemEstac'>";
         if (listaDePrecos != undefined) {
             if (listaDePrecos.length > 0) {
-                for (var i = 0; i < 0; i++) {
+                for (var i = 0; i < listaDePrecos.length; i++) {
                     if(listaDePrecos.status[i]){
                         listaDePrecos.status[i] = "checked";
                     }else{
