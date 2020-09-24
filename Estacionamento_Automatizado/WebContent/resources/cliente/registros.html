@@ -7,46 +7,30 @@
         <link rel="stylesheet" href="css/registros-desktop.css" media="screen and (min-device-width:600px)">
         <link rel="stylesheet" href="css/registros-mobile.css" media="screen and (max-device-width: 600px)">
         <link rel="stylesheet" href="../../css/menu.css">
-    
+        <link rel="stylesheet" href="../../css/calendar.css">
+        <script src="../../js/ajax.js"></script>
         <script src="../../js/jquery.js"></script>
         <script src="js/registros.js"></script>
-        <link rel="shortcut icon" href="../../img/logo.ico" />
-        <script src="../../js/ajax.js"></script>
         <script src="../../js/msgToast.js"></script>
+        <link rel="shortcut icon" href="../../img/logo.ico" />
     </head>
 <body>
     <div class="menu" id="menu"></div>
-    <div class="container">            
+    <div class="container">  
+                  
             <div>
             <nav class="listaFuncionarios">
-                <div>
+                <div class="titulo">
                     <h3>Registros de Estacionamento</h3>
-                    <input type="text" id="buscarFunc" class="autocomplete" placeholder="Buscar"/>
+                    <label for="buscarDataInicial">Data Inicial:</label>
+                    <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
+                    <label for="buscarDataFinal">Data Final</label>
+                    <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal"> 
+                                   
                 </div>
-                <ul class="itemFuncionario">
-                    <input type="radio" name="funcionario" id="func1" hidden>
-                    <label for="func1">Estacionamento 1 - 21/10/2020</label>
-                    <li>Check-in: <span>21:30</span></li>
-                    <li>Check-out: <span> - </span></li>
-                    <li>Permanencia: <span>30m</span></li>
-                    <li>Valor Hora:  <span>R$:12,00</span></li>                    
-                </ul>
-                <ul class="itemFuncionario">
-                    <input type="radio" name="funcionario" id="func2" hidden>
-                    <label for="func2">Estacionamento 2 - 20/10/2020</label>
-                    <li>Check-in: <span>21:30</span></li>
-                    <li>Check-out: <span> - </span></li>
-                    <li>Permanencia: <span>30m</span></li>
-                    <li>Valor Hora:  <span>R$:12,00</span></li>
-                </ul>
-                <ul class="itemFuncionario">
-                    <input type="radio" name="funcionario" id="func3" hidden>
-                    <label for="func3">Estacionamento 2 - 19/10/2020</label>
-                    <li>Check-in: <span>21:30</span></li>
-                    <li>Check-out: <span> - </span></li>
-                    <li>Permanencia: <span>30m</span></li>
-                    <li>Valor Hora:  <span>R$:12,00</span></li>
-                </ul>
+                <button type="button"id="buscarRegistros" >Buscar</button> 
+
+                <div id="registroHtml" ></div>
             </nav>
         </div>
     </div>

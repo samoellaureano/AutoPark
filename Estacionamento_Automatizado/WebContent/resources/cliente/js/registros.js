@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $("#menu").load("menu.html");
     
     buscar = function(){
         var dataInicial = $("#buscarDataInicial").val();
