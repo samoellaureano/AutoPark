@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     $("#buscarRegistros").click(function(e){
 
-      var buscaregistro = new Object();
+      var buscaRegistro = new Object();
       buscaRegistro.dataInicial = $("#buscarDataInicial").val();
       buscaRegistro.dataFinal = $("#buscarDataFinal").val();
       
