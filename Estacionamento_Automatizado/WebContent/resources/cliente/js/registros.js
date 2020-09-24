@@ -1,27 +1,12 @@
 $(document).ready(function(){
+    $("#menu").load("menu.html");
     
-    $("#buscarRegistros").click(function(e){
-
-      var buscaregistro = new Object();
-      buscaRegistro.dataInicial = $("#buscarDataInicial").val();
-      buscaRegistro.dataFinal = $("#buscarDataFinal").val();
-      
-      buscaRegistro(buscaRegistro);
-
-    });
-
-    $("#menu").load("menu.html");  
-    $("#formCadPagamento").css('display','none');
-    
-    buscaRegistro=function(buscaRegistro){
-      
-        if(buscaRegistro==undefined){
-            buscaregistro=null;
-        };
+    buscar = function(){
+        var dataInicial = $("#buscarDataInicial").val();
+        var dataFinal = $("#buscarDataFinal").val();
 
         var cfg = {
-            url: "../rest/registroRest/buscaregistro",
-            data:JSON.stringify(buscaRegistro),
+            url: "../rest/registroRest/buscaregistro/dataInicial="+dataInicial + "&dataFinal=" + dataFinal,
             success: function (listaDeRegistros){
                 visualizarRegistro(listaDeRegistros);
             },
@@ -32,7 +17,8 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-        visualizarRegistro=function(listaDeRegistros){
+
+    visualizarRegistro=function(listaDeRegistros){
 
             var registroHtml="";
             var checkout="";
@@ -63,6 +49,9 @@ $(document).ready(function(){
                    
             };   
         };
-        
-        buscaRegistro(undefined);
+
+        $("#buscarRegistros").click(function(e){
+            buscar();
+        });
+        buscar();
 });

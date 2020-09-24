@@ -38,7 +38,7 @@ $(document).ready(function(){
             url: "../rest/veiculoRest/buscaVeiculo",
             data: JSON.stringify(veiculo),
             success: function (listaDeVeiculo) {
-                 visualizar(listaDeVeiculo);
+                visualizarVeiculos(listaDeVeiculo);
             },
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo Veiculo!");
@@ -79,8 +79,7 @@ $(document).ready(function(){
             }else{
                 veiculoHtml += "<ul class='itemVeiculo'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
             };
-          console.log(veiculoHtml);
-            $('#ListaDVeiculosHtml').html(veiculoHtml);
+            $('#ListaDeVeiculosHtml').html(veiculoHtml);
         };
 
         atualizaVeiculo=function(id){
@@ -113,8 +112,5 @@ $(document).ready(function(){
             };
             autoPark.ajax.post(cfg);
         };
-
-     var lista1=undefined;
-     visualizarVeiculos(lista1);
-        
+        busca();
 });

@@ -10,6 +10,8 @@
 
     <script src="../../js/jquery.js"></script>
     <script src="js/funcionario.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
     <link rel="shortcut icon" href="../../img/logo.ico" />
 </head>
 <body>
@@ -39,11 +41,12 @@
             
         </div>
             <div class="check">
-                <input type="radio" id="check-out" name="check" hidden>
-                <label id="check-out" for="check-out">Check-out</label>
-
-                <input type="radio" id="check-in" name="check" hidden>
+                
+                <input type="radio" id="check-in" value="check-in" name="check" hidden>
                 <label for="check-in">Check-in</label>
+
+                <input type="radio" id="check-out" value="check-out" name="check" hidden>
+                <label id="check-out" for="check-out">Check-out</label>
 
                 <div class="box-check">
                     <div>

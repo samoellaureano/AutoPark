@@ -76,4 +76,6 @@ $(document).ready(function(){
             }
         }
     });
+
+    buscar();
 });

@@ -67,7 +67,8 @@ $(document).ready(function(){
     };  // fim do visualizar
     $("#formCadPagamento").css('display','none');
     $('input'). prop('disabled', true);
-    buscar();
+ //   buscar();
    
 });
 
+    

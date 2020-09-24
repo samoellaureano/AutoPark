@@ -1,6 +1,7 @@
 
 var configUsuario = new Object();
 $(document).ready(function(){
+    $("#menu").load("menu.html"); 
     buscar = function(){
         //ID do usuario logado
         var valorBusca = 1;
@@ -62,5 +63,5 @@ $(document).ready(function(){
     });
 
     buscar();
-    $("#menu").load("menu.html"); 
+    
 });
