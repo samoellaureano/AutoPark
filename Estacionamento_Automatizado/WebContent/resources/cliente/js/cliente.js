@@ -14,8 +14,8 @@ $(document).ready(function(){
           }
       };
       autoPark.ajax.post(cfg);
-  };
-      visualizar=function(daschboard){
+    };
+    visualizar=function(daschboard){
 
             if (daschboard != undefined) {
                if (daschboard.length > 0) {
@@ -26,7 +26,7 @@ $(document).ready(function(){
                   $("#valorCredito").text(daschboard.valorTotal);
                };                 
             };  
-      }; 
+    }; 
       
-      busca();
+    busca();
 });
