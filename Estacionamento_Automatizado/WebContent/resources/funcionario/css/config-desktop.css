@@ -7,16 +7,6 @@ body {
   outline: 0px auto -webkit-focus-ring-color; 
 }
 
-#buscarRelatorio{
-  margin: 1rem 0rem;
-    padding: 0.5rem 3rem;
-    border-radius: 0.3rem;
-    border: none;
-    background-color: #37b908cc;
-    color: white;
-    cursor: pointer;
-}
-
 .logo{
   display: flex;
   flex-wrap: nowrap;
@@ -46,19 +36,7 @@ h2{
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.autocomplete{
-  outline: 0px auto -webkit-focus-ring-color;
-    padding: 0.5rem;
-    font-family: inherit;
-    border-radius: 0.2rem;
-    border: none;
-    margin-bottom: 2rem;
-    width: 17rem;
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.listaRegistros{
+.dados{
   background-color: #aeb7ad42;
   color: black;
   padding: 0.5rem;
@@ -69,7 +47,7 @@ h2{
   margin: 0rem 5rem;
 }
 
-.listaRegistros > a{
+.dados > a{
   margin: 1rem 5rem;
   text-decoration: none;
   font-size: 0.7rem;
@@ -97,7 +75,7 @@ h2{
 }
 
 
-.listaRegistros > label{
+.dados > label{
   text-align: left;
   font-family: "Source Sans Pro", sans-serif;
   color: white;
@@ -105,13 +83,15 @@ h2{
   padding: 0.4rem 0rem;
 }
 
-.listaRegistros > div > label{
+.dados > div > label{
   display: flex;
   margin-bottom: 0.5rem;
   color: white;
 }
 
-.listaRegistros > ul{
+
+
+.dados > ul{
   background-color: #ffffff;
     padding: 0.5rem 0rem 0rem;
     border-radius: 0.2rem;
@@ -127,7 +107,7 @@ h2{
     color: white;
 }
 
-.listaRegistros > ul > label{
+.dados > ul > label{
   display: block;
     justify-content: center;
     padding: 0.2rem 0rem;
@@ -137,89 +117,40 @@ h2{
 }
 
 
-.listaRegistros > li > div:nth-child(2) > label{
+.dados > li > div:nth-child(2) > label{
   display: block;
   cursor: pointer;
 }
 
-.listaRegistros li{
+.dados li{
   flex-direction: column;
   width: auto;
     display: none;
     padding: 0.4rem 0.2rem;
 }
 
-.itemRegistro span{
-  padding: 1rem;
-}
-
-.itemRegistro > li > label{
-  background-color: #a7160a;
-    color: white;
-    padding: 0.2rem 0rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 2rem;
-    width: 4rem;
-    margin: auto;
-    user-select: none;
-}
-
-.itemRegistro > input:checked ~ li{
+.itemDados > input:checked ~ li{
   display: flex;
 }
 
-.itemRegistro > li > div > form{
+.itemDados > li > div > form{
   display: flex;
   flex-direction: column;
-  pointer-events: none;
-  cursor: none;
    user-select: none;
    align-items: end;   
    margin: 0rem 1rem;
 }
 
-.itemRegistro > li > div > form > div{
+.itemDados > li > div > form > div{
   display: flex;
     width: 100%;
     justify-content: space-evenly;
+    margin: 2rem 0rem 0rem 0rem;
 }
 
-.itemRegistro > li > div > form > div > button{
-  border: none;
-    background-color: green;
-    border-radius: 0.4rem;
-    padding: 0.4rem;
-    color: white;
-    cursor: pointer;
-}
-
-.itemRegistro > li > div > form > div > a {
-  text-decoration: none;
-  font-size: 0.7rem;
-  color: #940505;
-  padding: 0.4rem;
-}
-
-.itemRegistro > li > div > form > input{
-  background-color: #9e9b95;
-    color: #5a5a59;
-    font-family: "Source Sans Pro", sans-serif;
-    padding: 0.2rem;
-}
-
-.itemRegistro > li > div > form > select{
+.itemDados > li > div > form > select{
   font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
-}
-
-.itemRegistro > li > input:checked ~ div > form{
-  cursor: auto;
-  pointer-events: auto;
-}
-.itemRegistro > li > input:checked ~ div > form > input{
-  background-color: #fff;
-    color: #000;
 }
 
 .menu {

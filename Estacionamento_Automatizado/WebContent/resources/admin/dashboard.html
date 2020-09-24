@@ -6,7 +6,7 @@
     <title>AutoPark</title>
     <link rel="stylesheet" href="css/admin-desktop.css" media="screen and (min-device-width:600px)">
     <link rel="stylesheet" href="css/admin-mobile.css" media="screen and (max-device-width: 600px)">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="../../css/menu.css">
 
     <script src="../../js/jquery.js"></script>
     <script src="js/admin.js"></script>
@@ -20,26 +20,25 @@
         <div class="filial">
             <label for="listaFilial">Filial:</label>
             <select name="listaFilial" id="listaFilial">
-                <option value="">Estacionamento 001</option>
             </select>
         </div>
         
         <div class="medidores">
             <div class="item">
                 <div class="circulo">
-                    <span id="vagaDisponivel">16</span>
+                    <span id="vagaDisponivel"></span>
                 </div>
                 <label for="">Vagas Disponivies</label>
             </div>
             <div class="item">
                 <div class="circulo">
-                    <span id="vagaDisponivel">350</span>
+                    <span id="clienteDia">350</span>
                 </div>
                 <label for="">Clientes no Dia</label>
             </div>
             <div class="item">
                 <div class="circulo">
-                    <span id="vagaDisponivel">200,00</span>
+                    <span id="receita">200,00</span>
                 </div>
                 <label for="">Receita</label>
                 <div class="medidorValor"><label class="item2" for="">R$</label></div>
@@ -47,20 +46,20 @@
             </div>
             
         </div>
-            <div class="check">
-                <input type="radio" id="check-in" name="check" hidden>
+            <div class="check" id="formCheck">
+                <input type="radio" id="check-in" name="check" value="check-in" hidden>
                 <label id="check-in" for="check-in">Check-in</label>
 
-                <input type="radio" id="check-out" name="check" hidden>
+                <input type="radio" id="check-out" name="check" value="check-out" hidden>
                 <label for="check-out">Check-out</label>
 
                 <div class="box-check">
                     <div>
-                        <form action="">
+                        <form>
                             <label for="placa">Placa do Veículo</label>
-                        <input type="text" placeholder="Placa">
-                        <a href="">Cancelar</a>
-                        <button>Confirmar</button>
+                            <input type="text" id="placa" placeholder="Placa">
+                            <a href="">Cancelar</a>
+                            <button type="button" id="btnCheck">Confirmar</button>
                         </form>
                     </div>
                 </div>         

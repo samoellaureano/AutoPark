@@ -6,12 +6,11 @@
         <title>AutoPark</title>
         <link rel="stylesheet" href="css/pagamento-desktop.css" media="screen and (min-device-width:600px)">
         <link rel="stylesheet" href="css/pagamento-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+    
         <script src="../../js/jquery.js"></script>
         <script src="js/pagamento.js"></script>
         <link rel="shortcut icon" href="../../img/logo.ico" />
-        <script src="../../js/ajax.js"></script>
-        <script src="../../js/msgToast.js"></script>
     </head>
 <body>
 
@@ -19,35 +18,39 @@
     <div class="container">
              
         <div id="pagamento" >
+
             <span>Pagamento</span> 
             <label for="preco">Total de Crédito R$:</label>
-            <label type="text" id="preco" name="preco" disabled>100</label>
-            
-            <button id='buscaPagamento'>visualizar</button>            
+            <input type="text" id="preco" name="preco" disabled>
+            <button>Cadastar ou Editar</button>            
         </div>
 
-        <form id="formCadPagamento" action="#" >
+        <div id="CadastrarPagamento">
             <!-- alterar o valor via js-->
-            <span id="titularPagamento">Cadastrar Pagamento</span>
+            <span id="tituloPagamento">Cadastrar Pagamento</span>
            
             <label for="cartao">Número do Cartão</label>
-            <input type="text" id="cartao" >
+            <input type="text" id="cartao" name="preco">
 
             <label for="NomeTitular">Nome do Titular</label>
-            <input type="text" id="NomeTitular" >
-               
+            <input type="text" id="NomeTitular" name="preco">
+        
+       
             <label for="validade">Validade</label>
-            <input type="text" id="validade" >
+            <input type="text" id="validade" name="preco">
 
             <label for="codigoVerificacao">Código de Verificação</label>
-            <input type="text" id="codigoVerificacao" >
+            <input type="text" id="codigoVerificacao" name="preco">
         
             <div>
-                <button type="button" id="cadPagamento" >Salvar</button>               
-                <button id="abilitarEdicao" >Editar</button>
-            </div>
-        </form>
-        <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-    </div>       
+                <button id="cadastar" onclick="cliente.pagamento.capturarInf()">Cadastrar</button>
+                <button >Cancelar</button>
+            </div>     
+
+        <a href="dashboard.html">VOLTAR</a>
+
+    </div>
+    </div>
+       
 </body>
 </html>
