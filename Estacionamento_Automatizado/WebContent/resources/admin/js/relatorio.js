@@ -7,7 +7,7 @@ $(document).ready(function(){
         var dataF = $("#buscarDataFinal").val();
         var cfg = {
             type: "POST",
-            url: "../rest/funcionarioRest/buscarFuncionarios/" + valorBusca,
+            url: "../rest/registrosRest/buscarRegistros/valorBusca=" + valorBusca +"&dataInicial=" + dataI + "&dataFinal=" + dataF,
             success: function (listaDeFuncionarios) {
                 exibirFuncionarios(listaDeFuncionarios);
             },
