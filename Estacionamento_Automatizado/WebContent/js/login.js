@@ -2,7 +2,9 @@ assistencia = new Object();
 usuario = new Object();
 
 $(document).ready(function(){
-    $('#usuario').mask('000.000.000-00');
+
+  //  $("#inputCPF").mask('000.000.000-00');
+
 });
 
 assistencia.login = function(){

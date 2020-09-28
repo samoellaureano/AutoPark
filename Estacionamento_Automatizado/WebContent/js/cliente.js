@@ -1,17 +1,17 @@
+$( document ).ready(function() {
+
 var cliente = new Object();
 
-$(document).ready(function(){
-	
-	$('#cadCliente').click(function(e){
+	$("#cadCliente").click(function(e){
 	        cliente.nome    = $("#nome").val();
 	        cliente.cpf     = $("#cpf").val();
 	        cliente.celular = $("#celular").val();
 	        cliente.email   = $("#email").val();
 	        cliente.senha 	= $("#senha").val();
-	     // cliente.empresa = $("#empresa").val();
+	   
 	        
 	        var cfg = {
-	            url: "../rest/clienteRest/addCliente",
+	            url: "rest/clienteRest/addCliente",
 	            data: JSON.stringify(cliente),
 	            success: function (succJson) {
 	                if (succJson == 1) {
@@ -32,5 +32,6 @@ $(document).ready(function(){
 	            }
 	        };
 	        autoPark.ajax.post(cfg);
-	    });
+	    });// fim da fução
+
 });

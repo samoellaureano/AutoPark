@@ -1,13 +1,38 @@
 package br.com.estacionamento.object;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Cliente implements Serializable{
+@Entity
+@Table(name="clientes")
+
+public class Cliente implements Serializable {
+    private static final long serialVersionUID = 1L;
 	
-	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	
-	 private String nome,cpf,senha,email;
-	 private int celular;
+	@Column(nullable = false,length = 100)
+	private String nome;
+	
+	@Column(nullable = false,length = 12)
+	private String cpf;
+	
+	@Column(nullable = false,length = 35)
+	private String senha;
+	
+	@Column(nullable = false,length = 255)
+	private String email;
+	
+	@Column(nullable = false,length = 11)
+	private int celular;
+	
 	
 	 public String getNome() {
 		return nome;

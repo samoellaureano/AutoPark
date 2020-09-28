@@ -1,5 +1,5 @@
 package br.com.estacionamento.util;
 
-public class Login {
+public class UtilLogin {
 
 }

@@ -18,50 +18,47 @@ import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.db.Conexao;
+import br.com.estacionamento.entidade.EntiCliente;
 import br.com.estacionamento.util.UtilRest;
 import br.com.estacionamento.object.Cliente;
 
 @Path("clienteRest")
 public class ClienteRest extends UtilRest{
 
-	public ClienteRest(){} 
+public ClienteRest(){} 
 
-	@POST
-	@Path("/addCliente")
-	@Consumes("application/*")
-	
-	public Response inserir(String addcliente){
+@POST
+@Path("/addCliente")
+@Consumes("application/*")
+
+public Response inserir(String addcliente){
 		
-		Boolean retorno = null; // Boolean com B aceita valores null;
+	try {
+					
+		Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);	
+		EntiCliente entidade = new EntiCliente();
+		Boolean	retorno = entidade.Salvar(cliente); 
 		
-		try {
-						
-			Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);	
-			Conexao conec = new Conexao();
+		if(retorno){
+			// true = Cadastrado com sucesso.
+			return this.buildResponse("1");				
+		
+		}else if(retorno==false){
+			// false = cliente ja existe
+			return this.buildErrorResponse("2");
 			
-			Connection conexao = conec.abrirConexao();						
-			conec.fecharConexao();
-			
-			if(retorno){
-				// Cadastrado com sucesso.
-				return this.buildResponse("1");				
-			
-			}else if(retorno==false){
-				// cliente ja existe
-				return this.buildErrorResponse("2");
-				
-			}else {
-				// Erro ao cadastrar o cliente
-				return this.buildErrorResponse("0");			
-			}
-			
-		} catch (Exception e){
-			e.printStackTrace();
-			
-			return this.buildErrorResponse("Erro ao cadastrar cliente");
+		}else {
+			// null = Erro ao cadastrar o cliente
+			return this.buildErrorResponse("0");			
 		}
-	
-	}// fim do método inserir
+		
+	} catch (Exception e){
+		e.printStackTrace();
+		
+		return this.buildErrorResponse("Erro ao cadastrar cliente");
+	}
+
+}// fim do método inserir
 	
 	
 	
