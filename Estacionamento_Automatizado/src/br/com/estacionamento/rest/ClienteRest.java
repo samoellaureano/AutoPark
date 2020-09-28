@@ -1,26 +1,15 @@
 package br.com.estacionamento.rest;
 
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.db.Conexao;
-import br.com.estacionamento.entidade.EntiCliente;
+import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.util.UtilRest;
-import br.com.estacionamento.object.Cliente;
+import controler.controlerCliente;
 
 @Path("clienteRest")
 public class ClienteRest extends UtilRest{
@@ -35,9 +24,10 @@ public Response inserir(String addcliente){
 		
 	try {
 					
-		Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);	
-		EntiCliente entidade = new EntiCliente();
-		Boolean	retorno = entidade.Salvar(cliente); 
+		Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);
+		controlerCliente contrCliente = new controlerCliente();
+		
+		boolean	retorno = contrCliente.salvar(cliente); 
 		
 		if(retorno){
 			// true = Cadastrado com sucesso.

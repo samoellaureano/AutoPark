@@ -1,24 +1,23 @@
-package br.com.estacionamento.entidade;
+package controler;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
-import br.com.estacionamento.object.Veiculo;
+import br.com.estacionamento.controlerInterface.VeiculoInterface;
+import br.com.estacionamento.entidade.Veiculo;
 
-public class EntiVeiculo {
+public class controlerVeiculo implements VeiculoInterface{
 
 	EntityManagerFactory emf;
 	EntityManager em;	
 	
-	public  EntiVeiculo() {
+	public  controlerVeiculo() {
 		emf= Persistence.createEntityManagerFactory("autoPark");
 		em = emf.createEntityManager();
 	}
 	
-	public Boolean Salvar (Veiculo veiculo) {
+	public boolean salvar (Veiculo veiculo) {
 	
 		try {
 			
@@ -30,13 +29,25 @@ public class EntiVeiculo {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return false;
 			
 		}finally{
 			emf.close();
 		}		
 		
 	}// fim do método;
+
+	@Override
+	public boolean atualizar(Veiculo veiculo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Veiculo buscar(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

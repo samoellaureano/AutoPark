@@ -1,4 +1,4 @@
-package br.com.estacionamento.object;
+package br.com.estacionamento.entidade;
 
 import java.io.Serializable;
 import javax.persistence.Column;

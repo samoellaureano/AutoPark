@@ -1,23 +1,15 @@
 package br.com.estacionamento.rest;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
-import br.com.estacionamento.entidade.EntiVeiculo;
-import br.com.estacionamento.object.Veiculo;
+import controler.controlerVeiculo;
 
 @Path("veiculoRest")
 public class VeiculoRest  extends UtilRest{
@@ -31,9 +23,10 @@ public Response inserir(String addveiculo){
 		
 	try {
 					
-		Veiculo veiculo = new ObjectMapper().readValue(addveiculo,Veiculo.class);	
-		EntiVeiculo entidade = new EntiVeiculo();
-		Boolean retorno = entidade.Salvar(veiculo);
+		Veiculo veiculo = new ObjectMapper().readValue(addveiculo,Veiculo.class);
+		controlerVeiculo contrVeiculo = new controlerVeiculo();
+		
+		boolean retorno = contrVeiculo.salvar(veiculo);
 				
 		if(retorno){
 			// Cadastrado com sucesso.
