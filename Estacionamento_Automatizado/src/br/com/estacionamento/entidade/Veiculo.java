@@ -31,9 +31,15 @@ public class Veiculo implements Serializable {
 	
 	@Column(length = 10,nullable = false)
 	private  String placa;
+
+	/* O lado "Many" é o da classe que envolve isso tudo, no caso "Veiculo". O lado One é o da entidade relacionada, no caso "Cliente". */
 	
 	@ManyToOne
-	@JoinColumn(name = "cliente_id",nullable = false)
+	/* @JoinColumns({
+        @JoinColumn(name="ADDR_ID", referencedColumnName="ID"),
+        @JoinColumn(name="ADDR_ZIP", referencedColumnName="ZIP")
+    }) */
+	@JoinColumn(name = "cliente_id", referencedColumnName="Cliente") //Coluna de junção
 	private Cliente cliente;
 	
 	public String getMarca() {
