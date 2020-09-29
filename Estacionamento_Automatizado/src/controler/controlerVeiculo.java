@@ -13,7 +13,7 @@ public class controlerVeiculo implements VeiculoInterface{
 	EntityManager em;	
 	
 	public  controlerVeiculo() {
-		emf= Persistence.createEntityManagerFactory("autoPark");
+		emf= Persistence.createEntityManagerFactory("autopark");
 		em = emf.createEntityManager();
 	}
 	

@@ -13,7 +13,8 @@ public class controlerCliente implements ClienteInterface{
 	EntityManager em;	
 	
 	public  controlerCliente() {
-		emf= Persistence.createEntityManagerFactory("autopark");
+		emf= Persistence.createEntityManagerFactory("autopark");//Unidade de Persistencia
+		System.out.println("criou ");
 		em = emf.createEntityManager();
 	}
 	
@@ -22,7 +23,7 @@ public class controlerCliente implements ClienteInterface{
 		try {
 			
 			em.getTransaction().begin();
-			em.merge(cliente);		
+			em.merge(cliente);	
 			em.getTransaction().commit();
 			
 			return true;

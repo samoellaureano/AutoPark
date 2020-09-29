@@ -20,14 +20,24 @@ public ClienteRest(){}
 @Path("/addCliente")
 @Consumes("application/*")
 
-public Response inserir(String addcliente){
+public Response salvar(String addcliente){
 		
 	try {
 					
 		Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);
-		controlerCliente contrCliente = new controlerCliente();
 		
-		boolean	retorno = contrCliente.salvar(cliente); 
+		System.out.println(cliente.getNome()+"\n"
+				+cliente.getCpf()+"\n"
+				+cliente.getCelular()+"\n"
+				+cliente.getEmail()+"\n"
+				+cliente.getSenha());
+		
+		controlerCliente con = new controlerCliente();
+		
+		
+		
+		
+		boolean	retorno = con.salvar(cliente); 
 		
 		if(retorno){
 			// true = Cadastrado com sucesso.
