@@ -1,6 +1,11 @@
 package senai.comjpa.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Estado {
+	@Id
 	private int id;
 	private String nome;
 	private String uf;
