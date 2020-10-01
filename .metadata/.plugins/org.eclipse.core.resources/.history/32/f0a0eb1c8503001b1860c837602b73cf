@@ -1,0 +1,35 @@
+import senai.comjpa.dao.jpa.JPAConnection;
+import senai.comjpa.pojo.Cidade;
+import senai.comjpa.pojo.Cliente;
+import senai.comjpa.pojo.Estado;
+
+public class RunnerJPA {
+
+	public static void main(String[] args) {
+
+		// Cria um objeto do tipo Estado
+		Estado sc = new Estado();
+		sc.setId(1);// provisório, apenas para testarmos a persistência
+		sc.setNome("Santa Catarina");
+		sc.setUf("SC");
+
+		// Cria um objeto do tipo Cidade
+		Cidade joi = new Cidade();
+		joi.setId(1);// provisório, apenas para testarmos a persistência
+		joi.setEstado(sc);
+		joi.setNome("Joinville");
+
+		// Cria um objeto do tipo Cliente
+		Cliente eu = new Cliente();
+		eu.setId(1);// provisório, apenas para testarmos a persistência
+		eu.setCidade(joi);
+		eu.setNome("Thiago");
+
+		JPAConnection jpa = new JPAConnection();
+		jpa.incluir(eu);
+
+		System.out.println("Estado inserido com o id " + sc.getId() );
+
+	}
+
+}

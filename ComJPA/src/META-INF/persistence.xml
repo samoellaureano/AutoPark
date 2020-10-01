@@ -3,13 +3,16 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
     <persistence-unit name="SENAI" transaction-type="RESOURCE_LOCAL">
+    <class>senai.comjpa.pojo.Estado</class>
+    <class>senai.comjpa.pojo.Cliente</class>
+    <class>senai.comjpa.pojo.Cidade</class>
         <properties>
        		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
        		 
             <!-- Conexão com o banco de dados -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
 			
 			<property name="eclipselink.ddl-generation" value="create-tables"/>	<!-- Elimina a necessidade do uso do metodo criaEstrutura() -->	
 		</properties>

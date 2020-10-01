@@ -40,15 +40,14 @@ public class controlerCliente implements ClienteInterface{
 
 	@Override
 	public boolean atualizar(Cliente cliente) {
-		return false;
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
 	public Cliente buscar(int id) {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
 	
 }

@@ -16,7 +16,6 @@ INDEX VERSION 1.131+C:\BACKUP\Git\TCC\TCC\.metadata\.plugins\org.eclipse.jdt.cor
 3541128027.index
 3236021421.index
 3139812003.index
-2266200260.index
 3835088761.index
 3344863296.index
 1186734610.index

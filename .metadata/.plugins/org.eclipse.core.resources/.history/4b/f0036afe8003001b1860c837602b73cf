@@ -1,0 +1,20 @@
+import senai.comjpa.dao.jpa.JPAConnection;
+import senai.comjpa.pojo.Estado;
+
+public class RunnerJPA {
+
+	public static void main(String[] args) {
+		Estado sc = new Estado();
+		
+		sc.setId(1); // provisório, apenas para testarmos a persistência
+		sc.setNome("Santa Catarina");
+		sc.setUf("SC");
+		
+		JPAConnection jpa = new JPAConnection();
+		jpa.incluir(sc);
+
+		System.out.println("Estado inserido com o id " + sc.getId() );
+
+	}
+
+}
