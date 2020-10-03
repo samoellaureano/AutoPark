@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="senai.comjpa.pojo.Cidade"/>
 <fullyQualifiedTypeName name="senai.comjpa.pojo.Estado"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.ClienteDAO"/>
-<fullyQualifiedTypeName name="senai.comjpa.dao.jpa.ClienteJPADAO"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.DAOFactory"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.CidadeDAO"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.EstadoDAO"/>
@@ -28,6 +27,14 @@
 <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
 <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.jpa.JPAConnection"/>
-<fullyQualifiedTypeName name="senai.comjpa.pojo.Cliente"/>
+<fullyQualifiedTypeName name="java.lang.Class"/>
+<fullyQualifiedTypeName name="senai.comjpa.dao.jpa.ClienteJPADAO"/>
 <fullyQualifiedTypeName name="senai.comjpa.dao.jpa.JPAAbstract"/>
+<fullyQualifiedTypeName name="org.apache.tomcat.util.http.parser.MediaType"/>
+<fullyQualifiedTypeName name="javax.ws.rs.Path"/>
+<fullyQualifiedTypeName name="javax.ws.rs.POST"/>
+<fullyQualifiedTypeName name="javax.ws.rs.Produces"/>
+<fullyQualifiedTypeName name="javax.websocket.server.PathParam"/>
+<fullyQualifiedTypeName name="senai.comjpa.pojo.Cliente"/>
+<fullyQualifiedTypeName name="senai.comjpa.rest.UtilRest"/>
 </qualifiedTypeNameHistroy>

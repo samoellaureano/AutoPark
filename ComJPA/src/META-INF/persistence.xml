@@ -3,9 +3,11 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
     <persistence-unit name="SENAI" transaction-type="RESOURCE_LOCAL">
-    <class>senai.comjpa.pojo.Estado</class>
+    
+    <!--<class>senai.comjpa.pojo.Estado</class>
     <class>senai.comjpa.pojo.Cliente</class>
-    <class>senai.comjpa.pojo.Cidade</class>
+    <class>senai.comjpa.pojo.Cidade</class>  -->
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
        		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
        		 
