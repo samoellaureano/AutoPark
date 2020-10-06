@@ -15,7 +15,7 @@ public class JPAConnection {
 			}
 		} catch (Exception e) {}
 		
-		conexao = Persistence.createEntityManagerFactory("comJPAeHibernate"); 
+		conexao = Persistence.createEntityManagerFactory("hibernate"); 
 		/* deve conter aqui a informação do atributo name da tag <persistence unit> */
 		return conexao;
 		//EntityManager em = conexao.createEntityManager();

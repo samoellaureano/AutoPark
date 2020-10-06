@@ -1,10 +1,10 @@
-package controler;
+package br.com.estacionamento.dao.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.estacionamento.controlerInterface.VeiculoInterface;
+import br.com.estacionamento.dao.VeiculoInterface;
 import br.com.estacionamento.entidade.Veiculo;
 
 public class controlerVeiculo implements VeiculoInterface{

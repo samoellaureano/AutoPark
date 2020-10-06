@@ -7,9 +7,9 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.estacionamento.dao.jpa.controlerCliente;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.util.UtilRest;
-import controler.controlerCliente;
 
 @Path("clienteRest")
 public class ClienteRest extends UtilRest{

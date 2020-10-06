@@ -7,9 +7,9 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.estacionamento.dao.jpa.controlerVeiculo;
 import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
-import controler.controlerVeiculo;
 
 @Path("veiculoRest")
 public class VeiculoRest  extends UtilRest{

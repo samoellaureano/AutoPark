@@ -5,6 +5,7 @@ import javax.ws.rs.Path;//Identifica o caminho do URI para o qual uma classe de 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import senai.comjpa.dao.jpa.ClienteJPADAO;
 import senai.comjpa.pojo.Cliente;
@@ -16,11 +17,11 @@ public class buscarCliente extends UtilRest{
 	@Path("buscarClientePeloId/{id}")
 	@Produces({MediaType.APPLICATION_ATOM_XML,MediaType.APPLICATION_JSON})
 
-	public Cliente buscarClientePeloId(@PathParam("id") int id){
+	public Response buscarClientePeloId(@PathParam("id") int id){
 		
 		ClienteJPADAO clienteJPA = new ClienteJPADAO();
 		Cliente cliente = clienteJPA.buscarPorId(id);
-		return cliente;
+		return buildResponse(cliente);
 		
 	}
 

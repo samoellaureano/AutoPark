@@ -1,4 +1,4 @@
-package br.com.estacionamento.controlerInterface;
+package br.com.estacionamento.dao;
 
 import br.com.estacionamento.entidade.Veiculo;
 
