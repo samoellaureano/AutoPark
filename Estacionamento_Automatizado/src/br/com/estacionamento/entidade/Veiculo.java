@@ -1,14 +1,16 @@
 package br.com.estacionamento.entidade;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="veiculos")
@@ -31,17 +33,19 @@ public class Veiculo implements Serializable {
 	
 	@Column(length = 10,nullable = false)
 	private  String placa;
-
-	/* O lado "Many" é o da classe que envolve isso tudo, no caso "Veiculo". O lado One é o da entidade relacionada, no caso "Cliente". */
 	
-	@ManyToOne
-	/* @JoinColumns({
-        @JoinColumn(name="ADDR_ID", referencedColumnName="ID"),
-        @JoinColumn(name="ADDR_ZIP", referencedColumnName="ZIP")
-    }) */
-	@JoinColumn(name = "cliente_id", referencedColumnName="Cliente") //Coluna de junção
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Cliente cliente;
 	
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public String getMarca() {
 		return marca;
 	}
@@ -72,5 +76,10 @@ public class Veiculo implements Serializable {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+	
+	@Override
+	public String toString() {
+		return "Veiculo [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + "]";
 	}
 }

@@ -70,10 +70,12 @@ public class Cliente implements Serializable {
 	}
 	public void setCelular(int celular) {
 		this.celular = celular;
-	}
-	 
+	}	 
      
-	
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", celular=" + celular + "]";
+	}
 	
 	
 }

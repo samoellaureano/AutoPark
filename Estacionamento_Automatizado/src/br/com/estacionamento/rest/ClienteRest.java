@@ -7,37 +7,25 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.controlerCliente;
+import br.com.estacionamento.dao.jpa.clienteJPADAO;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("clienteRest")
 public class ClienteRest extends UtilRest{
 
-public ClienteRest(){} 
-
 @POST
 @Path("/addCliente")
 @Consumes("application/*")
 
-public Response salvar(String addcliente){
+public Response salvar(String addCliente){
 		
 	try {
 					
-		Cliente cliente = new ObjectMapper().readValue(addcliente,Cliente.class);
+		Cliente cliente = new ObjectMapper().readValue(addCliente,Cliente.class);		
+		clienteJPADAO clienteJpadao = new clienteJPADAO();
 		
-		System.out.println(cliente.getNome()+"\n"
-				+cliente.getCpf()+"\n"
-				+cliente.getCelular()+"\n"
-				+cliente.getEmail()+"\n"
-				+cliente.getSenha());
-		
-		controlerCliente con = new controlerCliente();
-		
-		
-		
-		
-		boolean	retorno = con.salvar(cliente); 
+		boolean	retorno = clienteJpadao.salvar(cliente);
 		
 		if(retorno){
 			// true = Cadastrado com sucesso.

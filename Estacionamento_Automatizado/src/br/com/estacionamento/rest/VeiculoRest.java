@@ -7,26 +7,27 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.controlerVeiculo;
+import br.com.estacionamento.dao.jpa.veiculoJPADAO;
 import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("veiculoRest")
-public class VeiculoRest  extends UtilRest{
-public VeiculoRest(){}
+public class VeiculoRest extends UtilRest{
 
 @POST
-@Path("/addveiculo")
+@Path("/addVeiculo")
 @Consumes("application/*")
 
-public Response inserir(String addveiculo){
+public Response inserir(String addVeiculo){
 		
 	try {
+		System.out.println(addVeiculo);
 					
-		Veiculo veiculo = new ObjectMapper().readValue(addveiculo,Veiculo.class);
-		controlerVeiculo contrVeiculo = new controlerVeiculo();
+		Veiculo veiculo = new ObjectMapper().readValue(addVeiculo, Veiculo.class);
 		
-		boolean retorno = contrVeiculo.salvar(veiculo);
+		veiculoJPADAO veiculoJpadao = new veiculoJPADAO();
+		
+		boolean retorno = veiculoJpadao.salvar(veiculo);
 				
 		if(retorno){
 			// Cadastrado com sucesso.
