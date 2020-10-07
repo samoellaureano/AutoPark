@@ -1,11 +1,14 @@
 package br.com.estacionamento.entidade;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,18 +23,15 @@ public class Cliente implements Serializable {
 	
 	@Column(nullable = false,length = 100)
 	private String nome;
-	
-	@Column(nullable = false,length = 12)
-	private String cpf;
-	
-	@Column(nullable = false,length = 35)
-	private String senha;
-	
+			
 	@Column(nullable = false,length = 255)
 	private String email;
 	
 	@Column(nullable = false,length = 11)
 	private int celular;
+	
+	@OneToOne(cascade=CascadeType.PERSIST)
+	private Usuario usuario;
 	
 	
 	
@@ -47,18 +47,6 @@ public class Cliente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -70,11 +58,18 @@ public class Cliente implements Serializable {
 	}
 	public void setCelular(int celular) {
 		this.celular = celular;
-	}	 
-     
+	}	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", celular=" + celular + "]";
+		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", celular=" + celular
+				+ "]";
 	}
 	
 	

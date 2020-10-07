@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.clienteJPADAO;
 import br.com.estacionamento.entidade.Cliente;
+import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("clienteRest")
@@ -22,7 +23,14 @@ public Response salvar(String addCliente){
 		
 	try {
 					
-		Cliente cliente = new ObjectMapper().readValue(addCliente,Cliente.class);		
+		Cliente cliente = new ObjectMapper().readValue(addCliente,Cliente.class);
+		Usuario usuario = cliente.getUsuario();
+		
+		usuario.setAcesso(true);
+		usuario.setPerfil(0);
+		
+		cliente.setUsuario(usuario);
+		
 		clienteJPADAO clienteJpadao = new clienteJPADAO();
 		
 		boolean	retorno = clienteJpadao.salvar(cliente);

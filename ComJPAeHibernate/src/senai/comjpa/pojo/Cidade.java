@@ -17,6 +17,7 @@ public class Cidade {
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Estado estado;
+	
 	public int getId() {
 		return id;
 	}

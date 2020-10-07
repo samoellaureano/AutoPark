@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -34,16 +34,17 @@ public class Veiculo implements Serializable {
 	@Column(length = 10,nullable = false)
 	private  String placa;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.MERGE)
 	private Cliente cliente;
 	
 	
-	public Cliente getCliente() {
-		return cliente;
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getMarca() {
@@ -78,6 +79,14 @@ public class Veiculo implements Serializable {
 		this.placa = placa;
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public String toString() {
 		return "Veiculo [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + "]";

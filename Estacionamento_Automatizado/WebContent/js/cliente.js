@@ -1,13 +1,16 @@
 $( document ).ready(function() {
 
 var cliente = new Object();
+var usuario = new Object();
 
 	$("#cadCliente").click(function(e){
 	        cliente.nome    = $("#nome").val();
-	        cliente.cpf     = $("#cpf").val();
+	        usuario.cpf     = $("#cpf").val();
 	        cliente.celular = $("#celular").val();
 	        cliente.email   = $("#email").val();
-	        cliente.senha 	= $("#senha").val();
+	        usuario.senha 	= $("#senha").val();
+
+			cliente.usuario = usuario;
 	   
 	        
 	        var cfg = {
