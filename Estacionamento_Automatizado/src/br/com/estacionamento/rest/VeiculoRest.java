@@ -21,7 +21,6 @@ public class VeiculoRest extends UtilRest{
 public Response inserir(String addVeiculo){
 		
 	try {
-		System.out.println(addVeiculo);
 					
 		Veiculo veiculo = new ObjectMapper().readValue(addVeiculo, Veiculo.class);
 		

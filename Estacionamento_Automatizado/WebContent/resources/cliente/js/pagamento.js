@@ -1,4 +1,5 @@
 var pagamento = new Object();
+var cliente = new Object();
 $(document).ready(function(){
     $("#menu").load("menu.html");
    
@@ -7,6 +8,9 @@ $(document).ready(function(){
     });
 
     $('#cadPagamento').click(function(e){
+	
+		cliente.id = clienteID;
+		pagamento.cliente = cliente;
        
         pagamento.numCartao = $("#cartao").val()
         pagamento.titular = $("#NomeTitular").val()
@@ -14,11 +18,11 @@ $(document).ready(function(){
         pagamento.codVerificacao = $("#codigoVerificacao").val()
         
         var cfg = {
-            url: "../rest/pagamentosRest/addPagamentos",
+            url: "../../rest/pagamentoRest/addPagamento",
             data: JSON.stringify(pagamento),
             success: function (succJson) {
                 if (succJson == 1) {
-                    resp = ("pagamentos cadastrado com sucesso!");
+                    resp = ("Pagamento cadastrado com sucesso!");
                     exibirMessagem(resp, 1);
                 } else if(succJson == 2){
                     resp = ("O pagamento ja existe!");
@@ -40,7 +44,7 @@ $(document).ready(function(){
     $('#buscaPagamento').click(function(){    
        
         var cfg = {
-            url: "../rest/pagamentosRest/viewPagamentos",
+            url: "../rest/pagamentoRest/viewPagamentos",
             data: JSON.stringify(pagamento),
             success: function (pagamento) {
                 visualizarFormaDPagamento(pagamento);
@@ -64,9 +68,10 @@ $(document).ready(function(){
             $("#codigoVerificacao").text(pagamento.codVerificacao);
             $("#formCadPagamento").css('display','none');
         };
-    };  // fim do visualizar
-    $("#formCadPagamento").css('display','none');
-    $('input'). prop('disabled', true);
+    };  
+// fim do visualizar
+   // $("#formCadPagamento").css('display','none');
+   // $('input'). prop('disabled', true);
  //   buscar();
    
 });
