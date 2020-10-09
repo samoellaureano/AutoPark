@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,12 +23,6 @@ public class Veiculo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(length = 90,nullable = false) // max de 100 caracteres e nao pode ser null estes campos da tabela.
-	private  String marca;
-	
-	@Column(length = 90,nullable = false)
-	private  String modelo;
-	
 	@Column(length = 5,nullable = false)
 	private  String ano;
 	
@@ -37,58 +32,73 @@ public class Veiculo implements Serializable {
 	@OneToOne(cascade=CascadeType.MERGE)
 	private Cliente cliente;
 	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	private Modelo modelo;
+	
 	
 	
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getMarca() {
-		return marca;
-	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
 
 	public String getAno() {
 		return ano;
 	}
 
+
+
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
+
+
 
 	public String getPlaca() {
 		return placa;
 	}
 
+
+
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	
+
+
+
 	public Cliente getCliente() {
 		return cliente;
 	}
+
+
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
+
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Veiculo [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + "]";
+		return "Veiculo [id=" + id + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + "]";
 	}
 }

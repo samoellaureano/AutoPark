@@ -33,7 +33,8 @@ public class Cliente implements Serializable {
 	@OneToOne(cascade=CascadeType.PERSIST)
 	private Usuario usuario;
 	
-	
+	@OneToOne(cascade=CascadeType.PERSIST)
+	private Credito credito;
 	
 	 public int getId() {
 		return id;
@@ -65,6 +66,12 @@ public class Cliente implements Serializable {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public Credito getCredito() {
+		return credito;
+	}
+	public void setCredito(Credito credito) {
+		this.credito = credito;
 	}
 	@Override
 	public String toString() {
