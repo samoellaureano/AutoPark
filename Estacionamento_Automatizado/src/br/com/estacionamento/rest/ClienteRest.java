@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.clienteJPADAO;
+import br.com.estacionamento.dao.jpa.ClienteJPADAO;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
@@ -31,7 +31,7 @@ public class ClienteRest extends UtilRest{
 
 			cliente.setUsuario(usuario);
 
-			clienteJPADAO clienteJpadao = new clienteJPADAO();
+			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 
 			boolean	retorno = clienteJpadao.salvar(cliente);
 

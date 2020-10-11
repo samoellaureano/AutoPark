@@ -6,43 +6,28 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="pagamentos")
-public class Pagamento implements Serializable{
+public class Pagamento extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
+
 	@Column(nullable = false)
 	private int numCartao;
-	
+
 	@Column(nullable = false)
 	private String titular;
-	
+
 	@Column(nullable = false)
 	private Date validade;
-	
+
 	@Column(nullable = false)
 	private int codVerificacao;
-	
+
 	@OneToOne(cascade=CascadeType.MERGE)
 	private Cliente cliente;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getNumCartao() {
 		return numCartao;
@@ -83,8 +68,8 @@ public class Pagamento implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	
-	
+
+
+
 
 }

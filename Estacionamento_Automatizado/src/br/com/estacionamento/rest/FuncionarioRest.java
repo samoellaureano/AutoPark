@@ -7,25 +7,24 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.MarcaJPADAO;
-import br.com.estacionamento.entidade.Marca;
+import br.com.estacionamento.dao.jpa.FuncionarioJPADAO;
+import br.com.estacionamento.entidade.Funcionario;
 import br.com.estacionamento.util.UtilRest;
 
-@Path("marcaRest")
-public class MarcaRest extends UtilRest{
-
+@Path("funcionarioRest")
+public class FuncionarioRest extends UtilRest{
 	@POST
-	@Path("/addMarca")
+	@Path("/addFuncionario")
 	@Consumes("application/*")
 
-	public Response salvar(String addMarca){
+	public Response salvar(String addFuncionario){
 
 		try {
 
-			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);	
-			MarcaJPADAO marcaJpadao = new MarcaJPADAO();
+			Funcionario funcionario = new ObjectMapper().readValue(addFuncionario,Funcionario.class);	
+			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
 
-			boolean	retorno = marcaJpadao.salvar(marca);
+			boolean	retorno = funcionarioJpadao.salvar(funcionario);
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
@@ -47,4 +46,5 @@ public class MarcaRest extends UtilRest{
 		}
 
 	}
+
 }

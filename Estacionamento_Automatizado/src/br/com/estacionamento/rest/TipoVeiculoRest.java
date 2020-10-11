@@ -7,25 +7,25 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.MarcaJPADAO;
-import br.com.estacionamento.entidade.Marca;
+import br.com.estacionamento.dao.jpa.TipoVeiculoJPADAO;
+import br.com.estacionamento.entidade.TipoVeiculo;
 import br.com.estacionamento.util.UtilRest;
 
-@Path("marcaRest")
-public class MarcaRest extends UtilRest{
+@Path("tipoVeiculoRest")
+public class TipoVeiculoRest extends UtilRest{
 
 	@POST
-	@Path("/addMarca")
+	@Path("/addTipoVeiculo")
 	@Consumes("application/*")
 
-	public Response salvar(String addMarca){
+	public Response salvar(String addTipoVeiculo){
 
 		try {
 
-			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);	
-			MarcaJPADAO marcaJpadao = new MarcaJPADAO();
+			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(addTipoVeiculo,TipoVeiculo.class);	
+			TipoVeiculoJPADAO tipoVeiculoJpadao = new TipoVeiculoJPADAO();
 
-			boolean	retorno = marcaJpadao.salvar(marca);
+			boolean	retorno = tipoVeiculoJpadao.salvar(tipoVeiculo);
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
@@ -47,4 +47,5 @@ public class MarcaRest extends UtilRest{
 		}
 
 	}
+
 }

@@ -7,38 +7,38 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.MarcaJPADAO;
-import br.com.estacionamento.entidade.Marca;
+import br.com.estacionamento.dao.jpa.CheckinJPADAO;
+import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.util.UtilRest;
 
-@Path("marcaRest")
-public class MarcaRest extends UtilRest{
-
+@Path("checkinRest")
+public class CheckinRest extends UtilRest{
 	@POST
-	@Path("/addMarca")
+	@Path("/addCheckin")
 	@Consumes("application/*")
 
-	public Response salvar(String addMarca){
+	public Response inserir(String addCheckin){
 
 		try {
 
-			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);	
-			MarcaJPADAO marcaJpadao = new MarcaJPADAO();
+			Checkin checkin = new ObjectMapper().readValue(addCheckin, Checkin.class);
 
-			boolean	retorno = marcaJpadao.salvar(marca);
+			CheckinJPADAO checkinJpadao = new CheckinJPADAO();
+
+			boolean retorno = checkinJpadao.salvar(checkin);
 
 			if(retorno){
-				// true = Cadastrado com sucesso.
+				// Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
 			}else if(retorno==false){
-				// false =  ja existe
+				// ja existe um veiculo
 				return this.buildErrorResponse("2");
 
 			}else {
-				// null = Erro ao cadastrar o 
+				// Erro ao cadastrar o veiculo
 				return this.buildErrorResponse("0");			
-			}
+			}		
 
 		} catch (Exception e){
 			e.printStackTrace();
@@ -47,4 +47,5 @@ public class MarcaRest extends UtilRest{
 		}
 
 	}
+
 }

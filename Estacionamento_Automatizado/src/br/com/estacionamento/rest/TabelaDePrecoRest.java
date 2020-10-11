@@ -7,36 +7,35 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.MarcaJPADAO;
-import br.com.estacionamento.entidade.Marca;
+import br.com.estacionamento.dao.jpa.TabelaDePrecoJPADAO;
+import br.com.estacionamento.entidade.TabelaDePreco;
 import br.com.estacionamento.util.UtilRest;
 
-@Path("marcaRest")
-public class MarcaRest extends UtilRest{
-
+@Path("tabelaDePrecoRest")
+public class TabelaDePrecoRest extends UtilRest{
 	@POST
-	@Path("/addMarca")
+	@Path("/addPreco")
 	@Consumes("application/*")
 
-	public Response salvar(String addMarca){
+	public Response salvar(String addPreco){
 
 		try {
 
-			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);	
-			MarcaJPADAO marcaJpadao = new MarcaJPADAO();
+			TabelaDePreco tabelaDePreco = new ObjectMapper().readValue(addPreco,TabelaDePreco.class);
+			TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
 
-			boolean	retorno = marcaJpadao.salvar(marca);
+			boolean	retorno = tabelaDePrecoJpadao.salvar(tabelaDePreco);
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
 			}else if(retorno==false){
-				// false =  ja existe
+				// false = ja existe
 				return this.buildErrorResponse("2");
 
 			}else {
-				// null = Erro ao cadastrar o 
+				// null = Erro ao cadastrar
 				return this.buildErrorResponse("0");			
 			}
 

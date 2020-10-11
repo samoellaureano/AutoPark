@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.modeloJPADAO;
+import br.com.estacionamento.dao.jpa.ModeloJPADAO;
 import br.com.estacionamento.entidade.Modelo;
 import br.com.estacionamento.util.UtilRest;
 
@@ -23,7 +23,7 @@ public class ModeloRest extends UtilRest{
 		try {
 
 			Modelo modelo = new ObjectMapper().readValue(addCliente,Modelo.class);
-			modeloJPADAO modeloJpadao = new modeloJPADAO();
+			ModeloJPADAO modeloJpadao = new ModeloJPADAO();
 
 			boolean	retorno = modeloJpadao.salvar(modelo);
 

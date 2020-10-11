@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.creditoJPADAO;
+import br.com.estacionamento.dao.jpa.CreditoJPADAO;
 import br.com.estacionamento.entidade.Credito;
 import br.com.estacionamento.util.UtilRest;
 
@@ -22,7 +22,7 @@ public class CreditoRest extends UtilRest{
 		try {
 
 			Credito credito = new ObjectMapper().readValue(addCredito,Credito.class);	
-			creditoJPADAO creditoJpadao = new creditoJPADAO();
+			CreditoJPADAO creditoJpadao = new CreditoJPADAO();
 
 			boolean	retorno = creditoJpadao.salvar(credito);
 

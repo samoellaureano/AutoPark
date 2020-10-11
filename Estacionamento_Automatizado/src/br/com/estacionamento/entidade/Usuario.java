@@ -4,40 +4,25 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="usuarios")
-public class Usuario implements Serializable{
+public class Usuario extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
+
 	@Column(nullable = false,length = 35)
 	private String senha;
-	
+
 	@Column(nullable = false)
 	private int perfil;
-	
+
 	@Column(nullable = false)
 	private boolean acesso;
-	
+
 	@Column(nullable = false, length = 11)
 	private String cpf;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getSenha() {
 		return senha;
@@ -70,9 +55,9 @@ public class Usuario implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

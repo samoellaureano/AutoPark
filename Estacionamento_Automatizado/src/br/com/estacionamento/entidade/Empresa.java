@@ -7,12 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="marcas")
-public class Marca extends Persistivel implements Serializable{
+@Table(name="empresas")
+public class Empresa extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
+
+	@Column(nullable = false,length = 14)
+	private String cnpj;
 
 	@Column(nullable = false,length = 45)
 	private String descricao;
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -21,7 +32,6 @@ public class Marca extends Persistivel implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 
 }

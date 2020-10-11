@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.veiculoJPADAO;
+import br.com.estacionamento.dao.jpa.VeiculoJPADAO;
 import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
 
@@ -24,7 +24,7 @@ public Response inserir(String addVeiculo){
 					
 		Veiculo veiculo = new ObjectMapper().readValue(addVeiculo, Veiculo.class);
 		
-		veiculoJPADAO veiculoJpadao = new veiculoJPADAO();
+		VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
 		
 		boolean retorno = veiculoJpadao.salvar(veiculo);
 				

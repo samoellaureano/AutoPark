@@ -7,44 +7,46 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.PagamentoJPADAO;
-import br.com.estacionamento.entidade.Pagamento;
+import br.com.estacionamento.dao.jpa.EstacionamentoJPADAO;
+import br.com.estacionamento.entidade.Estacionamento;
 import br.com.estacionamento.util.UtilRest;
 
-@Path("pagamentoRest")
-public class PagamentoRest extends UtilRest{
-	
+@Path("estacionamentoRest")
+public class EstacionamentoRest extends UtilRest{
+
 	@POST
-	@Path("/addPagamento")
+	@Path("/addEstacionamento")
 	@Consumes("application/*")
 
-	public Response salvar(String addPagamento){
+	public Response inserir(String addEstacionamento){
+
 		try {
-			
-			Pagamento pagamento = new ObjectMapper().readValue(addPagamento, Pagamento.class);
-			
-			PagamentoJPADAO pagamentoJpadao = new PagamentoJPADAO();
-			
-			boolean retorno = pagamentoJpadao.salvar(pagamento);
-					
+
+			Estacionamento estacionamento = new ObjectMapper().readValue(addEstacionamento, Estacionamento.class);
+
+			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
+
+			boolean retorno = estacionamentoJpadao.salvar(estacionamento);
+
 			if(retorno){
 				// Cadastrado com sucesso.
 				return this.buildResponse("1");				
-			
+
 			}else if(retorno==false){
 				// ja existe um veiculo
 				return this.buildErrorResponse("2");
-				
+
 			}else {
 				// Erro ao cadastrar o veiculo
 				return this.buildErrorResponse("0");			
 			}		
-			
+
 		} catch (Exception e){
 			e.printStackTrace();
-			
-			return this.buildErrorResponse("Erro ao cadastrar pagamento");
+
+			return this.buildErrorResponse("Erro ao cadastrar veiculo");
 		}
+
 	}
 
 }
