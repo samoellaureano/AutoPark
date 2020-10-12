@@ -1,11 +1,7 @@
 package br.com.reconhecimentoImagem.main;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -13,10 +9,6 @@ import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
-
 public class Decomposicao {
 	//tesseract.exe C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\placa2.png C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\out  --dpi 200
 	private static int eixoX=0;
@@ -75,25 +67,25 @@ public class Decomposicao {
 	}
 
 	private static String lerArquivo(String caminhoDoArquivo) throws IOException {
-		String textoconvertido="";
+		String placa="";
 
 		BufferedReader leitor = null;
-
 		try {
 
 			leitor = new BufferedReader(new FileReader(caminhoDoArquivo));
 			 while(leitor.ready()){
-				 textoconvertido += leitor.readLine() + "\n";
+				 placa += leitor.readLine() + "\n";
              }			
-			
-			leitor.close();
+			leitor.close();		    
+		    placa = placa.replaceAll("[^0-9a-zA-Z-]","");
 
 		} catch (Exception e) {
 			// TODO: handle exception
 
 		}
+		
 		//leitor.close();
-		return textoconvertido;
+		return placa;
 	}
 
 	public static void mostraImg(Mat img, String titulo){			
