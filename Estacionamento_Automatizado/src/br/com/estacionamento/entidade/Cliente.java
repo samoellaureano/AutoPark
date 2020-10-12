@@ -20,8 +20,8 @@ public class Cliente extends Persistivel implements Serializable {
 	@Column(nullable = false,length = 255)
 	private String email;
 
-	@Column(nullable = false,length = 11)
-	private int celular;
+	@Column(nullable = false,length = 12)
+	private String celular;
 
 	@OneToOne(cascade=CascadeType.PERSIST)
 	private Usuario usuario;
@@ -41,10 +41,10 @@ public class Cliente extends Persistivel implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
-	public void setCelular(int celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}	
 

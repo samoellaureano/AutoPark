@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tabelaDePrecos")
-public class TabelaDePreco implements Serializable{
+public class TabelaDePreco extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(nullable = false)
@@ -20,12 +20,14 @@ public class TabelaDePreco implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String descricao;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="tipoVeiculo_id")
 	private TipoVeiculo tipoVeiculo;
-	@ManyToOne(cascade=CascadeType.ALL)
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="estacionamento_id")
 	private Estacionamento estacionamento;
+	
 	public double getValor() {
 		return valor;
 	}

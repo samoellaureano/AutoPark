@@ -14,11 +14,12 @@ import javax.persistence.Table;
 @Table(name="tiposVeiculos")
 public class TipoVeiculo extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	@Column(length = 45,nullable = false)
 	private String descricao;
 	
-	@OneToMany(mappedBy="tipoVeiculo", cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="tipoVeiculo",  cascade = CascadeType.ALL)
     private Set<TabelaDePreco> tabelaDePreco = new HashSet<TabelaDePreco>();
 
 	public String getDescricao() {
@@ -29,6 +30,7 @@ public class TipoVeiculo extends Persistivel implements Serializable{
 		this.descricao = descricao;
 	}
 
+
 	public Set<TabelaDePreco> getTabelaDePreco() {
 		return tabelaDePreco;
 	}
@@ -36,5 +38,7 @@ public class TipoVeiculo extends Persistivel implements Serializable{
 	public void setTabelaDePreco(Set<TabelaDePreco> tabelaDePreco) {
 		this.tabelaDePreco = tabelaDePreco;
 	}
+
+	
 
 }

@@ -1,15 +1,13 @@
 package br.com.estacionamento.entidade;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="estacionamentos")
@@ -27,9 +25,6 @@ public class Estacionamento extends Persistivel implements Serializable{
 
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Empresa empresa;
-	
-	@OneToMany(mappedBy="estacionameto", cascade=CascadeType.ALL)
-    private Set<TabelaDePreco> tabelaDePreco = new HashSet<TabelaDePreco>();
 
 	public String getEndereco() {
 		return endereco;
@@ -61,8 +56,6 @@ public class Estacionamento extends Persistivel implements Serializable{
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-	}
-
-
+	}		
 
 }
