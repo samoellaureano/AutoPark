@@ -1,10 +1,14 @@
 package br.com.estacionamento.entidade;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import br.com.estacionamento.util.HashUtil;
 
 
 @Entity
@@ -30,6 +34,23 @@ public class Usuario extends Persistivel implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public void setSenhaCriptografada(String senha) {
+		HashUtil hash = new HashUtil();
+		try {
+			//System.out.println("Senha do login - "+senha);
+			senha = (senha + "321#cAsA");
+			//System.out.println("Senha do login concatenada - "+senha);
+			
+			//System.out.println("Senha do login criptografada - "+hash.stringToMD5(senha));
+			
+			this.senha = hash.stringToMD5(senha);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int getPerfil() {
