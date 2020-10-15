@@ -16,7 +16,7 @@ import br.com.estacionamento.util.HashUtil;
 public class Usuario extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	@Column(nullable = false,length = 35)
+	@Column(nullable = false,length = 45)
 	private String senha;
 
 	@Column(nullable = false)

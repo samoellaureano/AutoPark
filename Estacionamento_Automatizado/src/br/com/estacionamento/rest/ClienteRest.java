@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
+import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
@@ -28,22 +29,26 @@ public class ClienteRest extends UtilRest{
 
 			usuario.setAcesso(true);
 			usuario.setPerfil(0);
-
-			cliente.setUsuario(usuario);
+			usuario.setSenhaCriptografada(usuario.getSenha());
 
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
-
-			boolean	retorno = clienteJpadao.salvar(cliente);
+			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
+			
+			usuario = usuarioJpadao.buscarPorCpf(usuario.getCpf());
+			
+			cliente.setUsuario(usuario);
+			
+			boolean	retorno = false;
+			if(usuario.getId() == null) {			
+				retorno = clienteJpadao.salvar(cliente);
+			}
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				
-
-			}else if(retorno==false){
-				// false = cliente ja existe
-				return this.buildErrorResponse("2");
-
-			}else {
+			}else if(retorno == false){
+				return this.buildResponse("2");
+			}else{
 				// null = Erro ao cadastrar o cliente
 				return this.buildErrorResponse("0");			
 			}

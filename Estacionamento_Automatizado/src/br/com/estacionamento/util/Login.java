@@ -6,19 +6,19 @@ import br.com.estacionamento.entidade.Usuario;
 public class Login {
 	
 	private UsuarioJPADAO jpaUsuario;
-	private Usuario usuarioAutenticado;
+	private Usuario usuarioBanco;
 	public Login(UsuarioJPADAO jpaUsuario) {
 		this.jpaUsuario = jpaUsuario;
 	}
 	
-	public boolean autenticaUsuario(Usuario login) {
-		this.usuarioAutenticado = jpaUsuario.buscarPorCpf(login.getCpf());
-		//System.out.println("Senha do banco - " +this.usuarioAutenticado.getSenha());
-		return login.equals(this.usuarioAutenticado);
+	public boolean autenticaUsuario(Usuario loginFront) {
+		this.usuarioBanco = jpaUsuario.buscarPorCpf(loginFront.getCpf());
+		//System.out.println("Senha do banco - " +this.usuarioBanco.getSenha());
+		return loginFront.getSenha().equals(this.usuarioBanco.getSenha());
 	}
 	
 	public Usuario usuarioAutenticado() {
-		return usuarioAutenticado;
+		return usuarioBanco;
 	}
 	
 	

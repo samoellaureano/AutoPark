@@ -16,7 +16,7 @@ public class UsuarioJPADAO extends JPAAbstract<Usuario> implements UsuarioDAO{
 
 	@Override
 	public Usuario buscarPorCpf(String cpf) {
-		String jpql = "select c from " +getEntityName()+ " c where c.cpf = " + cpf;
+		String jpql = "select c from " +getEntityName()+ " c where c.cpf = '" + cpf + "'";
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings("rawtypes")
 		List list = query.getResultList();

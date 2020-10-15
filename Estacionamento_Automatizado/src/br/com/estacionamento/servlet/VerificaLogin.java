@@ -35,7 +35,7 @@ public class VerificaLogin extends HttpServlet {
 
 		Login login = new Login(new UsuarioJPADAO());
 
-		boolean retorno = false;
+		boolean retorno;
 		HttpSession sessao = request.getSession();
 
 		if (login.autenticaUsuario(loginFront)) {
@@ -54,7 +54,21 @@ public class VerificaLogin extends HttpServlet {
 		//Criando a mensagem para o usuário
 		Map<String, String> msg = new HashMap<String, String>();
 		if(retorno){
-			msg.put("url", context + "/resources/principal.html");
+			switch(login.usuarioAutenticado().getPerfil()) {
+				case 0:
+					msg.put("url", context + "/resources/cliente/dashboard.html");
+					break;
+				case 1:
+					msg.put("url", context + "/resources/funcionario/dashboard.html");
+					break;
+				case 2:
+					msg.put("url", context + "/resources/admin/dashboard.html");
+					break;
+				default:
+					msg.put("url", context);
+					break;
+			}
+			
 		}else{
 			msg.put("msg", "Usuario ou senha incorretos!");
 		}

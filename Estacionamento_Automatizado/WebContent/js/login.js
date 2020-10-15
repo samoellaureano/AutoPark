@@ -3,25 +3,23 @@ usuario = new Object();
 
 $(document).ready(function(){
 
-  //  $("#inputCPF").mask('000.000.000-00');
+    $("#usuario").mask('000.000.000-00');
 
 });
 
 assistencia.login = function(){
-    document.getElementById("telaLogin").style.display = 'none';
-    document.getElementById("loader").style.display = 'block';
 
     usuario.cpf = new Object();
-    usuario.cpf = $("#inputCPF").val();
+    usuario.cpf = $("#usuario").val();
     usuario.cpf = usuario.cpf.replace(/\./g, "");
     usuario.cpf = usuario.cpf.replace(/\-/g, "");
 
-    var inputSenha = $("#inputPassword").val();
+    var inputSenha = $("#senha").val();
     usuario.senha = btoa(inputSenha);
     
     $.ajax({
         type: "POST",
-        url: "verificalogin",
+        url: "verificaLogin",
         dataType: "JSON",
         data: JSON.stringify(usuario),
         success: function (msgSuc){
@@ -31,8 +29,6 @@ assistencia.login = function(){
 
             if(msgSuc.msg != undefined){
                 exibirMessagem(msgSuc.msg, 2);
-                document.getElementById("telaLogin").style.display = 'block';
-                document.getElementById("loader").style.display = 'none'; 
             }
         },
         error: function (){
