@@ -17,13 +17,13 @@ public class Funcionario extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String nome;
 
-	@Column(length = 11,nullable = false)
-	private  int celular;
+	@Column(nullable = false,length = 12)
+	private String celular;
 
 	@Column(length = 45,nullable = false)
 	private  String email;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Empresa empresa;
 
 	@OneToOne(cascade=CascadeType.MERGE)
@@ -37,11 +37,11 @@ public class Funcionario extends Persistivel implements Serializable{
 		this.nome = nome;
 	}
 
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(int celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 

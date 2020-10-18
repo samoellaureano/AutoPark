@@ -1,4 +1,6 @@
-var funcionario = new Object();
+var funcionario = null;
+var empresa = null;
+var usuario = null;
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
@@ -94,13 +96,20 @@ $(document).ready(function(){
     };
 
     $('#cadFuncionario').click(function(e){
+        funcionario = new Object();
+        empresa = new Object();
+        usuario = new Object();
+
+        empresa.id = $("#empresa").val();
+        usuario.cpf = $("#cpf").val();
         funcionario.nome = $("#nome").val();
         funcionario.celular = $("#celular").val();
         funcionario.email = $("#email").val();
-        funcionario.empresa = $("#empresa").val();
+        funcionario.empresa = empresa;
+        funcionario.usuario = usuario;
 
         var cfg = {
-            url: "../rest/funcionarioRest/addFuncionario",
+            url: "../../rest/funcionarioRest/addFuncionario",
             data: JSON.stringify(funcionario),
             success: function (succJson) {
                 if (succJson == 1) {

@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.FuncionarioJPADAO;
 import br.com.estacionamento.entidade.Funcionario;
+import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("funcionarioRest")
@@ -21,7 +22,15 @@ public class FuncionarioRest extends UtilRest{
 
 		try {
 
-			Funcionario funcionario = new ObjectMapper().readValue(addFuncionario,Funcionario.class);	
+			Funcionario funcionario = new ObjectMapper().readValue(addFuncionario,Funcionario.class);
+			Usuario usuario = funcionario.getUsuario();
+
+			usuario.setAcesso(true);
+			usuario.setPerfil(1);
+			usuario.setSenhaCriptografada("1234");
+			
+			funcionario.setUsuario(usuario);
+			
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
 
 			boolean	retorno = funcionarioJpadao.salvar(funcionario);
