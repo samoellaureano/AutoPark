@@ -14,7 +14,10 @@ public class Login {
 	public boolean autenticaUsuario(Usuario loginFront) {
 		this.usuarioBanco = jpaUsuario.buscarPorCpf(loginFront.getCpf());
 		//System.out.println("Senha do banco - " +this.usuarioBanco.getSenha());
-		return loginFront.getSenha().equals(this.usuarioBanco.getSenha());
+		if(usuarioBanco != null) {
+			return loginFront.getSenha().equals(this.usuarioBanco.getSenha());
+		}
+		return false;
 	}
 	
 	public Usuario usuarioAutenticado() {

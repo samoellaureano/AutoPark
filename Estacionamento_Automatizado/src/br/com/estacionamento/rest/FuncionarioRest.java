@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.FuncionarioJPADAO;
+import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
 import br.com.estacionamento.entidade.Funcionario;
 import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
@@ -27,14 +28,20 @@ public class FuncionarioRest extends UtilRest{
 
 			usuario.setAcesso(true);
 			usuario.setPerfil(1);
-			usuario.setSenhaCriptografada("1234");
+			usuario.setSenhaCriptografada(usuario.getCpf());
 			
 			funcionario.setUsuario(usuario);
 			
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
-
-			boolean	retorno = funcionarioJpadao.salvar(funcionario);
-
+			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
+			
+			usuario = usuarioJpadao.buscarPorCpf(usuario.getCpf());
+			
+			boolean	retorno = false;
+			if(usuario == null) {			
+				retorno = funcionarioJpadao.salvar(funcionario);
+			}
+			
 			if(retorno){
 				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				

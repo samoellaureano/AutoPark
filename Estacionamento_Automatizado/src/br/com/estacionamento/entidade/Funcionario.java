@@ -26,7 +26,7 @@ public class Funcionario extends Persistivel implements Serializable{
 	@ManyToOne(cascade=CascadeType.MERGE)
 	private Empresa empresa;
 
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Usuario usuario;
 
 	public String getNome() {

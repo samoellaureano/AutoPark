@@ -23,8 +23,9 @@ var usuario = new Object();
 	            success: function (succJson) {
 	                if (succJson == 1) {
 	                    resp = ("Cliente cadastrado com sucesso!");
-											exibirMessagem(resp, 1);
-											window.location.href = ("cadastrarVeiculo.html");
+						exibirMessagem(resp, 1);
+						window.location.href = ("index.html");
+						//window.location.href = ("cadastrarVeiculo.html");
 	                } else if(succJson == 2){
 	                    resp = ("O cliente ja existe!");
 	                    exibirMessagem(resp, 2);

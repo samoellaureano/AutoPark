@@ -28,5 +28,19 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		return null;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public T buscarPorCpf(String cpf) {
+		String jpql = "select c from " +getEntityName()+ " c where c.cpf = '" + cpf + "'";
+		Query query = super.getQuery(jpql);
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		
+		for (Object object: list) {			
+			return ((T) object);
+		}
+		return null;
+	}
+	
 	public abstract String getEntityName();
 }

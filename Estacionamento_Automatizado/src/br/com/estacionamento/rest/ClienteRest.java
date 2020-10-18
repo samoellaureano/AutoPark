@@ -33,13 +33,12 @@ public class ClienteRest extends UtilRest{
 
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
+			cliente.setUsuario(usuario);
 			
 			usuario = usuarioJpadao.buscarPorCpf(usuario.getCpf());
 			
-			cliente.setUsuario(usuario);
-			
 			boolean	retorno = false;
-			if(usuario.getId() == null) {			
+			if(usuario == null) {			
 				retorno = clienteJpadao.salvar(cliente);
 			}
 
