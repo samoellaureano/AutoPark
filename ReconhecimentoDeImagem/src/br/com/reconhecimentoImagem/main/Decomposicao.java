@@ -1,14 +1,20 @@
 package br.com.reconhecimentoImagem.main;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfInt;
 import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+
 public class Decomposicao {
 	//tesseract.exe C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\placa2.png C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\out  --dpi 200
 	private static int eixoX=0;
@@ -26,42 +32,49 @@ public class Decomposicao {
 		Mat img = Imgcodecs.imread(localImg1);
 		
 		Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2GRAY);		 
-		Imgproc.medianBlur(img, img, 3);
-		Imgproc.GaussianBlur(img, img, new Size(5,5),5);
-		
-		Imgproc.medianBlur(img, img, 5);
+	//	Imgproc.medianBlur(img, img, 3);
+	//	Imgproc.GaussianBlur(img, img, new Size(5,5),5);		
+	//	Imgproc.medianBlur(img, img, 5);
 	 // Imgproc.equalizeHist(img2, img2);
-		Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,11,11);	
 		
 	 // Imgproc.resize(img2,img2,new Size(300,300));
+		
+		
+		
+	//	Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY, 0);
+		
+	//	 Imgproc.medianBlur(img, img,1);
+		 Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);		
+		 Imgproc.GaussianBlur(img, img, new Size(1,1),1);
+		 Core.addWeighted(img, 1.5, img, -0.51, 0, img);
+		
+		Imgproc.threshold(img,img,64,255,Imgproc.THRESH_BINARY);
+		Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);	
+	// Imgproc.erode(img, img, new Mat());
+		Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);
+	//	Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,11,11);
+		Imgproc.GaussianBlur(img, img, new Size(1,1),1);
+		Imgproc.medianBlur(img, img, 1);
+		Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,11,11);
+		Mat structImage = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,1));
+	//	Imgproc.erode(img, img, structImage);
+		Mat structImage2 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(1,1));
+		Imgproc.dilate(img, img, structImage);
+		Imgproc.erode(img, img, structImage2);
 		Imgcodecs.imwrite("placa2.png",img );		
+		
 		mostraImg(img, "Imagem");
 				
-		Process converter=null;
-		try {
-			converter = new ProcessBuilder("tesseract.exe "," C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\placa2.png  C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\out --dpi 900").start();
+		 File imageFile = new File("C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\placa2.png");
+	     ITesseract instance = new Tesseract();  // JNA Interface Mapping
+	     instance.setDatapath("C:\\Users\\Felipe\\Desktop\\tesseractOcr\\workspace\\TesteOCR\\tessdata");
 
-			String texto = lerArquivo("C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\out.txt");
-
-			System.out.println("texto: "+texto);
-			//	aaa.destroy();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-
-		finally {
-			converter.destroy();
-		}
-
-		/* O filtro Gaussiano geralmente é usado como um filtro de passa-baixa por deixar passar 
-		 * as baixas frequências, mas elimina os valores relacionados às altas frequência.  
-		 * Neste filtro, assim como em outros, a suavização da imagem é realizada através da 
-		 * substituição de cada pixel pela média ponderada dos pixels vizinhos. 
-		 * 
-		 * Filtro da Mediana: Eficiente para o propósito de filtrar imagens, pois ele reduz a quantidade de variação de 
-		 * intensidade entre um pixel e seus vizinhos, eliminando ruídos.
-		 */		
+	        try {
+	            String result = instance.doOCR(imageFile);
+	            System.out.println("resultado:"+result);
+	        } catch (TesseractException e) {
+	            System.err.println(e.getMessage());
+	        }		
 
 		HighGui.waitKey();
 	}
@@ -81,9 +94,7 @@ public class Decomposicao {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-
-		}
-		
+		}		
 		//leitor.close();
 		return placa;
 	}
