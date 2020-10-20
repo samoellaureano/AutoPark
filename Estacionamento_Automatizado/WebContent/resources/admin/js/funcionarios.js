@@ -3,6 +3,7 @@ var empresa = null;
 var usuario = null;
 $(document).ready(function(){
     $("#menu").load("menu.html");
+    $("#cpf").mask('000.000.000-00');
 
     buscar = function(){
         var valorBusca = $("#buscarFunc").val();
@@ -102,8 +103,12 @@ $(document).ready(function(){
 
         empresa.id = $("#empresa").val();
         usuario.cpf = $("#cpf").val();
+		usuario.cpf = usuario.cpf.replace(/\./g, "");
+		usuario.cpf = usuario.cpf.replace(/\-/g, "");					
+		funcionario.celular = $("#celular").val();
+		funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
+		usuario.senha = btoa(usuario.cpf);
         funcionario.nome = $("#nome").val();
-        funcionario.celular = $("#celular").val();
         funcionario.email = $("#email").val();
         funcionario.empresa = empresa;
         funcionario.usuario = usuario;
