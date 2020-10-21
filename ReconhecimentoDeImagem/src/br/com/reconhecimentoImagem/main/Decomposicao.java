@@ -3,10 +3,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.pdfbox.jbig2.segments.TextRegion;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfInt;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -31,36 +35,47 @@ public class Decomposicao {
 
 		Mat img = Imgcodecs.imread(localImg1);
 		
-		Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2GRAY);		 
-	//	Imgproc.medianBlur(img, img, 3);
-	//	Imgproc.GaussianBlur(img, img, new Size(5,5),5);		
-	//	Imgproc.medianBlur(img, img, 5);
-	 // Imgproc.equalizeHist(img2, img2);
+		Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2GRAY);
+	//	
 		
+		Imgproc.medianBlur(img, img,5);
+		Imgproc.blur(img, img,new Size(1,3));
+		
+		Imgproc.boxFilter(img, img, Imgproc.ADAPTIVE_THRESH_MEAN_C, new Size(2,2));
+		Imgproc.equalizeHist(img, img);
+		Imgproc.Canny(img, img, Imgproc.THRESH_OTSU, Imgproc.THRESH_BINARY_INV);
 	 // Imgproc.resize(img2,img2,new Size(300,300));
 		
 		
 		
 	//	Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY, 0);
 		
-	//	 Imgproc.medianBlur(img, img,1);
-		 Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);		
-		 Imgproc.GaussianBlur(img, img, new Size(1,1),1);
-		 Core.addWeighted(img, 1.5, img, -0.51, 0, img);
+	//	 
+	//	 Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);		
+		//Imgproc.GaussianBlur(img, img, new Size(1,1),1);
+		 //Core.addWeighted(img, 1.37, img, -0.75, 0, img);		
+		 //Imgproc.threshold(img,img,100,255,1);
+	     //Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);
 		
-		Imgproc.threshold(img,img,64,255,Imgproc.THRESH_BINARY);
-		Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);	
-	// Imgproc.erode(img, img, new Mat());
-		Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);
-	//	Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,11,11);
-		Imgproc.GaussianBlur(img, img, new Size(1,1),1);
+	//	Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);	
+	//	Imgproc.GaussianBlur(img, img, new Size(1,1),1);
+	   // Imgproc.erode(img, img, new Mat());
+		/*	
 		Imgproc.medianBlur(img, img, 1);
-		Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,11,11);
-		Mat structImage = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,1));
-	//	Imgproc.erode(img, img, structImage);
+		
+		Mat structImage = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(1,1));
+		Imgproc.erode(img, img, structImage);
 		Mat structImage2 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(1,1));
-		Imgproc.dilate(img, img, structImage);
-		Imgproc.erode(img, img, structImage2);
+		Imgproc.dilate(img, img, structImage2);
+	//	Imgproc.erode(img, img, structImage2);
+		
+		// Imgproc.erode(img, img, structImage2);
+		Mat hierarchy = new Mat();
+		Mat image = img.clone();
+		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		Imgproc.findContours(image, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+		
+		*/
 		Imgcodecs.imwrite("placa2.png",img );		
 		
 		mostraImg(img, "Imagem");
@@ -77,6 +92,7 @@ public class Decomposicao {
 	        }		
 
 		HighGui.waitKey();
+		
 	}
 
 	private static String lerArquivo(String caminhoDoArquivo) throws IOException {
