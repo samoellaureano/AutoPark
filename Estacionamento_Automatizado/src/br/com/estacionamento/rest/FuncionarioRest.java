@@ -45,8 +45,8 @@ public class FuncionarioRest extends UtilRest{
 			funcionario.setEmpresa(empresa);
 			
 			boolean	retorno = false;
-			if(usuario == null) {			
-				retorno = funcionarioJpadao.salvar(funcionario);
+			if(usuario == null || usuario.getPerfil() == 0) {			
+				retorno = funcionarioJpadao.salvar(funcionario);//Verificar
 			}
 			
 			if(retorno){

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,9 +17,10 @@ public class Modelo extends Persistivel implements Serializable{
 
 	@Column(nullable = false,length = 45)
 	private String descricao;
-
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	private Marca marca;
+	
+	@JoinColumn(referencedColumnName = "id")
+    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    private Marca marca;
 
 	public String getDescricao() {
 		return descricao;

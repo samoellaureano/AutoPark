@@ -22,6 +22,4 @@ public class Marca extends Persistivel implements Serializable{
 		this.descricao = descricao;
 	}
 
-
-
 }

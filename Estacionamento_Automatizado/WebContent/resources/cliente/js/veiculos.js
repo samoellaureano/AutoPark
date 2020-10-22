@@ -1,16 +1,27 @@
-var veiculo = null;
+var veiculo, marca, modelo, cliente, usuario;
 $(document).ready(function () {
     $("#menu").load("menu.html");
 
     $('#cadVeiculo').click(function (e) {
         veiculo = new Object();
-        veiculo.marca = $("#marca").val();
-        veiculo.modelo = $("#modelo").val();
+        marca = new Object();
+        modelo = new Object();
+        cliente = new Object();
+        usuario = new Object();
+
+        marca.id = $("#marca").val();
+        modelo.id = $("#modelo").val();
         veiculo.ano = $("#ano").val();
-        veiculo.placa1 = $("#placa").val();
+        veiculo.placa = $("#placa").val();
+        usuario.id = dadosSessao.id;
+
+        cliente.usuario = usuario;
+        modelo.marca = marca;
+        veiculo.modelo = modelo;
+        veiculo.cliente = cliente;
 
         var cfg = {
-            url: "../rest/veiculoRest/addVeiculo",
+            url: "../../rest/veiculoRest/addVeiculo",
             data: JSON.stringify(veiculo),
             success: function (succJson) {
                 if (succJson == 1) {
@@ -131,9 +142,32 @@ $(document).ready(function () {
         var html="<option value='0'>Selecione</option>";
         for (var i = 0; i < listaMarcas.length; i++) {
             html += ("<option value='" + listaMarcas[i].id + "'>" + listaMarcas[i].descricao + "</option>");
+        }    
+        $("#marca").html(html);
+    }
+
+    buscaModelos = function () {
+        var valorBusca = $("#marca").val()
+        var cfg = {
+            type: "POST",
+            url: "../../rest/modeloRest/buscaModelos/" + valorBusca,
+            success: function (listaModelos) {
+                exibirModelos(listaModelos);
+            },
+            error: function (err) {
+                alert("Erro ao buscar as modelos: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    };
+    
+    exibirModelos = function (listaModelos) {
+        var html="<option value='0'>Selecione</option>";
+        for (var i = 0; i < listaModelos.length; i++) {
+            html += ("<option value='" + listaModelos[i].id + "'>" + listaModelos[i].descricao + "</option>");
         }
     
-        $("#marca").html(html);
+        $("#modelo").html(html);
     }
 
     busca();

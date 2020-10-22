@@ -17,10 +17,10 @@ public class Checkin extends Persistivel implements Serializable{
 	@Column(nullable = false)
 	private  Date dataHora;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Estacionamento estacionamento;
 
 	public Date getDataHora() {

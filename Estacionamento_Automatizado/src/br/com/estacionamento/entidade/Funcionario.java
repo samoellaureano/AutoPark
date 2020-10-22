@@ -23,10 +23,10 @@ public class Funcionario extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String email;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Empresa empresa;
 
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.ALL)
 	private Usuario usuario;
 
 	public String getNome() {

@@ -26,7 +26,7 @@ public class Pagamento extends Persistivel implements Serializable{
 	@Column(nullable = false)
 	private int codVerificacao;
 
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 
 	public int getNumCartao() {

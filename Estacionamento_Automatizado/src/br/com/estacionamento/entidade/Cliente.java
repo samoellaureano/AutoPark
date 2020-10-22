@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,10 +25,11 @@ public class Cliente extends Persistivel implements Serializable {
 	@Column(nullable = false,length = 12)
 	private String celular;
 
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(referencedColumnName = "id")
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.ALL)
 	private Credito credito;
 
 	public String getNome() {

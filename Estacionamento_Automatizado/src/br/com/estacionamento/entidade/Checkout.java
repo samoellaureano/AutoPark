@@ -20,10 +20,10 @@ public class Checkout extends Persistivel implements Serializable{
 	@Column(nullable = false)
 	private  double valor;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Estacionamento estacionamento;
 
 	public Date getDataHora() {

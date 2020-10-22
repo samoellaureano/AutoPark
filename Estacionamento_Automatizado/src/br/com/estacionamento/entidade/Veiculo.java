@@ -22,10 +22,10 @@ public class Veiculo extends Persistivel implements Serializable {
 	@Column(length = 10,nullable = false)
 	private  String placa;
 
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Modelo modelo;
 
 	public String getAno() {

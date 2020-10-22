@@ -1,11 +1,14 @@
 package br.com.estacionamento.rest;
 
-import javax.ws.rs.Consumes;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.ModeloJPADAO;
 import br.com.estacionamento.entidade.Modelo;
@@ -13,39 +16,20 @@ import br.com.estacionamento.util.UtilRest;
 
 @Path("modeloRest")
 public class ModeloRest extends UtilRest{
-	
 	@POST
-	@Path("/addCliente")
-	@Consumes("application/*")
-
-	public Response salvar(String addCliente){
-
-		try {
-
-			Modelo modelo = new ObjectMapper().readValue(addCliente,Modelo.class);
+	@Path("/buscaModelos/{idMarca}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarMarcas(@PathParam("idMarca") int idMarca){
+		try{
+			List<Modelo> listaModelos = new ArrayList<Modelo>();
 			ModeloJPADAO modeloJpadao = new ModeloJPADAO();
-
-			boolean	retorno = modeloJpadao.salvar(modelo);
-
-			if(retorno){
-				// true = Cadastrado com sucesso.
-				return this.buildResponse("1");				
-
-			}else if(retorno==false){
-				// false = ja existe
-				return this.buildErrorResponse("2");
-
-			}else {
-				// null = Erro ao cadastrar
-				return this.buildErrorResponse("0");			
-			}
-
-		} catch (Exception e){
+			listaModelos = modeloJpadao.buscarPorIdMarca(idMarca);
+			
+			return this.buildResponse(listaModelos);
+		}catch (Exception e){
 			e.printStackTrace();
-
-			return this.buildErrorResponse("Erro ao cadastrar");
+			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
 
 }

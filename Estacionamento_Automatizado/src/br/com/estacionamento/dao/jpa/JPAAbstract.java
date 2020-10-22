@@ -47,7 +47,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 	public List<T> buscarPorDescricao(String b) {
 		String jpql = "select c from " +getEntityName()+ " c ";
 		if(!b.equals("null") && !b.equals("*")) {
-			jpql += "where c.descricao LIKE '%" + b + "%'";
+			jpql += "where c.descricao LIKE '%" + b + "%' ORDER BY c.descricao ASC";
 		}
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings("rawtypes")

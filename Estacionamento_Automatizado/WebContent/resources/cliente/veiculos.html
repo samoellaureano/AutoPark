@@ -32,16 +32,13 @@
                             <form id = "formCadVeiculo"action="#">
                                 <h3>Novo Veículo</h3>
                                 <label for="marca">Marca:</label>
-                                <select  id="marca" required>
+                                <select  id="marca" required onchange="buscaModelos()">
                                 </select>
                                 <label for="modelo">Modelo:</label>
                                 <select  id="modelo" required>
-                                    <option value="Ka">Ka</option>
                                 </select>
                                 <label for="ano">Ano:</label>
-                                <select  id="ano" required>
-                                    <option value="2006">2006</option>
-                                </select>
+                                <input type="text" id="ano"  required>
                                 <label for="placa">Placa:</label>
                                 <input type="text" id="placa"  required>
                                 <div>

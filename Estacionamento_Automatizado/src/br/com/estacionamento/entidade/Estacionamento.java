@@ -23,7 +23,7 @@ public class Estacionamento extends Persistivel implements Serializable{
 	@Column(length = 14,nullable = false)
 	private  String cnpj;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Empresa empresa;
 
 	public String getEndereco() {
