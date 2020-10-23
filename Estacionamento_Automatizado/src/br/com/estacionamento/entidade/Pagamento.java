@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,7 +28,8 @@ public class Pagamento extends Persistivel implements Serializable{
 	@Column(nullable = false)
 	private int codVerificacao;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@OneToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Cliente cliente;
 
 	public int getNumCartao() {

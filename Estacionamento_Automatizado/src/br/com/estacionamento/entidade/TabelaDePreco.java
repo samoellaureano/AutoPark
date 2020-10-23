@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,12 +21,12 @@ public class TabelaDePreco extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String descricao;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="tipoVeiculo_id")
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private TipoVeiculo tipoVeiculo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="estacionamento_id")
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Estacionamento estacionamento;
 	
 	public double getValor() {

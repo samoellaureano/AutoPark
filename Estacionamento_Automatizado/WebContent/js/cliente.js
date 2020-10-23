@@ -7,8 +7,7 @@ var usuario = new Object();
 	        cliente.nome    = $("#nome").val();
 					usuario.cpf     = $("#cpf").val();
 					usuario.cpf = usuario.cpf.replace(/\./g, "");
-					usuario.cpf = usuario.cpf.replace(/\-/g, "");
-					
+					usuario.cpf = usuario.cpf.replace(/\-/g, "");					
 					cliente.celular = $("#celular").val();
 					cliente.celular = cliente.celular.replace(/[^0-9]/g, '');
 	        cliente.email   = $("#email").val();
@@ -24,8 +23,7 @@ var usuario = new Object();
 	                if (succJson == 1) {
 	                    resp = ("Cliente cadastrado com sucesso!");
 						exibirMessagem(resp, 1);
-						window.location.href = ("index.html");
-						//window.location.href = ("cadastrarVeiculo.html");
+						window.location.href = ("cadastrarVeiculo.html");
 	                } else if(succJson == 2){
 	                    resp = ("O cliente ja existe!");
 	                    exibirMessagem(resp, 2);

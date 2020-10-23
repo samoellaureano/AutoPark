@@ -19,7 +19,7 @@ public class Modelo extends Persistivel implements Serializable{
 	private String descricao;
 	
 	@JoinColumn(referencedColumnName = "id")
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     private Marca marca;
 
 	public String getDescricao() {

@@ -7,10 +7,8 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.estacionamento.dao.jpa.EmpresaJPADAO;
 import br.com.estacionamento.dao.jpa.FuncionarioJPADAO;
 import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
-import br.com.estacionamento.entidade.Empresa;
 import br.com.estacionamento.entidade.Funcionario;
 import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
@@ -27,7 +25,7 @@ public class FuncionarioRest extends UtilRest{
 
 			Funcionario funcionario = new ObjectMapper().readValue(addFuncionario,Funcionario.class);
 			Usuario usuario = funcionario.getUsuario();
-			Empresa empresa = funcionario.getEmpresa();
+//			Empresa empresa = funcionario.getEmpresa();
 
 			usuario.setAcesso(true);
 			usuario.setPerfil(1);
@@ -37,16 +35,16 @@ public class FuncionarioRest extends UtilRest{
 			
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
 			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
-			EmpresaJPADAO empresaJpadao = new EmpresaJPADAO();
+//			EmpresaJPADAO empresaJpadao = new EmpresaJPADAO();
 			
 			usuario = usuarioJpadao.buscarPorCpf(usuario.getCpf());
-			empresa = empresaJpadao.buscarPorId(empresa.getId());
+//			empresa = empresaJpadao.buscarPorId(empresa.getId());
 			
-			funcionario.setEmpresa(empresa);
+//			funcionario.setEmpresa(empresa);
 			
 			boolean	retorno = false;
 			if(usuario == null || usuario.getPerfil() == 0) {			
-				retorno = funcionarioJpadao.salvar(funcionario);//Verificar
+				retorno = funcionarioJpadao.salvar(funcionario);
 			}
 			
 			if(retorno){

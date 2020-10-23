@@ -41,7 +41,7 @@ public class VerificaLogin extends HttpServlet {
 		if (login.autenticaUsuario(loginFront)) {
 			sessao.setAttribute("login", login.usuarioAutenticado().getCpf());				
 			sessao.setAttribute("perfil", login.usuarioAutenticado().getPerfil());
-			sessao.setAttribute("idUsuario", login.usuarioAutenticado().getId());
+			sessao.setAttribute("id", login.usuarioAutenticado().getId());
 
 			retorno = true;
 			

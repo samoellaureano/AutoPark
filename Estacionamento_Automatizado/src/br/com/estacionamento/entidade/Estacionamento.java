@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +25,8 @@ public class Estacionamento extends Persistivel implements Serializable{
 	@Column(length = 14,nullable = false)
 	private  String cnpj;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Empresa empresa;
 
 	public String getEndereco() {

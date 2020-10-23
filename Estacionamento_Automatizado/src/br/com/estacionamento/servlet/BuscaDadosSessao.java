@@ -29,7 +29,7 @@ public class BuscaDadosSessao extends HttpServlet {
 		Map<String, String> msg = new HashMap<String, String>();
 		msg.put("login", sessao.getAttribute("login").toString());
 		msg.put("perfil", sessao.getAttribute("perfil").toString());
-		msg.put("id", sessao.getAttribute("idUsuario").toString());
+		msg.put("id", sessao.getAttribute("id").toString());
 		
 		//Retorna a resposta para o usuário a partir do Json
 		String json = new Gson().toJson(msg);

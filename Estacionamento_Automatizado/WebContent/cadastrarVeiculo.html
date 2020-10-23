@@ -3,18 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AutoPark</title>
     <link rel="stylesheet" href="css/login.css">
-     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/alertToast.css">
-    
+
+    <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/ajax.js"></script>
     <script type="text/javascript" src="js/msgToast.js"></script>
-    <script type="text/javascript" src="js/veiculo.js"></script>	
-    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/veiculo.js"></script>    
 </head>
 
 <body>
@@ -25,21 +24,15 @@
 
         <form id="cadastro" action="#">
             <label for="nome">Marca:</label>
-            <select name="marca" id="marca" required>
-                <option value="Ford">Ford</option>
-            </select>
+            <select name="marca" id="marca" required onchange="buscaModelos()"></select>
             <label for="nome">Modelo:</label>
-            <select name="modelo" id="modelo" required>
-                <option value="Ka">Ka</option>
-            </select>
-            <label for="nome">Ano:</label>
-            <select name="ano" id="ano" required>
-                <option value="2006">2006</option>
-            </select>
+            <select name="modelo" id="modelo" required></select>
+            <label for="ano">Ano:</label>
+            <input type="text" id="ano" required>
             <label for="placa">Placa:</label>
-            <input type="text" id="placa" name="placa" required>
+            <input type="text" id="placa" maxlength="7" required>
             <div>
-                <button id="cadVeiculo" type="button" >ENVIAR</button>
+                <button id="cadVeiculo" type="button">ENVIAR</button>
             </div>
         </form>
         <a href="index.html">VOLTAR</a>

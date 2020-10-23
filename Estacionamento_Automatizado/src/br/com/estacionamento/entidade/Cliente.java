@@ -29,7 +29,8 @@ public class Cliente extends Persistivel implements Serializable {
     @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Credito credito;
 
 	public String getNome() {

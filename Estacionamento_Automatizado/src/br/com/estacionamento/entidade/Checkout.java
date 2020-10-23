@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,10 +22,12 @@ public class Checkout extends Persistivel implements Serializable{
 	@Column(nullable = false)
 	private  double valor;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Cliente cliente;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Estacionamento estacionamento;
 
 	public Date getDataHora() {

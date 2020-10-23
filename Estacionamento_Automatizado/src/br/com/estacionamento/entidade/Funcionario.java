@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,10 +25,12 @@ public class Funcionario extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String email;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Empresa empresa;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "id")
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
 	public String getNome() {

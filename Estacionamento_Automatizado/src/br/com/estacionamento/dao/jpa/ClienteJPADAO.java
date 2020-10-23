@@ -15,7 +15,7 @@ public class ClienteJPADAO extends JPAAbstract<Cliente> implements ClienteDAO{
 	}
 
 	@Override
-	public Cliente buscarPorIdCliente(int id) {
+	public Cliente buscarPorIdUsuario(int id) {
 
 		String jpql = "select c from "+getEntityName()+" c where c.usuario.id =:id ";
 		Query query = super.getQuery(jpql);
