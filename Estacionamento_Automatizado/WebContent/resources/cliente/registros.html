@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AutoPark</title>
-        <link rel="stylesheet" href="css/registros-desktop.css" media="screen and (min-device-width:600px)">
-        <link rel="stylesheet" href="css/registros-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="../../css/menu.css">
-        <link rel="stylesheet" href="../../css/calendar.css">
-        <script src="../../js/ajax.js"></script>
-        <script src="../../js/jquery.js"></script>
-        <script src="js/registros.js"></script>
-        <script src="../../js/msgToast.js"></script>
-        <script src="../../js/sessao.js"></script>
-        <link rel="shortcut icon" href="../../img/logo.ico" />
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/registros-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/registros-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="../../css/menu.css">
+    <link rel="stylesheet" href="../../css/alertToast.css">
+    <link rel="stylesheet" href="../../css/calendar.css">
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/msgToast.js"></script>
+    <script src="../../js/sessao.js"></script>
+    <script src="js/registros.js"></script>
+</head>
+
 <body>
     <div class="menu" id="menu"></div>
-    <div class="container">  
-                  
-            <div>
+    <div class="container">
+
+        <div>
             <nav class="listaFuncionarios">
                 <div class="titulo">
                     <h3>Registros de Estacionamento</h3>
                     <label for="buscarDataInicial">Data Inicial:</label>
                     <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
                     <label for="buscarDataFinal">Data Final</label>
-                    <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal"> 
-                                   
-                </div>
-                <button type="button"id="buscarRegistros" >Buscar</button> 
+                    <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal">
 
-                <div id="registroHtml" ></div>
+                </div>
+                <button type="button" id="buscarRegistros">Buscar</button>
+
+                <div id="registroHtml"></div>
             </nav>
         </div>
     </div>
-    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-
-
-
-
-    
+    <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
 </body>
+
 </html>

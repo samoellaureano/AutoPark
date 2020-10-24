@@ -50,7 +50,7 @@ $(document).ready(function(){
                 visualizarFormaDPagamento(pagamento);
             },  
             error: function (errJson) {
-                resp = ("Erro ao cadastrar um novo Pagamento!");
+                resp = ("Erro ao buscar os dados!");
                 exibirMessagem(resp, 2);
             }
         };

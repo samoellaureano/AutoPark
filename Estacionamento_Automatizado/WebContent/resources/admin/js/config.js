@@ -46,17 +46,17 @@ $(document).ready(function(){
             data: JSON.stringify(configUsuario),
             success: function (succJson) {
                 if (succJson == 1) {
-                    resp = ("Item alterado com sucesso!");
+                    resp = ("Cadastro alterado com sucesso!");
                     exibirMessagem(resp, 1);
                 }else{
-                    resp = ("Erro ao alterar o item!");
+                    resp = ("Erro ao alterar o cadastro!");
                     exibirMessagem(resp, 2);
                 }
 
                 buscar();
             },
             error: function (errJson) {
-                resp = ("Erro ao alterar o item!");
+                resp = ("Erro ao alterar o cadastro!");
                 exibirMessagem(resp, 2);
             }
         };

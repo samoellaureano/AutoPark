@@ -102,13 +102,8 @@ $(document).ready(function(){
             url: "../rest/veiculoRest/editarVeiculo",
             data: JSON.stringify(veiculo),
             success: function (succJson) {
-                if (succJson == 1) {
                     resp = ("Veiculo editado com sucesso!");
                     exibirMessagem(resp, 1);
-                }else{
-                    resp = ("Erro ao editar o veiculo!");
-                    exibirMessagem(resp, 2);
-                }
                 buscar();
             },
             error: function (errJson) {

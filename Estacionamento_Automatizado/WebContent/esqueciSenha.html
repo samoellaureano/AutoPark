@@ -7,43 +7,43 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/login.css">
-     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/alertToast.css">
-    
+
+    <script src="js/jquery.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script src="js/msgToast.js"></script>
+    <script src="js/login.js"></script>
 </head>
 
 <body>
     <div class="logo"><img src="img/logo.png" alt="logo" hidden></div>
     <div class="container">
-            <span>Recuperar Senha</span>
-            <img id="profile-img" src="img/senha.png" />
-            
-            <form id="esqueciSenha">
-                <h6 class="redefineSenhaErro" id="msgRecuperaErro">
-                    <p>CPF não encontrado*</p>
-                </h6>
-                <h6 class="redefineSenhaOk" id="msgRecuperaOk">
-                    <p>Atenção!</p>
-                    <p>Sua nova senha enviada para o e-mail <i id="emailUsuarioEncaminhado"></i></p>
-                </h6>
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" placeholder="CPF" required
-                    autofocus>
-                <br>
-                <div id="iconeVerificandoCPF" class="spinner-border iconCarregando carregamentoRedefinirSenha" role="status" style="display: none;">
-                </div>
-                <div><button id="btnRecuperarSenha" type="button" onclick="assistencia.recuperaSenha()">Recuperar Senha</button></div>                
-            </form>
-            <a href="index.html">VOLTAR</a>
+        <span>Recuperar Senha</span>
+        <img id="profile-img" src="img/senha.png" />
+
+        <form id="esqueciSenha">
+            <h6 class="redefineSenhaErro" id="msgRecuperaErro">
+                <p>CPF não encontrado*</p>
+            </h6>
+            <h6 class="redefineSenhaOk" id="msgRecuperaOk">
+                <p>Atenção!</p>
+                <p>Sua nova senha enviada para o e-mail <i id="emailUsuarioEncaminhado"></i></p>
+            </h6>
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="CPF" required autofocus>
+            <br>
+            <div id="iconeVerificandoCPF" class="spinner-border iconCarregando carregamentoRedefinirSenha" role="status"
+                style="display: none;">
+            </div>
+            <div><button id="btnRecuperarSenha" type="button" onclick="assistencia.recuperaSenha()">Recuperar
+                    Senha</button></div>
+        </form>
+        <a href="index.html">VOLTAR</a>
         <p style="color: red; display: none;">CPF não encontrado*</p>
 
     </div>
-    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
+    <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
 </body>
-
-<script src="js/jquery.js"></script>
-<script src="js/jquery.mask.min.js"></script>
-<script src="js/login.js"></script>
-<script src="js/ajax.js"></script>
 
 </html>

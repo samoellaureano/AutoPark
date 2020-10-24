@@ -11,7 +11,7 @@ $(document).ready(function(){
                 visualizarRegistro(listaDeRegistros);
             },
             error: function (errJson) {
-                resp = ("Erro ao buscar um novo Registro!");
+                resp = ("Erro ao buscar os dados!");
                 exibirMessagem(resp, 2);
             }
         };

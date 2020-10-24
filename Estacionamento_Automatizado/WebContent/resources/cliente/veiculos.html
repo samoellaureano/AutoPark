@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AutoPark</title>
-        <link rel="stylesheet" href="css/veiculos-desktop.css" media="screen and (min-device-width:600px)">
-        <link rel="stylesheet" href="css/veiculos-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="../../css/menu.css">    
-        <script src="../../js/jquery.js"></script>
-        <script src="js/veiculos.js"></script>
-        <link rel="shortcut icon" href="../../img/logo.ico" />
-        <script src="../../js/msgToast.js"></script>
-        <script src="../../js/ajax.js"></script>
-        <script src="../../js/sessao.js"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/veiculos-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/veiculos-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="../../css/menu.css">
+    <link rel="stylesheet" href="../../css/alertToast.css">
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
+    <script src="../../js/sessao.js"></script>
+    <script src="js/veiculos.js"></script>
+</head>
+
 <body>
-    <div class="menu" id="menu"></div>    
+    <div class="menu" id="menu"></div>
     <div class="container">
         <nav class="listaVeiculos">
-                <div>
-                    <div class="topLista">
-                        <img src="img/frota2.png" alt="equipe">
-                        <h3>Veiculos</h3>
-                    </div>
-                    <div  class="novo">
-                        <label for="novoVeic"><img src="img/newVeiculo.png" alt="novo"></label>
-                        <label for="novoVeic">Novo</label>
-
-                        <input type="checkbox" id="novoVeic" hidden>
-                        <div class="box-novo">
-                            <form id = "formCadVeiculo"action="#">
-                                <h3>Novo Veículo</h3>
-                                <label for="marca">Marca:</label>
-                                <select  id="marca" required onchange="buscaModelos()">
-                                </select>
-                                <label for="modelo">Modelo:</label>
-                                <select  id="modelo" required>
-                                </select>
-                                <label for="ano">Ano:</label>
-                                <input type="text" id="ano"  required>
-                                <label for="placa">Placa:</label>
-                                <input type="text" id="placa" maxlength="7" required>
-                                <div>
-                                    <a href="">Cancelar</a>
-                                    <button type="button" id="cadVeiculo" >Confirmar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <label for="buscarVeiculo">Buscar:</label>
-                    <input type="text" id="buscarVeiculo" class="autocomplete" placeholder="Digite aqui..." />
+            <div>
+                <div class="topLista">
+                    <img src="img/frota2.png" alt="equipe">
+                    <h3>Veiculos</h3>
                 </div>
-                <label for="">Lista de Veiculos:</label>
-                <ul class="fecharDados">
-                    <input type="radio" name="funcionario" id="menos" hidden>
-                    <label for="menos">Fechar Dados</label>
-                </ul>
-                <div id="ListaDeVeiculosHtml"></div>
-                <a href="" id="carrega-listaFuncionario">Ver Mais</a>
-            </nav>
-        </div>
+                <div class="novo">
+                    <label for="novoVeic"><img src="img/newVeiculo.png" alt="novo"></label>
+                    <label for="novoVeic">Novo</label>
+
+                    <input type="checkbox" id="novoVeic" hidden>
+                    <div class="box-novo">
+                        <form id="formCadVeiculo" action="#">
+                            <h3>Novo Veículo</h3>
+                            <label for="marca">Marca:</label>
+                            <select id="marca" required onchange="buscaModelos()">
+                            </select>
+                            <label for="modelo">Modelo:</label>
+                            <select id="modelo" required>
+                            </select>
+                            <label for="ano">Ano:</label>
+                            <input type="text" id="ano" required>
+                            <label for="placa">Placa:</label>
+                            <input type="text" id="placa" maxlength="7" required>
+                            <div>
+                                <a href="">Cancelar</a>
+                                <button type="button" id="cadVeiculo">Confirmar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <label for="buscarVeiculo">Buscar:</label>
+                <input type="text" id="buscarVeiculo" class="autocomplete" placeholder="Digite aqui..." />
+            </div>
+            <label for="">Lista de Veiculos:</label>
+            <ul class="fecharDados">
+                <input type="radio" name="funcionario" id="menos" hidden>
+                <label for="menos">Fechar Dados</label>
+            </ul>
+            <div id="ListaDeVeiculosHtml"></div>
+            <a href="" id="carrega-listaFuncionario">Ver Mais</a>
+        </nav>
     </div>
-    <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-    </body>
+    </div>
+    <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
 </html>

@@ -9,7 +9,7 @@ $(document).ready(function(){
                visualizar(Daschboard);
           },
           error: function (errJson) {
-              resp = ("Erro ao cadastrar um novo Veiculo!");
+              resp = ("Erro ao buscar os dados!");
               exibirMessagem(resp, 2);
           }
       };

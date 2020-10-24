@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AutoPark</title>
-        <link rel="stylesheet" href="css/relatorio-desktop.css" media="screen and (min-device-width:600px)">
-        <link rel="stylesheet" href="css/relatorio-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="../../css/menu.css">
-        <link rel="stylesheet" href="../../css/calendar.css">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    
-        <script src="../../js/jquery.js"></script>
-        <script src="../../js/jquery-ui.js"></script>
-        <script src="js/relatorio.js"></script>
-        <link rel="shortcut icon" href="../../img/logo.ico" />
-        <script src="js/autoComplete.js"></script>
-        <script src="../../js/ajax.js"></script>
-        <script src="../../js/msgToast.js"></script>
-        <script src="../../js/sessao.js"></script>
-        
-    </head>
-    
-    <body>
-        <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
-        <div class="menu" id="menu"></div>
-    
-        <div class="container">
-            <div>
-                <nav class="listaRegistros">
-                    <div>
-                        <div class="topLista">
-                            <img src="img/registroIcone.png" alt="registro">
-                            <h3>Relatório</h3>
-                        </div>
-                        <label for="buscarReg">Buscar:</label>
-                        <input type="text" id="buscarReg" class="autocomplete" placeholder="Digite aqui..." />
-                        <label for="buscarDataInicial">Data Inicial:</label>
-                        <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
-                        <label for="buscarDataFinal">Data Final</label>
-                        <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal">
-                        <button id="buscarRelatorio">Buscar</button>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/relatorio-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/relatorio-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <link rel="stylesheet" href="../../css/menu.css">
+    <link rel="stylesheet" href="../../css/alertToast.css">
+    <link rel="stylesheet" href="../../css/calendar.css">
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/jquery-ui.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
+    <script src="../../js/sessao.js"></script>
+    <script src="js/autoComplete.js"></script>
+    <script src="js/relatorio.js"></script>
+</head>
+
+<body>
+    <div class="logo"><img src="../../img/logo.png" alt="logo" hidden></div>
+    <div class="menu" id="menu"></div>
+
+    <div class="container">
+        <div>
+            <nav class="listaRegistros">
+                <div>
+                    <div class="topLista">
+                        <img src="img/registroIcone.png" alt="registro">
+                        <h3>Relatório</h3>
                     </div>
-                    <label for="">Lista de Registros:</label>
-                    <ul class="fecharDados">
-                        <input type="radio" name="registro" id="menos" hidden>
-                        <label for="menos">Fechar Dados</label>
-                    </ul>
-                    <div id="listaRegistrosHTML"></div>
-                    <a href="" id="carrega-listaFuncionario">Gerar Relatório</a>
-                </nav>
-            </div>
+                    <label for="buscarReg">Buscar:</label>
+                    <input type="text" id="buscarReg" class="autocomplete" placeholder="Digite aqui..." />
+                    <label for="buscarDataInicial">Data Inicial:</label>
+                    <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
+                    <label for="buscarDataFinal">Data Final</label>
+                    <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal">
+                    <button id="buscarRelatorio">Buscar</button>
+                </div>
+                <label for="">Lista de Registros:</label>
+                <ul class="fecharDados">
+                    <input type="radio" name="registro" id="menos" hidden>
+                    <label for="menos">Fechar Dados</label>
+                </ul>
+                <div id="listaRegistrosHTML"></div>
+                <a href="" id="carrega-listaFuncionario">Gerar Relatório</a>
+            </nav>
         </div>
-        <div id="msgFuncionarios" class="msg" style="display: none; z-index: 10;"></div>
-    </body>
+    </div>
+    <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
+</body>
+
 </html>

@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AutoPark</title>
-        <link rel="stylesheet" href="css/pagamento-desktop.css" media="screen and (min-device-width:600px)">
-        <link rel="stylesheet" href="css/pagamento-mobile.css" media="screen and (max-device-width: 600px)">
-        <link rel="stylesheet" href="../../css/menu.css">
-        <script src="../../js/jquery.js"></script>
-        <script src="js/pagamento.js"></script>
-        <link rel="shortcut icon" href="../../img/logo.ico" />
-        <script src="../../js/ajax.js"></script>
-        <script src="../../js/msgToast.js"></script>
-        <script src="../../js/sessao.js"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/pagamento-desktop.css" media="screen and (min-device-width:600px)">
+    <link rel="stylesheet" href="css/pagamento-mobile.css" media="screen and (max-device-width: 600px)">
+    <link rel="stylesheet" href="../../css/menu.css">
+    <link rel="stylesheet" href="../../css/alertToast.css">
+    <link rel="shortcut icon" href="../../img/logo.ico" />
+
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
+    <script src="../../js/sessao.js"></script>
+    <script src="js/pagamento.js"></script>
+</head>
+
 <body>
 
     <div class="menu" id="menu"></div>
     <div class="container">
-             
-        <div id="pagamento" >
-            <span>Pagamento</span> 
+
+        <div id="pagamento">
+            <span>Pagamento</span>
             <label for="preco">Total de Crédito R$:</label>
             <label type="text" id="preco" name="preco" disabled>100</label>
-            
-            <button id='buscaPagamento'>visualizar</button>            
+
+            <button id='buscaPagamento'>visualizar</button>
         </div>
 
-        <form id="formCadPagamento" action="#" >
+        <form id="formCadPagamento" action="#">
             <!-- alterar o valor via js-->
             <span id="titularPagamento">Cadastrar Pagamento</span>
-           
+
             <label for="cartao">Número do Cartão</label>
-            <input type="text" id="cartao" >
+            <input type="text" id="cartao">
 
             <label for="NomeTitular">Nome do Titular</label>
-            <input type="text" id="NomeTitular" >
-               
+            <input type="text" id="NomeTitular">
+
             <label for="validade">Validade</label>
-            <input type="text" id="validade" >
+            <input type="text" id="validade">
 
             <label for="codigoVerificacao">Código de Verificação</label>
-            <input type="text" id="codigoVerificacao" >
-        
+            <input type="text" id="codigoVerificacao">
+
             <div>
-                <button type="button" id="cadPagamento" >Salvar</button>               
-                <button id="abilitarEdicao" >Editar</button>
+                <button type="button" id="cadPagamento">Salvar</button>
+                <button id="abilitarEdicao">Editar</button>
             </div>
         </form>
-        <div id="msgLogin" class="msg" style="display: none; z-index: 10;"></div>
-    </div>       
+        <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
+    </div>
 </body>
+
 </html>
