@@ -14,5 +14,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Felipe/Downloads/opencv/build/java/x64"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Opencv4.5"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

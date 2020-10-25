@@ -1,17 +1,14 @@
 package br.com.reconhecimentoImagem.main;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import org.apache.pdfbox.jbig2.segments.TextRegion;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfInt;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
@@ -21,7 +18,6 @@ import org.opencv.imgproc.Imgproc;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
-import net.sourceforge.tess4j.util.Utils;
 
 public class Decomposicao {
 	//tesseract.exe C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\placa2.png C:\Users\Felipe\Documents\GitHub\TCC\ReconhecimentoDeImagem\out  --dpi 200
@@ -38,86 +34,87 @@ public class Decomposicao {
 		String localImg3="C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\src\\placa3.jpg";
 		String localImg4="C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\src\\placa4.jpg";
 		String localImg5="C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\src\\placa5.jpg";
-		
+		String localImg6="C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\src\\placa6.png";
+
 		Mat img = Imgcodecs.imread(localImg2);
+	
+		List<MatOfPoint> contourList = new ArrayList<MatOfPoint>(); //A list to store all the contours
+		Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY, 90);
+		Imgproc.boxFilter(img, img, Imgproc.ADAPTIVE_THRESH_MEAN_C, new Size(1,3));	
+		Imgproc.equalizeHist(img, img);	
 		
+		Imgproc.medianBlur(img, img,5);        
+		Imgproc.blur(img, img,new Size(1,3));
+	
 		
-		    Mat grayMat = new Mat();
-		    Mat cannyEdges = new Mat();
-		    Mat hierarchy = new Mat();
-
-		    List<MatOfPoint> contourList = new ArrayList<MatOfPoint>(); //A list to store all the contours
-
-		    //Converting the image to grayscale
-		    Imgproc.cvtColor(img, grayMat, Imgproc.COLOR_BGR2GRAY);
-
-		    Imgproc.Canny(img, cannyEdges, 10, 100);
-
-		    //finding contours
-		    Imgproc.findContours(cannyEdges, contourList, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
-
-		    //Drawing contours on a new image
-		    Mat contours = new Mat();
-		    contours.create(cannyEdges.rows(), cannyEdges.cols(), CvType.CV_8UC3);
-		    Random r = new Random();
-		    for (int i = 0; i < contourList.size(); i++) {
-		        Imgproc.drawContours(contours, contourList, i, new Scalar(r.nextInt(255), r.nextInt(255), r.nextInt(255)), -1);
-		    }
-		    		    
-		}
+		Mat structImage = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3,3));
+		Imgproc.erode(img, img, structImage);
 		
+		Mat structImage2 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,1));
+		Imgproc.dilate(img, img, structImage2);
 		
-		/*
+	//	Imgproc.Canny(img, img, 90, 100);
+		
+		//	Imgproc.cvtColor(img, img, Imgproc.THRESH_OTSU);
+		//	Imgproc.Canny(img, cannyEdges, Imgproc.THRESH_OTSU, Imgproc.ADAPTIVE_THRESH_MEAN_C);
+		//	Imgproc.medianBlur(cannyEdges, cannyEdges,1);    
+		//	Imgproc.adaptiveThreshold(cannyEdges, cannyEdges, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);
+		//Converting the image to grayscale
+		//   Imgproc.cvtColor(img, grayMat, Imgproc.COLOR_BGR2GRAY);
+		//   Imgproc.Canny(img, cannyEdges, 90, 100);
+		//finding contours
+
+
+		/*		
 	   	Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY, 50);
 	   	Imgproc.equalizeHist(img, img);	
-        Imgproc.medianBlur(img, img,5);        
+	    Imgproc.medianBlur(img, img,5);        
 		Imgproc.blur(img, img,new Size(1,3));
-		
+
 		Mat structImage = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3,3));
 		Imgproc.erode(img, img, structImage);
 		Mat structImage2 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2,1));
 		Imgproc.dilate(img, img, structImage2);
 		Imgproc.cvtColor(img, img, Imgproc.THRESH_OTSU);
-		 Imgproc.Canny(img, img, Imgproc.THRESH_OTSU, Imgproc.ADAPTIVE_THRESH_MEAN_C);
-		*/
-		
-		
-	 /* Imgproc.boxFilter(img, img, Imgproc.ADAPTIVE_THRESH_MEAN_C, new Size(2,2));		
-	  Imgproc.Canny(img, img, Imgproc.THRESH_OTSU, Imgproc.ADAPTIVE_THRESH_MEAN_C);
-	  Imgproc.resize(img,img,new Size(300,300));
-			 
+		Imgproc.Canny(img, img, Imgproc.THRESH_OTSU, Imgproc.ADAPTIVE_THRESH_MEAN_C);
+
+
+	  	Imgproc.boxFilter(img, img, Imgproc.ADAPTIVE_THRESH_MEAN_C, new Size(2,2));		
+	  	Imgproc.Canny(img, img, Imgproc.THRESH_OTSU, Imgproc.ADAPTIVE_THRESH_MEAN_C);
+	  	Imgproc.resize(img,img,new Size(300,300));
+
 	  Imgproc.GaussianBlur(img, img, new Size(0,0),0.5);		
 	  Imgproc.GaussianBlur(img, img, new Size(1,1),1);
 	  Core.addWeighted(img, 1.37, img, -0.75, 0, img);		
 	  Imgproc.threshold(img,img,100,255,1);
 	  Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);
-		
+
 	 Imgproc.adaptiveThreshold(img, img, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY,3,3);	
 	 Imgproc.GaussianBlur(img, img, new Size(1,1),1);
 	 Imgproc.erode(img, img, structImage2); 
-		
+
 		Mat hierarchy = new Mat();
 		Mat image = img.clone();
 		List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-		Imgproc.findContours(img, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-		
-		Imgcodecs.imwrite("placa2.png",img );		
-		
-		mostraImg(c, "Imagem");*/
-				
-	 File imageFile = new File("C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\placa2.png");
-     ITesseract instance = new Tesseract();  // JNA Interface Mapping
-     instance.setDatapath("C:\\Users\\Felipe\\Desktop\\tesseractOcr\\workspace\\TesteOCR\\tessdata");
+		Imgproc.findContours(img, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);  */
 
-     try {
-        String result = instance.doOCR(imageFile);
-        System.out.println("resultado:"+result);
-     }catch (TesseractException e) {
-        System.err.println(e.getMessage());
-     }		
+		Imgcodecs.imwrite("placa2.png",img);		
 
-     HighGui.waitKey();
-     
+		mostraImg(img, "Imagem");
+
+		File imageFile = new File("C:\\Users\\Felipe\\Documents\\GitHub\\TCC\\ReconhecimentoDeImagem\\placa2.png");
+		ITesseract instance = new Tesseract();  // JNA Interface Mapping
+		instance.setDatapath("C:\\Users\\Felipe\\Desktop\\tesseractOcr\\workspace\\TesteOCR\\tessdata");
+
+		try {
+			String result = instance.doOCR(imageFile);
+			System.out.println("resultado:"+result);
+		}catch (TesseractException e) {
+			System.err.println(e.getMessage());
+		}		
+
+		HighGui.waitKey();
+
 	}
 
 	private static String lerArquivo(String caminhoDoArquivo) throws IOException {
@@ -127,11 +124,11 @@ public class Decomposicao {
 		try {
 
 			leitor = new BufferedReader(new FileReader(caminhoDoArquivo));
-			 while(leitor.ready()){
-				 placa += leitor.readLine() + "\n";
-             }			
+			while(leitor.ready()){
+				placa += leitor.readLine() + "\n";
+			}			
 			leitor.close();		    
-		    placa = placa.replaceAll("[^0-9a-zA-Z-]","");
+			placa = placa.replaceAll("[^0-9a-zA-Z-]","");
 
 		} catch (Exception e) {
 			// TODO: handle exception
