@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-  margin: 100px 10px -150px 35px;
+  margin: 5rem auto;
   align-items: baseline;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 75%;

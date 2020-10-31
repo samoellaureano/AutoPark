@@ -15,6 +15,9 @@ import javax.persistence.Table;
 @Table(name="estacionamentos")
 public class Estacionamento extends Persistivel implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@Column(length = 45,nullable = false)
+	private  String descricao;
 
 	@Column(length = 45,nullable = false)
 	private  String endereco;
@@ -59,6 +62,16 @@ public class Estacionamento extends Persistivel implements Serializable{
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-	}		
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
 
 }

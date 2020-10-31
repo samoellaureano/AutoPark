@@ -1,29 +1,57 @@
 package br.com.estacionamento.rest;
 
-import javax.ws.rs.Consumes;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import br.com.estacionamento.dao.jpa.CheckinJPADAO;
+import br.com.estacionamento.dao.jpa.ClienteJPADAO;
+import br.com.estacionamento.dao.jpa.EstacionamentoJPADAO;
+import br.com.estacionamento.dao.jpa.VeiculoJPADAO;
 import br.com.estacionamento.entidade.Checkin;
+import br.com.estacionamento.entidade.Cliente;
+import br.com.estacionamento.entidade.Estacionamento;
+import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("checkinRest")
 public class CheckinRest extends UtilRest{
 	@POST
-	@Path("/addCheckin")
-	@Consumes("application/*")
+	@Path("/addCheckin/{placa}&{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 
-	public Response inserir(String addCheckin){
+	public Response inserir(@PathParam("placa") String placa, @PathParam("id") int id){
 
 		try {
+			Date data = new Date();
 
-			Checkin checkin = new ObjectMapper().readValue(addCheckin, Checkin.class);
-
+			@SuppressWarnings("unused")
+			DateFormat formatadorComHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			Checkin checkin = new Checkin();
+			Veiculo veiculo = new Veiculo();
+			Cliente cliente = new Cliente();
+			Estacionamento estacionamento = new Estacionamento();
+			
 			CheckinJPADAO checkinJpadao = new CheckinJPADAO();
+			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
+			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
+			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
+			
+			veiculo = veiculoJpadao.buscarPorPlaca(placa);
+			cliente = clienteJpadao.buscarPorId(veiculo.getCliente().getId());
+			estacionamento = estacionamentoJpadao.buscarPorId(id);		
+			
+			checkin.setCliente(cliente);
+			checkin.setEstacionamento(estacionamento);
+			checkin.setDataHora(data);
 
 			boolean retorno = checkinJpadao.salvar(checkin);
 

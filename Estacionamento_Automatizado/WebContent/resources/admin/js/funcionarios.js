@@ -120,6 +120,7 @@ $(document).ready(function(){
                 if (succJson == 1) {
                     resp = ("Funcionário cadastrado com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("funcionarios.html");
                 } else if(succJson == 2){
                     resp = ("O Funcionário ja existe!");
                     exibirMessagem(resp, 2);

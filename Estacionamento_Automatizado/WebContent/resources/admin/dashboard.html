@@ -13,8 +13,8 @@
 
     <script src="../../js/jquery.js"></script>
     <script src="../../js/ajax.js"></script>
-    <script src="../../js/msgToast.js"></script>
     <script src="../../js/sessao.js"></script>
+    <script src="../../js/msgToast.js"></script>    
     <script src="js/admin.js"></script>
 </head>
 
@@ -24,8 +24,8 @@
 
     <div class="container">
         <div class="filial">
-            <label for="listaFilial">Filial:</label>
-            <select name="listaFilial" id="listaFilial">
+            <label for="estacionamento">Filial:</label>
+            <select id="estacionamento" required></select>
             </select>
         </div>
 
@@ -64,7 +64,7 @@
                     <form>
                         <label for="placa">Placa do Veículo</label>
                         <input type="text" id="placa" placeholder="Placa">
-                        <a href="">Cancelar</a>
+                        <a href="">Cancelar</a>                        
                         <button type="button" id="btnCheck">Confirmar</button>
                     </form>
                 </div>

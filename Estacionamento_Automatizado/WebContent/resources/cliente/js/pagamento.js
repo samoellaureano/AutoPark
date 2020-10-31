@@ -3,13 +3,13 @@ var cliente = new Object();
 $(document).ready(function(){
     $("#menu").load("menu.html");
    
-    $('#abilitarEdicao').click(function(e){
+    $('#habilitarEdicao').click(function(e){
         $('input').prop('disabled', false);
     });
 
     $('#cadPagamento').click(function(e){
 	
-		cliente.id = clienteID;
+		cliente.id = dadosSessao.id;
 		pagamento.cliente = cliente;
        
         pagamento.numCartao = $("#cartao").val()
@@ -42,7 +42,8 @@ $(document).ready(function(){
 
     
     $('#buscaPagamento').click(function(){    
-       
+        $("#formCadPagamento").show( "fast", function() {});
+
         var cfg = {
             url: "../rest/pagamentoRest/viewPagamentos",
             data: JSON.stringify(pagamento),
@@ -69,10 +70,8 @@ $(document).ready(function(){
             $("#formCadPagamento").css('display','none');
         };
     };  
-// fim do visualizar
-   // $("#formCadPagamento").css('display','none');
-   // $('input'). prop('disabled', true);
- //   buscar();
+   $("#formCadPagamento").css('display','none');
+   $('input'). prop('disabled', true);
    
 });
 

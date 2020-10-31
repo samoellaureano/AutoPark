@@ -27,12 +27,14 @@ $(document).ready(function(){
 
     checkin = function(){
         var placa = $("#placa").val();
+        var idEstacionamento = $("#estacionamento").val();
         var cfg = {
-            url: "../rest/checkinRest/addCheckin/" + placa,
+            url: "../../rest/checkinRest/addCheckin/" + placa +"&"+idEstacionamento,
             success: function (succJson) {
                 if (succJson == 1) {
                     resp = ("Check-in com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("dashboard.html");
                 }else{
                     resp = ("Erro ao realizar o check-in!");
                     exibirMessagem(resp, 2);
@@ -49,7 +51,7 @@ $(document).ready(function(){
     checkout = function(){
         var placa = $("#placa").val();
         var cfg = {
-            url: "../rest/checkoutRest/addCheckout/" + placa,
+            url: "../../rest/checkoutRest/addCheckout/" + placa +"&"+dadosSessao.id,
             success: function (succJson) {
                 if (succJson == 1) {
                     resp = ("Check-out com sucesso!");
@@ -79,5 +81,32 @@ $(document).ready(function(){
         }
     });
 
+    buscaEstacionamento = function () {
+            setTimeout(function(){
+                if(dadosSessao.id != undefined){
+                    var cfg = {
+                        type: "POST",
+                        url: "../../rest/estacionamentoRest/buscaEstacionamentosPorUsuario/" + dadosSessao.id,
+                        success: function (listaDeEstacionamento) {
+                            exibirEstacionamentos(listaDeEstacionamento);
+                        },
+                        error: function (err) {
+                            alert("Erro ao buscar os estacionamentos: " + err.responseText);
+                        }
+                    };
+                    autoPark.ajax.post(cfg);
+                }
+            }, 500);
+    };
+
+    exibirEstacionamentos = function (listaDeEstacionamento) {
+        var html="";
+        for (var i = 0; i < listaDeEstacionamento.length; i++) {
+            html += ("<option value='" + listaDeEstacionamento[i].id + "'>" + listaDeEstacionamento[i].descricao + "</option>");
+        }    
+        $("#estacionamento").html(html);
+    }
+
     buscar();
+    buscaEstacionamento();
 });

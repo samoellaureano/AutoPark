@@ -17,6 +17,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 			return true;
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	public T buscarPorId(int id) {
 		String jpql = "select c from "+getEntityName()+" c where c.id = " + id;
@@ -58,6 +59,21 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 			listObjetos.add((T) object);
 		}
 		return listObjetos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T buscarPorIdUsuario(int id) {
+
+		String jpql = "select c from "+getEntityName()+" c where c.usuario.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		for (Object object: list) {
+			return ((T) object);
+		}
+		return null;
 	}
 	
 	public abstract String getEntityName();

@@ -34,6 +34,7 @@ $(document).ready(function () {
                     resp = ("Erro ao cadastrar um novo Veiculo!");
                     exibirMessagem(resp, 2);
                 };
+                window.location.href = ("veiculos.html");
             },
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo Veiculo!");
