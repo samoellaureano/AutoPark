@@ -1,5 +1,9 @@
 package br.com.estacionamento.dao;
 
-public interface TabelaDePrecoDAO {
+import br.com.estacionamento.entidade.Estacionamento;
+import br.com.estacionamento.entidade.Veiculo;
 
+public interface TabelaDePrecoDAO {
+	
+	public double buscaValor(Veiculo veiculo, Estacionamento estacionamento);
 }

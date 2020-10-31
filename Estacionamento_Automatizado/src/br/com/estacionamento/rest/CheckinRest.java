@@ -1,7 +1,5 @@
 package br.com.estacionamento.rest;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.POST;
@@ -31,9 +29,6 @@ public class CheckinRest extends UtilRest{
 
 		try {
 			Date data = new Date();
-
-			@SuppressWarnings("unused")
-			DateFormat formatadorComHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
 			Checkin checkin = new Checkin();
 			Veiculo veiculo = new Veiculo();
@@ -52,6 +47,7 @@ public class CheckinRest extends UtilRest{
 			checkin.setCliente(cliente);
 			checkin.setEstacionamento(estacionamento);
 			checkin.setDataHora(data);
+			checkin.setVeiculo(veiculo);
 
 			boolean retorno = checkinJpadao.salvar(checkin);
 

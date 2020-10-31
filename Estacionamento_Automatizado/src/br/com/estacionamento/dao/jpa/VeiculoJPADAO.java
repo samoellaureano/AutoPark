@@ -16,6 +16,7 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 	
 	@Override
 	public Veiculo buscarPorPlaca(String placa) {
+		Veiculo veiculo = new Veiculo();
 		String jpql = "select c from "+getEntityName()+" c where c.placa =:placa ";
 		Query query = super.getQuery(jpql);
 		query.setParameter("placa", placa);
@@ -23,9 +24,9 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 		@SuppressWarnings("rawtypes")
 		List list = query.getResultList();
 		for (Object object: list) {
-			return ((Veiculo) object);
+			veiculo = ((Veiculo) object);
 		}
-		return null;
+		return veiculo;
 	}
 	
 	

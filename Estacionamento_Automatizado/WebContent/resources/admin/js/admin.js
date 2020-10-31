@@ -50,8 +50,9 @@ $(document).ready(function(){
 
     checkout = function(){
         var placa = $("#placa").val();
+        var idEstacionamento = $("#estacionamento").val();
         var cfg = {
-            url: "../../rest/checkoutRest/addCheckout/" + placa +"&"+dadosSessao.id,
+            url: "../../rest/checkoutRest/addCheckout/" + placa +"&"+idEstacionamento,
             success: function (succJson) {
                 if (succJson == 1) {
                     resp = ("Check-out com sucesso!");
@@ -68,6 +69,7 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     }
+    
     $("#btnCheck").click(function(){
         var radios = $('input[type="radio"]');
         for (var i = 0; i < radios.length; i++) {

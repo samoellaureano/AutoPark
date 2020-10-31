@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
+import br.com.estacionamento.dao.jpa.TipoVeiculoJPADAO;
 import br.com.estacionamento.dao.jpa.VeiculoJPADAO;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Veiculo;
@@ -28,15 +29,17 @@ public class VeiculoRest extends UtilRest{
 			Cliente cliente = veiculo.getCliente();
 
 
+
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
-			ClienteJPADAO clienteJpado = new ClienteJPADAO();
+			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
+			TipoVeiculoJPADAO tipoVeiculoJpadao = new TipoVeiculoJPADAO();
 
 			if(cliente.getUsuario() != null) {
-
-				cliente = clienteJpado.buscarPorIdUsuario(cliente.getUsuario().getId());
+				cliente = clienteJpadao.buscarPorIdUsuario(cliente.getUsuario().getId());
 
 				veiculo.setCliente(cliente);
 			}
+			veiculo.setTipoVeiculo(tipoVeiculoJpadao.buscarPorId(veiculo.getTipoVeiculo().getId()));
 
 			boolean retorno = veiculoJpadao.salvar(veiculo);
 

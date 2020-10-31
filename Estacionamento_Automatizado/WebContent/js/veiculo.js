@@ -21,15 +21,19 @@ $(document).ready(function(){
         marca = new Object();
         modelo = new Object();
         cliente = new Object();
+        tipoVeiculo = new Object();
 
         marca.id = $("#marca").val();
-        modelo.id = $("#modelo").val();
+        modelo.id = $("#modelo").val();        
+        tipoVeiculo.id = $("#tipoVeiculo").val();
+        veiculo.cor = $("#cor").val();
         veiculo.ano = $("#ano").val();
         veiculo.placa = $("#placa").val();
         cliente.id = dadosSessao.id;
 
         modelo.marca = marca;
-        veiculo.modelo = modelo;
+        veiculo.modelo = modelo;        
+        veiculo.tipoVeiculo = tipoVeiculo;
         veiculo.cliente = cliente;
 
         var cfg = {
@@ -103,5 +107,28 @@ $(document).ready(function(){
         $("#modelo").html(html);
     }
 
-    buscaMarcas();    
+    buscaTipoVeiculos = function () {
+        var cfg = {
+            type: "POST",
+            url: "rest/tipoVeiculoRest/buscaTipoVeiculos/*",
+            success: function (listaTipoVeiculos) {
+                exibirTipoVeiculos(listaTipoVeiculos);
+            },
+            error: function (err) {
+                alert("Erro ao buscar as marcas: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    };
+
+    exibirTipoVeiculos = function (listaTipoVeiculos) {
+        var html="";
+        for (var i = 0; i < listaTipoVeiculos.length; i++) {
+            html += ("<option value='" + listaTipoVeiculos[i].id + "'>" + listaTipoVeiculos[i].descricao + "</option>");
+        }    
+        $("#tipoVeiculo").html(html);
+    }
+
+    buscaMarcas();
+    buscaTipoVeiculos();  
 });

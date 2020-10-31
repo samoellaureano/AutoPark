@@ -26,6 +26,10 @@ public class Checkin extends Persistivel implements Serializable{
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Estacionamento estacionamento;
+	
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Veiculo veiculo;
 
 	public Date getDataHora() {
 		return dataHora;
@@ -51,5 +55,12 @@ public class Checkin extends Persistivel implements Serializable{
 		this.estacionamento = estacionamento;
 	}
 
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
 
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+	
 }

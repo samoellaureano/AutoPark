@@ -23,6 +23,9 @@ public class Veiculo extends Persistivel implements Serializable {
 
 	@Column(length = 10,nullable = false)
 	private  String placa;
+	
+	@Column(length = 30,nullable = false)
+	private  String cor;
 
 	@JoinColumn(referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -31,6 +34,10 @@ public class Veiculo extends Persistivel implements Serializable {
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Modelo modelo;
+	
+	@JoinColumn(referencedColumnName = "id")
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+	private TipoVeiculo tipoVeiculo;
 
 	public String getAno() {
 		return ano;
@@ -63,4 +70,21 @@ public class Veiculo extends Persistivel implements Serializable {
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public TipoVeiculo getTipoVeiculo() {
+		return tipoVeiculo;
+	}
+
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
+	}
+	
 }
