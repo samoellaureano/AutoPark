@@ -93,12 +93,14 @@ public class CheckinRest extends UtilRest{
 				checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
 			}
 
-			if(checkout != null) {
+			if(checkout.getDataHora() != null) {
 				if(checkin.getDataHora().after(checkout.getDataHora())) {
 					return this.buildResponse(checkin);
+				}else {
+					checkin = null;
 				}
 			}
-			checkin = null;
+			
 			return this.buildResponse(checkin);
 
 

@@ -69,7 +69,7 @@ $(document).ready(function () {
 
         if (listaDeVeiculos != undefined) {
             if (listaDeVeiculos.length > 0) {
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < listaDeVeiculos.length; i++) {
                     veiculoHtml += "<ul class='itemVeiculo'><input type='radio' name='veiculos' id='car" + i + "' hidden>"
                         + "<label for='car" + i + "'> " + listaDeVeiculos[i].placa + "</label><li>"
                         + "<label for='editar" + i + "'>Editar</label>"

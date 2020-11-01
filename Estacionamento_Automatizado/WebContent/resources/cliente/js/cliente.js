@@ -18,13 +18,13 @@ $(document).ready(function () {
    };
    visualizar = function (checkin) {
       if(checkin != undefined){
-         var d = new Date(checkin.dataHora);
+         var d = (new Date(checkin.dataHora));
          const now = new Date(); // Data de hoje
          const past = new Date(checkin.dataHora); // Outra data no passado
          const diff = Math.abs(now.getTime() - past.getTime());
          var diferenca = new Date(diff);
    
-         $("#dataCheckin").text(d.getDate() + "/" + d.getUTCMonth() + "/" + d.getFullYear());
+         $("#dataCheckin").text(d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear());
          $("#horaCheckin").text(d.getHours() + ":" + d.getMinutes());
          $("#tempoDecorrido").text(diferenca.getUTCHours()+":"+diferenca.getUTCMinutes());
       }else{
