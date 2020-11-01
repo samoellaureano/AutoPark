@@ -27,5 +27,20 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 		}
 		return null;
 	}
+	
+	public Checkin buscarPorIdCliente(int id) {
+		Checkin checkin = new Checkin();
+		
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+		
+		@SuppressWarnings({ "unchecked" })
+		List<Checkin> list = query.getResultList();
+		for (Checkin checkinObj: list) {
+			checkin = checkinObj;
+		}
+		return checkin;
+	}
 
 }

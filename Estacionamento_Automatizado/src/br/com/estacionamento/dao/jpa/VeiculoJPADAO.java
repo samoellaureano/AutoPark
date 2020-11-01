@@ -1,5 +1,6 @@
 package br.com.estacionamento.dao.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -27,6 +28,21 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 			veiculo = ((Veiculo) object);
 		}
 		return veiculo;
+	}
+
+	@Override
+	public List<Veiculo> buscarPorCliente(int id) {
+		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		for (Object object: list) {
+			listaVeiculos.add((Veiculo) object);
+		}
+		return listaVeiculos;
 	}
 	
 	

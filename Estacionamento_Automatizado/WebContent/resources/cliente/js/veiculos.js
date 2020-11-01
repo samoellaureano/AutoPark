@@ -51,10 +51,10 @@ $(document).ready(function () {
 
     busca = function () {
         var cfg = {
-            url: "../rest/veiculoRest/buscaVeiculo",
-            data: JSON.stringify(veiculo),
-            success: function (listaDeVeiculo) {
-                visualizarVeiculos(listaDeVeiculo);
+            type: "POST",
+            url: "../../rest/veiculoRest/buscaVeiculos/" + dadosSessao.id,
+            success: function (listaDeVeiculos) {
+                visualizarVeiculos(listaDeVeiculos);
             },
             error: function (errJson) {
                 resp = ("Erro ao buscar os dados!");
@@ -63,32 +63,29 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
-    visualizarVeiculos = function (listaDeVeiculo) {
+    visualizarVeiculos = function (listaDeVeiculos) {
 
         var veiculoHtml = "";
 
-        if (listaDeVeiculo != undefined) {
-            if (listaDeVeiculo.length > 0) {
-                for (var i = 0; i < listaDeVeiculo.length; i++) {
-                    veiculoHtml += "<ul class='itemVeiculo'><input type='radio' name='carro' id='car" + i + "' hidden>"
-                        + "<label for='car'" + i + "'> " + listaDeVeiculo[i].placa + "</label><li>"
+        if (listaDeVeiculos != undefined) {
+            if (listaDeVeiculos.length > 0) {
+                for (var i = 0; i < 4; i++) {
+                    veiculoHtml += "<ul class='itemVeiculo'><input type='radio' name='veiculos' id='car" + i + "' hidden>"
+                        + "<label for='car" + i + "'> " + listaDeVeiculos[i].placa + "</label><li>"
                         + "<label for='editar" + i + "'>Editar</label>"
-                        + "<input type='checkbox' name='editar' id='editar'" + i + "' hidden><div>"
+                        + "<input type='checkbox' name='editar' id='editar" + i + "' hidden><div>"
                         + "<form action=''><label for='marca" + i + "'>Marca:</label>"
-                        + "<select onkeyup='" + listaDeVeiculo[i].idMarca + "' name='marca' id='marca" + i + "' required></select>"
+                        + "<select onkeyup='" + listaDeVeiculos[i].modelo.marca.id + "' name='marca' id='marca" + i + "' required></select>"
                         + "<label for='modelo" + i + "'>Modelo:</label>"
-                        + "<select onkeyup='" + listaDeVeiculo[i].idModelo + "' name='modelo' id='modelo" + i + "' required></select>"
+                        + "<select onkeyup='" + listaDeVeiculos[i].modelo.id + "' name='modelo' id='modelo" + i + "' required></select>"
                         + "<label for='ano" + i + "'>Ano:</label>"
-                        + "<select onkeyup='" + listaDeVeiculo[i].idAno + "' name='ano' id='ano" + i + "' required></select>"
+                        + "<select onkeyup='" + listaDeVeiculos[i].ano + "' name='ano' id='ano" + i + "' required></select>"
                         + "<label for='placa" + i + "'>Placa:</label>"
-                        + "<input type='text' id='placa" + i + "' value='" + listaDeVeiculo[i].placa + "'>"
-                        + "<div><a href=''>Cancelar</a><button onclick='atualizaVeiculo(" + i + ")' id='editCar" + id + "'>Confirmar</button>"
+                        + "<input type='text' id='placa" + i + "' value='" + listaDeVeiculos[i].placa + "'>"
+                        + "<div><a href=''>Cancelar</a><button onclick='atualizaVeiculo(" + i + ")' id='editCar" + listaDeVeiculos[i].id + "'>Confirmar</button>"
                         + "</div></form></div></li></ul>";
                 };
-                veiculoHtml += "<a href='' id='carrega-listaFuncionario'>Ver Mais</a>";
-
             } else {
-
                 veiculoHtml += "<ul class='itemVeiculo'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
             };
 
@@ -110,8 +107,8 @@ $(document).ready(function () {
             url: "../rest/veiculoRest/updateVeiculo",
             data: JSON.stringify(veiculo),
             success: function (succJson) {
-                    resp = ("Veiculo editado com sucesso!");
-                    exibirMessagem(resp, 1);
+                resp = ("Veiculo editado com sucesso!");
+                exibirMessagem(resp, 1);
             },
             error: function (errJson) {
                 resp = ("Erro ao editar o Veiculo!");
@@ -134,12 +131,12 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
-    
+
     exibirMarcas = function (listaMarcas) {
-        var html="<option value='0'>Selecione</option>";
+        var html = "<option value='0'>Selecione</option>";
         for (var i = 0; i < listaMarcas.length; i++) {
             html += ("<option value='" + listaMarcas[i].id + "'>" + listaMarcas[i].descricao + "</option>");
-        }    
+        }
         $("#marca").html(html);
     }
 
@@ -157,13 +154,13 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
-    
+
     exibirModelos = function (listaModelos) {
-        var html="<option value='0'>Selecione</option>";
+        var html = "<option value='0'>Selecione</option>";
         for (var i = 0; i < listaModelos.length; i++) {
             html += ("<option value='" + listaModelos[i].id + "'>" + listaModelos[i].descricao + "</option>");
         }
-    
+
         $("#modelo").html(html);
     }
 
@@ -182,14 +179,15 @@ $(document).ready(function () {
     };
 
     exibirTipoVeiculos = function (listaTipoVeiculos) {
-        var html="";
+        var html = "";
         for (var i = 0; i < listaTipoVeiculos.length; i++) {
             html += ("<option value='" + listaTipoVeiculos[i].id + "'>" + listaTipoVeiculos[i].descricao + "</option>");
-        }    
+        }
         $("#tipoVeiculo").html(html);
     }
-
-    busca();
-    buscaMarcas();
-    buscaTipoVeiculos();
+    setTimeout(function () {
+        busca();
+        buscaMarcas();
+        buscaTipoVeiculos();
+    }, 500);
 });

@@ -76,5 +76,20 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public T buscarPorIdVeiculo(int id) {
+		T obj = (T) new Object();
+		String jpql = "select c from "+getEntityName()+" c where c.veiculo.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		for (Object object: list) {
+			obj = (T) object;
+		}
+		return (T) obj;
+	}
+	
 	public abstract String getEntityName();
 }
