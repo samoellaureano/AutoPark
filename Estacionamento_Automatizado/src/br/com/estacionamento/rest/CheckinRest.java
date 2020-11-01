@@ -80,14 +80,14 @@ public class CheckinRest extends UtilRest{
 	public Response buscaCheckin(@PathParam("idUsuario") int idUsuario){		
 		try{
 			Checkin checkin = new Checkin();
-			Checkout checkout = null;
+			Checkout checkout = new Checkout();
 
 			CheckinJPADAO checkinJpadao = new CheckinJPADAO();
 			CheckoutJPADAO checkoutJpadao = new CheckoutJPADAO();
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 
 			checkin = checkinJpadao.buscarPorIdCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
-			checkout = new Checkout();
+						
 			if(checkin.getId() != 0) {
 				
 				checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
