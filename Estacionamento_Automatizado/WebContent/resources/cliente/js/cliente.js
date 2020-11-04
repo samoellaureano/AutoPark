@@ -26,7 +26,7 @@ $(document).ready(function () {
    
          $("#dataCheckin").text(d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear());
          $("#horaCheckin").text(d.getHours() + ":" + d.getMinutes());
-         $("#tempoDecorrido").text(diferenca.getUTCHours()+":"+diferenca.getUTCMinutes());
+         $("#tempoDecorrido").text((diferenca.getUTCHours()+24*diferenca.getUTCDate())+"h "+diferenca.getUTCMinutes()+"m");
       }else{
          $("#dataCheckin").text("Nenhum registro");
          $("#horaCheckin").text("Nenhum registro");
