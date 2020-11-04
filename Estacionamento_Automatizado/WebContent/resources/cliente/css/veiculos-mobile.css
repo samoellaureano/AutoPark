@@ -43,6 +43,7 @@ h2{
     width: 100%;
     align-items: flex-end;
     cursor: pointer;
+    margin: 1rem 0rem;
 }
 
 .novo #novoVeic:checked ~ div{
@@ -276,14 +277,14 @@ h2{
     padding: 0.2rem;
 }
 
-.itemVeiculo > li > input:checked ~ div > form{
+/* .itemVeiculo > li > input:checked ~ div > form{
   cursor: auto;
   pointer-events: auto;
 }
 .itemVeiculo > li > input:checked ~ div > form > input{
   background-color: #fff;
     color: #000;
-}
+} */
 
 .menu {
   display: flex;

@@ -26,6 +26,9 @@ public class Veiculo extends Persistivel implements Serializable {
 	
 	@Column(length = 30,nullable = false)
 	private  String cor;
+	
+	@Column
+	private  boolean ativo;
 
 	@JoinColumn(referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -86,5 +89,15 @@ public class Veiculo extends Persistivel implements Serializable {
 	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
 		this.tipoVeiculo = tipoVeiculo;
 	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 	
 }
