@@ -46,6 +46,7 @@ public class VeiculoRest extends UtilRest{
 				veiculo.setCliente(cliente);
 			}
 			veiculo.setTipoVeiculo(tipoVeiculoJpadao.buscarPorId(veiculo.getTipoVeiculo().getId()));
+			veiculo.setAtivo(true);
 
 			boolean retorno = veiculoJpadao.salvar(veiculo);
 
@@ -73,7 +74,7 @@ public class VeiculoRest extends UtilRest{
 	@POST
 	@Path("/buscaVeiculos/{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarMarcas(@PathParam("idUsuario") int idUsuario){
+	public Response buscaVeiculos(@PathParam("idUsuario") int idUsuario){
 		try{
 			List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
@@ -82,6 +83,37 @@ public class VeiculoRest extends UtilRest{
 			listaVeiculos = veiculoJpadao.buscarPorCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
 			
 			return this.buildResponse(listaVeiculos);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/excluiVeiculo/{idVeiculo}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response excluiVeiculos(@PathParam("idVeiculo") int idVeiculo){
+		try{		
+			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
+			Veiculo veiculo = veiculoJpadao.buscarPorId(idVeiculo);
+			
+			veiculo.setAtivo(false);
+			veiculo.setId(idVeiculo);
+						
+			boolean retorno = veiculoJpadao.atualizar(veiculo);
+
+			if(retorno){
+				// Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// ja existe um veiculo
+				return this.buildErrorResponse("2");
+
+			}else {
+				// Erro ao cadastrar o veiculo
+				return this.buildErrorResponse("0");			
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

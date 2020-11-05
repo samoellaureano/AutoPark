@@ -33,7 +33,7 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 	@Override
 	public List<Veiculo> buscarPorCliente(int id) {
 		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
-		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id ";
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id AND c.ativo = true";
 		Query query = super.getQuery(jpql);
 		query.setParameter("id", id);
 		

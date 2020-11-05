@@ -72,21 +72,18 @@ $(document).ready(function () {
                 for (var i = 0; i < listaDeVeiculos.length; i++) {
                     veiculoHtml += "<ul class='itemVeiculo'><input type='radio' name='veiculos' id='car" + i + "' hidden>"
                         + "<label for='car" + i + "'> " + listaDeVeiculos[i].placa + "</label><li>"
-                        + "<label for='editar" + i + "'>Editar</label>"
-                        + "<input type='checkbox' name='editar' id='editar" + i + "' hidden><div>"
-                        + "<form action=''><label for='marca" + i + "'>Marca:</label>"
-                        + "<select onkeyup='buscaMarca("+i+")' name='marca' id='marca" + i + "' required>"
-                        + "<option value='" + listaDeVeiculos[i].modelo.marca.id + "'>" + listaDeVeiculos[i].modelo.marca.descricao + "</option></select>"
-                        + "<label for='modelo" + i + "'>Modelo:</label>"
-                        + "<select onkeyup='buscaModelo("+i+")' name='modelo' id='modelo" + i + "' required>"
-                        + "<option value='" + listaDeVeiculos[i].modelo.id + "'>" + listaDeVeiculos[i].modelo.descricao + "</option></select>"
-                        + "<label for='cor" + i + "'>Cor:</label>"
-                        + "<input type='text' id='cor" + i + "' value='"+listaDeVeiculos[i].cor+"' required>"
-                        + "<label for='ano" + i + "'>Ano:</label>"
-                        + "<input type='text' id='ano" + i + "' value='"+listaDeVeiculos[i].ano+"' required>"
-                        + "<label for='placa" + i + "'>Placa:</label>"
-                        + "<input type='text' id='placa" + i + "' value='" + listaDeVeiculos[i].placa + "'>"
-                        + "<div><a href=''>Cancelar</a><button onclick='atualizaVeiculo(" + i + ")' id='editCar" + listaDeVeiculos[i].id + "'>Confirmar</button>"
+                        + "<label for='excluir" + i + "' onclick='excluiVeiculo("+listaDeVeiculos[i].id+")'>Excluir</label>"
+                        + "<input type='checkbox' name='excluir' id='excluir" + i + "' hidden><div>"
+                        + "<form><label for='marca'>Marca:</label>"
+                        + "<input type='text' id='marca' value='"+listaDeVeiculos[i].modelo.marca.descricao+"'>"
+                        + "<label for='modelo'>Modelo:</label>"
+                        + "<input type='text' id='modelo' value='"+listaDeVeiculos[i].modelo.descricao+"'>"
+                        + "<label for='cor'>Cor:</label>"
+                        + "<input type='text' id='cor' value='"+listaDeVeiculos[i].cor+"'>"
+                        + "<label for='ano'>Ano:</label>"
+                        + "<input type='text' id='ano' value='"+listaDeVeiculos[i].ano+"' >"
+                        + "<label for='placa'>Placa:</label>"
+                        + "<input type='text' id='placa' value='" + listaDeVeiculos[i].placa + "'>"
                         + "</div></form></div></li></ul>";
                 };
             } else {
@@ -121,6 +118,24 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
+
+    excluiVeiculo = function (idVeiculo) {
+        var cfg = {
+            type: "POST",
+            url: "../../rest/veiculoRest/excluiVeiculo/" + idVeiculo,
+            success: function (succJson) {
+                resp = ("Veiculo excluido com sucesso!");
+                exibirMessagem(resp, 1);
+                busca();
+            },
+            error: function (errJson) {
+                resp = ("Erro ao excluir o Veiculo!");
+                exibirMessagem(resp, 2);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    };
+
     buscaMarcas = function () {
 
         var cfg = {

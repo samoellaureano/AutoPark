@@ -17,6 +17,15 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 			return true;
 	}
 	
+	public boolean atualizar (T t) {
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		em.merge(t);
+		em.getTransaction().commit();
+		em.close();
+		return true;
+}
+	
 	
 	@SuppressWarnings("unchecked")
 	public T buscarPorId(int id) {

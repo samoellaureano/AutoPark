@@ -47,6 +47,7 @@ h2{
     width: 100%;
     align-items: flex-end;
     cursor: pointer;
+    margin: 1rem 0rem;
 }
 
 .novo #novoVeic:checked ~ div{
@@ -282,7 +283,7 @@ h2{
   font-family: "Source Sans Pro", sans-serif;
     padding: 0.2rem;
 }
-
+/* Ativa os imputs da lista
 .itemVeiculo > li > input:checked ~ div > form{
   cursor: auto;
   pointer-events: auto;
@@ -290,7 +291,7 @@ h2{
 .itemVeiculo > li > input:checked ~ div > form > input{
   background-color: #fff;
     color: #000;
-}
+} */
 
 .menu {
   display: flex;
