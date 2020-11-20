@@ -5,7 +5,10 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -78,10 +81,51 @@ public class ClienteRest extends UtilRest{
 			return this.buildErrorResponse("Erro ao cadastrar cliente");
 		}
 
-	}// fim do método inserir
+	}
+	
+	@POST
+	@Path("/buscaDados/{idUsuario}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscaDados(@PathParam("idUsuario") int idUsuario){
+		try{
+			Usuario usuario = new UsuarioJPADAO().buscarPorId(idUsuario);
+			Cliente cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
+			
+			cliente.setUsuario(usuario);
+			
+			return this.buildResponse(cliente);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 
 
+	@POST
+	@Path("/atualizaCliente")
+	@Consumes("application/*")
+	public Response atualizaCliente(String atualizaCliente){
 
+		try {
+			Cliente cliente = new ObjectMapper().readValue(atualizaCliente,Cliente.class);
+			
+			cliente.setCredito(new ClienteJPADAO().buscarPorId(cliente.getId()).getCredito());
+			cliente.setUsuario(new UsuarioJPADAO().buscarPorId(cliente.getUsuario().getId()));
+			
+			boolean	retorno = false;		
+			retorno = new ClienteJPADAO().atualizar(cliente);
+			
+			if(retorno){
+				return this.buildResponse("1");				
+			}else{
+				return this.buildResponse("2");
+			}
 
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar cliente");
+		}
+	}
 
 }

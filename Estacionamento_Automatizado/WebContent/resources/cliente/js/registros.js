@@ -1,22 +1,21 @@
 $(document).ready(function(){
     $("#menu").load("menu.html");
     
-    buscar = function(){
+    $("#buscaRegistros").click(function(e){
         var dataInicial = $("#buscarDataInicial").val();
         var dataFinal = $("#buscarDataFinal").val();
-
         var cfg = {
-            url: "../rest/registroRest/buscaregistro/dataInicial="+dataInicial + "&dataFinal=" + dataFinal,
+            type: "POST",
+            url: "../../rest/registroRest/buscaRegistro/dataInicial="+dataInicial + "&dataFinal=" + dataFinal,
             success: function (listaDeRegistros){
                 visualizarRegistro(listaDeRegistros);
             },
             error: function (errJson) {
-                resp = ("Erro ao buscar os dados!");
-                exibirMessagem(resp, 2);
+                alert("Erro ao buscar Configurações: " + errJson.responseText);
             }
         };
         autoPark.ajax.post(cfg);
-    };
+    });
 
     visualizarRegistro=function(listaDeRegistros){
 
@@ -49,9 +48,4 @@ $(document).ready(function(){
                    
             };   
         };
-
-        $("#buscarRegistros").click(function(e){
-            buscar();
-        });
-        buscar();
 });

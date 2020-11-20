@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
 import br.com.estacionamento.util.HashUtil;
 
 
@@ -76,9 +77,15 @@ public class Usuario extends Persistivel implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-
-
+	
+	public boolean comparaSenha(Usuario usuarioAlter) {
+		setSenhaCriptografada(usuarioAlter.getSenha());
+		if(this.senha.equals(new UsuarioJPADAO().buscarPorId(usuarioAlter.getId()).getSenha())) {
+			return true;
+		}
+		
+		return false;
+	}
 
 
 }

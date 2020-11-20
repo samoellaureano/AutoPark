@@ -70,6 +70,16 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		return listObjetos;
 	}
 	
+	public List<T> buscarPorIdClienteLista(int id) {		
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+		
+		@SuppressWarnings({ "unchecked" })
+		List<T> list = query.getResultList();
+		return list;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public T buscarPorIdUsuario(int id) {
 
