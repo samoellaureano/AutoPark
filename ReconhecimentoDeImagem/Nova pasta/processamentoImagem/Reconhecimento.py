@@ -4,9 +4,9 @@ import pytesseract
 import cv2
 
 
-def findPlace(contornos, imagem):
-    for c in contornos:
+def localizarPlaca(contornos, imagem):
 
+    for c in contornos:
         perimetro = cv2.arcLength(c, True)
         if perimetro > 900 and perimetro < 1250:
             approx = cv2.approxPolyDP(c, 0.05 * perimetro, True)
@@ -21,7 +21,7 @@ def findPlace(contornos, imagem):
     return imagem
 
 
-def reconhecimentoOCR(path_img):
+def reconhecimentoImagem(path_img):
     print("reconhecimento da placa")
 
     img = cv2.imread(path_img)
@@ -60,7 +60,6 @@ def removerChars(text):
 
     return text
 
-
 video = cv2.VideoCapture('resource\\placa7.mp4')
 
 while (video.isOpened()):
@@ -71,31 +70,27 @@ while (video.isOpened()):
         break
 
     area = frame[400:, 225:1250]
-    # area = frame[300:, 150:1255]
+    result = cv2.cvtColor(area, cv2.COLOR_BGR2GRAY)
+    result = cv2.GaussianBlur(result, (5, 5), 0)
 
-    img_result = cv2.cvtColor(area, cv2.COLOR_BGR2GRAY)
-    img_result = cv2.GaussianBlur(img_result, (5, 5), 0)
+    ret, result = cv2.threshold(result, 90, 255, cv2.THRESH_BINARY)
+    result = cv2.Canny(result, 100, 200)
+    img, contornos, hier = cv2.findContours(result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-    ret, img_result = cv2.threshold(img_result, 90, 255, cv2.THRESH_BINARY)
-    img_result = cv2.Canny(img_result, 100, 200)
-    img, contornos, hier = cv2.findContours(img_result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-    # limite horizontal
     cv2.line(frame, (0, 500), (1880, 500), (0, 0, 255), 3)
-    # limite vertical 1
     cv2.line(frame, (300, 0), (300, 1200), (0, 0, 255), 3)
-    # limite vertical 2
     cv2.line(frame, (1200, 0), (1200, 1200), (0, 0, 255), 3)
 
     cv2.imshow('FRAME', frame)
-    findPlace(contornos, area)
+    localizarPlaca(contornos, area)
     cv2.imshow('RES', area)
-    cv2.imshow("Proc", img_result)
+    cv2.imshow("Proc", result)
 
     if cv2.waitKey(1) & 0xff == ord('q'):
         break
 
 video.release()
 caminho = "C:\Tesseract-OCR\saidas\placa.jpg"
-reconhecimentoOCR(caminho)
+reconhecimentoImagem(caminho)
 cv2.destroyAllWindows()
