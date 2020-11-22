@@ -20,7 +20,6 @@ import br.com.estacionamento.entidade.Checkout;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Estacionamento;
 import br.com.estacionamento.entidade.Veiculo;
-import br.com.estacionamento.util.Util;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("checkoutRest")
