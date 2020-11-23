@@ -17,24 +17,28 @@ $(document).ready(function () {
         autoPark.ajax.post(cfg);
     });
 
-    visualizarRegistro = function (listaDeRegistros) {
-
-        var registroHtml = "";
+    visualizarRegistro = function (listaDeRegistros) {        
         if (listaDeRegistros != undefined) {
+            var registroHtml = "";
             if (listaDeRegistros.checkin.length > 0) {
                 for (var i = 0; i < listaDeRegistros.checkin.length; i++) {
-                            registroHtml = ("<ul class='itemRegistro'><input type='radio' name='registro' id='reg" + i + "'>"
-                            + "<label for='reg" + i + "'>" + new Date(listaDeRegistros.checkin[i].dataHora)+"</label>"
-                            + "<li>Check-in: <span>" +  + "</span></li>"
-                            + "<li>Check-out: <span>" +  + "</span></li>"
-                            + "<li>Permanencia: <span>" +  + "</span></li>"
-                            + "<li>Valor Hora:  <span>R$:" + + "</span></li></ul>");
+                            var data = new Date(listaDeRegistros.checkin[i].dataHora);
+
+                            const now = new Date(listaDeRegistros.checkout[i].dataHora); // Data de hoje
+                            const past = new Date(listaDeRegistros.checkin[i].dataHora); // Outra data no passado
+                            const diff = Math.abs(now.getTime() - past.getTime());
+                            var diferenca = new Date(diff);
+                            registroHtml += "<ul class='itemRegistro'><input type='radio' name='registro' id='reg" + i + "' hidden>"
+                            + "<label for='reg" + i + "'>" + data.getUTCDate()+"/"+data.getUTCMonth()+"/"+data.getUTCFullYear()+"</label>"
+                            + "<li>Veiculo:<span>"+listaDeRegistros.checkin[i].veiculo.placa+"</span></li>"
+                            + "<li>Tempo de Uso:<span>"+(diferenca.getUTCDate()-1)+"d "+diferenca.getUTCHours()+"h "+diferenca.getUTCMinutes()+"m</span></li>"
+                            + "<li>Valor:<span>"+listaDeRegistros.checkout[i].valor+"</span></li></ul>";
                         
                 };
             } else {
-                registroHtml += "<ul class='itemRegistro'><li style='text-align: center'>Nenhum registro encontrado</li></ul>";
+                registroHtml = "<span>Nenhum registro encontrado</span>";
             };
-            $("#registroHtml").append(registroHtml);
+            $("#registroHtml").html(registroHtml);
         };
     };
 

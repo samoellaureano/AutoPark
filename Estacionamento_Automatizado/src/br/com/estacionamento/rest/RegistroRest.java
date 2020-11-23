@@ -33,17 +33,24 @@ public class RegistroRest extends UtilRest{
 			Cliente cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
 			List<Checkin> listaCheckin = new ArrayList<Checkin>();
 			List<Checkout> listaCheckout = new ArrayList<Checkout>();
+			Date DI = null;
+			Date DF = null;
 						
 			SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 			
-			Date DI = formato.parse(dataInicial);
-			Date DF = formato.parse(dataFinal);
-			
-			listaCheckin = new CheckinJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
-			listaCheckout = new CheckoutJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
-			
-			registro.setCheckin(listaCheckin);
-			registro.setCheckout(listaCheckout);
+			if(!dataInicial.equals("undefined-undefined-") && !dataFinal.equals("undefined-undefined-")) {
+					DI = formato.parse(dataInicial);
+					DF = formato.parse(dataFinal);
+					listaCheckin = new CheckinJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);					
+					listaCheckout = new CheckoutJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
+					registro.setCheckin(listaCheckin);
+					registro.setCheckout(listaCheckout);			
+			}else {
+				listaCheckin = new CheckinJPADAO().buscarPorIdClienteLista(cliente.getId());
+				registro.setCheckin(listaCheckin);
+				listaCheckout = new CheckoutJPADAO().buscarPorIdClienteLista(cliente.getId());
+				registro.setCheckout(listaCheckout);
+			}
 
 		}catch (Exception e){
 			e.printStackTrace();
