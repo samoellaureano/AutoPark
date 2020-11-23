@@ -56,7 +56,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 				checkin = null;
 			}
 		}
-		
+
 		return checkin;
 
 	}
@@ -73,25 +73,29 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 		List<Checkin> list = query.getResultList();
 
 		for (Checkin checkinObj: list){
-			Checkout checkout = new CheckoutJPADAO().buscarPorIdVeiculo(checkinObj.getVeiculo().getId());
-
-			if(checkout.getId() == 0){					
-
-				listaVeiculos.add(checkinObj);
-
-			}else {
-
-				if(checkinObj.getDataHora().after(checkout.getDataHora())) { 
+			
+			if(checkinObj.getVeiculo().getAtivo()==true) {
+				
+				Checkout checkout = new CheckoutJPADAO().buscarPorIdVeiculo(checkinObj.getVeiculo().getId());
+				// verifica se o veiculo esta ativo
+				if(checkout.getId() == 0){					
 
 					listaVeiculos.add(checkinObj);
+
+				}else {
+
+					if(checkinObj.getDataHora().after(checkout.getDataHora())) { 
+
+						listaVeiculos.add(checkinObj);
+					}
 				}
 			}
 		}
 
 		return listaVeiculos;
 	}
-	
-	
+
+
 	public List<Checkin> buscarClienteDia(int id){
 
 		List<Checkin>listaVeiculos = new ArrayList<Checkin>();
@@ -102,22 +106,27 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 
 		@SuppressWarnings({ "unchecked" })
 		List<Checkin> list = query.getResultList();
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); 
 		Date data = new Date(); 
 		String dataAtual = dateFormat.format(data);		
-		
+
 		for (Checkin checkinObj: list){
-			
-			String dataCheckin = dateFormat.format(checkinObj.getDataHora());
+			if(checkinObj.getVeiculo().getAtivo()==true) {	
+				// verifica se o veiculo esta ativo
+				String dataCheckin = dateFormat.format(checkinObj.getDataHora());
 
-			if(dataCheckin.equals(dataAtual)){ 
+				if(dataCheckin.equals(dataAtual)){ 
 
-				listaVeiculos.add(checkinObj);
+
+
+					listaVeiculos.add(checkinObj);
+
+				}
 			}		
 		}
 
 		return listaVeiculos;
-		
+
 	}	
 }

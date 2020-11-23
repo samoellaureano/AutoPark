@@ -2,28 +2,47 @@ $(document).ready(function(){
     $("#menu").load("menu.html");
 
     buscar = function(){
+
+        var idEstacionamento = $("#estacionamento").val();
+
         var cfg = {
+            
             type: "POST",
-            url: "../rest/dashboardRest/buscarDashboard/",
-            success: function (dashboard) {
-                exibirDashboard(dashboard);
+            url: "../../rest/checkinRest/buscarVagas/"+idEstacionamento,
+                 success: function (vagasDisponiveis){
+                    exibirVaga(vagasDisponiveis);
+                    buscarClientesDoDia(idEstacionamento);
             },
             error: function (err) {
-                alert("Erro ao buscar dados dashboard: " + err.responseText);
+                 alert("Erro ao buscar dados dashboard: " + err.responseText);
             }
         };
         autoPark.ajax.post(cfg);      
-    }
+    };
 
-    exibirDashboard = function(dashboard){
-        $("#vagaDisponivel").html(dashboard.vagaDisponivel);
-        $("#clienteDia").html(dashboard.clienteDia);
-        $("#receita").html(dashboard.receita);
+    exibirVaga = function(vagasDisponiveis) {
+        $("#vagaDisponivel").html(vagasDisponiveis);
+    };
 
-        for(var i=0; i < dashboard.listaDeEstacionamento.length; i++){
-            $("#listaFilial").append("<option value='"+i+"'>"+dashboard.listaDeEstacionamento.nome+"</option>")
-        }
-    }
+    buscarClientesDoDia= function(idEstacionamento){       
+
+        var cfg = {
+            
+            type: "POST",
+            url: "../../rest/checkinRest/buscarClientesDoDia/"+idEstacionamento,
+                 success: function (numeroClientes){
+                    exibirNumeroClientes(numeroClientes);
+            },
+            error: function (err) {
+                 alert("Erro ao buscar dados dashboard: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);      
+    };
+
+    exibirNumeroClientes = function (numeroDeClientes) {
+        $("#clienteDia").html(numeroDeClientes);
+    };
 
     checkin = function(){
         var placa = $("#placa").val();
@@ -107,8 +126,9 @@ $(document).ready(function(){
             html += ("<option value='" + listaDeEstacionamento[i].id + "'>" + listaDeEstacionamento[i].descricao + "</option>");
         }    
         $("#estacionamento").html(html);
+        buscar();
     }
 
-    buscar();
+   
     buscaEstacionamento();
 });

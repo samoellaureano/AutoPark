@@ -131,7 +131,5 @@ $(document).ready(function(){
         buscarVagas();
     };
 
-    buscaEstacionamento(); 
-   
-    
+    buscaEstacionamento();    
 });
