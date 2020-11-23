@@ -16,7 +16,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
 import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
 import br.com.estacionamento.entidade.Cliente;
-import br.com.estacionamento.entidade.Credito;
 import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
 
@@ -35,7 +34,6 @@ public class ClienteRest extends UtilRest{
 			HttpSession sessao = request.getSession();
 			Cliente cliente = new ObjectMapper().readValue(addCliente,Cliente.class);
 			Usuario usuario = cliente.getUsuario();
-			Credito credito = new Credito();
 			
 			sessao.setAttribute("login", usuario.getCpf());			
 			sessao.setAttribute("perfil", usuario.getPerfil());
@@ -43,18 +41,14 @@ public class ClienteRest extends UtilRest{
 			usuario.setAcesso(true);
 			usuario.setPerfil(0);
 			usuario.setSenhaCriptografada(usuario.getSenha());
-			credito.setSaldo(0);
 			String cpf = usuario.getCpf();
 
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
 			
 			cliente.setUsuario(usuario);
-			cliente.setCredito(credito);
 			
-			usuario = usuarioJpadao.buscarPorCpf(cpf);
-			
-			
+			usuario = usuarioJpadao.buscarPorCpf(cpf);			
 			
 			boolean	retorno = false;
 			if(usuario == null) {			
@@ -109,7 +103,6 @@ public class ClienteRest extends UtilRest{
 		try {
 			Cliente cliente = new ObjectMapper().readValue(atualizaCliente,Cliente.class);
 			
-			cliente.setCredito(new ClienteJPADAO().buscarPorId(cliente.getId()).getCredito());
 			cliente.setUsuario(new UsuarioJPADAO().buscarPorId(cliente.getUsuario().getId()));
 			
 			boolean	retorno = false;		

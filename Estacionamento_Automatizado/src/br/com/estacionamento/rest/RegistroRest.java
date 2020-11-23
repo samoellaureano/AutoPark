@@ -1,6 +1,9 @@
 package br.com.estacionamento.rest;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,45 +17,39 @@ import br.com.estacionamento.dao.jpa.CheckoutJPADAO;
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
 import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.Checkout;
+import br.com.estacionamento.entidade.Cliente;
+import br.com.estacionamento.entidade.Registro;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("registroRest")
 public class RegistroRest extends UtilRest{
 	
 	@POST
-	@Path("/buscaRegistro/{dataInicial}&{dataFinal}")
+	@Path("/buscaRegistro/{dataInicial}&{dataFinal}&{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscaRegistro(@PathParam("dataInicial") Date dataInicial, @PathParam("dataFinal") Date dataFinal){		
+	public Response buscaRegistro(@PathParam("dataInicial") String dataInicial, @PathParam("dataFinal") String dataFinal, @PathParam("idUsuario") int idUsuario){
+		Registro registro = new Registro();
 		try{
-			Checkin checkin = new Checkin();
-			Checkout checkout = new Checkout();
-
-			CheckinJPADAO checkinJpadao = new CheckinJPADAO();
-			CheckoutJPADAO checkoutJpadao = new CheckoutJPADAO();
-			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
-
-			//checkin = checkinJpadao.buscarPorIdCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
+			Cliente cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
+			List<Checkin> listaCheckin = new ArrayList<Checkin>();
+			List<Checkout> listaCheckout = new ArrayList<Checkout>();
 						
-			if(checkin.getId() != 0) {
-				
-				checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
-			}
-
-			if(checkout.getDataHora() != null){
-				if(checkin.getDataHora().after(checkout.getDataHora())) {
-					return this.buildResponse(checkin);
-				}else {
-					checkin = null;
-				}
-			}
+			SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 			
-			return this.buildResponse(checkin);
-
+			Date DI = formato.parse(dataInicial);
+			Date DF = formato.parse(dataFinal);
+			
+			listaCheckin = new CheckinJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
+			listaCheckout = new CheckoutJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
+			
+			registro.setCheckin(listaCheckin);
+			registro.setCheckout(listaCheckout);
 
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
+		return this.buildResponse(registro);
 	}
 
 }

@@ -90,7 +90,7 @@ public class Veiculo extends Persistivel implements Serializable {
 		this.tipoVeiculo = tipoVeiculo;
 	}
 
-	public boolean isAtivo() {
+	public boolean getAtivo() {
 		return ativo;
 	}
 

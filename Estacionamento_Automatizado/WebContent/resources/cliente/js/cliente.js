@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
    $("#menu").load("menu.html");
 
    busca = function () {
@@ -17,7 +16,7 @@ $(document).ready(function () {
       autoPark.ajax.post(cfg);
    };
    visualizar = function (checkin) {
-      if(checkin != undefined){
+      if(checkin != undefined && checkin.dataHora != null){
          var d = (new Date(checkin.dataHora));
          const now = new Date(); // Data de hoje
          const past = new Date(checkin.dataHora); // Outra data no passado
@@ -26,7 +25,7 @@ $(document).ready(function () {
    
          $("#dataCheckin").text(d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear());
          $("#horaCheckin").text(d.getHours() + ":" + d.getMinutes());
-         $("#tempoDecorrido").text((diferenca.getUTCHours()+(24*diferenca.getUTCDate()))+"h "+diferenca.getUTCMinutes()+"m");
+         $("#tempoDecorrido").text((diferenca.getUTCDate()-1)+"d "+diferenca.getUTCHours()+"h "+diferenca.getUTCMinutes()+"m");
       }else{
          $("#dataCheckin").text("Nenhum registro");
          $("#horaCheckin").text("Nenhum registro");
@@ -34,30 +33,7 @@ $(document).ready(function () {
       }
    };
 
-   buscaSaldo = function () {
-      var cfg = {
-         url: "../../rest/creditoRest/buscaCredito/" + dadosSessao.id,
-         success: function (credito) {
-            visualizarSaldo(credito);
-         },
-         error: function (errJson) {
-            resp = ("Erro ao buscar os dados!");
-            exibirMessagem(resp, 2);
-         }
-      };
-      autoPark.ajax.post(cfg);
-   };
-
-   visualizarSaldo = function (credito) {
-      if(credito != undefined){
-         $("#valorCredito").text(credito.saldo);
-      }else{
-         $("#valorCredito").text("Nenhum registro");
-      }
-   };
-
    setTimeout(function () {
       busca();
-      buscaSaldo();
-   }, 500);
+   }, 1000);
 });

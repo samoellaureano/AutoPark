@@ -24,17 +24,19 @@
     <div class="container">
 
         <div>
-            <nav class="listaFuncionarios">
+            <nav class="listaRegistros">
                 <div class="titulo">
                     <h3>Registros de Estacionamento</h3>
                     <label for="buscarDataInicial">Data Inicial:</label>
                     <input type="date" class="calendario" name="buscarDataInicial" id="buscarDataInicial">
                     <label for="buscarDataFinal">Data Final</label>
                     <input type="date" class="calendario" name="buscarDataFinal" id="buscarDataFinal">
-
                 </div>
                 <button type="button" id="buscaRegistros">Buscar</button>
-
+                <ul class="fecharDados">
+                    <input type="radio" name="dados" id="menos" hidden>
+                    <label for="menos">Fechar Dados</label>
+                </ul>
                 <div id="registroHtml"></div>
             </nav>
         </div>

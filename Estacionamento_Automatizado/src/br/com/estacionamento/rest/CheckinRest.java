@@ -87,20 +87,20 @@ public class CheckinRest extends UtilRest{
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 
 			checkin = checkinJpadao.buscarPorIdCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
-						
-			if(checkin.getId() != 0) {
-				
-				checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
-			}
 
-			if(checkout.getDataHora() != null){
-				if(checkin.getDataHora().after(checkout.getDataHora())) {
-					return this.buildResponse(checkin);
-				}else {
-					checkin = null;
+			if(checkin != null) {
+				if(checkin.getId() != 0) {
+					checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
+				}
+
+				if(checkout.getDataHora() != null){
+					if(checkin.getDataHora().after(checkout.getDataHora())) {
+						return this.buildResponse(checkin);
+					}else {
+						checkin = null;
+					}
 				}
 			}
-			
 			return this.buildResponse(checkin);
 
 

@@ -29,10 +29,6 @@ public class Cliente extends Persistivel implements Serializable {
     @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
-	@JoinColumn(referencedColumnName = "id")
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	private Credito credito;
-
 	public String getNome() {
 		return nome;
 	}
@@ -57,12 +53,6 @@ public class Cliente extends Persistivel implements Serializable {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-	public Credito getCredito() {
-		return credito;
-	}
-	public void setCredito(Credito credito) {
-		this.credito = credito;
 	}
 
 }
