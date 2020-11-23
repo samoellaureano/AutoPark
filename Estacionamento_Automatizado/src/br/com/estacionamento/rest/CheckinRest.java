@@ -1,6 +1,8 @@
 package br.com.estacionamento.rest;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -87,9 +89,9 @@ public class CheckinRest extends UtilRest{
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 
 			checkin = checkinJpadao.buscarPorIdCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
-						
+
 			if(checkin.getId() != 0) {
-				
+
 				checkout = checkoutJpadao.buscarPorIdVeiculo(checkin.getVeiculo().getId());
 			}
 
@@ -100,9 +102,8 @@ public class CheckinRest extends UtilRest{
 					checkin = null;
 				}
 			}
-			
-			return this.buildResponse(checkin);
 
+			return this.buildResponse(checkin);
 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -110,4 +111,40 @@ public class CheckinRest extends UtilRest{
 		}
 	}
 
+	@POST
+	@Path("/buscarVagas/{idestaconamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarVagas(@PathParam("idestaconamento") int idEstaconamento){		
+		try{
+
+			CheckinJPADAO checkinJpadao = new CheckinJPADAO();			
+			List<Checkin> listaVeiculos = new ArrayList<Checkin>();
+
+			listaVeiculos = checkinJpadao.buscarPorIdEstacionamento(idEstaconamento);
+			int numVagas = new EstacionamentoJPADAO().buscarPorId(idEstaconamento).getVagas();
+			
+			return this.buildResponse(numVagas - listaVeiculos.size());
+
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	
+	@POST
+	@Path("/buscarClientesDoDia/{idestaconamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarClientesDoDia(@PathParam("idestaconamento") int idEstaconamento){		
+		
+		try{
+			
+			int numVagas = new CheckinJPADAO().buscarClienteDia(idEstaconamento).size();			
+			return this.buildResponse(numVagas);
+
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 }

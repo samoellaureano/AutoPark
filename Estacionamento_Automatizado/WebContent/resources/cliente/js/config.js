@@ -4,6 +4,7 @@ var cliente = null;
 
 var usuario2 = new Object();
 var cliente2 = new Object();
+
 $(document).ready(function () {
     $("#menu").load("menu.html");
     buscarDados = function () {
@@ -93,7 +94,7 @@ $(document).ready(function () {
                     }
                 };
             } else {
-                aler("A confirmação de senha esta diferente!")
+                alert("A confirmação de senha esta diferente!")
             }
         }
         autoPark.ajax.post(cfg);

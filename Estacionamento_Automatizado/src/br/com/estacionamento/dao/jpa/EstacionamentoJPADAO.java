@@ -30,4 +30,5 @@ public class EstacionamentoJPADAO extends JPAAbstract<Estacionamento> implements
 		return listaEstacionamentos;
 	}
 
+
 }

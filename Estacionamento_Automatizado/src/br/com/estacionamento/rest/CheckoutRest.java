@@ -1,6 +1,8 @@
 package br.com.estacionamento.rest;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -80,6 +82,6 @@ public class CheckoutRest extends UtilRest{
 
 			return this.buildErrorResponse("Erro ao cadastrar");
 		}
-
-	}
+	}	
+		
 }

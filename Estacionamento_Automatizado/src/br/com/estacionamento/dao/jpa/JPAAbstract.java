@@ -108,7 +108,8 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 			obj = (T) object;
 		}
 		return (T) obj;
-	}
+	}	
+	
 	
 	public abstract String getEntityName();
 }

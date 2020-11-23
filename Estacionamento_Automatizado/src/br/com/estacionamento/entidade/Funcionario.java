@@ -30,7 +30,7 @@ public class Funcionario extends Persistivel implements Serializable{
 	private Empresa empresa;
 
 	@JoinColumn(referencedColumnName = "id")
-    @OneToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
 	public String getNome() {
