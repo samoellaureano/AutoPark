@@ -1,67 +1,116 @@
 
-var configUsuario = new Object();
+var usuario = null;
+var funcionario = null;
+
+var usuario2 = new Object();
+var funcionario2 = new Object();
+
+
 $(document).ready(function(){
     $("#menu").load("menu.html"); 
-    buscar = function(){
-        //ID do usuario logado
-        var valorBusca = 1;
+
+    buscarDados = function () {
         var cfg = {
             type: "POST",
-            url: "../rest/configRest/buscarConfiguracoes/" + valorBusca,
-            success: function (configuracoes) {
-                configUsuario.tipo = configuracoes.tipoUsuario;
-                exibirConfiguracoes(configuracoes);
+            url: "../../rest/funcionarioRest/buscaDados/" + dadosSessao.id,
+            success: function (funcionario) {
+                exibirDados(funcionario);
             },
             error: function (err) {
                 alert("Erro ao buscar Configurações: " + err.responseText);
             }
         };
-        autoPark.ajax.post(cfg);      
+        autoPark.ajax.post(cfg);
     }
 
-    exibirConfiguracoes = function(configuracoes){
-        $("#nomeEdit").val(configuracoes.nome);
-        $("#cpfEdit").val(configuracoes.cpf);
-        $("#celEdit").val(configuracoes.celular);
-        $("#emailEdit").val(configuracoes.email);
+    exibirDados = function (funcionario) {
+
+        $("#nomeEdit").val(funcionario.nome);
+        $("#cpfEdit").val(funcionario.usuario.cpf);
+        usuario2.senha = funcionario.usuario.senha;
+        funcionario2.usuario = usuario2;
+        $("#celEdit").val(funcionario.celular);
+        $("#emailEdit").val(funcionario.email);        
+        $("#salvarAlteracoes").val(funcionario.id);
     }
 
-    $('#salvarAlteracoes').click(function(e){
+    $('#salvarAlteracoes').click(function (e){
+        usuario = new Object();
+        funcionario = new Object();
         var formSelecionado = $("input[name='dados']:checked").val();
-        if(formSelecionado == "usuario"){
-            configUsuario = new Object();
-            configUsuario.nome = $("#nomeEdit").val();
-            configUsuario.cpf = $("#cpfEdit").val();
-            configUsuario.celular = $("#celEdit").val();
-            configUsuario.email = $("#emailEdit").val();
-        }else{
-            configUsuario = new Object();
-            configUsuario.senha = $("#senha").val();
-            configUsuario.novaSenha = $("#novaSenha").val();
-        }
-        
-        var cfg = {
-            url: "../rest/configUsuarioRest/configUsuario",
-            data: JSON.stringify(configUsuario),
-            success: function (succJson) {
-                if (succJson == 1) {
-                    resp = ("Cadastro alterado com sucesso!");
-                    exibirMessagem(resp, 1);
-                }else{
+        var cfg = null;
+
+        if (formSelecionado == "usuario") {
+            funcionario.id = $("#salvarAlteracoes").val();
+            funcionario.nome = $("#nomeEdit").val();
+            usuario.id = dadosSessao.id;
+            funcionario.usuario = usuario;
+            funcionario.celular = $("#celEdit").val();
+            funcionario.email = $("#emailEdit").val();
+
+            cfg = {
+                url: "../../rest/funcionarioRest/atualizaFuncionario",
+                data: JSON.stringify(funcionario),
+                success: function (succJson) {
+                    if (succJson == 1) {
+                        resp = ("Cadastro alterado com sucesso!");
+                        exibirMessagem(resp, 1);
+                    } else {
+                        resp = ("Erro ao alterar o cadastro!");
+                        exibirMessagem(resp, 2);
+                    }
+
+                    buscarDados();
+                },
+                error: function (errJson) {
                     resp = ("Erro ao alterar o cadastro!");
                     exibirMessagem(resp, 2);
                 }
+            };
+        } else {
+            
+            var confSenha = $("#confSenha").val();
+            var novaSenha = $("#novaSenha").val();
+            usuario = new Object();
 
-                buscar();
-            },
-            error: function (errJson) {
-                resp = ("Erro ao alterar o cadastro!");
-                exibirMessagem(resp, 2);
+            if (confSenha == novaSenha){
+                usuario.id = dadosSessao.id;
+                usuario.senha = btoa(novaSenha);
+
+                cfg = {
+                    url: "../../rest/usuarioRest/alteraSenha",
+                    data: JSON.stringify(usuario),
+                    success: function (succJson) {
+                        if (succJson == 1) {
+                            resp = ("Esta senha já esta em uso!");
+                            exibirMessagem(resp, 2);
+                        } else if(succJson == 2) {
+                            resp = ("Senha alterada com sucesso!");
+                            exibirMessagem(resp, 1);
+                        }else{
+                            exibirMessagem(succJson, 2);
+                        }
+
+                        buscarDados();
+                    },
+                    error: function (errJson) {
+                        resp = ("Erro ao alterar o cadastro!");
+                        exibirMessagem(resp, 2);
+                    }
+                };
+            } else {
+                alert("A confirmação de senha esta diferente!")
             }
-        };
+        }
         autoPark.ajax.post(cfg);
     });
 
-    buscar();
+    setTimeout(function () {
+      
+        buscarDados();
+
+     }, 1000);
+  
+   
     
 });

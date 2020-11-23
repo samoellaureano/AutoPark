@@ -122,7 +122,6 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		List<T> list = query.getResultList();
 		return list;
 	}
-
-
+	
 	public abstract String getEntityName();
 }
