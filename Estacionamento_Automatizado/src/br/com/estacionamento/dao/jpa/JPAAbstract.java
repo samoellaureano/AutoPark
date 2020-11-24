@@ -70,6 +70,23 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		}
 		return listObjetos;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> buscarPorNome(String b) {
+		String jpql = "select c from " +getEntityName()+ " c ";
+		if(!b.equals("null") && !b.equals("*")) {
+			jpql += "where c.nome LIKE '%"+b+"%' ORDER BY c.nome ASC";
+		}
+		Query query = super.getQuery(jpql);
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+
+		List<T> listObjetos = new ArrayList<T>();
+		for (Object object: list) {			
+			listObjetos.add((T) object);
+		}
+		return listObjetos;
+	}
 
 	public List<T> buscarPorIdClienteLista(int id) {		
 		String jpql = "select c from "+getEntityName()+" c where c.cliente.id =:id ";

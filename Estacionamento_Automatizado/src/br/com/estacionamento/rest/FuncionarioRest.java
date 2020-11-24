@@ -1,5 +1,7 @@
 package br.com.estacionamento.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,6 +39,8 @@ public class FuncionarioRest extends UtilRest{
 			usuario.setSenhaCriptografada(usuario.getSenha());
 			
 			funcionario.setUsuario(usuario);
+			
+			funcionario.setAtivo(true);
 			
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
 			UsuarioJPADAO usuarioJpadao = new UsuarioJPADAO();
@@ -76,6 +80,20 @@ public class FuncionarioRest extends UtilRest{
 	}
 	
 	@POST
+	@Path("/buscaFuncionarios/{desc}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscaFuncionarios(@PathParam("desc") String desc){
+		try{
+			List<Funcionario> listaFuncionarios = new FuncionarioJPADAO().buscarPorNome(desc);
+			
+			return this.buildResponse(listaFuncionarios);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
 	@Path("/buscaDados/{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscaDados(@PathParam("idUsuario") int idUsuario){
@@ -99,10 +117,16 @@ public class FuncionarioRest extends UtilRest{
 	public Response atualizaCliente(String atualizaFuncionario){
 
 		try {
+			int perfil = 0;
 			
-			Funcionario funcionario = new ObjectMapper().readValue(atualizaFuncionario,Funcionario.class);			
+			Funcionario funcionario = new ObjectMapper().readValue(atualizaFuncionario,Funcionario.class);	
+			if(funcionario.getUsuario().getPerfil() != 0) {
+				perfil = funcionario.getUsuario().getPerfil();
+			}
 			funcionario.setUsuario(new UsuarioJPADAO().buscarPorId(funcionario.getUsuario().getId()));
-			funcionario.setEmpresa(new FuncionarioJPADAO().buscarPorId(funcionario.getId()).getEmpresa());		
+			funcionario.setEmpresa(new FuncionarioJPADAO().buscarPorId(funcionario.getId()).getEmpresa());
+			
+			funcionario.getUsuario().setPerfil(perfil);
 			
 			boolean	retorno = false;
 			

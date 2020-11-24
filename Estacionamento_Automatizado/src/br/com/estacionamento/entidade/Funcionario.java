@@ -24,6 +24,9 @@ public class Funcionario extends Persistivel implements Serializable{
 
 	@Column(length = 45,nullable = false)
 	private  String email;
+	
+	@Column(nullable = false)
+	private boolean ativo;
 
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -72,5 +75,14 @@ public class Funcionario extends Persistivel implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 
 }

@@ -7,9 +7,12 @@ $(document).ready(function(){
 
     buscar = function(){
         var valorBusca = $("#buscarFunc").val();
+        if (valorBusca == "") {
+            valorBusca = null;
+        }
         var cfg = {
             type: "POST",
-            url: "../rest/funcionarioRest/buscarFuncionarios/" + valorBusca,
+            url: "../../rest/funcionarioRest/buscaFuncionarios/" + valorBusca,
             success: function (listaDeFuncionarios) {
                 exibirFuncionarios(listaDeFuncionarios);
             },
@@ -20,47 +23,44 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);      
     }
 
-    exibirFuncionarios = function(listaDeFuncionarios){
-        var funcionariosHTML = "<ul class='itemFuncionario'>";
+    exibirFuncionarios = function(listaDeFuncionarios){       
+        var funcionariosHTML = ""; 
+        var ativo="";
         if (listaDeFuncionarios != undefined) {
             if (listaDeFuncionarios.length > 0) {
                 for (var i = 0; i < listaDeFuncionarios.length; i++) {
-                    if(listaDeFuncionarios.status[i]){
-                        listaDeFuncionarios.status[i] = "checked";
+                    funcionariosHTML += "<ul class='itemFuncionario'>";
+                    if(listaDeFuncionarios[i].ativo){
+                        ativo=true;
+                        listaDeFuncionarios[i].ativo = "checked";
                     }else{
-                        listaDeFuncionarios.status[i] = "";
+                        ativo=false;
+                        listaDeFuncionarios[i].ativo = "";
                     }
-                    if(listaDeFuncionarios.perfil[i] == 0){
-                        listaDeFuncionarios.perfil[i] = "<option value='0' selected>Administrador</option>"
-                            +"<option value='1'>Funcionario</option>"
-                            +"<option value='2'>Cliente</option></select>";
-                    }else if(listaDeFuncionarios.perfil[i] == 1){
-                        listaDeFuncionarios.perfil[i] = "<option value='0'>Administrador</option>"
-                            +"<option value='1' selected>Funcionario</option>"
-                            +"<option value='2'>Cliente</option></select>";
+                    if(listaDeFuncionarios[i].usuario.perfil == 1){
+                        listaDeFuncionarios[i].usuario.perfil = "<option value='2'>Administrador</option>"
+                            +"<option value='1' selected>Funcionario</option>";
                     }else{
-                        listaDeFuncionarios.perfil[i] = "<option value='0'>Administrador</option>"
-                            +"<option value='1'>Funcionario</option>"
-                            +"<option value='2' selected>Cliente</option></select>";
+                        listaDeFuncionarios[i].usuario.perfil = "<option value='2' selected>Administrador</option>"
+                            +"<option value='1'>Funcionario</option>";
                     }
                     funcionariosHTML += "<input type='radio' name='funcionario' id='func"+i+"' hidden>"
-                    +"<label for='func"+i+"'>"+listaDeFuncionarios.nome[i]+"</label>"
+                    +"<label for='func"+i+"'>"+listaDeFuncionarios[i].nome+"</label>"
                     +"<li><label for='editar"+i+"'>Editar</label>"
                     +"<input type='checkbox' name='editar' id='editar"+i+"' hidden>"
                     +"<div><form><label for='nome'>Nome:</label><input type='text' id='nome"+i+"'"
-                    +"value='"+listaDeFuncionarios.nome[i]+"'>"
+                    +"value='"+listaDeFuncionarios[i].nome+"'>"
                     +"<label for='celular'>Celular:</label><input type='text' id='celular"+i+"'"
-                    +"value='"+listaDeFuncionarios.celular[i]+"'>"
+                    +"value='"+listaDeFuncionarios[i].celular+"'>"
                     +"<label for='email'>Email:</label><input type='text' id='email"+i+"'"
-                    +"value='"+listaDeFuncionarios.email[i]+"'>"
+                    +"value='"+listaDeFuncionarios[i].email+"'>"
                     +"<label for='perfil'>Perfil:</label>"
                     +"<select name='perfil' id='perfil"+i+"'>"
-                    + listaDeFuncionarios.perfil[i]
-                    +"<label for='status'>Status:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios.status[i] +"></label>"
+                    + listaDeFuncionarios[i].usuario.perfil
+                    +"</select><label for='status'>Ativo:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios[i].ativo +" value='"+ativo+"'></label>"
                     +"<div><a href=''>Cancelar</a>"
-                    +"<button onclick='editarFuncionario("+i+")'>Confirmar</button></div></form></div></li>"
+                    +"<button type='button' onclick='editarFuncionario("+i+","+listaDeFuncionarios[i].id+","+listaDeFuncionarios[i].usuario.id+")'>Confirmar</button></div></form></div></li></ul>";
                 }
-                funcionariosHTML+="</ul>";
             } else {
                 funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
@@ -68,15 +68,19 @@ $(document).ready(function(){
         }
     }
 
-    editarFuncionario = function(id){
-        funcionario.nome = $("#nome"+id).val();
-        funcionario.celular = $("#celular"+id).val();
-        funcionario.email = $("#email"+id).val();
-        funcionario.perfil = $("#perfil"+id).val();
-        funcionario.status = $("#status"+id).val();
-
+    editarFuncionario = function(i, id, idUsuario){
+        funcionario = new Object();
+        usuario = new Object();
+        funcionario.nome = $("#nome"+i).val();
+        funcionario.celular = $("#celular"+i).val();
+        funcionario.email = $("#email"+i).val();
+        funcionario.ativo = $("#status"+i).val();
+        funcionario.id = id;
+        usuario.perfil = $("#perfil"+i).val();
+        usuario.id = idUsuario;
+        funcionario.usuario = usuario;
         var cfg = {
-            url: "../rest/funcionarioRest/editarFuncionario",
+            url: "../../rest/funcionarioRest/atualizaFuncionario",
             data: JSON.stringify(funcionario),
             success: function (succJson) {
                 if (succJson == 1) {
@@ -86,7 +90,7 @@ $(document).ready(function(){
                     resp = ("Erro ao editar o funcionário!");
                     exibirMessagem(resp, 2);
                 }
-                buscar();
+                //buscar();
             },
             error: function (errJson) {
                 resp = ("Erro ao editar o funcionário!");
@@ -138,9 +142,11 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     });
+    setTimeout(function () {
+        buscar();
+    }, 500);
 
-    buscar();
-
+    
     $('#carrega-listaFuncionario').click(function(e){
         /*https://tableless.com.br/conteudo-sob-demanda-com-jquery/ */
     });
