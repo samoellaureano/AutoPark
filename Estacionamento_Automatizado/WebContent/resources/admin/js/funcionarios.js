@@ -57,14 +57,14 @@ $(document).ready(function(){
                     +"<label for='perfil'>Perfil:</label>"
                     +"<select name='perfil' id='perfil"+i+"'>"
                     + listaDeFuncionarios[i].usuario.perfil
-                    +"</select><label for='status'>Ativo:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios[i].ativo +" value='"+ativo+"'></label>"
+                    +"</select><label for='status"+i+"'>Ativo:<input type='checkbox' id='status"+i+"' "+ listaDeFuncionarios[i].ativo +" value='"+ativo+"' onclick='alteraStatus("+i+")'></label>"
                     +"<div><a href=''>Cancelar</a>"
                     +"<button type='button' onclick='editarFuncionario("+i+","+listaDeFuncionarios[i].id+","+listaDeFuncionarios[i].usuario.id+")'>Confirmar</button></div></form></div></li></ul>";
                 }
             } else {
                 funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
-            $("#listaFuncionariosHTML").append(funcionariosHTML);
+            $("#listaFuncionariosHTML").html(funcionariosHTML);
         }
     }
 
@@ -90,7 +90,7 @@ $(document).ready(function(){
                     resp = ("Erro ao editar o funcionário!");
                     exibirMessagem(resp, 2);
                 }
-                //buscar();
+                buscar();
             },
             error: function (errJson) {
                 resp = ("Erro ao editar o funcionário!");
@@ -146,6 +146,16 @@ $(document).ready(function(){
         buscar();
     }, 500);
 
+    alteraStatus = function(i){
+        var status = $("#status"+i).val();
+        console.log($("#status"+i).val());
+        if(status=="true"){
+            $("#status"+i).val(false);
+        }else{
+            $("#status"+i).val(true);
+        }
+        console.log($("#status"+i).val());
+    }
     
     $('#carrega-listaFuncionario').click(function(e){
         /*https://tableless.com.br/conteudo-sob-demanda-com-jquery/ */

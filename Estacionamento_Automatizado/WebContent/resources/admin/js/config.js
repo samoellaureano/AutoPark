@@ -55,6 +55,7 @@ $(document).ready(function(){
                     if (succJson == 1) {
                         resp = ("Cadastro alterado com sucesso!");
                         exibirMessagem(resp, 1);
+                        buscarDados();
                     } else {
                         resp = ("Erro ao alterar o cadastro!");
                         exibirMessagem(resp, 2);
@@ -87,11 +88,10 @@ $(document).ready(function(){
                         } else if(succJson == 2) {
                             resp = ("Senha alterada com sucesso!");
                             exibirMessagem(resp, 1);
+                            buscarDados();
                         }else{
                             exibirMessagem(succJson, 2);
                         }
-
-                        buscarDados();
                     },
                     error: function (errJson) {
                         resp = ("Erro ao alterar o cadastro!");

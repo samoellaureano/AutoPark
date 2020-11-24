@@ -76,7 +76,7 @@ public class Funcionario extends Persistivel implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public boolean isAtivo() {
+	public boolean getAtivo() {
 		return ativo;
 	}
 
