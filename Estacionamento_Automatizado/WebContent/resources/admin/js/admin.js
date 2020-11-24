@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
-    buscar = function(){
+    buscarVagas = function(){
 
         var idEstacionamento = $("#estacionamento").val();
 
@@ -53,11 +53,11 @@ $(document).ready(function(){
                 if (succJson == 1) {
                     resp = ("Check-in com sucesso!");
                     exibirMessagem(resp, 1);
-                    window.location.href = ("dashboard.html");
                 }else{
                     resp = ("Erro ao realizar o check-in!");
                     exibirMessagem(resp, 2);
                 }
+                buscarVagas();
             },
             error: function (errJson) {
                 resp = ("Erro ao realizar o check-in!");
@@ -80,6 +80,7 @@ $(document).ready(function(){
                     resp = ("Erro ao realizar o check-out!");
                     exibirMessagem(resp, 2);
                 }
+                buscarVagas();
             },
             error: function (errJson) {
                 resp = ("Erro ao realizar o check-out!");
@@ -126,7 +127,7 @@ $(document).ready(function(){
             html += ("<option value='" + listaDeEstacionamento[i].id + "'>" + listaDeEstacionamento[i].descricao + "</option>");
         }    
         $("#estacionamento").html(html);
-        buscar();
+        buscarVagas();
     }
 
    
