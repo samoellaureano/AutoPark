@@ -116,9 +116,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 				// verifica se o veiculo esta ativo
 				String dataCheckin = dateFormat.format(checkinObj.getDataHora());
 
-				if(dataCheckin.equals(dataAtual)){ 
-
-
+				if(dataCheckin.equals(dataAtual)){
 
 					listaVeiculos.add(checkinObj);
 
@@ -128,5 +126,45 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
 
 		return listaVeiculos;
 
-	}	
+	}
+	
+	public List<Checkin> ListaCheckin(int id){
+
+		List<Checkin>listaCheckins = new ArrayList<Checkin>();
+
+		String jpql = "select c from "+getEntityName()+" c where c.estacionamento.id =:id ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("id", id);
+
+		@SuppressWarnings({ "unchecked" })
+		List<Checkin> list = query.getResultList();
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); 
+		Date data = new Date(); 
+		String dataAtual = dateFormat.format(data);		
+		
+		for (Checkin checkinObj: list){
+			
+			if(checkinObj.getVeiculo().getAtivo()==true) {				
+				Checkout checkout = new CheckoutJPADAO().buscarPorIdVeiculo(checkinObj.getVeiculo().getId());
+				
+				if(checkout.getId() != 0){					
+					String dataCheckin = dateFormat.format(checkinObj.getDataHora());
+					
+					if(dataCheckin.equals(dataAtual)){
+						
+						listaCheckins.add(checkinObj);
+					}
+				}
+			}
+		}
+
+		return listaCheckins;
+	}
+	
+	
+
+	
+	
+	
 }
