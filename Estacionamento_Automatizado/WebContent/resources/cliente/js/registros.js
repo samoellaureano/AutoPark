@@ -17,23 +17,24 @@ $(document).ready(function () {
         autoPark.ajax.post(cfg);
     });
 
-    visualizarRegistro = function (listaDeRegistros) {        
+    visualizarRegistro = function (listaDeRegistros) {
         if (listaDeRegistros != undefined) {
             var registroHtml = "";
             if (listaDeRegistros.checkin.length > 0) {
                 for (var i = 0; i < listaDeRegistros.checkin.length; i++) {
-                            var data = new Date(listaDeRegistros.checkin[i].dataHora);
+                    if (listaDeRegistros.checkout[i] != undefined) {
+                        var data = new Date(listaDeRegistros.checkin[i].dataHora);
 
-                            const now = new Date(listaDeRegistros.checkout[i].dataHora); // Data de hoje
-                            const past = new Date(listaDeRegistros.checkin[i].dataHora); // Outra data no passado
-                            const diff = Math.abs(now.getTime() - past.getTime());
-                            var diferenca = new Date(diff);
-                            registroHtml += "<ul class='itemRegistro'><input type='radio' name='registro' id='reg" + i + "' hidden>"
-                            + "<label for='reg" + i + "'>" + data.getUTCDate()+"/"+data.getUTCMonth()+"/"+data.getUTCFullYear()+"</label>"
-                            + "<li>Veiculo:<span>"+listaDeRegistros.checkin[i].veiculo.placa+"</span></li>"
-                            + "<li>Tempo de Uso:<span>"+(diferenca.getUTCDate()-1)+"d "+diferenca.getUTCHours()+"h "+diferenca.getUTCMinutes()+"m</span></li>"
-                            + "<li>Valor:<span>"+listaDeRegistros.checkout[i].valor+"</span></li></ul>";
-                        
+                        const now = new Date(listaDeRegistros.checkout[i].dataHora); // Data de hoje
+                        const past = new Date(listaDeRegistros.checkin[i].dataHora); // Outra data no passado
+                        const diff = Math.abs(now.getTime() - past.getTime());
+                        var diferenca = new Date(diff);
+                        registroHtml += "<ul class='itemRegistro'><input type='radio' name='registro' id='reg" + i + "' hidden>"
+                            + "<label for='reg" + i + "'>" + data.getUTCDate() + "/" + data.getUTCMonth() + "/" + data.getUTCFullYear() + "</label>"
+                            + "<li>Veiculo:<span>" + listaDeRegistros.checkin[i].veiculo.placa + "</span></li>"
+                            + "<li>Tempo de Uso:<span>" + (diferenca.getUTCDate() - 1) + "d " + diferenca.getUTCHours() + "h " + diferenca.getUTCMinutes() + "m</span></li>"
+                            + "<li>Valor:<span>" + listaDeRegistros.checkout[i].valor + "</span></li></ul>";
+                    }
                 };
             } else {
                 registroHtml = "<span>Nenhum registro encontrado</span>";
