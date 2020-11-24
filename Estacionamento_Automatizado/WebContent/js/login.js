@@ -49,7 +49,7 @@ assistencia.recuperaSenha = function(){
     document.getElementById("iconeVerificandoCPF").style.display = "block";      
 
     var cfg = {
-        url: "rest/recuperacaoSenha/esqueciSenha",
+        url: "../../rest/recuperacaoSenha/esqueciSenha",
         data: JSON.stringify(cpf),
         success: function (msgSuc){
             if(msgSuc.valUsuario == "true"){
@@ -67,5 +67,5 @@ assistencia.recuperaSenha = function(){
             exibirMessagem(resp, 2);
         }
     }
-    IT.ajax.post(cfg);
+    autoPark.ajax.post(cfg);
 };

@@ -73,7 +73,6 @@ public class CheckinRest extends UtilRest{
 
 			return this.buildErrorResponse("Erro ao cadastrar");
 		}
-
 	}
 
 	@POST
@@ -152,4 +151,10 @@ public class CheckinRest extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+	
+
+	
+	
+	
+	
 }

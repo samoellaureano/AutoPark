@@ -13,7 +13,9 @@ $(document).ready(function () {
             exibirMessagem(resp, 2);
          }
       };
+      
       autoPark.ajax.post(cfg);
+
    };
    visualizar = function (checkin) {
       if(checkin != undefined && checkin.dataHora != null){

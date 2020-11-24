@@ -34,7 +34,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings("rawtypes")
 		List list = query.getResultList();
-		for (Object object: list) {
+		for (Object object: list){
 			return ((T) object);
 		}
 		return null;

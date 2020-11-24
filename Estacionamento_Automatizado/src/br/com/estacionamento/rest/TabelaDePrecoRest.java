@@ -3,11 +3,14 @@ package br.com.estacionamento.rest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.TabelaDePrecoJPADAO;
+import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.TabelaDePreco;
 import br.com.estacionamento.util.UtilRest;
 
@@ -45,5 +48,6 @@ public class TabelaDePrecoRest extends UtilRest{
 			return this.buildErrorResponse("Erro ao cadastrar");
 		}
 
-	}
+	}	
+	
 }
