@@ -53,11 +53,11 @@ $(document).ready(function () {
                 if (succJson == 1) {
                     resp = ("Check-in com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("dashboard.html");
                 } else {
                     resp = ("Erro ao realizar o check-in!");
                     exibirMessagem(resp, 2);
                 }
-                buscarVagas();
             },
             error: function (errJson) {
                 resp = ("Erro ao realizar o check-in!");
@@ -76,11 +76,11 @@ $(document).ready(function () {
                 if (succJson == 1) {
                     resp = ("Check-out com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("dashboard.html");
                 } else {
                     resp = ("Erro ao realizar o check-out!");
                     exibirMessagem(resp, 2);
                 }
-                buscarVagas();
             },
             error: function (errJson) {
                 resp = ("Erro ao realizar o check-out!");
@@ -130,5 +130,5 @@ $(document).ready(function () {
     };
     setTimeout(function () {
         buscaEstacionamento();
-    }, 1000);
+    }, 3000);
 });

@@ -16,7 +16,7 @@ def localizarPlaca(contornos, imagem):
                 if alt < lar:
                     cv2.rectangle(imagem, (x, y), (x + lar, y + alt), (0, 255, 0), 3)
                     roi = imagem[y:y + alt, x:x + lar]
-                    cv2.imwrite("C:\Tesseract-OCR\saidas\placa.jpg", roi)
+                    cv2.imwrite("C:/Tesseract-OCR/saidas/placa.jpg", roi)
 
     return imagem
 
@@ -74,6 +74,7 @@ while (video.isOpened()):
     result = cv2.GaussianBlur(result, (5, 5), 0)
 
     ret, result = cv2.threshold(result, 90, 255, cv2.THRESH_BINARY)
+
     img, contornos, hier = cv2.findContours(result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 

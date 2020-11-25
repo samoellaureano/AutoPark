@@ -132,5 +132,5 @@ $(document).ready(function () {
 
     setTimeout(function () {
         buscaEstacionamento();
-    }, 1000);
+    }, 1500);
 });
