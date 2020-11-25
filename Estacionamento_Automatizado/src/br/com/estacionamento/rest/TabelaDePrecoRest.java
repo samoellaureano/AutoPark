@@ -62,7 +62,7 @@ public class TabelaDePrecoRest extends UtilRest{
 
 			List<TabelaDePreco> listaPrecos = new ArrayList<TabelaDePreco>();
 			
-			if(nomeEstacionamento.equals("")||nomeEstacionamento==null) {
+			if(nomeEstacionamento.equals("")||nomeEstacionamento.equals("null")) {
 				
 				listaPrecos = new TabelaDePrecoJPADAO().listaTodosValor();
 				

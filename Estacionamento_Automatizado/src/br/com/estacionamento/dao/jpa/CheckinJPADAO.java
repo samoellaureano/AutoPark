@@ -10,12 +10,11 @@ import javax.persistence.Query;
 
 import com.mysql.fabric.xmlrpc.base.Data;
 
-import br.com.estacionamento.dao.CheckinDAO;
 import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.entidade.Checkout;
 
-public class CheckinJPADAO extends JPAAbstract<Checkin> implements CheckinDAO{
+public class CheckinJPADAO extends JPAAbstract<Checkin> {
 
 	@Override
 	public String getEntityName() {
