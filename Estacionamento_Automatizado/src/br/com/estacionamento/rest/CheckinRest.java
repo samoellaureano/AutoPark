@@ -52,8 +52,11 @@ public class CheckinRest extends UtilRest{
 			checkin.setEstacionamento(estacionamento);
 			checkin.setDataHora(data);
 			checkin.setVeiculo(veiculo);
-
-			boolean retorno = checkinJpadao.salvar(checkin);
+			
+			boolean retorno = false;
+			if(checkin.getVeiculo().getAtivo()) {
+				retorno = checkinJpadao.salvar(checkin);
+			}
 
 			if(retorno){
 				// Cadastrado com sucesso.

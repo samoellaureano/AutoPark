@@ -19,6 +19,7 @@ import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.Checkout;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Registro;
+import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("registroRest")
@@ -30,7 +31,15 @@ public class RegistroRest extends UtilRest{
 	public Response buscaRegistro(@PathParam("dataInicial") String dataInicial, @PathParam("dataFinal") String dataFinal, @PathParam("idUsuario") int idUsuario){
 		Registro registro = new Registro();
 		try{
-			Cliente cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
+			Cliente cliente = new Cliente();
+			if(idUsuario == 0) {
+				Usuario usuario = new Usuario();
+				usuario.setId(idUsuario);
+				cliente.setUsuario(usuario);
+			}else {
+				cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
+			}
+			 
 			List<Checkin> listaCheckin = new ArrayList<Checkin>();
 			List<Checkout> listaCheckout = new ArrayList<Checkout>();
 			Date DI = null;
