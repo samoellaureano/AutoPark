@@ -74,7 +74,7 @@ while (video.isOpened()):
     result = cv2.GaussianBlur(result, (5, 5), 0)
 
     ret, result = cv2.threshold(result, 90, 255, cv2.THRESH_BINARY)
-    result = cv2.Canny(result, 100, 200)
+
     img, contornos, hier = cv2.findContours(result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 
