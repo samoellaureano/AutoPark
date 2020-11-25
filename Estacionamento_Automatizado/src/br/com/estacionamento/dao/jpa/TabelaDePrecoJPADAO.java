@@ -56,7 +56,7 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 public List<TabelaDePreco> listaTodosValor() {
 		
 		List<TabelaDePreco>listaPreco = new ArrayList<TabelaDePreco>();		
-		String jpql = "select c from "+getEntityName();
+		String jpql = "select c from "+getEntityName()+ " c ";
 		Query query = super.getQuery(jpql);		
 		
 		@SuppressWarnings("rawtypes")

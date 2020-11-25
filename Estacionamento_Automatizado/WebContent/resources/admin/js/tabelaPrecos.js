@@ -27,22 +27,18 @@ $(document).ready(function(){
         if (listaDePrecos != undefined) {
             if (listaDePrecos.length > 0) {
                 for (var i = 0; i < listaDePrecos.length; i++) {
-                    if(listaDePrecos.status[i]){
-                        listaDePrecos.status[i] = "checked";
-                    }else{
-                        listaDePrecos.status[i] = "";
-                    }
-                    precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos.estacionamento[i]+"' hidden>"
-                    +"<label for='est"+i+"'>"+listaDePrecos.estacionamento[i]+"</label>";
                     
-                    for (var j = 0; j < listaDePrecos.listaDeValores.length; j++) {
+                    precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos[i].estacionamento.descricao+"' hidden>"
+                    +"<label for='est"+i+"'>"+listaDePrecos[i].estacionamento.descricao+"</label>";
+                    
+                    for (var j = 0; j < listaDePrecos.length; j++) {
 
                         precosHTML +=" <li><input type='checkbox' name='preco' id='prec"+j+"' hidden>"
-                        +"<label for='prec"+j+"'>"+listaDePrecos.listaDeValores.tipoVeiculo[j]+"/"+listaDePrecos.listaDeValores.tipoCobranca[j]+"</label><ul>"
+                        +"<label for='prec"+j+"'>"+listaDePrecos[i].tipoVeiculo.descricao+"-"+listaDePrecos[j].descricao+"</label><ul>"
                         +"<label for='editar"+j+"'>Editar</label>"
                         +"<input type='checkbox' id='editar"+j+"' hidden>"
                         +"<div><form><label for='valor"+j+"'>Valor:</label>"
-                        +"<input type='text' id='valor"+j+"' value='"+listaDePrecos.listaDeValores.valor[j]+"'>"
+                        +"<input type='text' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
                         +"<label for='tipoVeiculo"+j+"'>Tipo de Veículo:</label>"
                         +"<select name='tipoVeiculo' id='tipoVeiculo"+j+"' onClick='buscarVeiculos()'></select>"
                         +"<label for='tipoCobranca"+j+"'>Tipo de Cobrança:</label>"
@@ -52,7 +48,7 @@ $(document).ready(function(){
                         +"<option value='semana'>Semana</option>"
                         +"<option value='mes'>Mês</option></select>"
                         +"<label for='status"+j+"'>Status:"
-                        +"<input type='checkbox' id='status"+j+"' "+listaDePrecos.listaDeValores.status[j]+"></label>"
+                        +"<input type='checkbox' id='status"+j+"'checked'></label>"
                         +"<div><a href=''>Cancelar</a>"
                         +"<button onClick='editarPreco("+i+","+j+")'>Confirmar</button>"
                         +"</div></form></div></ul></li>"
