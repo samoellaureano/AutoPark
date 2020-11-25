@@ -1,8 +1,11 @@
 package br.com.estacionamento.dao.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import br.com.estacionamento.dao.TabelaDePrecoDAO;
 import br.com.estacionamento.entidade.Estacionamento;
@@ -30,9 +33,41 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 		for (Object object: list) {
 			tabelaDePreco = ((TabelaDePreco) object);
 		}		
-		return tabelaDePreco.getValor();
-		
+		return tabelaDePreco.getValor();	
 		
 	}
+	
+	public List<TabelaDePreco> listaValorEstacionamento(String estacionamento) {
+		
+		List<TabelaDePreco>listaPreco = new ArrayList<TabelaDePreco>();		
+		String jpql = "select c from "+getEntityName()+" c  where c.descricao := estacionamento ";
+		Query query = super.getQuery(jpql);
+		query.setParameter("estacionamento", estacionamento);
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		for (Object object: list) {
+			listaPreco.add((TabelaDePreco) object);
+		}		
+		return listaPreco;	
+		
+	}
+	
+public List<TabelaDePreco> listaTodosValor() {
+		
+		List<TabelaDePreco>listaPreco = new ArrayList<TabelaDePreco>();		
+		String jpql = "select c from "+getEntityName();
+		Query query = super.getQuery(jpql);		
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.getResultList();
+		
+		for (Object object: list) {
+			listaPreco.add((TabelaDePreco) object);
+		}		
+		return listaPreco;			
+	}
+	
+	
 
 }

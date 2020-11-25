@@ -4,10 +4,15 @@ $(document).ready(function(){
 
     buscar = function(){
         var valorBusca = $("#buscarEst").val();
+        if(valorBusca==""||valorBusca==null||valorBusca==undefined){
+            valorBusca=null;
+        };
+        console.log(valorBusca+":lol");
         var cfg = {
             type: "POST",
-            url: "../rest/precoRest/buscarPrecos/" + valorBusca,
+            url: "../../rest/tabelaDePrecoRest/buscarPrecos/" + valorBusca,
             success: function (listaDePrecos) {
+                console.log(listaDePrecos);
                 exibirPrecos(listaDePrecos);
             },
             error: function (err) {
@@ -29,7 +34,9 @@ $(document).ready(function(){
                     }
                     precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos.estacionamento[i]+"' hidden>"
                     +"<label for='est"+i+"'>"+listaDePrecos.estacionamento[i]+"</label>";
+                    
                     for (var j = 0; j < listaDePrecos.listaDeValores.length; j++) {
+
                         precosHTML +=" <li><input type='checkbox' name='preco' id='prec"+j+"' hidden>"
                         +"<label for='prec"+j+"'>"+listaDePrecos.listaDeValores.tipoVeiculo[j]+"/"+listaDePrecos.listaDeValores.tipoCobranca[j]+"</label><ul>"
                         +"<label for='editar"+j+"'>Editar</label>"

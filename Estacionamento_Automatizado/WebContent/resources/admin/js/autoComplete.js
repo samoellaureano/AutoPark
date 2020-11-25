@@ -11,9 +11,9 @@ $(function() {
 
 $(function() {
   var estacionamentos = [
-    "Estacionamento 001",
-    "Estacionamento 002",
-    "Estacionamento 003"
+    "Estacionamento 01",
+    "Estacionamento 02",
+    "Estacionamento 03"
   ];
   $("#buscarEst" ).autocomplete({
     source: estacionamentos

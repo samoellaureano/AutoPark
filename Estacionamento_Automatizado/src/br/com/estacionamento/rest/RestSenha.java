@@ -1,14 +1,50 @@
 package br.com.estacionamento.rest;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;      //Identifica o caminho do URI para o qual uma classe de recurso ou método de classe atenderá solicitações.
+import javax.ws.rs.core.Response;
 
+import br.com.estacionamento.dao.jpa.ClienteJPADAO;
+import br.com.estacionamento.dao.jpa.UsuarioJPADAO;
+import br.com.estacionamento.entidade.Cliente;
+import br.com.estacionamento.entidade.Funcionario;
+import br.com.estacionamento.entidade.Usuario;
 import br.com.estacionamento.util.UtilRest;
 
 @Path("recuperacaoSenha")      //Caminho URI da classe Rest utilizada.
 public class RestSenha extends UtilRest{
 
-	public RestSenha(){
+	public RestSenha(){}
+	
+	//
+	
+	@POST
+	@Path("/esqueciSenha")
+	@Consumes("application/*")
+	public Response atualizaCliente(String cpf){
+		
+		Usuario usuario = new UsuarioJPADAO().buscarPorCpf(cpf);
+		Cliente cliente = new Cliente();
+		Funcionario funcionario = new Funcionario();
+		
+		if(usuario.getPerfil()==0) {
+		   // Cliente 
+		  
+			
+		  
+			
+		}else{			
+		 // Funcionario
+			
+			
+		}
+		
+		
+		return null;
 	}
+	
+	
 //	
 //	@POST
 //	@Path("/esqueciSenha")

@@ -118,7 +118,7 @@ $(document).ready(function(){
                     };
                     autoPark.ajax.post(cfg);
                 }
-            }, 500);
+            }, 1000);
     };
 
     exibirEstacionamentos = function (listaDeEstacionamento) {
