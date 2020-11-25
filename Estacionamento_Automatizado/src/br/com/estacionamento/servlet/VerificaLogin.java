@@ -32,7 +32,9 @@ public class VerificaLogin extends HttpServlet {
 
 		String context = request.getServletContext().getContextPath(); //recebe a urlda request
 		loginFront.setSenhaCriptografada(loginFront.getSenha());
-
+		
+		System.out.println(loginFront.getSenha());
+		
 		Login login = new Login(new UsuarioJPADAO());
 
 		boolean retorno;

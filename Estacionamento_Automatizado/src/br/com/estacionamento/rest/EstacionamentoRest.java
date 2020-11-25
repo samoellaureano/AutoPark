@@ -69,6 +69,10 @@ public class EstacionamentoRest extends UtilRest{
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
 			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
 			
+			
+			
+			
+			
 			funcionario = funcionarioJpadao.buscarPorIdUsuario(idUsuario);
 			
 			listaEstacionamentos = estacionamentoJpadao.buscarPorIdEsmpresa(funcionario.getEmpresa().getId());
