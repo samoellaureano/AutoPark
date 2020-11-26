@@ -42,10 +42,10 @@ public class SendMail {
                          .parse(email); 
               String messagem = "Olá,\nVocê solicitou a redefinição da senha de acesso.\n\n    Nova Senha:  " + novaSenha;
               messagem += "\n\nPara isso clique no link abaixo e utilize a nova senha:";
-              messagem += "\n\nhttp://localhost:8080/Assistencia";
+              messagem += "\n\nhttp://localhost:8080/Estacionamento_Automatizado";
 
               message.setRecipients(Message.RecipientType.TO, toUser);
-              message.setSubject("Nova Senha de Acesso");//Assunto
+              message.setSubject("noreply");//Assunto
               message.setText(messagem);
               /**M�todo para enviar a mensagem criada*/
               

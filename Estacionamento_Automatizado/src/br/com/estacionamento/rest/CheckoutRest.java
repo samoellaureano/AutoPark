@@ -1,8 +1,6 @@
 package br.com.estacionamento.rest;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,13 +9,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.estacionamento.dao.jpa.CheckinJPADAO;
 import br.com.estacionamento.dao.jpa.CheckoutJPADAO;
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
 import br.com.estacionamento.dao.jpa.EstacionamentoJPADAO;
-import br.com.estacionamento.dao.jpa.TabelaDePrecoJPADAO;
 import br.com.estacionamento.dao.jpa.VeiculoJPADAO;
-import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.Checkout;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Estacionamento;
@@ -34,35 +29,41 @@ public class CheckoutRest extends UtilRest{
 
 		try {
 			Date data = new Date();
-			double totalDeHoras;
+			//int totalDeHoras;
 			
 			Checkout checkout = new Checkout();
-			Checkin checkin = new Checkin();
+			//Checkin checkin = new Checkin();
 			Veiculo veiculo = new Veiculo();
 			Cliente cliente = new Cliente();
 			Estacionamento estacionamento = new Estacionamento();
 			
 			CheckoutJPADAO checkoutJpadao = new CheckoutJPADAO();
-			CheckinJPADAO checkinJpadao = new CheckinJPADAO();
+			//CheckinJPADAO checkinJpadao = new CheckinJPADAO();
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
-			TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
+			//TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
 			
 			veiculo = veiculoJpadao.buscarPorPlaca(placa);
 			cliente = clienteJpadao.buscarPorId(veiculo.getCliente().getId());
 			estacionamento = estacionamentoJpadao.buscarPorId(id);
-			checkin = checkinJpadao.buscarPorIdVeiculo(veiculo.getId());
-			
-			//totalDeHoras = Util.calcularDiferencaHoras(checkin.getDataHora().toString(), data.toString());
+			//checkin = checkinJpadao.buscarPorIdVeiculo(veiculo.getId());
 			
 			checkout.setCliente(cliente);
 			checkout.setEstacionamento(estacionamento);
 			checkout.setDataHora(data);
 			checkout.setVeiculo(veiculo);
-			//checkout.setValor(totalDeHoras*tabelaDePrecoJpadao.buscaValor(veiculo, estacionamento));
 
 			boolean retorno = checkoutJpadao.salvar(checkout);
+			/*
+			 * checkout = checkoutJpadao.buscarPorIdVeiculo(id); totalDeHoras =
+			 * Util.calcularDiferencaHoras(checkin.getDataHora().toString(),
+			 * checkout.getDataHora().toString());
+			 * checkout.setValor(totalDeHoras*tabelaDePrecoJpadao.buscaValor(veiculo,
+			 * estacionamento));
+			 * 
+			 * retorno = checkoutJpadao.atualizar(checkout);
+			 */
 
 			if(retorno){
 				// Cadastrado com sucesso.
@@ -82,6 +83,22 @@ public class CheckoutRest extends UtilRest{
 
 			return this.buildErrorResponse("Erro ao cadastrar");
 		}
-	}	
+	}
+	
+	@POST
+	@Path("/buscaReceitaDoDia/{idestaconamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarReceitaDoDia(@PathParam("idestaconamento") int idEstaconamento){		
+		
+		try{
+			
+			float receita = new CheckoutJPADAO().buscarReceitaDia(idEstaconamento);			
+			return this.buildResponse(receita);
+
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 		
 }

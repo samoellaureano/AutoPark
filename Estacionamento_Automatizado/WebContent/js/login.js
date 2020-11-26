@@ -42,6 +42,7 @@ assistencia.recuperaSenha = function(){
     var cpf = $("#cpf").val();
     cpf = cpf.replace(/\./g, "");
     cpf = cpf.replace(/\-/g, "");
+    cpf = cpf.replace(/\"/g, "");
 
     document.getElementById("msgRecuperaOk").style.display = "none";
     document.getElementById("msgRecuperaErro").style.display = "none";
@@ -49,10 +50,10 @@ assistencia.recuperaSenha = function(){
     document.getElementById("iconeVerificandoCPF").style.display = "block";      
 
     var cfg = {
-        url: "../../rest/recuperacaoSenha/esqueciSenha",
-        data: JSON.stringify(cpf),
+        type: "POST",
+        url: "rest/recuperacaoSenha/esqueciSenha/" + cpf,
         success: function (msgSuc){
-            if(msgSuc.valUsuario == "true"){
+            if(msgSuc.retorno == "true"){
                 document.getElementById("msgRecuperaOk").style.display = "block";                            
             }else{                
                 document.getElementById("msgRecuperaErro").style.display = "block";
@@ -61,6 +62,7 @@ assistencia.recuperaSenha = function(){
             $("#emailUsuarioEncaminhado").html(msgSuc.email);
             document.getElementById("btnRecuperarSenha").style.display = "block";
             document.getElementById("iconeVerificandoCPF").style.display = "none";
+            window.location.href = ("index.html");
         },
         error: function (){
             resp = ("Erro ao solicitar a recuperação")

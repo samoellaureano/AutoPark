@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import br.com.estacionamento.dao.TabelaDePrecoDAO;
 import br.com.estacionamento.entidade.Estacionamento;
 import br.com.estacionamento.entidade.TabelaDePreco;

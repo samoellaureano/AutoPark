@@ -74,7 +74,7 @@ $(document).ready(function(){
             var novaSenha = $("#novaSenha").val();
             usuario = new Object();
 
-            if (confSenha == novaSenha){
+            if (confSenha == novaSenha && novaSenha != ""){
                 usuario.id = dadosSessao.id;
                 usuario.senha = btoa(novaSenha);
 

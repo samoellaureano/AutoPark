@@ -32,6 +32,7 @@ $(document).ready(function () {
             url: "../../rest/checkinRest/buscarClientesDoDia/" + idEstacionamento,
             success: function (numeroClientes) {
                 exibirNumeroClientes(numeroClientes);
+                buscaReceitaDoDia(idEstacionamento);
             },
             error: function (err) {
                 alert("Erro ao buscar dados dashboard: " + err.responseText);
@@ -42,6 +43,24 @@ $(document).ready(function () {
 
     exibirNumeroClientes = function (numeroDeClientes) {
         $("#clienteDia").html(numeroDeClientes);
+    };
+
+    buscaReceitaDoDia = function (idEstacionamento) {
+        var cfg = {
+            type: "POST",
+            url: "../../rest/checkoutRest/buscaReceitaDoDia/" + idEstacionamento,
+            success: function (receita) {
+                exibirReceita(receita);
+            },
+            error: function (err) {
+                alert("Erro ao buscar dados dashboard: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    };
+
+    exibirReceita = function (receita) {
+        $("#receita").html(receita);
     };
 
     checkin = function () {
