@@ -1,13 +1,11 @@
-import urllib
-import cv2
-import numpy as np
 
+import cv2
 
 cap = cv2.VideoCapture("rtsp://192.168.100.3:8080/h264_ulaw.sdp")
 while True:
     try:
-        _, frame = cap.read()
-        cv2.imshow("camera", frame)
+        _, img = cap.read()
+        cv2.imshow("camera", img)
         key = cv2.waitKey(1)
         if key & 0xFF == ord('q'):
             break
