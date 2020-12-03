@@ -30,7 +30,7 @@ def reconhecimentoImagem(path_img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     cv2.imshow("Escala Cinza", img)
 
-    ret, img = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
+    ret, img = cv2.threshold(img, 90, 120, cv2.CHAIN_APPROX_NONE)
     cv2.imshow("Limiar", img)
 
     img = cv2.GaussianBlur(img, (5, 5), 0)
