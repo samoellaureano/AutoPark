@@ -2,10 +2,11 @@ from PIL import Image
 import tkinter
 import pytesseract
 import cv2
+import json
+import requests
 
 
 def localizarPlaca(contornos, imagem):
-
     for c in contornos:
         perimetro = cv2.arcLength(c, True)
         if perimetro > 900 and perimetro < 1250:
@@ -48,17 +49,25 @@ def reconhecimentoImagem(path_img):
 
     janela = tkinter.Tk()
     print(texto)
+    id = "1"
+
+    response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
+    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
+
+    print(response.status_code)
+
     tkinter.Label(janela, text=texto, font=("Helvetica", 50)).pack()
     janela.mainloop()
 
 
 def removerChars(text):
-    str = "'‘!@#%¨&*()_+:;><^^}{`?|~¬/=,.'ºª»'\n \s+    °"
+    str = "'‘-!@#%¨&*()_+:;><^^}{`?|~¬/=,.-'ºª»'\n \s+    °"
     for x in str:
         text = text.replace(x, '')
     text = text.replace(str, '')
 
     return text
+
 
 video = cv2.VideoCapture('resource\\placa7.mp4')
 
@@ -76,7 +85,6 @@ while (video.isOpened()):
     ret, result = cv2.threshold(result, 90, 255, cv2.THRESH_BINARY)
 
     img, contornos, hier = cv2.findContours(result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-
 
     cv2.line(frame, (0, 500), (1880, 500), (0, 0, 255), 3)
     cv2.line(frame, (300, 0), (300, 1200), (0, 0, 255), 3)
