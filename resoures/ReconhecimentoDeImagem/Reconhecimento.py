@@ -5,18 +5,17 @@ import cv2
 import json
 import requests
 
-
 def localizarPlaca(contornos, imagem):
     for c in contornos:
         perimetro = cv2.arcLength(c, True)
         if 600 < perimetro < 870:
-            approx = cv2.approxPolyDP(c, 0.05 * perimetro, True)
+            approx = cv2.approxPolyDP(c, 0.03 * perimetro, True)
             if len(approx) == 4:
 
                 (x, y, lar, alt) = cv2.boundingRect(c)
                 if alt < lar:
-                    cv2.rectangle(imagem, (x, y), (x + lar, y + alt), (0, 255, 0), 1)
-                    roi = imagem[y:y + alt+20, x:x + lar]
+                    cv2.rectangle(imagem, (x, y), (x + lar, y + alt+20), (0, 255, 0), 1)
+                    roi = imagem[y:y + alt, x:x + lar]
                     cv2.imwrite("C:/Tesseract-OCR/saidas/placa.jpg", roi)
 
     return imagem
@@ -31,18 +30,17 @@ def reconhecimentoImagem(path_img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     cv2.imshow("Escala Cinza", img)
 
-    ret, img = cv2.threshold(img, 80, 255, cv2.FILE_NODE_NONE)
-    cv2.imshow("Limiar", img)
-
     img = cv2.GaussianBlur(img, (5, 5), 0)
     cv2.imshow("Desfoque", img)
+
+    ret, img = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY)
+    cv2.imshow("Limiar", img)
 
     cv2.imwrite(path_img + "-ocr.jpg", img)
     imagem = Image.open(path_img + "-ocr.jpg")
     saida = pytesseract.image_to_string(imagem, lang='eng')
-
     if len(saida) > 0:
-        print(saida)
+        #print(saida)
         texto = removerChars(saida)
     else:
         texto = "Reconhecimento Falho"
@@ -61,7 +59,7 @@ def reconhecimentoImagem(path_img):
 
 
 def removerChars(text):
-    str = "'[‘-]!@#%¨&*()_+:;><^^}{`?|~¬/=,.-'ºª»'\n \s+    °——————eagonmmmnt"
+    str = "'[‘-]!@#%¨&*()_+:;><^^}{`?|~¬/=,.-'ºª»'\n \s+    °——————eagonmmmntrrbivcud"
     for x in str:
         text = text.replace(x, '')
     text = text.replace(str, '')
@@ -69,19 +67,19 @@ def removerChars(text):
     return text
 
 
-video = cv2.VideoCapture('resource\\ANB5022.mp4')
+video = cv2.VideoCapture('resource\\RAE1151.mp4')
 
-while (video.isOpened()):
-    print("Video rodando")
+while video.isOpened():
+    #print("Video rodando")
     ret, frame = video.read()
 
-    if ret == False:
+    if not ret:
         break
 
-    area = frame[300:, 200:900]
+    area = frame[400:, 200:900]
     result = cv2.cvtColor(area, cv2.COLOR_BGR2GRAY)
     result = cv2.GaussianBlur(result, (5, 5), 0)
-    ret, result = cv2.threshold(result, 80, 255, cv2.THRESH_BINARY)
+    ret, result = cv2.threshold(result, 110, 170, cv2.THRESH_BINARY)
 
     img, contornos, hier = cv2.findContours(result, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
@@ -91,7 +89,7 @@ while (video.isOpened()):
 
     cv2.imshow('FRAME', frame)
     cv2.imshow('RES', area)
-    #cv2.imshow("Proc", result)
+    cv2.imshow("Proc", result)
     localizarPlaca(contornos, area)
 
 
@@ -101,4 +99,3 @@ while (video.isOpened()):
 video.release()
 caminho = "C:\Tesseract-OCR\saidas\placa.jpg"
 reconhecimentoImagem(caminho)
-cv2.destroyAllWindows()
