@@ -1,5 +1,6 @@
 package br.com.estacionamento.rest;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import javax.ws.rs.POST;
@@ -33,7 +34,7 @@ public class CheckoutRest extends UtilRest{
 
 		try {
 			Date data = new Date();
-			float totalDeHoras;
+			double totalDeHoras;
 			
 			Checkout checkout = new Checkout();
 			Checkin checkin = new Checkin();
@@ -63,6 +64,10 @@ public class CheckoutRest extends UtilRest{
 			checkout = checkoutJpadao.buscarPorIdVeiculo(id);
 			totalDeHoras = Util.calcularDiferencaHoras(checkin.getDataHora(),checkout.getDataHora());
 			double valorEst = tabelaDePrecoJpadao.buscaValor(veiculo, estacionamento);
+			
+			DecimalFormat formato = new DecimalFormat("0.##");      
+			totalDeHoras = Double.parseDouble(formato.format(totalDeHoras).replace(",","."));
+			
 			checkout.setValor(totalDeHoras*valorEst);
 			
 			retorno = checkoutJpadao.atualizar(checkout);
