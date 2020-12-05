@@ -60,7 +60,7 @@ public class TabelaDePrecoRest extends UtilRest{
 	public Response buscarPrecos (@PathParam("nomeEstacionamento") String nomeEstacionamento){
 		
 		try {
-
+		
 			List<TabelaDePreco> listaPrecos = new ArrayList<TabelaDePreco>();
 			
 			if(nomeEstacionamento.equals("")||nomeEstacionamento.equals("null")) {

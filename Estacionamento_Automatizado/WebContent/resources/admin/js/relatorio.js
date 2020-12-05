@@ -1,56 +1,45 @@
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
-    // $('#buscarRelatorio').click(function(e){
-    //     var valorBusca = $("#buscarReg").val();
-    //     var dataI = $("#buscarDataInicial").val();
-    //     var dataF = $("#buscarDataFinal").val();
-    //     var cfg = {
-    //         type: "POST",
-    //         url: "../rest/registrosRest/buscarRegistros/valorBusca=" + valorBusca +"&dataInicial=" + dataI + "&dataFinal=" + dataF,
-    //         success: function (listaDeRegistros) {
-    //             exibirRegistros(listaDeRegistros);
-    //         },
-    //         error: function (err) {
-    //             alert("Erro ao buscar Registros: " + err.responseText);
-    //         }
-    //     };
-    //     autoPark.ajax.post(cfg);
-    // });
+   $('#buscarRelatorio').click(function(e){
+        var dataIni = $("#buscarDataInicial").val();
+        var dataFin = $("#buscarDataFinal").val();      
+        var msg = "";
+        if (dataIni =="" || dataIni == null||dataIni == undefined ||dataFin =="" || dataFin == null||dataFin == undefined ){		
+            msg += "Data Invalida"+"\n";			
+        
+        }else{
+                    
+            var msg="";
+            var data1=relatorio.dataIni.split('-');
+            var data2=relatorio.dataFin.split('-');
+            
+            var dataInicial = new Date(data1[0],data1[1],data1[2]);
+            var dataFinal = new Date(data2[0],data2[1],data2[2]);
 
-    // exibirRegistros = function(listaDeRegistros){
-    //     var registrosHTML = "<ul class='itemRegistro'>";
-    //     if (listaDeRegistros != undefined) {
-    //         if (listaDeRegistros.length > 0) {
-    //             for (var i = 0; i < listaDeRegistros.length; i++) {
-    //                 registrosHTML += "<input type='radio' name='registro' id='reg"+i+"' hidden>"
-    //                 +"<label for='reg"+i+"'>"+listaDeRegistros.cliente.nome+"</label>"
-    //                 +"<li><div><form action=''><label for='nome'>Veiculo:<span>"+listaDeRegistros.veiculo.placa+"</span></label>"
-    //                 +"<label for='nome'>Check-in:<span>"+listaDeRegistros.checkin.data+"</span></label>"
-    //                 +"<label for='nome'>Check-out:<span>"+listaDeRegistros.checkout.data+"</span></label></form></div></li>"
-    //             }
-    //             registrosHTML+="</ul>";
-    //         } else {
-    //             registrosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
-    //         }
-    //         $("#listaRegistrosHTML").append(registrosHTML);
-    //     }
-    // }
+            if(dataFinal<dataInicial){
+            msg+="Data com o valor invalido."+"\n";
+            };
+        };     
+               
+        if(msg == ""){	
+            dataIni = data1[0],data1[1],data1[2];
+            dataFin = data2[0],data2[1],data2[2];
+            var cfg = {
+                type: "POST",
+                url: "../../rest/registroRest/buscaRegistro/" + dataIni + "&" + dataFin + "&0",
+                success: function (listaDeRegistros){
+                    visualizarRegistro(listaDeRegistros);
+                },
+                error: function (errJson){
+                    alert("Erro ao buscar relatório: " + errJson.responseText);
+                }
+            };
+            autoPark.ajax.post(cfg);
 
-    $('#buscarRelatorio').click(function(e){
-        var dataInicial = reformatDate($("#buscarDataInicial").val());
-        var dataFinal = reformatDate($("#buscarDataFinal").val());
-        var cfg = {
-            type: "POST",
-            url: "../../rest/registroRest/buscaRegistro/" + dataInicial + "&" + dataFinal + "&0",
-            success: function (listaDeRegistros) {
-                visualizarRegistro(listaDeRegistros);
-            },
-            error: function (errJson) {
-                alert("Erro ao buscar relatório: " + errJson.responseText);
-            }
-        };
-        autoPark.ajax.post(cfg);
+        }else{
+           alert(msg);
+        };        
     });
 
     visualizarRegistro = function (listaDeRegistros) {
@@ -84,6 +73,7 @@ $(document).ready(function(){
         return dArr[2] + "-" + dArr[1] + "-" + dArr[0]; //ex out: "18/01/10"
     }
 });
+
 /*
 trazer  importe para a o html e referenciar a tabela 
 sem css de prerencia e apontar a tabela para o doc.autotable com o id da mesma
