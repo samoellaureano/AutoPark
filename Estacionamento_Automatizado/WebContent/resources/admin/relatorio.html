@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="../../css/alertToast.css">
     <link rel="stylesheet" href="../../css/calendar.css">
     <link rel="shortcut icon" href="../../img/logo.ico" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>	
     <script src="../../js/jquery.js"></script>
     <script src="../../js/jquery-ui.js"></script>
     <script src="../../js/ajax.js"></script>
     <script src="../../js/msgToast.js"></script>
     <script src="../../js/sessao.js"></script>
     <script src="js/relatorio.js"></script>
+    <script src="../../js/autoTable.js"></script>
+    
 </head>
 
 <body>
@@ -45,9 +47,10 @@
                     <label for="menos">Fechar Dados</label>
                 </ul>
                 <div id="listaRegistrosHTML"></div>
-                <a href="" id="carrega-listaFuncionario">Gerar Relatório</a>
+                <a id="carrega-listaFuncionario" onclick="gerarPDF()">Gerar Relatório</a>
             </nav>
         </div>
+            <div id="gridRelatorio" hidden></div>
     </div>
     <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
 </body>
