@@ -30,7 +30,7 @@ $(document).ready(function () {
                         const diff = Math.abs(now.getTime() - past.getTime());
                         var diferenca = new Date(diff);
                         registroHtml += "<ul class='itemRegistro'><input type='radio' name='registro' id='reg" + i + "' hidden>"
-                            + "<label for='reg" + i + "'>" + data.getUTCDate() + "/" + data.getUTCMonth() + "/" + data.getUTCFullYear() + "</label>"
+                            + "<label for='reg" + i + "'>" + data.getUTCDate() + "/" + (data.getUTCMonth()+1) + "/" + data.getUTCFullYear() + "</label>"
                             + "<li>Veiculo:<span>" + listaDeRegistros.checkin[i].veiculo.placa + "</span></li>"
                             + "<li>Tempo de Uso:<span>" + (diferenca.getUTCDate() - 1) + "d " + diferenca.getUTCHours() + "h " + diferenca.getUTCMinutes() + "m</span></li>"
                             + "<li>Valor:<span>" + listaDeRegistros.checkout[i].valor + "</span></li></ul>";
