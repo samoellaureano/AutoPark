@@ -13,7 +13,7 @@ $(document).ready(function(){
             url: "../../rest/tabelaDePrecoRest/buscarPrecos/" + valorBusca,
             success: function (listaDePrecos) {
                 console.log(listaDePrecos);
-                exibirPrecos(listaDePrecos);
+                buscaTipoVeiculo(listaDePrecos);                
             },
             error: function (err) {
                 alert("Erro ao buscar estacionamento: " + err.responseText);
@@ -22,9 +22,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);      
     }
 
-    exibirPrecos = function(listaDePrecos){
+    exibirPrecos = function(listaDePrecos,listaOpcoes){
         var precosHTML = "<ul class='itemEstac'>";
-        if (listaDePrecos != undefined) {
+        if (listaDePrecos != undefined && listaOpcoes != undefined) {
             if (listaDePrecos.length > 0) {
                 for (var i = 0; i < listaDePrecos.length; i++) {
                     
@@ -40,14 +40,7 @@ $(document).ready(function(){
                         +"<div><form><label for='valor"+j+"'>Valor:</label>"
                         +"<input type='text' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
                         +"<label for='tipoVeiculo"+j+"'>Tipo de Veículo:</label>"
-                        +"<select name='tipoVeiculo' id='tipoVeiculo"+j+">"
-                            +"<option value='2'>Automóvel</option>"
-                            +"<option value='5'>Bicicleta</option>"
-                            +"<option value='6'>Caminhonete</option>"
-                            +"<option value='7'>Caminhão</option>"+
-                            +"<option value='3'>Microônibus</option>"
-                            +"<option value='1'>Motocicleta</option>"
-                            +"<option value='4'>Triciclo</option>"
+                        +"<select name='tipoVeiculo' id='tipoVeiculo"+j+">"+listaOpcoes                          
                         +"</select>"
                         +"<label for='tipoCobranca"+j+"'>Tipo de Cobrança:</label>"
                         +"<select name='estacionamento' id='tipoCobranca"+j+"'>"
@@ -67,8 +60,41 @@ $(document).ready(function(){
                 precosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
             $("#listaPrecosHTML").append(precosHTML);
+            
         }
     }
+
+    buscaTipoVeiculo=function (listaDePrecos) {
+       var tipoVeicloHTML = "";            
+       var valorBusca = null;       
+        var cfg = {
+            type: "POST",
+            url: "../../rest/tipoVeiculoRest/buscaTipoVeiculos/" + valorBusca,
+            success: function (listaTipoVeiculo) {               
+                
+                if (listaTipoVeiculo != undefined){
+                    if (listaTipoVeiculo.length > 0) {
+                        for (var i = 0; i < listaTipoVeiculo.length; i++) {
+                            
+                            tipoVeicloHTML+="<option value='"+listaTipoVeiculo[i].id+"'>"+listaTipoVeiculo[i].descricao+"</option>";
+        
+                        };
+                        exibirPrecos(listaDePrecos,tipoVeicloHTML);
+                    };
+                };        
+
+                return tipoVeicloHTML;
+            },
+            error: function (err) {
+                alert("Erro ao buscar tipo de veiculo: " + err.responseText);
+                return null;
+            }
+        };
+        autoPark.ajax.post(cfg);  
+        
+    }
+
+       
 
     editarPreco = function(idI, idJ){
         tabelaPreco.valor = $("#valor"+idJ).val();

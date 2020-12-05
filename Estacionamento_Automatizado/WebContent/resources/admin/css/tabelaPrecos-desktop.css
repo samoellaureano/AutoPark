@@ -176,11 +176,11 @@ h2{
 
 
 .listaPrecos > div > ul{
-  background-color: #ffffff;
-    padding: 0.5rem 0rem 0rem;
-    border-radius: 0.2rem;
-    margin: 0.2rem 0rem;
-    user-select: none;
+  background-color: #ffffff;    
+  padding: 0.5rem 0rem 0.5rem 0rem;
+  border-radius: 0.2rem;
+  margin: 0.2rem 0rem;
+  user-select: none;
 }
 
 .fecharDados{
@@ -241,6 +241,8 @@ h2{
 
 .itemEstac > input:checked ~ li{
   display: flex;
+  margin-bottom: -1rem;
+  margin-top: 5px;
 }
 
 .itemEstac form{
