@@ -21,7 +21,7 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 	public double buscaValor(Veiculo veiculo, Estacionamento estacionamento) {
 		TabelaDePreco tabelaDePreco = new TabelaDePreco();
 		
-		String jpql = "select DISTINCT c from "+getEntityName()+" c INNER JOIN estacionamento e INNER JOIN tipoVeiculo t where t.id := idTipoVeiculo AND e.id := idEstacionamento";
+		String jpql = "select c from "+getEntityName()+" c where c.tipoVeiculo.id =:idTipoVeiculo AND c.estacionamento.id =:idEstacionamento";
 		Query query = super.getQuery(jpql);
 		query.setParameter("idTipoVeiculo", veiculo.getTipoVeiculo().getId());
 		query.setParameter("idEstacionamento", estacionamento.getId());
