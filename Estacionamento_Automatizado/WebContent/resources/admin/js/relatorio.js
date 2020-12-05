@@ -1,43 +1,8 @@
-$(document).ready(function(){
+var listaDeRegistros = null;
+$(document).ready(function () {
     $("#menu").load("menu.html");
-
-    // $('#buscarRelatorio').click(function(e){
-    //     var valorBusca = $("#buscarReg").val();
-    //     var dataI = $("#buscarDataInicial").val();
-    //     var dataF = $("#buscarDataFinal").val();
-    //     var cfg = {
-    //         type: "POST",
-    //         url: "../rest/registrosRest/buscarRegistros/valorBusca=" + valorBusca +"&dataInicial=" + dataI + "&dataFinal=" + dataF,
-    //         success: function (listaDeRegistros) {
-    //             exibirRegistros(listaDeRegistros);
-    //         },
-    //         error: function (err) {
-    //             alert("Erro ao buscar Registros: " + err.responseText);
-    //         }
-    //     };
-    //     autoPark.ajax.post(cfg);
-    // });
-
-    // exibirRegistros = function(listaDeRegistros){
-    //     var registrosHTML = "<ul class='itemRegistro'>";
-    //     if (listaDeRegistros != undefined) {
-    //         if (listaDeRegistros.length > 0) {
-    //             for (var i = 0; i < listaDeRegistros.length; i++) {
-    //                 registrosHTML += "<input type='radio' name='registro' id='reg"+i+"' hidden>"
-    //                 +"<label for='reg"+i+"'>"+listaDeRegistros.cliente.nome+"</label>"
-    //                 +"<li><div><form action=''><label for='nome'>Veiculo:<span>"+listaDeRegistros.veiculo.placa+"</span></label>"
-    //                 +"<label for='nome'>Check-in:<span>"+listaDeRegistros.checkin.data+"</span></label>"
-    //                 +"<label for='nome'>Check-out:<span>"+listaDeRegistros.checkout.data+"</span></label></form></div></li>"
-    //             }
-    //             registrosHTML+="</ul>";
-    //         } else {
-    //             registrosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
-    //         }
-    //         $("#listaRegistrosHTML").append(registrosHTML);
-    //     }
-    // }
-
-    $('#buscarRelatorio').click(function(e){
+    $('#buscarRelatorio').click(function (e) {
+        listaDeRegistros = null;
         var dataInicial = reformatDate($("#buscarDataInicial").val());
         var dataFinal = reformatDate($("#buscarDataFinal").val());
         var cfg = {
@@ -83,28 +48,29 @@ $(document).ready(function(){
         dArr = dateStr.split("-");  // ex input "2010-01-18"
         return dArr[2] + "-" + dArr[1] + "-" + dArr[0]; //ex out: "18/01/10"
     }
+
+    function gerarPDF() {
+        //trazer  importe para a o html e referenciar a tabela
+        //sem css de prerencia e apontar a tabela para o doc.autotable com o id da mesma
+
+
+        var doc = new jsPDF();
+        doc.setFontSize(11);
+        doc.text(10, 10, 'Logos Assistência Tecnica Especializada');
+        doc.text(10, 15, 'Rua: Dr. João Colin, nº 780, joinville - SC ');
+        doc.text(10, 20, 'Telefone: (47) 3227 9076');
+        doc.text(0, 30, '--------------------------------------------------------------------------------------------------------------------------------------------------------------------');
+        doc.setFontSize(22);
+        doc.text(65, 45, 'Relatório da Empresa');
+        doc.setFontSize(11);
+        doc.text(20, 65, 'Status das ordem de Serviço: ' + status);
+        doc.text(20, 70, 'Valor Total: ' + vlt);
+
+        doc.autoTable({ html: "#idtableEdit2", startY: 95 });
+
+        var data = new Date();
+        var mes = parseInt(data.getMonth()) + parseInt(1);
+        var dia = data.getDate() + "_" + mes + "_" + data.getFullYear();
+        doc.save("Relatorio - " + dia + ".pdf");
+    }
 });
-/*
-trazer  importe para a o html e referenciar a tabela 
-sem css de prerencia e apontar a tabela para o doc.autotable com o id da mesma
-
-var doc = new jsPDF();
-							doc.setFontSize(11);
-							doc.text(10, 10, 'Logos Assistência Tecnica Especializada');
-							doc.text(10, 15, 'Rua: Dr. João Colin, nº 780, joinville - SC ');
-							doc.text(10, 20, 'Telefone: (47) 3227 9076');
-							doc.text(0, 30, '--------------------------------------------------------------------------------------------------------------------------------------------------------------------');
-							doc.setFontSize(22);
-							doc.text(65, 45, 'Relatório da Empresa');
-							doc.setFontSize(11);
-							doc.text(20, 65, 'Status das ordem de Serviço: '+status);
-							doc.text(20, 70, 'Valor Total: '+vlt);
-									
-						doc.autoTable({ html: "#idtableEdit2",startY: 95 });
-						
-						var data = new Date();
-						var mes = parseInt(data.getMonth())+parseInt(1);
-						var dia = data.getDate()+"_"+ mes+"_"+ data.getFullYear();
-						doc.save("Relatorio - "+dia+".pdf");
-
-*/
