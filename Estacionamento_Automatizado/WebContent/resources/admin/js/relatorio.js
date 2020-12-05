@@ -44,16 +44,14 @@ $(document).ready(function () {
         };
     };
 
-    function reformatDate(dateStr) {
+    reformatDate = function (dateStr) {
         dArr = dateStr.split("-");  // ex input "2010-01-18"
         return dArr[2] + "-" + dArr[1] + "-" + dArr[0]; //ex out: "18/01/10"
     }
 
-    function gerarPDF() {
+    gerarPDF = function (){
         //trazer  importe para a o html e referenciar a tabela
         //sem css de prerencia e apontar a tabela para o doc.autotable com o id da mesma
-
-
         var doc = new jsPDF();
         doc.setFontSize(11);
         doc.text(10, 10, 'Logos Assistência Tecnica Especializada');
