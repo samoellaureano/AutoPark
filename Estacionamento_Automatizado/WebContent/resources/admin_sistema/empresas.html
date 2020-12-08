@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/empresas.css">
+
+    <script src="../../js/jquery.js"></script>     
+    <script src="../../js/ajax.js"></script>
+    <script src="js/empresas.js"></script> 
+</head>
+
+<body>
+    <div class="container">
+        <div class="voltar">
+            <a href="dashboard.html"><img src="img/voltar.png" alt="Voltar">
+                <span>Voltar</span>
+            </a>            
+        </div>
+        <div><h1>Empresas</h1></div>
+        <div class="corpo" id="corpo">                    
+            <div class="novo" id="novo">            
+                <div>
+                    <h2>Novo</h2>
+                    <form class="novoEmp">
+                        <label for="razaoSocial">Razão Social</label>
+                        <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Digite aqui.." required>
+        
+                        <label for="cnpj">CNPJ</label>
+                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+    
+                        <div>
+                            <button type="button">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="lista">
+                <h2>Lista de Empresas</h2>
+                <table>
+                    <th>Razão Social</th>
+                    <th>CNPJ</th>
+                    <th>Ação</th>
+                </table>
+            </div>
+            <div class="editar" id="editar" style="display: none;">            
+                <div>
+                    <h2>Editar</h2>
+                    <form class="novoEmp">
+                        <label for="razaoSocialEdit">Razão Social</label>
+                        <input type="text" id="razaoSocialEdit" name="razaoSocialEdit" placeholder="Digite aqui.." required>
+        
+                        <label for="cnpjEdit">CNPJ</label>
+                        <input type="text" id="cnpjEdit" name="cnpjEdit" placeholder="00.000.000/0000-00" required>
+    
+                        <div>
+                            <button type="button">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>
