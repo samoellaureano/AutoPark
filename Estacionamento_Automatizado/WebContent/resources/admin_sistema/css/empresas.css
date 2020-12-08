@@ -1,0 +1,104 @@
+html,
+body {
+  display: flex;
+  width: 100%;
+  height: 98%;
+  background-color: #0c4304;
+  background-repeat: no-repeat;
+}
+.container{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+}
+.corpo{
+  display: flex;
+  justify-content: space-between;
+}
+.voltar{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  position: fixed;
+}
+.voltar > a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  padding: 1rem;
+  color: rgb(216, 221, 217); 
+}
+.voltar > a:hover{
+  background-color: rgba(216, 207, 207, 0.795);
+  border-radius: 1rem;
+  color: rgb(0, 0, 0);
+}
+.voltar > a > span{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1rem;  
+}
+
+.novo{
+  color: black;
+  margin: 3rem 0rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3rem;
+  width: 13rem;
+  padding: 1rem;
+  background-color: #aeb7ad42;
+}
+.editar{
+  color: black;
+  margin: 3rem 0rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3rem;
+  width: 13rem;
+  padding: 1rem;
+  background-color: #aeb7ad42;
+}
+.novoEmp{
+  text-align: left;
+}
+.novoEmp > input{
+  margin: 0.4rem 0rem;
+}
+.novoEmp > div{
+  text-align: end;
+}
+.novoEmp > div > button{
+  margin: 1.5rem 0rem 0rem 0rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #fff;
+  padding: 0.7rem;
+  background-color: #07a72d;
+  border-radius: 0.3rem;
+  border: none;
+  user-select: none;
+}
+
+.lista{
+  color: black;
+  margin: 3rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #aeb7ad42;
+}
+
+table{
+  border: 1px solid;
+}
+

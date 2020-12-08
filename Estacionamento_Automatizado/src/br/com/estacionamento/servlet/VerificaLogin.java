@@ -66,6 +66,9 @@ public class VerificaLogin extends HttpServlet {
 				case 2:
 					msg.put("url", context + "/resources/admin/dashboard.html");
 					break;
+				case 3:
+					msg.put("url", context + "/resources/admin_sistema/dashboard.html");
+					break;
 				default:
 					msg.put("url", context);
 					break;
