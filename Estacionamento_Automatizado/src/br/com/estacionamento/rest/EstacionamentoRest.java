@@ -13,8 +13,10 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.estacionamento.dao.jpa.EmpresaJPADAO;
 import br.com.estacionamento.dao.jpa.EstacionamentoJPADAO;
 import br.com.estacionamento.dao.jpa.FuncionarioJPADAO;
+import br.com.estacionamento.entidade.Empresa;
 import br.com.estacionamento.entidade.Estacionamento;
 import br.com.estacionamento.entidade.Funcionario;
 import br.com.estacionamento.util.UtilRest;
@@ -26,33 +28,94 @@ public class EstacionamentoRest extends UtilRest{
 	@Path("/addEstacionamento")
 	@Consumes("application/*")
 
-	public Response inserir(String addEstacionamento){
+	public Response salvar(String addEstacionamento){
 
 		try {
 
-			Estacionamento estacionamento = new ObjectMapper().readValue(addEstacionamento, Estacionamento.class);
-
-			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
-
-			boolean retorno = estacionamentoJpadao.salvar(estacionamento);
+			Estacionamento estacionamento = new ObjectMapper().readValue(addEstacionamento,Estacionamento.class);
+			
+			boolean	retorno = new EstacionamentoJPADAO().salvar(estacionamento);
 
 			if(retorno){
-				// Cadastrado com sucesso.
+				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
 			}else if(retorno==false){
-				// ja existe um veiculo
+				// false = ja existe
 				return this.buildErrorResponse("2");
 
 			}else {
-				// Erro ao cadastrar o veiculo
+				// null = Erro ao cadastrar
 				return this.buildErrorResponse("0");			
-			}		
+			}
 
 		} catch (Exception e){
 			e.printStackTrace();
 
-			return this.buildErrorResponse("Erro ao cadastrar veiculo");
+			return this.buildErrorResponse("Erro ao cadastrar");
+		}
+
+	}
+	
+	@POST
+	@Path("/buscaEstacionamentos")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscaEstacionamentos(){
+		try{
+			List<Estacionamento> listaEstacionamentos = new EstacionamentoJPADAO().buscarPorDescricao("null");
+			
+			return this.buildResponse(listaEstacionamentos);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/buscarEstacionamentoPorId/{idEstacionamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarEstacionamentoPorId(@PathParam("idEstacionamento") int idEstacionamento){
+		try{
+			Estacionamento estacionamento = new EstacionamentoJPADAO().buscarPorId(idEstacionamento);
+			
+			return this.buildResponse(estacionamento);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/editEstacionamento")
+	@Consumes("application/*")
+
+	public Response editEstacionamento(String editEstacionamento){
+
+		try {
+
+			Estacionamento estacionamento = new ObjectMapper().readValue(editEstacionamento,Estacionamento.class);
+			Empresa empresa = new EmpresaJPADAO().buscarPorId(estacionamento.getEmpresa().getId());
+			estacionamento.setEmpresa(empresa);
+
+			boolean	retorno = new EstacionamentoJPADAO().atualizar(estacionamento);
+
+			if(retorno){
+				// true = Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// false = ja existe
+				return this.buildErrorResponse("2");
+
+			}else {
+				// null = Erro ao cadastrar
+				return this.buildErrorResponse("0");			
+			}
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse(e.toString());
 		}
 
 	}

@@ -10,7 +10,6 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
@@ -30,11 +29,11 @@ body {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   color: rgb(216, 221, 217); 
 }
 .voltar > a:hover{
-  background-color: rgba(216, 207, 207, 0.795);
+  background-color: #aeb7ad42;
   border-radius: 1rem;
   color: rgb(0, 0, 0);
 }
@@ -53,6 +52,7 @@ body {
   width: 13rem;
   padding: 1rem;
   background-color: #aeb7ad42;
+  height: fit-content;
 }
 .editar{
   color: black;
@@ -64,6 +64,7 @@ body {
   width: 13rem;
   padding: 1rem;
   background-color: #aeb7ad42;
+  height: fit-content;
 }
 .novoEmp{
   text-align: left;
@@ -74,7 +75,7 @@ body {
 .novoEmp > div{
   text-align: end;
 }
-.novoEmp > div > button{
+.btnSalvar{
   margin: 1.5rem 0rem 0rem 0rem;
   text-decoration: none;
   font-size: 0.7rem;
@@ -84,6 +85,18 @@ body {
   border-radius: 0.3rem;
   border: none;
   user-select: none;
+  cursor: pointer;
+}
+.btnCancelar{
+  margin: 1.5rem 0rem 0rem 0rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  padding: 0.7rem;
+  border-radius: 0.3rem;
+  border: none;
+  user-select: none;
+  background-color: #f0ffff00;
+  cursor: pointer;
 }
 
 .lista{
@@ -98,7 +111,28 @@ body {
   background-color: #aeb7ad42;
 }
 
-table{
-  border: 1px solid;
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:hover{
+  background-color: #aeb7ad42;
+}
+
+th {
+  background-color: #000000ab;
+  color: white;
+}
+
+.btnEdit{
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
 

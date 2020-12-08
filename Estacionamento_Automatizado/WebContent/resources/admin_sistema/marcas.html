@@ -9,7 +9,7 @@
 
     <script src="../../js/jquery.js"></script>     
     <script src="../../js/ajax.js"></script>
-    <script src="js/empresas.js"></script> 
+    <script src="js/marcas.js"></script> 
 </head>
 
 <body>
@@ -19,18 +19,14 @@
                 <span>Voltar</span>
             </a>            
         </div>
-        <div><h1>Empresas</h1></div>
+        <div><h1>Marcas</h1></div>
         <div class="corpo" id="corpo">                    
             <div class="novo" id="novo">            
                 <div>
                     <h2>Novo</h2>
                     <form class="novoEmp">
-                        <label for="razaoSocial">Razão Social</label>
-                        <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Digite aqui.." required>
-        
-                        <label for="cnpj">CNPJ</label>
-                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
-    
+                        <label for="descricao">Descrição</label>
+                        <input type="text" id="descricao" name="descricao" placeholder="Digite aqui.." required>
                         <div>
                             <button type="button" class="btnSalvar" id="btnSalvar">Salvar</button>
                         </div>
@@ -38,15 +34,14 @@
                 </div>
             </div>
             <div class="lista">
-                <h2>Lista de Empresas</h2>
-                <table id="tabEmpresas">
+                <h2>Lista de Marcas</h2>
+                <table id="tabMarcas">
                     <thead>
-                        <th>Razão Social</th>
-                        <th>CNPJ</th>
+                        <th>Descrição</th>
                         <th>Ação</th>
                     </thead>
                     <tbody>
-                        <tbody id="resultadoEmpresas"></tbody>
+                        <tbody id="resultadoMarcas"></tbody>
                     </tbody>                    
                 </table>
             </div>
@@ -54,12 +49,8 @@
                 <div>
                     <h2>Editar</h2>
                     <form class="novoEmp">
-                        <label for="razaoSocialEdit">Razão Social</label>
-                        <input type="text" id="razaoSocialEdit" name="razaoSocialEdit" placeholder="Digite aqui.." required>
-        
-                        <label for="cnpjEdit">CNPJ</label>
-                        <input type="text" id="cnpjEdit" name="cnpjEdit" placeholder="00.000.000/0000-00" required>
-    
+                        <label for="descricaoEdit">Descrição</label>
+                        <input type="text" id="descricaoEdit" name="descricaoEdit" placeholder="Digite aqui.." required>
                         <div>
                             <button type="button" class="btnCancelar" onclick="exibeEditar()">Cancelar</button>
                             <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>

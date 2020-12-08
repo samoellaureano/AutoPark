@@ -28,21 +28,20 @@ public class TipoVeiculoRest extends UtilRest{
 
 		try {
 
-			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(addTipoVeiculo,TipoVeiculo.class);	
-			TipoVeiculoJPADAO tipoVeiculoJpadao = new TipoVeiculoJPADAO();
-
-			boolean	retorno = tipoVeiculoJpadao.salvar(tipoVeiculo);
+			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(addTipoVeiculo,TipoVeiculo.class);
+			
+			boolean	retorno = new TipoVeiculoJPADAO().salvar(tipoVeiculo);
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
 			}else if(retorno==false){
-				// false =  ja existe
+				// false = ja existe
 				return this.buildErrorResponse("2");
 
 			}else {
-				// null = Erro ao cadastrar o 
+				// null = Erro ao cadastrar
 				return this.buildErrorResponse("0");			
 			}
 
@@ -50,6 +49,66 @@ public class TipoVeiculoRest extends UtilRest{
 			e.printStackTrace();
 
 			return this.buildErrorResponse("Erro ao cadastrar");
+		}
+
+	}
+	
+	@POST
+	@Path("/buscarTipoVeiculos")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarTipoVeiculos(){
+		try{
+			List<TipoVeiculo> tipoVeiculos = new TipoVeiculoJPADAO().buscarPorDescricao("null");
+			
+			return this.buildResponse(tipoVeiculos);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/buscarTipoVeiculoPorId/{idTipoVeiculo}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarTipoVeiculoPorId(@PathParam("idTipoVeiculo") int idTipoVeiculo){
+		try{
+			TipoVeiculo tipoVeiculo = new TipoVeiculoJPADAO().buscarPorId(idTipoVeiculo);
+			
+			return this.buildResponse(tipoVeiculo);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/editTipoVeiculo")
+	@Consumes("application/*")
+
+	public Response editTipoVeiculo(String editTipoVeiculo){
+
+		try {
+
+			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(editTipoVeiculo,TipoVeiculo.class);
+			boolean	retorno = new TipoVeiculoJPADAO().atualizar(tipoVeiculo);
+
+			if(retorno){
+				// true = Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// false = ja existe
+				return this.buildErrorResponse("2");
+
+			}else {
+				// null = Erro ao cadastrar
+				return this.buildErrorResponse("0");			
+			}
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse(e.toString());
 		}
 
 	}

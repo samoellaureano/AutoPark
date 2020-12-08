@@ -28,21 +28,20 @@ public class MarcaRest extends UtilRest{
 
 		try {
 
-			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);	
-			MarcaJPADAO marcaJpadao = new MarcaJPADAO();
-
-			boolean	retorno = marcaJpadao.salvar(marca);
+			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);
+			
+			boolean	retorno = new MarcaJPADAO().salvar(marca);
 
 			if(retorno){
 				// true = Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
 			}else if(retorno==false){
-				// false =  ja existe
+				// false = ja existe
 				return this.buildErrorResponse("2");
 
 			}else {
-				// null = Erro ao cadastrar o 
+				// null = Erro ao cadastrar
 				return this.buildErrorResponse("0");			
 			}
 
@@ -50,6 +49,66 @@ public class MarcaRest extends UtilRest{
 			e.printStackTrace();
 
 			return this.buildErrorResponse("Erro ao cadastrar");
+		}
+
+	}
+	
+	@POST
+	@Path("/buscarMarcas")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarMarcas(){
+		try{
+			List<Marca> listaMarcas = new MarcaJPADAO().buscarPorDescricao("null");
+			
+			return this.buildResponse(listaMarcas);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/buscarMarcaPorId/{idMarca}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarMarcaPorId(@PathParam("idMarca") int idMarca){
+		try{
+			Marca marca = new MarcaJPADAO().buscarPorId(idMarca);
+			
+			return this.buildResponse(marca);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/editMarca")
+	@Consumes("application/*")
+
+	public Response editMarca(String editMarca){
+
+		try {
+
+			Marca marca = new ObjectMapper().readValue(editMarca,Marca.class);
+			boolean	retorno = new MarcaJPADAO().atualizar(marca);
+
+			if(retorno){
+				// true = Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// false = ja existe
+				return this.buildErrorResponse("2");
+
+			}else {
+				// null = Erro ao cadastrar
+				return this.buildErrorResponse("0");			
+			}
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse(e.toString());
 		}
 
 	}
