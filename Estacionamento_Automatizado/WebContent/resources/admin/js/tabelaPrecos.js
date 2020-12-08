@@ -38,7 +38,7 @@ $(document).ready(function(){
                         +"<label for='editar"+j+"'>Editar</label>"
                         +"<input type='checkbox' id='editar"+j+"' hidden>"
                         +"<div><form><label for='valor"+j+"'>Valor:</label>"
-                        +"<input type='text' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
+                        +"<input min='0' type='number' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
                         +"<label for='tipoVeiculo"+j+"'>Tipo de Veículo:</label>"
                         +"<select name='tipoVeiculo' id='tipoVeiculo"+j+">"+listaOpcoes                          
                         +"</select>"
@@ -90,11 +90,8 @@ $(document).ready(function(){
                 return null;
             }
         };
-        autoPark.ajax.post(cfg);  
-        
-    }
-
-       
+        autoPark.ajax.post(cfg); 
+     };       
 
     editarPreco = function(idI, idJ){
         tabelaPreco.valor = $("#valor"+idJ).val();

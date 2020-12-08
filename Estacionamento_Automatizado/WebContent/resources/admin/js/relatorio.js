@@ -1,14 +1,17 @@
 
-
+var valorTotal = 0;
+var estacionamentoRelatorio="";
 $(document).ready(function () {
     $("#menu").load("menu.html");
     $('#buscarRelatorio').click(function (e) {
        
         var dataInicial = reformatDate($("#buscarDataInicial").val());
         var dataFinal = reformatDate($("#buscarDataFinal").val());
+        var estacionamento = $("#estacionamento").val();
+
         var cfg = {
             type: "POST",
-            url: "../../rest/registroRest/buscaRegistro/" + dataInicial + "&" + dataFinal + "&0",
+            url: "../../rest/registroRest/buscaRegistro/" + dataInicial + "&" + dataFinal + "&"+estacionamento,
             success: function (listaDeRegistros) {
                 visualizarRegistro(listaDeRegistros);
             },
@@ -20,7 +23,7 @@ $(document).ready(function () {
     });
 
     visualizarRegistro = function (listaDeRegistros){
-       
+       console.log(listaDeRegistros);
         if (listaDeRegistros != undefined) {
             var registroHtml = "";
             if (listaDeRegistros.checkin.length > 0) {
@@ -55,13 +58,24 @@ $(document).ready(function () {
 
 
     geraTabelaPDF = function(listaDeRegistros){
-    	
+    	estacionamentoRelatorio=listaDeRegistros;
         var html="<table id='idtableEdit2'><thead>"
 				+"<th scope='col'>Veiculo</th><th scope='col'>tempo de Uso</th><th scope='col'>Valor</th>"
 				+"</tr></thead><tbody>";		
 
                 for(var i=0; i<listaDeRegistros.checkin.length; i++){	
                     if (listaDeRegistros.checkout[i] != undefined) {
+                      var validaDecimal =""+ listaDeRegistros.checkout[i].valor+"";
+                        if(validaDecimal.includes(",",0)){     
+                            console.log("1");
+                            var valor = listaDeRegistros.checkout[i].valor.replace(",",".");
+
+                        }else{
+                            console.log("2");
+                            var valor = listaDeRegistros.checkout[i].valor;
+                        };
+
+                        valorTotal = parseFloat(valorTotal)+parseFloat(listaDeRegistros.checkout[i].valor);
                     var data = new Date(listaDeRegistros.checkin[i].dataHora);
 
                         const now = new Date(listaDeRegistros.checkout[i].dataHora); // Data de hoje
@@ -83,19 +97,17 @@ $(document).ready(function () {
     	
         //trazer  importe para a o html e referenciar a tabela
         //sem css de prerencia e apontar a tabela para o doc.autotable com o id da mesma
-       
+       var rua = estacionamentoRelatorio.checkout[0].estacionamento.endereco;
         var doc = new jsPDF();
         doc.setFontSize(11);
         
-        doc.text(10, 10, 'Logos Assistência Tecnica Especializada');
-        doc.text(10, 15, 'Rua: Dr. João Colin, nº 780, joinville - SC ');
-        doc.text(10, 20, 'Telefone: (47) 3227 9076');
+        doc.text(15, 10, estacionamentoRelatorio.checkout[0].estacionamento.descricao);
+        doc.text(15, 15, rua);     
         doc.text(0, 30, '--------------------------------------------------------------------------------------------------------------------------------------------------------------------');
         doc.setFontSize(22);
         doc.text(65, 45, 'Relatório da Empresa');
-        doc.setFontSize(11);
-        doc.text(20, 65, 'Status das ordem de Serviço: ');
-        doc.text(20, 70, 'Valor Total: ');
+        doc.setFontSize(11);        
+        doc.text(20, 70, 'Valor Total: '+valorTotal);
 
         doc.autoTable({ html: "#idtableEdit2", startY: 95 });
         var data = new Date();
@@ -104,4 +116,35 @@ $(document).ready(function () {
         doc.save("Relatorio - "+dia+".pdf");
         
     };
+
+    buscaEstacionamento = function () {
+
+        if (dadosSessao.id != undefined) {
+            var cfg = {
+                type: "POST",
+                url: "../../rest/estacionamentoRest/buscaEstacionamentosPorUsuario/" + dadosSessao.id,
+                success: function (listaDeEstacionamento) {
+                    exibirEstacionamentos(listaDeEstacionamento);
+                },
+                error: function (err) {
+                    alert("Erro ao buscar os estacionamentos: " + err.responseText);
+                }
+            };
+            autoPark.ajax.post(cfg);
+        }
+
+    };
+
+    exibirEstacionamentos = function (listaDeEstacionamento) {
+        var html = "";
+        for (var i = 0; i < listaDeEstacionamento.length; i++) {
+            html += ("<option value='" + listaDeEstacionamento[i].id + "'>" + listaDeEstacionamento[i].descricao + "</option>");
+        }
+        $("#estacionamento").html(html);       
+    };
+    
+    setTimeout(function () {
+        buscaEstacionamento();
+    }, 1500);
+
 });

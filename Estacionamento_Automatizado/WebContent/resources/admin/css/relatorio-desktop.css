@@ -95,8 +95,24 @@ h2{
 .topLista > img{
   width: 4rem;
 }
+#estacionamento{
+  
+  display: flex;
+  padding: 0.2rem;
+  margin-top: 1rem;
+  border-radius: 3px;
+}
+#listaRegistrosHTML{
 
+}
+.itemRegistro{
+  text-align: center;
+  font-family: "Source Sans Pro", sans-serif;
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.4rem 0rem;
 
+}
 .listaRegistros > label{
   text-align: left;
   font-family: "Source Sans Pro", sans-serif;
@@ -128,12 +144,12 @@ h2{
 }
 
 .listaRegistros > div > ul > label{
-  display: block;
-    justify-content: center;
-    padding: 0.2rem 0rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-around;
+  padding: 0.3rem 0rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffff;
+  color: #000;
 }
 .listaRegistros div li div{
   width: 100%;
@@ -153,6 +169,7 @@ h2{
   width: auto;
     display: none;
     background-color: #bac1b9ad;
+    color: #000000;
     padding: 0.4rem 0.2rem;
 }
 .itemRegistro > input:checked ~ li{

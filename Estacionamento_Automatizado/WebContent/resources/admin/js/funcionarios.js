@@ -55,8 +55,8 @@ $(document).ready(function () {
                         + "<input type='checkbox' name='editar' id='editar" + i + "' hidden>"
                         + "<div><form><label for='nome'>Nome:</label><input type='text' id='nome" + i + "'"
                         + "value='" + listaDeFuncionarios[i].nome + "'>"
-                        + "<label for='celular'>Celular:</label><input type='text' id='celular" + i + "'"
-                        + "value='" + listaDeFuncionarios[i].celular + "'>"
+                        + "<label for='celular'>Celular:</label><input maxlength='15' type='text' id='celular" + i + "'"
+                        + "value='" + listaDeFuncionarios[i].celular + "' class='telefone'>"
                         + "<label for='email'>Email:</label><input type='text' id='email" + i + "'"
                         + "value='" + listaDeFuncionarios[i].email + "'>"
                         + "<label for='perfil'>Perfil:</label>"
@@ -70,9 +70,11 @@ $(document).ready(function () {
                 funcionariosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
             $("#listaFuncionariosHTML").html(funcionariosHTML);
+            
             $("#buscarFunc").autocomplete({
                 source: funcionarios
             }); 
+            $(".telefone").mask("(00) 0000-00009");
         }
     }
 

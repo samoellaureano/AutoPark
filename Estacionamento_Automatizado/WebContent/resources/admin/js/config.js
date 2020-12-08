@@ -7,7 +7,8 @@ var funcionario2 = new Object();
 
 
 $(document).ready(function(){
-    $("#menu").load("menu.html"); 
+    $("#menu").load("menu.html");
+    $("#cpfEdit").mask('000.000.000-00'); 
 
     buscarDados = function () {
         var cfg = {
