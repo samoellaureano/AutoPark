@@ -4,7 +4,7 @@ var cliente = null;
 
 var usuario2 = new Object();
 var cliente2 = new Object();
-
+$("#cpfEdit").mask('000.000.000-00'); 
 $(document).ready(function () {
     $("#menu").load("menu.html");
     buscarDados = function () {
@@ -24,9 +24,10 @@ $(document).ready(function () {
     exibirDados = function (cliente) {
         $("#nomeEdit").val(cliente.nome);
         $("#cpfEdit").val(cliente.usuario.cpf);
+        $("#cpfEdit").mask('000.000.000-00');       
         usuario2.senha = cliente.usuario.senha;
         cliente2.usuario = usuario2;
-        $("#celEdit").val(cliente.celular);
+        $("#celEdit").val(mtel(cliente.celular));
         $("#emailEdit").val(cliente.email);
         $("#salvarAlteracoes").val(cliente.id);
     }

@@ -9,8 +9,8 @@ $(document).ready(function(){
             $("#editar").show();
             $("#novo").hide();
             $("#novo").val(true);
-        }        
-    }
+        };        
+    };
     buscarEstacionamentos = function () {
         var cfg = {
             type: "POST",
@@ -33,7 +33,7 @@ $(document).ready(function(){
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaEstacionamentos[i].descricao))
-                            .append($('<td>').append(listaEstacionamentos[i].cnpj))
+                            .append($("<td class='maskcnpj'>").append(listaEstacionamentos[i].cnpj))
                             .append($('<td>').append(listaEstacionamentos[i].endereco))
                             .append($('<td>').append(listaEstacionamentos[i].vagas))
                             .append($('<td>').append(listaEstacionamentos[i].empresa.descricao))
@@ -44,8 +44,13 @@ $(document).ready(function(){
                 html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoEstacionamentos").html(html);
-        }
-    }
+            $(".maskcnpj").mask("99.999.999/9999-99");
+        };
+    };
+    mascaraCpf=function(){
+        $("#cnpj").mask("99.999.999/9999-99");
+
+    };
     buscarEstacionamentoPorID = function(id){
         exibeEditar();
         var cfg = {
@@ -54,6 +59,7 @@ $(document).ready(function(){
             success: function (estacionamento) {
                 $("#descricaoEdit").val(estacionamento.descricao);
                 $("#cnpjEdit").val(estacionamento.cnpj);
+                $("#cnpjEdit").mask("99.999.999/9999-99");
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);

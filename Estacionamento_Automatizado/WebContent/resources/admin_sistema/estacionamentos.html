@@ -7,7 +7,8 @@
     <title>AutoPark</title>
     <link rel="stylesheet" href="css/adm_sist_pgs.css">
 
-    <script src="../../js/jquery.js"></script>     
+    <script src="../../js/jquery.js"></script> 
+    <script src="../../js/jquery.mask.min.js" ></script>       
     <script src="../../js/ajax.js"></script>
     <script src="js/estacionamentos.js"></script> 
 </head>
@@ -29,7 +30,7 @@
                         <input type="text" id="descricao" name="descricao" placeholder="Digite aqui.." required>
         
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" onkeyup="mascaraCpf()"  required>
 
                         <label for="endereco">Endereço</label>
                         <input type="text" id="endereco" name="endereco" placeholder="Digite aqui.." required>
@@ -69,7 +70,7 @@
                         <input type="text" id="descricaoEdit" name="descricaoEdit" placeholder="Digite aqui.." required>
         
                         <label for="cnpjEdit">CNPJ</label>
-                        <input type="text" id="cnpjEdit" name="cnpjEdit" placeholder="00.000.000/0000-00" required>
+                        <input type="text" id="cnpjEdit" name="cnpjEdit" placeholder="00.000.000/0000-00" onkeyup="mascaraCpf()"  required>
 
                         <label for="enderecoEdit">Endereço</label>
                         <input type="text" id="enderecoEdit" name="enderecoEdit" placeholder="Digite aqui.." required>
