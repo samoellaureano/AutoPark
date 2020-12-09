@@ -1,4 +1,6 @@
+
 $(document).ready(function(){
+   
     $("#editar").hide();
     exibeEditar = function(){
         if($("#novo").val()){
@@ -9,8 +11,12 @@ $(document).ready(function(){
             $("#editar").show();
             $("#novo").hide();
             $("#novo").val(true);
-        }        
-    }
+        };        
+    };
+    mascaraCpf=function(){
+        $("#cnpj").mask("99.999.999/9999-99");
+
+    };
     buscarEmpresas = function () {
         var cfg = {
             type: "POST",
@@ -33,16 +39,17 @@ $(document).ready(function(){
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaEmpresas[i].descricao))
-                            .append($('<td>').append(listaEmpresas[i].cnpj))
+                            .append($("<td class='maskcnpj'>").append(listaEmpresas[i].cnpj))
                             .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
-                    )
-                }
+                    );
+                };
             } else {
                 html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
-            }
-            $("#resultadoEmpresas").html(html);
-        }
-    }
+            };
+            $("#resultadoEmpresas").html(html);            
+            $(".maskcnpj").mask("99.999.999/9999-99");
+        };
+    };
     buscarEmpresaPorID = function(id){
         exibeEditar();
         var cfg = {
@@ -51,6 +58,7 @@ $(document).ready(function(){
             success: function (empresa) {
                 $("#razaoSocialEdit").val(empresa.descricao);
                 $("#cnpjEdit").val(empresa.cnpj);
+                $("#cnpjEdit").mask("99.999.999/9999-99");
                 $("#btnSalvarEdit").val(empresa.id);
             },
             error: function (err) {
@@ -58,7 +66,7 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-    }
+    };
     $('#btnSalvarEdit').click(function (e) {
         empresa = new Object();
         empresa.id = $("#btnSalvarEdit").val();

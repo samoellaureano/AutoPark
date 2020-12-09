@@ -5,7 +5,7 @@ var funcionario = null;
 var usuario2 = new Object();
 var funcionario2 = new Object();
 
-
+$("#cpfEdit").mask('000.000.000-00'); 
 $(document).ready(function(){
     $("#menu").load("menu.html"); 
 
@@ -27,9 +27,10 @@ $(document).ready(function(){
 
         $("#nomeEdit").val(funcionario.nome);
         $("#cpfEdit").val(funcionario.usuario.cpf);
+        $("#cpfEdit").mask('000.000.000-00');    
         usuario2.senha = funcionario.usuario.senha;
         funcionario2.usuario = usuario2;
-        $("#celEdit").val(funcionario.celular);
+        $("#celEdit").val(mtel(funcionario.celular));
         $("#emailEdit").val(funcionario.email);        
         $("#salvarAlteracoes").val(funcionario.id);
     }

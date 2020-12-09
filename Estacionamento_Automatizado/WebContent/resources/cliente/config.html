@@ -12,6 +12,8 @@
     <link rel="shortcut icon" href="../../img/logo.ico" />
 
     <script src="../../js/jquery.js"></script>
+    <script src="../../js/jquery.mask.min.js" ></script>
+    <script src="../../js/maskTelefone.js"></script>
     <script src="../../js/ajax.js"></script>
     <script src="../../js/msgToast.js"></script>
     <script src="../../js/sessao.js"></script>
@@ -48,7 +50,7 @@
                                 <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required>
 
                                 <label for="celEdit">Telefone</label>
-                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" required>
+                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" onkeydown="maskTel( this, mtel );" required>
                                 <label for="emailEdit">E-mail</label>
                                 <input type="text" id="emailEdit" name="emailEdit" placeholder="E-mail" required>
                             </form>
