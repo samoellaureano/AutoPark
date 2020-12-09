@@ -1,7 +1,7 @@
 
 import cv2
 
-cap = cv2.VideoCapture("rtsp://192.168.100.3:8080/h264_ulaw.sdp")
+cap = cv2.VideoCapture("rtsp://root:root@192.168.100.3:8080/h264_ulaw.sdp")
 while True:
     try:
         _, img = cap.read()
