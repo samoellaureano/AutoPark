@@ -30,6 +30,9 @@ public class Checkin extends Persistivel implements Serializable{
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Veiculo veiculo;
+	
+	@Column
+	private  boolean validado;
 
 	public Date getDataHora() {
 		return dataHora;
@@ -62,5 +65,15 @@ public class Checkin extends Persistivel implements Serializable{
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
+
+	public boolean getValidado() {
+		return validado;
+	}
+
+	public void setValidado(boolean validado) {
+		this.validado = validado;
+	}
+	
+	
 	
 }

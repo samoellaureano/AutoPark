@@ -59,27 +59,25 @@ public class CheckoutRest extends UtilRest{
 			checkout.setDataHora(data);
 			checkout.setVeiculo(veiculo);
 
-			boolean retorno = checkoutJpadao.salvar(checkout);
+			boolean retorno = false;
+			if(checkin.getValidado()) {
+				retorno = checkoutJpadao.salvar(checkout);
+				
+				checkout = checkoutJpadao.buscarPorIdVeiculo(id);
+				totalDeHoras = Util.calcularDiferencaHoras(checkin.getDataHora(),checkout.getDataHora());
+				double valorEst = tabelaDePrecoJpadao.buscaValor(veiculo, estacionamento);
+				
+				DecimalFormat formato = new DecimalFormat("0.##");      
+				totalDeHoras = Double.parseDouble(formato.format(totalDeHoras).replace(",","."));
+				
+				checkout.setValor(totalDeHoras*valorEst);
+				
+				retorno = checkoutJpadao.atualizar(checkout);
+			}
 			
-			checkout = checkoutJpadao.buscarPorIdVeiculo(id);
-			totalDeHoras = Util.calcularDiferencaHoras(checkin.getDataHora(),checkout.getDataHora());
-			double valorEst = tabelaDePrecoJpadao.buscaValor(veiculo, estacionamento);
-			
-			DecimalFormat formato = new DecimalFormat("0.##");      
-			totalDeHoras = Double.parseDouble(formato.format(totalDeHoras).replace(",","."));
-			
-			checkout.setValor(totalDeHoras*valorEst);
-			
-			retorno = checkoutJpadao.atualizar(checkout);
-			
-
 			if(retorno){
 				// Cadastrado com sucesso.
 				return this.buildResponse("1");				
-
-			}else if(retorno==false){
-				// ja existe
-				return this.buildErrorResponse("2");
 
 			}else {
 				// Erro ao cadastrar o veiculo
