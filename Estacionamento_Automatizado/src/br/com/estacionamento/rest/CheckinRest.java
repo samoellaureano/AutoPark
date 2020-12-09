@@ -52,6 +52,7 @@ public class CheckinRest extends UtilRest{
 			checkin.setEstacionamento(estacionamento);
 			checkin.setDataHora(data);
 			checkin.setVeiculo(veiculo);
+			checkin.setValidado(false);
 			
 			boolean retorno = false;
 			if(checkin.getVeiculo().getAtivo()) {
@@ -155,7 +156,40 @@ public class CheckinRest extends UtilRest{
 		}
 	}
 	
+	
+	@POST
+	@Path("/validaCheckin/{placa}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 
+	public Response validaCheckin(@PathParam("placa") String placa){
+
+		try {
+			Veiculo veiculo = new VeiculoJPADAO().buscarPorPlaca(placa);
+			Checkin checkin = new CheckinJPADAO().buscarPorIdVeiculo(veiculo.getId());
+			
+			checkin.setValidado(true);
+			
+			boolean retorno = new CheckinJPADAO().atualizar(checkin);
+
+			if(retorno){
+				// Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// ja existe um veiculo
+				return this.buildErrorResponse("2");
+
+			}else {
+				// Erro ao cadastrar o veiculo
+				return this.buildErrorResponse("0");			
+			}		
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao cadastrar");
+		}
+	}
 	
 	
 	
