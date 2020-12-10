@@ -93,11 +93,12 @@ while video.isOpened():
     cv2.imshow('RES', area)
     cv2.imshow("Proc", result)
     localizarPlaca(contornos, area)
-    caminho = "C:\Tesseract-OCR\saidas\placa.jpg"
-    reconhecimentoImagem(caminho)
+
 
     if cv2.waitKey(1) & 0xff == ord('q'):
         break
 
 video.release()
-
+cv2.destroyAllWindows()
+caminho = "C:\Tesseract-OCR\saidas\placa.jpg"
+reconhecimentoImagem(caminho)
