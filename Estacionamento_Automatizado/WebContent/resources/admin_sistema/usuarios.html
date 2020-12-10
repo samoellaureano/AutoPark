@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPark</title>
+    <link rel="stylesheet" href="css/adm_sist_pgs.css">
+
+    <script src="../../js/jquery.js"></script> 
+    <script src="../../js/jquery.mask.min.js" ></script>       
+    <script src="../../js/ajax.js"></script>
+    <script src="js/usuarios.js"></script> 
+</head>
+
+<body>
+    <div class="container">
+        <div class="voltar">
+            <a href="dashboard.html"><img src="img/voltar.png" alt="Voltar">
+                <span>Voltar</span>
+            </a>            
+        </div>
+        <div><h1>Usuarios</h1></div>
+        <div class="corpo" id="corpo">                    
+            <div class="novo" id="novo">            
+                <div>
+                    <h2>Novo</h2>
+                    <form class="novoEmp">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite aqui.." required>
+        
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" onkeyup="mascaraCpf()"  required>
+
+                        <label for="celular">Celular</label>
+                        <input type="text" id="celular" name="celular" placeholder="Digite aqui.." required>
+
+                        <label for="email">E-mail</label>
+                        <input type="text" id="email" name="email" placeholder="Digite aqui.." required>
+
+                        <label for="emp">Empresa</label>
+                        <select name="emp" id="emp"></select>
+                        <div>
+                            <button type="button" class="btnSalvar" id="btnSalvar">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="lista">
+                <h2>Lista de Usuarios</h2>
+                <table id="tabUsuarios">
+                    <thead>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Celular</th>
+                        <th>E-mail</th>
+                        <th>Empresa</th>
+                        <th>Ação</th>
+                    </thead>
+                    <tbody>
+                        <tbody id="resultadoUsuarios"></tbody>
+                    </tbody>                    
+                </table>
+            </div>
+            <div class="editar" id="editar" style="display: none;">            
+                <div>
+                    <h2>Editar</h2>
+                    <form class="novoEmp">
+                        <label for="nomeEdit">Nome Completo</label>
+                        <input type="text" id="nomeEdit" name="nomeEdit" placeholder="Digite aqui.." required>
+        
+                        <label for="cpfEdit">CPF</label>
+                        <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" onkeyup="mascaraCpf()"  required>
+
+                        <label for="celularEdit">Celular</label>
+                        <input type="text" id="celularEdit" name="celularEdit" placeholder="Digite aqui.." required>
+
+                        <label for="emailEdit">E-mail</label>
+                        <input type="text" id="emailEdit" name="emailEdit" placeholder="Digite aqui.." required>
+
+                        <label for="empEdit">Empresa</label>
+                        <select name="empEdit" id="empEdit" onclick="buscarEmpresas()"></select>
+                        <div>
+                            <button type="button" class="btnCancelar" onclick="exibeEditar()">Cancelar</button>
+                            <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

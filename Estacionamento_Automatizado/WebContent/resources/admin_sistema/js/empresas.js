@@ -72,8 +72,9 @@ $(document).ready(function(){
         empresa.id = $("#btnSalvarEdit").val();
         empresa.cnpj = $("#cnpjEdit").val();
         empresa.descricao = $("#razaoSocialEdit").val();
-        empresa.descricao = empresa.descricao.replace(/\./g, "");
-        empresa.descricao = empresa.descricao.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\./g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/empresaRest/editEmpresa",
             data: JSON.stringify(empresa),
@@ -92,8 +93,9 @@ $(document).ready(function(){
         empresa.id = $("#btnSalvar").val();
         empresa.cnpj = $("#cnpj").val();
         empresa.descricao = $("#razaoSocial").val();
-        empresa.descricao = empresa.descricao.replace(/\./g, "");
-        empresa.descricao = empresa.descricao.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\./g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/empresaRest/addEmpresa",
             data: JSON.stringify(empresa),
