@@ -23,42 +23,41 @@ def localizarPlaca(contornos, imagem):
 
 def reconhecimentoImagem(path_img):
     print("reconhecimento da placa")
+
     img = cv2.imread(path_img)
 
-    if img is not None:
-        cv2.imshow("ENTRADA", img)
+    cv2.imshow("ENTRADA", img)
 
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        cv2.imshow("Escala Cinza", img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Escala Cinza", img)
 
-        img = cv2.GaussianBlur(img, (5, 5), 0)
-        cv2.imshow("Desfoque", img)
+    img = cv2.GaussianBlur(img, (5, 5), 0)
+    cv2.imshow("Desfoque", img)
 
-        ret, img = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY)
-        cv2.imshow("Limiar", img)
+    ret, img = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY)
+    cv2.imshow("Limiar", img)
 
-        cv2.imwrite(path_img + "-ocr.jpg", img)
-        imagem = Image.open(path_img + "-ocr.jpg")
-        saida = pytesseract.image_to_string(imagem, lang='eng')
-        if len(saida) > 0:
-            #print(saida)
-            texto = removerChars(saida)
-        else:
-            texto = "Reconhecimento Falho"
+    cv2.imwrite(path_img + "-ocr.jpg", img)
+    imagem = Image.open(path_img + "-ocr.jpg")
+    saida = pytesseract.image_to_string(imagem, lang='eng')
 
-        janela = tkinter.Tk()
-        print(texto)
-        id = "1"
+    if len(saida) > 0:
+        #print(saida)
+        texto = removerChars(saida)
+    else:
+        texto = "Reconhecimento Falho"
 
-        #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
-        #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
+    janela = tkinter.Tk()
+    print(texto)
+    id = "1"
 
-        #print(response.status_code)
+    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
+    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
 
-       # tkinter.Label(janela, text=texto, font=("Helvetica", 50)).pack()
-       #janela.mainloop()
+    #print(response.status_code)
 
-
+    tkinter.Label(janela, text=texto, font=("Helvetica", 50)).pack()
+    janela.mainloop()
 
 def removerChars(text):
     str = "'[‘-]!@#%¨&*()_+:;><^^}{`?|~¬/=,.-'ºª»'\n \s+    °——————eagonmmmntrrbivcud"
@@ -69,11 +68,11 @@ def removerChars(text):
     return text
 
 
-video = cv2.VideoCapture("rtsp://root:root@192.168.100.3:8080/h264_ulaw.sdp")
+video = cv2.VideoCapture("resource\\AAR6633.mp4")
 
 while video.isOpened():
 
-    #print("Video rodando")
+    print("Video rodando")
     ret, frame = video.read()
 
     if not ret:
