@@ -48,7 +48,7 @@ public class CheckoutRest extends UtilRest{
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 			EstacionamentoJPADAO estacionamentoJpadao = new EstacionamentoJPADAO();
 			TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
-			
+						
 			veiculo = veiculoJpadao.buscarPorPlaca(placa);
 			cliente = clienteJpadao.buscarPorId(veiculo.getCliente().getId());
 			estacionamento = estacionamentoJpadao.buscarPorId(id);
@@ -63,7 +63,7 @@ public class CheckoutRest extends UtilRest{
 			if(checkin.getValidado()) {
 				retorno = checkoutJpadao.salvar(checkout);
 				
-				checkout = checkoutJpadao.buscarPorIdVeiculo(id);
+				checkout = checkoutJpadao.buscarPorIdVeiculo(veiculo.getId());
 				totalDeHoras = Util.calcularDiferencaHoras(checkin.getDataHora(),checkout.getDataHora());
 				double valorEst = tabelaDePrecoJpadao.buscaValor(veiculo, estacionamento);
 				

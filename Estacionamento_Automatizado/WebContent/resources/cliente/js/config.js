@@ -43,8 +43,9 @@ $(document).ready(function () {
             usuario.id = dadosSessao.id;
             cliente.usuario = usuario;
             cliente.celular = $("#celEdit").val();
+            cliente.celular = cliente.celular.replace(/[^0-9]/g, '');
             cliente.email = $("#emailEdit").val();
-
+            
             cfg = {
                 url: "../../rest/clienteRest/atualizaCliente",
                 data: JSON.stringify(cliente),

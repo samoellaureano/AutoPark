@@ -47,6 +47,7 @@ $(document).ready(function(){
             usuario.id = dadosSessao.id;
             funcionario.usuario = usuario;
             funcionario.celular = $("#celEdit").val();
+            funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
             funcionario.email = $("#emailEdit").val();
 
             cfg = {
