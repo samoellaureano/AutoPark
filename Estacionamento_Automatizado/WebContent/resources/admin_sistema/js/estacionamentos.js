@@ -82,8 +82,9 @@ $(document).ready(function(){
         empresa.id = $("#empEdit").val();
         estacionamento.empresa = empresa;
         estacionamento.vagas = $("#vagasEdit").val();
-        estacionamento.descricao = estacionamento.descricao.replace(/\./g, "");
-        estacionamento.descricao = estacionamento.descricao.replace(/\//g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/estacionamentoRest/editEstacionamento",
             data: JSON.stringify(estacionamento),
@@ -106,8 +107,9 @@ $(document).ready(function(){
         empresa.id = $("#emp").val();
         estacionamento.empresa = empresa;
         estacionamento.vagas = $("#vagas").val();
-        estacionamento.descricao = estacionamento.descricao.replace(/\./g, "");
-        estacionamento.descricao = estacionamento.descricao.replace(/\//g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
+        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/estacionamentoRest/addEstacionamento",
             data: JSON.stringify(estacionamento),

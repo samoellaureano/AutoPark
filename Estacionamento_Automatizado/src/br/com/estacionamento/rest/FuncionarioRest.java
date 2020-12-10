@@ -94,6 +94,20 @@ public class FuncionarioRest extends UtilRest{
 	}
 	
 	@POST
+	@Path("/buscarFuncionarios")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscarFuncionarios(){
+		try{
+			List<Funcionario> listaFuncionarios = new FuncionarioJPADAO().buscarPorDescricaoADM("null");
+			
+			return this.buildResponse(listaFuncionarios);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
 	@Path("/buscaDados/{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscaDados(@PathParam("idUsuario") int idUsuario){

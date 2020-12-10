@@ -115,8 +115,10 @@ $(document).ready(function () {
             if (radios[i].checked) {
                 if (radios[i].value == "check-in") {
                     checkin();
-                } else {
+                } else if (radios[i].value == "check-out") {
                     checkout();
+                }else{
+                    validar();
                 }
             }
         }
@@ -148,6 +150,21 @@ $(document).ready(function () {
         $("#estacionamento").html(html);
         buscarVagas();
     }
+
+    validar = function () {
+        var placa = $("#placa").val();
+        var cfg = {
+            type: "POST",
+            url: "../../rest/checkinRest/validaCheckin/" + placa,
+            success: function (succJson) {
+                window.location.href = ("dashboard.html");
+            },
+            error: function (errJson) {
+                alert(errJson);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    };
 
     setTimeout(function () {
         buscaEstacionamento();
