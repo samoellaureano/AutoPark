@@ -79,6 +79,9 @@ public class CheckoutRest extends UtilRest{
 				// Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
+			}else if(!retorno){
+				// Cadastrado com sucesso.
+				return this.buildResponse("2");
 			}else {
 				// Erro ao cadastrar o veiculo
 				return this.buildErrorResponse("0");			

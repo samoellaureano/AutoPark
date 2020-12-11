@@ -48,15 +48,19 @@ public class CheckinRest extends UtilRest{
 			cliente = clienteJpadao.buscarPorId(veiculo.getCliente().getId());
 			estacionamento = estacionamentoJpadao.buscarPorId(id);		
 
-			checkin.setCliente(cliente);
-			checkin.setEstacionamento(estacionamento);
-			checkin.setDataHora(data);
-			checkin.setVeiculo(veiculo);
-			checkin.setValidado(false);
-			
 			boolean retorno = false;
-			if(checkin.getVeiculo().getAtivo()) {
-				retorno = checkinJpadao.salvar(checkin);
+			checkin = checkinJpadao.buscarPorIdVeiculo(veiculo.getId());
+			if(checkin.getValidado()||checkin.getCliente()==null) {//verifica se existe algum veiculo com a mesma placa sem checkout
+				checkin = new Checkin();
+				checkin.setCliente(cliente);
+				checkin.setEstacionamento(estacionamento);
+				checkin.setDataHora(data);
+				checkin.setVeiculo(veiculo);
+				checkin.setValidado(false);			
+
+				if(checkin.getVeiculo().getAtivo()) {
+					retorno = checkinJpadao.salvar(checkin);
+				}
 			}
 
 			if(retorno){
@@ -65,7 +69,7 @@ public class CheckinRest extends UtilRest{
 
 			}else if(retorno==false){
 				// ja existe um veiculo
-				return this.buildErrorResponse("2");
+				return this.buildResponse("2");
 
 			}else {
 				// Erro ao cadastrar o veiculo
@@ -130,7 +134,7 @@ public class CheckinRest extends UtilRest{
 
 			listaVeiculos = checkinJpadao.buscarPorIdEstacionamento(idEstaconamento);
 			int numVagas = new EstacionamentoJPADAO().buscarPorId(idEstaconamento).getVagas();
-			
+
 			return this.buildResponse(numVagas - listaVeiculos.size());
 
 		}catch (Exception e){
@@ -138,15 +142,15 @@ public class CheckinRest extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@POST
 	@Path("/buscarClientesDoDia/{idestaconamento}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscarClientesDoDia(@PathParam("idestaconamento") int idEstaconamento){		
-		
+
 		try{
-			
+
 			int numVagas = new CheckinJPADAO().buscarClienteDia(idEstaconamento).size();			
 			return this.buildResponse(numVagas);
 
@@ -155,8 +159,8 @@ public class CheckinRest extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@POST
 	@Path("/validaCheckin/{placa}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -166,9 +170,9 @@ public class CheckinRest extends UtilRest{
 		try {
 			Veiculo veiculo = new VeiculoJPADAO().buscarPorPlaca(placa);
 			Checkin checkin = new CheckinJPADAO().buscarPorIdVeiculo(veiculo.getId());
-			
+
 			checkin.setValidado(true);
-			
+
 			boolean retorno = new CheckinJPADAO().atualizar(checkin);
 
 			if(retorno){
@@ -190,8 +194,8 @@ public class CheckinRest extends UtilRest{
 			return this.buildErrorResponse("Erro ao cadastrar");
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 }

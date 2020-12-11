@@ -54,8 +54,8 @@ $(document).ready(function () {
                     resp = ("Check-in com sucesso!");
                     exibirMessagem(resp, 1);
                     window.location.href = ("dashboard.html");
-                } else {
-                    resp = ("Erro ao realizar o check-in!");
+                } else if (succJson == 2){
+                    resp = ("Este check-in já existe!");
                     exibirMessagem(resp, 2);
                 }
             },
@@ -77,10 +77,11 @@ $(document).ready(function () {
                     resp = ("Check-out com sucesso!");
                     exibirMessagem(resp, 1);
                     window.location.href = ("dashboard.html");
-                } else {
-                    resp = ("Erro ao realizar o check-out!");
+                } else if (succJson == 2){
+                    resp = ("Necessário validar primeiro!");
                     exibirMessagem(resp, 2);
                 }
+                buscarVagas();
             },
             error: function (errJson) {
                 resp = ("Erro ao realizar o check-out!");

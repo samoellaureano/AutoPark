@@ -32,31 +32,34 @@ public class VeiculoRest extends UtilRest{
 		try {
 
 			Veiculo veiculo = new ObjectMapper().readValue(addVeiculo, Veiculo.class);
-			Cliente cliente = veiculo.getCliente();
-
-
-
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
 			TipoVeiculoJPADAO tipoVeiculoJpadao = new TipoVeiculoJPADAO();
 
-			if(cliente.getUsuario() != null) {
-				cliente = clienteJpadao.buscarPorIdUsuario(cliente.getUsuario().getId());
+			Veiculo veiculoExitente = veiculoJpadao.buscarPorPlaca(veiculo.getPlaca());
+			boolean retorno = false;
 
-				veiculo.setCliente(cliente);
+			if(veiculoExitente.getCliente() == null || veiculoExitente.getAtivo() == false) {
+				Cliente cliente = veiculo.getCliente();
+
+				if(cliente.getUsuario() != null) {
+					cliente = clienteJpadao.buscarPorIdUsuario(cliente.getUsuario().getId());
+
+					veiculo.setCliente(cliente);
+				}
+				veiculo.setTipoVeiculo(tipoVeiculoJpadao.buscarPorId(veiculo.getTipoVeiculo().getId()));
+				veiculo.setAtivo(true);
+
+				retorno = veiculoJpadao.salvar(veiculo);
 			}
-			veiculo.setTipoVeiculo(tipoVeiculoJpadao.buscarPorId(veiculo.getTipoVeiculo().getId()));
-			veiculo.setAtivo(true);
-
-			boolean retorno = veiculoJpadao.salvar(veiculo);
 
 			if(retorno){
 				// Cadastrado com sucesso.
 				return this.buildResponse("1");				
 
-			}else if(retorno==false){
+			}else if(!retorno){
 				// ja existe um veiculo
-				return this.buildErrorResponse("2");
+				return this.buildResponse("2");
 
 			}else {
 				// Erro ao cadastrar o veiculo
@@ -70,7 +73,7 @@ public class VeiculoRest extends UtilRest{
 		}
 
 	}
-	
+
 	@POST
 	@Path("/buscaVeiculos/{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -79,16 +82,16 @@ public class VeiculoRest extends UtilRest{
 			List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
 			ClienteJPADAO clienteJpadao = new ClienteJPADAO();
-			
+
 			listaVeiculos = veiculoJpadao.buscarPorCliente(clienteJpadao.buscarPorIdUsuario(idUsuario).getId());
-			
+
 			return this.buildResponse(listaVeiculos);
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
+
 	@POST
 	@Path("/excluiVeiculo/{idVeiculo}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -96,10 +99,10 @@ public class VeiculoRest extends UtilRest{
 		try{		
 			VeiculoJPADAO veiculoJpadao = new VeiculoJPADAO();
 			Veiculo veiculo = veiculoJpadao.buscarPorId(idVeiculo);
-			
+
 			veiculo.setAtivo(false);
 			veiculo.setId(idVeiculo);
-						
+
 			boolean retorno = veiculoJpadao.atualizar(veiculo);
 
 			if(retorno){

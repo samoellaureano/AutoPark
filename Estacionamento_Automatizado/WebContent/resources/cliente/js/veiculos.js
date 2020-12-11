@@ -31,14 +31,14 @@ $(document).ready(function () {
                 if (succJson == 1) {
                     resp = ("Veiculo cadastrado com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("veiculos.html");
                 } else if (succJson == 2) {
-                    resp = ("O Veiculo ja existe!");
+                    resp = ("O Veiculo ja esta em uso!");
                     exibirMessagem(resp, 2);
                 } else {
                     resp = ("Erro ao cadastrar um novo Veiculo!");
                     exibirMessagem(resp, 2);
                 };
-                window.location.href = ("veiculos.html");
             },
             error: function (errJson) {
                 resp = ("Erro ao cadastrar um novo Veiculo!");

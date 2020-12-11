@@ -45,7 +45,7 @@ $(document).ready(function(){
                     exibirMessagem(resp, 1);
                     window.location.href = ("index.html");
                 } else if (succJson == 2) {
-                    resp = ("O Veiculo ja existe!");
+                    resp = ("O Veiculo ja esta em uso!");
                     exibirMessagem(resp, 2);
                 } else {
                     resp = ("Erro ao cadastrar um novo Veiculo!");
