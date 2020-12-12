@@ -58,12 +58,12 @@ $(document).ready(function(){
             url: "../../rest/funcionarioRest/buscaDados/" + id,
             success: function (funcionario) {
                 $("#nomeEdit").val(funcionario.nome);
-                $("#cpfEdit").val(funcionario.usuario.cpf);
-                $("#cpfEdit").mask("999.999.999-99");
+                $("#cpfEdit").val(funcionario.usuario.cpf);                
                 $("#celularEdit").val(funcionario.celular);
                 $("#emailEdit").val(funcionario.email);
                 $("#empEdit").append("<option value='"+funcionario.empresa.id+"' selected>" + funcionario.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(funcionario.id);
+                $("#cpfEdit").mask("999.999.999-99");
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -106,6 +106,7 @@ $(document).ready(function(){
         usuario.cpf = $("#cpf").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
+        usuario.perfil = 2; 
         funcionario.usuario = usuario;
         funcionario.nome = $("#nome").val();
         funcionario.celular = $("#celular").val();
