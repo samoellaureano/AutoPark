@@ -19,7 +19,7 @@
                 <span>Voltar</span>
             </a>            
         </div>
-        <div><h1>Modelos</h1></div>
+        <div><h1>modelos</h1></div>
         <div class="corpo" id="corpo">                    
             <div class="lista">
                 <h2>Lista de Modelos</h2>
@@ -42,9 +42,9 @@
                         <input type="text" id="descricaoEdit" name="descricaoEdit" placeholder="Digite aqui.." required>
 
                         <label for="marcaEdit">Marca</label>
-                        <select name="marcaEdit" id="marcaEdit"></select>
+                        <select name="marcaEdit" id="marcaEdit" onclick="buscarMarcas()"></select>
                         <div>
-                            <button type="button" class="btnCancelar" onclick="exibeEditar(false)">Cancelar</button>
+                            <button type="button" class="btnCancelar" onclick="exibeEditar()">Cancelar</button>
                             <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>
                         </div>
                     </form>

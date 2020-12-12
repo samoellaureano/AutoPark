@@ -25,7 +25,7 @@ public class Funcionario extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String email;
 	
-	@Column
+	@Column(nullable = false)
 	private boolean ativo;
 
 	@JoinColumn(referencedColumnName = "id")

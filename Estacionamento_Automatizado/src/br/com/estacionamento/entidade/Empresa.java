@@ -16,9 +16,6 @@ public class Empresa extends Persistivel implements Serializable{
 
 	@Column(nullable = false,length = 45)
 	private String descricao;
-	
-	@Column
-	private boolean ativo;
 
 	public String getCnpj() {
 		return cnpj;
@@ -36,12 +33,5 @@ public class Empresa extends Persistivel implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
-	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	
 }
