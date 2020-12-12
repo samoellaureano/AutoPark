@@ -29,6 +29,7 @@ public class TipoVeiculoRest extends UtilRest{
 		try {
 
 			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(addTipoVeiculo,TipoVeiculo.class);
+			tipoVeiculo.setAtivo(true);
 			
 			boolean	retorno = new TipoVeiculoJPADAO().salvar(tipoVeiculo);
 
@@ -73,6 +74,7 @@ public class TipoVeiculoRest extends UtilRest{
 	public Response buscarTipoVeiculoPorId(@PathParam("idTipoVeiculo") int idTipoVeiculo){
 		try{
 			TipoVeiculo tipoVeiculo = new TipoVeiculoJPADAO().buscarPorId(idTipoVeiculo);
+			tipoVeiculo.setAtivo(true);
 			
 			return this.buildResponse(tipoVeiculo);
 		}catch (Exception e){
@@ -90,6 +92,7 @@ public class TipoVeiculoRest extends UtilRest{
 		try {
 
 			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(editTipoVeiculo,TipoVeiculo.class);
+			tipoVeiculo.setAtivo(true);
 			boolean	retorno = new TipoVeiculoJPADAO().atualizar(tipoVeiculo);
 
 			if(retorno){
@@ -126,6 +129,34 @@ public class TipoVeiculoRest extends UtilRest{
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/inativaTipoVeiculo/{idTipoVeiculo}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idTipoVeiculo") int idTipoVeiculo){
+
+		try {
+			TipoVeiculo tipoVeiculo = new TipoVeiculoJPADAO().buscarPorId(idTipoVeiculo);
+			tipoVeiculo.setAtivo(false);
+			boolean	retorno = false;
+			
+			retorno = new TipoVeiculoJPADAO().atualizar(tipoVeiculo);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
 		}
 	}
 

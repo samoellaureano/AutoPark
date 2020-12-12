@@ -52,7 +52,7 @@ body {
   border-radius: 0.3rem;
   width: 13rem;
   padding: 1rem;
-  background-color: #aeb7ad42;
+  background-color: #18f300a8;
   height: fit-content;
 }
 .editar{
@@ -64,7 +64,7 @@ body {
   border-radius: 0.3rem;
   width: 13rem;
   padding: 1rem;
-  background-color: #aeb7ad42;
+  background-color: #d4e235b0;
   height: fit-content;
 }
 .novoEmp{
@@ -82,7 +82,7 @@ body {
   font-size: 0.7rem;
   color: #fff;
   padding: 0.7rem;
-  background-color: #07a72d;
+  background-color: #20101f;
   border-radius: 0.3rem;
   border: none;
   user-select: none;
@@ -98,6 +98,7 @@ body {
   user-select: none;
   background-color: #f0ffff00;
   cursor: pointer;
+  color: white;
 }
 
 .lista{
@@ -136,5 +137,10 @@ th {
   display: flex;
   justify-content: end;
   cursor: pointer;
+}
+.acoes{
+  display: flex;
+    width: 40%;
+    justify-content: space-between;
 }
 

@@ -14,6 +14,9 @@ public class TipoVeiculo extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private String descricao;
 	
+	@Column
+	private boolean ativo;
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -21,5 +24,15 @@ public class TipoVeiculo extends Persistivel implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 
 }

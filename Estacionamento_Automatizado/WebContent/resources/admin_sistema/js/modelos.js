@@ -1,16 +1,20 @@
 $(document).ready(function(){
     $("#editar").hide();
-    exibeEditar = function(){
-        if($("#novo").val()){
-            $("#editar").hide();
-            $("#novo").show();
-            $("#novo").val(false);
-        }else{
-            $("#editar").show();
-            $("#novo").hide();
-            $("#novo").val(true);
-        }        
-    }
+    exibeEditar = function (val) {
+        if (val) {
+            if (!$("#novo").val()) {
+                $("#editar").show();
+                $("#novo").hide();
+                $("#novo").val(true);
+            }
+        } else {
+            if ($("#novo").val()) {
+                $("#editar").hide();
+                $("#novo").show();
+                $("#novo").val(false);
+            }
+        };
+    };
     buscarModelos = function () {
         var cfg = {
             type: "POST",
@@ -34,27 +38,40 @@ $(document).ready(function(){
                         $('<tr>')
                             .append($('<td>').append(listaModelos[i].descricao))
                             .append($('<td>').append(listaModelos[i].marca.descricao))
-                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
+                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirModeloPorID(" + listaModelos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
             } else {
-                html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoModelos").html(html);
         }
     }
     buscarModeloPorID = function(id){
-        exibeEditar();
+        exibeEditar(true);
         var cfg = {
             type: "POST",
             url: "../../rest/modeloRest/buscarModeloPorId/" + id,
             success: function (modelo) {
                 $("#descricaoEdit").val(modelo.descricao);
-                $("#marcaEdit").append("<option value='"+modelo.marca.id+"' selected>" + modelo.marca.descricao + "</option>");
+                $("#marcaEdit").val(modelo.marca.id);
                 $("#btnSalvarEdit").val(modelo.id);
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
+    excluirModeloPorID = function(id){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/modeloRest/inativaModelo/" + id,
+            success: function (succJson) {
+                window.location.href = ("modelos.html");
+            },
+            error: function (errJson) {
+                alert(errJson);
             }
         };
         autoPark.ajax.post(cfg);

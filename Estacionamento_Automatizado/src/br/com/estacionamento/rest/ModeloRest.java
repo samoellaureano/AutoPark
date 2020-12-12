@@ -132,5 +132,33 @@ public class ModeloRest extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+	
+	@POST
+	@Path("/inativaModelo/{idModelo}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idModelo") int idModelo){
+
+		try {
+			Modelo modelo = new ModeloJPADAO().buscarPorId(idModelo);
+			modelo.setAtivo(false);
+			boolean	retorno = false;
+			
+			retorno = new ModeloJPADAO().atualizar(modelo);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+		}
+	}
 
 }
