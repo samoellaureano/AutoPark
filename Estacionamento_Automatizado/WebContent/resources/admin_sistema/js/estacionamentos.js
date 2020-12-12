@@ -35,6 +35,11 @@ $(document).ready(function(){
         if (listaEstacionamentos != undefined) {
             if (listaEstacionamentos.length > 0) {
                 for (var i = 0; i < listaEstacionamentos.length; i++) {
+                    if(listaEstacionamentos[i].ativo){
+                        listaEstacionamentos[i].ativo = "Ativo";
+                    }else{
+                        listaEstacionamentos[i].ativo = "Inativo";
+                    }
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaEstacionamentos[i].descricao))
@@ -42,6 +47,7 @@ $(document).ready(function(){
                             .append($('<td>').append(listaEstacionamentos[i].endereco))
                             .append($('<td>').append(listaEstacionamentos[i].vagas))
                             .append($('<td>').append(listaEstacionamentos[i].empresa.descricao))
+                            .append($('<td>').append(listaEstacionamentos[i].ativo))
                             .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
@@ -77,6 +83,7 @@ $(document).ready(function(){
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").val(estacionamento.empresa.id);
                 $("#btnSalvarEdit").val(estacionamento.id);
+                $("#ativoEdit").prop( "checked",estacionamento.ativo);
                 mascaraCnpjEdit(); 
                
             },
@@ -112,6 +119,7 @@ $(document).ready(function(){
         estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\-/g, "");
+        estacionamento.ativo = $("#ativoEdit").is(':checked');
         var cfg = {
             url: "../../rest/estacionamentoRest/editEstacionamento",
             data: JSON.stringify(estacionamento),

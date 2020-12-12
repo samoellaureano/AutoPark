@@ -26,6 +26,7 @@
                 <table id="tabTipoVeiculos">
                     <thead>
                         <th>Descrição</th>
+                        <th>Status</th>
                         <th>Ação</th>
                     </thead>
                     <tbody>
@@ -39,6 +40,8 @@
                     <form class="novoEmp">
                         <label for="descricaoEdit">Descrição</label>
                         <input type="text" id="descricaoEdit" name="descricaoEdit" placeholder="Digite aqui.." required>
+                        <label for="ativoEdit">Ativo</label>
+                        <input type="checkbox" id="ativoEdit" name="ativoEdit"required>
                         <div>
                             <button type="button" class="btnCancelar" onclick="exibeEditar(false)">Cancelar</button>
                             <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>

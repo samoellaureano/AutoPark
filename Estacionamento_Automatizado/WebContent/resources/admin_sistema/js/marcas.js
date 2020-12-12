@@ -34,9 +34,15 @@ $(document).ready(function(){
         if (listaMarcas != undefined) {
             if (listaMarcas.length > 0) {
                 for (var i = 0; i < listaMarcas.length; i++) {
+                    if(listaMarcas[i].ativo){
+                        listaMarcas[i].ativo = "Ativo";
+                    }else{
+                        listaMarcas[i].ativo = "Inativo";
+                    }
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaMarcas[i].descricao))
+                            .append($('<td>').append(listaMarcas[i].ativo))
                             .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
@@ -54,6 +60,7 @@ $(document).ready(function(){
             success: function (marca) {
                 $("#descricaoEdit").val(marca.descricao);
                 $("#btnSalvarEdit").val(marca.id);
+                $("#ativoEdit").prop( "checked",marca.ativo);
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -78,6 +85,7 @@ $(document).ready(function(){
         marca = new Object();
         marca.descricao = $("#descricaoEdit").val();
         marca.id = $("#btnSalvarEdit").val();
+        marca.ativo = $("#ativoEdit").is(':checked');
         var cfg = {
             url: "../../rest/marcaRest/editMarca",
             data: JSON.stringify(marca),

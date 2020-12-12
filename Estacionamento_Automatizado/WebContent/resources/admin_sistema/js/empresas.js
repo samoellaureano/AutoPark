@@ -40,10 +40,16 @@ $(document).ready(function () {
         if (listaEmpresas != undefined) {
             if (listaEmpresas.length > 0) {
                 for (var i = 0; i < listaEmpresas.length; i++) {
+                    if(listaEmpresas[i].ativo){
+                        listaEmpresas[i].ativo = "Ativo";
+                    }else{
+                        listaEmpresas[i].ativo = "Inativo";
+                    }
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaEmpresas[i].descricao))
                             .append($("<td class='maskcnpj'>").append(listaEmpresas[i].cnpj))
+                            .append($("<td>").append(listaEmpresas[i].ativo))
                             .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     );
                 };
@@ -64,6 +70,7 @@ $(document).ready(function () {
                 $("#cnpjEdit").val(empresa.cnpj);
                 $("#cnpjEdit").mask("99.999.999/9999-99");
                 $("#btnSalvarEdit").val(empresa.id);
+                $("#ativoEdit").prop( "checked",empresa.ativo);
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -92,6 +99,7 @@ $(document).ready(function () {
         empresa.cnpj = empresa.cnpj.replace(/\./g, "");
         empresa.cnpj = empresa.cnpj.replace(/\//g, "");
         empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
+        empresa.ativo = $("#ativoEdit").is(':checked');
         var cfg = {
             url: "../../rest/empresaRest/editEmpresa",
             data: JSON.stringify(empresa),

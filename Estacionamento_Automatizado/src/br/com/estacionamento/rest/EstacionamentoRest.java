@@ -95,7 +95,6 @@ public class EstacionamentoRest extends UtilRest{
 
 			Estacionamento estacionamento = new ObjectMapper().readValue(editEstacionamento,Estacionamento.class);
 			Empresa empresa = new EmpresaJPADAO().buscarPorId(estacionamento.getEmpresa().getId());
-			estacionamento.setAtivo(true);
 			estacionamento.setEmpresa(empresa);
 			
 			boolean	retorno = new EstacionamentoJPADAO().atualizar(estacionamento);

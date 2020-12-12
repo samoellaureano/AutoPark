@@ -27,6 +27,7 @@
                     <thead>
                         <th>Descrição</th>
                         <th>Marca</th>
+                        <th>Status</th>
                         <th>Ação</th>
                     </thead>
                     <tbody>
@@ -43,6 +44,9 @@
 
                         <label for="marcaEdit">Marca</label>
                         <select name="marcaEdit" id="marcaEdit"></select>
+
+                        <label for="ativoEdit">Ativo</label>
+                        <input type="checkbox" id="ativoEdit" name="ativoEdit"required>
                         <div>
                             <button type="button" class="btnCancelar" onclick="exibeEditar(false)">Cancelar</button>
                             <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>

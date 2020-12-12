@@ -90,7 +90,6 @@ public class EmpresaRest extends UtilRest{
 
 			Empresa empresa = new ObjectMapper().readValue(editEmpresa,Empresa.class);
 			EmpresaJPADAO empresaJpadao = new EmpresaJPADAO();
-			empresa.setAtivo(true);
 			boolean	retorno = empresaJpadao.atualizar(empresa);
 
 			if(retorno){

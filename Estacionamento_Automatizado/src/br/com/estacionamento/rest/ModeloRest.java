@@ -93,7 +93,6 @@ public class ModeloRest extends UtilRest{
 			Modelo modelo = new ObjectMapper().readValue(editModelo,Modelo.class);
 			Marca marca = new MarcaJPADAO().buscarPorId(modelo.getMarca().getId());
 			modelo.setMarca(marca);
-			modelo.setAtivo(true);
 
 			boolean	retorno = new ModeloJPADAO().atualizar(modelo);
 

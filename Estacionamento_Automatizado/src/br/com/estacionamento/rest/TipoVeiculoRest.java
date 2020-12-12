@@ -74,7 +74,6 @@ public class TipoVeiculoRest extends UtilRest{
 	public Response buscarTipoVeiculoPorId(@PathParam("idTipoVeiculo") int idTipoVeiculo){
 		try{
 			TipoVeiculo tipoVeiculo = new TipoVeiculoJPADAO().buscarPorId(idTipoVeiculo);
-			tipoVeiculo.setAtivo(true);
 			
 			return this.buildResponse(tipoVeiculo);
 		}catch (Exception e){
@@ -92,7 +91,6 @@ public class TipoVeiculoRest extends UtilRest{
 		try {
 
 			TipoVeiculo tipoVeiculo = new ObjectMapper().readValue(editTipoVeiculo,TipoVeiculo.class);
-			tipoVeiculo.setAtivo(true);
 			boolean	retorno = new TipoVeiculoJPADAO().atualizar(tipoVeiculo);
 
 			if(retorno){

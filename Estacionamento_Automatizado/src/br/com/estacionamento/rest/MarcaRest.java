@@ -92,7 +92,6 @@ public class MarcaRest extends UtilRest{
 		try {
 
 			Marca marca = new ObjectMapper().readValue(editMarca,Marca.class);
-			marca.setAtivo(true);
 			boolean	retorno = new MarcaJPADAO().atualizar(marca);
 
 			if(retorno){

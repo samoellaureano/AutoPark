@@ -34,10 +34,16 @@ $(document).ready(function(){
         if (listaModelos != undefined) {
             if (listaModelos.length > 0) {
                 for (var i = 0; i < listaModelos.length; i++) {
+                    if(listaModelos[i].ativo){
+                        listaModelos[i].ativo = "Ativo";
+                    }else{
+                        listaModelos[i].ativo = "Inativo";
+                    }
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaModelos[i].descricao))
                             .append($('<td>').append(listaModelos[i].marca.descricao))
+                            .append($('<td>').append(listaModelos[i].ativo))
                             .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirModeloPorID(" + listaModelos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
@@ -56,6 +62,7 @@ $(document).ready(function(){
                 $("#descricaoEdit").val(modelo.descricao);
                 $("#marcaEdit").val(modelo.marca.id);
                 $("#btnSalvarEdit").val(modelo.id);
+                $("#ativoEdit").prop( "checked",modelo.ativo);
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -82,6 +89,7 @@ $(document).ready(function(){
         modelo.id = $("#btnSalvarEdit").val();
         modelo.descricao = $("#descricaoEdit").val();
         marca.id = $("#marcaEdit").val();
+        modelo.ativo = $("#ativoEdit").is(':checked');
         modelo.marca = marca;
         var cfg = {
             url: "../../rest/modeloRest/editModelo",

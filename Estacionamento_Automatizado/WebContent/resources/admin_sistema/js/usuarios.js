@@ -34,6 +34,11 @@ $(document).ready(function(){
         if (listaUsuarios != undefined) {
             if (listaUsuarios.length > 0) {
                 for (var i = 0; i < listaUsuarios.length; i++) {
+                    if(listaUsuarios[i].ativo){
+                        listaUsuarios[i].ativo = "Ativo";
+                    }else{
+                        listaUsuarios[i].ativo = "Inativo";
+                    }
                     tbody.append(
                         $('<tr>')
                             .append($('<td>').append(listaUsuarios[i].nome))
@@ -41,6 +46,7 @@ $(document).ready(function(){
                             .append($('<td>').append(listaUsuarios[i].celular))
                             .append($('<td>').append(listaUsuarios[i].email))
                             .append($('<td>').append(listaUsuarios[i].empresa.descricao))
+                            .append($('<td>').append(listaUsuarios[i].ativo))
                             .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
@@ -68,6 +74,7 @@ $(document).ready(function(){
                 $("#empEdit").val(funcionario.empresa.id);
                 $("#btnSalvarEdit").val(funcionario.id);
                 $("#cpfEdit").mask("999.999.999-99");
+                $("#ativoEdit").prop( "checked",funcionario.ativo);
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -103,6 +110,7 @@ $(document).ready(function(){
         empresa.id = $("#empEdit").val();
         funcionario.empresa = empresa;
         funcionario.email = $("#emailEdit").val();
+        funcionario.ativo = $("#ativoEdit").is(':checked');
         var cfg = {
             url: "../../rest/funcionarioRest/editFuncionario",
             data: JSON.stringify(funcionario),

@@ -169,7 +169,6 @@ public class FuncionarioRest extends UtilRest{
 			Funcionario funcionario = new ObjectMapper().readValue(editFuncionario,Funcionario.class);
 			funcionario.setUsuario(new UsuarioJPADAO().buscarPorCpf(funcionario.getUsuario().getCpf()));
 			funcionario.setEmpresa(new EmpresaJPADAO().buscarPorId(funcionario.getEmpresa().getId()));
-			funcionario.setAtivo(true);
 			boolean	retorno = new FuncionarioJPADAO().atualizar(funcionario);
 
 			if(retorno){
