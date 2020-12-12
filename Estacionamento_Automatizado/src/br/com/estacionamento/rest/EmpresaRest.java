@@ -113,5 +113,32 @@ public class EmpresaRest extends UtilRest{
 		}
 
 	}
+	@POST
+	@Path("/inativaEmpresa/{idEmpresa}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idEmpresa") int idEmpresa){
+
+		try {
+			Empresa empresa = new EmpresaJPADAO().buscarPorId(idEmpresa);
+			empresa.setAtivo(false);
+			boolean	retorno = false;
+			
+			retorno = new EmpresaJPADAO().atualizar(empresa);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+		}
+	}
 
 }

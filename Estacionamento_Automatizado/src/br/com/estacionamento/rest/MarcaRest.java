@@ -135,7 +135,7 @@ public class MarcaRest extends UtilRest{
 	@POST
 	@Path("/inativaMarca/{idMarca}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response inativaFuncionario(@PathParam("idMarca") int idMarca){
+	public Response inativaMarca(@PathParam("idMarca") int idMarca){
 
 		try {
 			Marca marca = new MarcaJPADAO().buscarPorId(idMarca);

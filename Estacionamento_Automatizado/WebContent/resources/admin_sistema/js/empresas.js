@@ -71,6 +71,19 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
+    excluirEmpresaPorID = function(id){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/empresaRest/inativaEmpresa/" + id,
+            success: function (succJson) {
+                window.location.href = ("empresas.html");
+            },
+            error: function (errJson) {
+                alert(errJson);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
     $('#btnSalvarEdit').click(function (e) {
         empresa = new Object();
         empresa.id = $("#btnSalvarEdit").val();

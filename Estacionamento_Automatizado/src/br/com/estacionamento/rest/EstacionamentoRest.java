@@ -144,5 +144,33 @@ public class EstacionamentoRest extends UtilRest{
 		}
 	}
 	
+	@POST
+	@Path("/inativaEstacionamento/{idEstacionamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idEstacionamento") int idEstacionamento){
+
+		try {
+			Estacionamento estacionamento = new EstacionamentoJPADAO().buscarPorId(idEstacionamento);
+			estacionamento.setAtivo(false);
+			boolean	retorno = false;
+			
+			retorno = new EstacionamentoJPADAO().atualizar(estacionamento);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+		}
+	}
+	
 
 }

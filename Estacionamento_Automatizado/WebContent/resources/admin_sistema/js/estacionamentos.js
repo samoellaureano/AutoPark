@@ -75,13 +75,26 @@ $(document).ready(function(){
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);
-                $("#empEdit").append("<option value='"+estacionamento.empresa.id+"' selected>" + estacionamento.empresa.descricao + "</option>");
+                $("#empEdit").val(estacionamento.empresa.id);
                 $("#btnSalvarEdit").val(estacionamento.id);
                 mascaraCnpjEdit(); 
                
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
+    excluirEstacionamentoPorID = function(id){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/estacionamentoRest/inativaEstacionamento/" + id,
+            success: function (succJson) {
+                window.location.href = ("estacionamentos.html");
+            },
+            error: function (errJson) {
+                alert(errJson);
             }
         };
         autoPark.ajax.post(cfg);
@@ -98,7 +111,7 @@ $(document).ready(function(){
         estacionamento.vagas = $("#vagasEdit").val();
         estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
-        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/estacionamentoRest/editEstacionamento",
             data: JSON.stringify(estacionamento),
@@ -123,7 +136,7 @@ $(document).ready(function(){
         estacionamento.vagas = $("#vagas").val();
         estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
-        empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
+        estacionamento.cnpj = estacionamento.cnpj.replace(/\-/g, "");
         var cfg = {
             url: "../../rest/estacionamentoRest/addEstacionamento",
             data: JSON.stringify(estacionamento),
