@@ -16,12 +16,25 @@
 <body>
     <div class="container">
         <div class="voltar">
-            <a href="dashboard.html"><img src="img/voltar.png" alt="Voltar">
+            <a href="dashboard.html"><img src="img/voltar.png" alt="Voltar" >
                 <span>Voltar</span>
             </a>            
         </div>
         <div><h1>Empresas</h1></div>
-        <div class="corpo" id="corpo">                    
+        <div class="corpo" id="corpo">
+            <div class="lista">
+                <h2>Lista de Empresas</h2>
+                <table id="tabEmpresas">
+                    <thead>
+                        <th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Ação</th>
+                    </thead>
+                    <tbody>
+                        <tbody id="resultadoEmpresas"></tbody>
+                    </tbody>                    
+                </table>
+            </div>
             <div class="novo" id="novo">            
                 <div>
                     <h2>Novo</h2>
@@ -37,19 +50,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="lista">
-                <h2>Lista de Empresas</h2>
-                <table id="tabEmpresas">
-                    <thead>
-                        <th>Razão Social</th>
-                        <th>CNPJ</th>
-                        <th>Ação</th>
-                    </thead>
-                    <tbody>
-                        <tbody id="resultadoEmpresas"></tbody>
-                    </tbody>                    
-                </table>
             </div>
             <div class="editar" id="editar" style="display: none;">            
                 <div>
@@ -67,6 +67,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
         </div>
     </div>
 </body>

@@ -3,7 +3,7 @@ body {
   display: flex;
   width: 100%;
   height: 98%;
-  background-color: #0c4304;
+  background-color: #470440;
   background-repeat: no-repeat;
 }
 .container{
@@ -30,7 +30,8 @@ body {
   align-items: center;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  color: rgb(216, 221, 217); 
+  color: rgb(216, 221, 217);
+  opacity: 70%;
 }
 .voltar > a:hover{
   background-color: #aeb7ad42;
@@ -119,6 +120,7 @@ table {
 th, td {
   text-align: left;
   padding: 8px;
+  background-color: #aeb7ad42;
 }
 
 tr:hover{
