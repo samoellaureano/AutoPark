@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     $("#editar").hide();
     exibeEditar = function(){
@@ -47,10 +48,18 @@ $(document).ready(function(){
             $(".maskcnpj").mask("99.999.999/9999-99");
         };
     };
-    mascaraCpf=function(){
-        $("#cnpj").mask("99.999.999/9999-99");
+    mascaraCnpj=function(){
+        $("#cnpj").mask("99.999.999/9999-99");        
+    };
+    mascaraCnpjEdit = function(){
+     var cnpj =  $("#cnpjEdit").val(); 
+
+     if(cnpj>11){
+        $("#cnpjEdit").mask("99.999.999/9999-99"); 
+    }
 
     };
+
     buscarEstacionamentoPorID = function(id){
         exibeEditar();
         var cfg = {
@@ -58,13 +67,14 @@ $(document).ready(function(){
             url: "../../rest/estacionamentoRest/buscarEstacionamentoPorId/" + id,
             success: function (estacionamento) {
                 $("#descricaoEdit").val(estacionamento.descricao);
-                $("#cnpjEdit").val(estacionamento.cnpj);
-                $("#cnpjEdit").mask("99.999.999/9999-99");
+                $("#cnpjEdit").val(estacionamento.cnpj);                          
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").append("<option value='"+estacionamento.empresa.id+"' selected>" + estacionamento.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(estacionamento.id);
+                mascaraCnpjEdit(); 
+               
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
