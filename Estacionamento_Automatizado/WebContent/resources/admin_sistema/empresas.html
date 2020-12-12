@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/adm_sist_pgs.css">
 
     <script src="../../js/jquery.js"></script>  
-    <script src="../../js/jquery.mask.min.js" ></script>     
+    <script src="../../js/jquery.mask.min.js" ></script>  
     <script src="../../js/ajax.js"></script>
+    <script src="../../js/mascaraCnpj.js"></script>
     <script src="js/empresas.js"></script> 
 </head>
 
@@ -43,7 +44,7 @@
                         <input type="text" id="razaoSocial" name="razaoSocial" placeholder="Digite aqui.." required>
         
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" id="cnpj" name="cnpj" onkeyup="mascaraCpf()" placeholder="00.000.000/0000-00" required>
+                        <input type="text" id="cnpj" name="cnpj" onkeyup="mascaraCnpj()" placeholder="00.000.000/0000-00" required>
     
                         <div>
                             <button type="button" class="btnSalvar" id="btnSalvar">Salvar</button>
@@ -59,7 +60,7 @@
                         <input type="text" id="razaoSocialEdit" name="razaoSocialEdit" placeholder="Digite aqui.." required>
         
                         <label for="cnpjEdit">CNPJ</label>
-                        <input type="text" id="cnpjEdit" name="cnpjEdit" placeholder="00.000.000/0000-00" required>
+                        <input type="text" id="cnpjEdit" name="cnpjEdit" onkeyup="mascaraCnpjEdit()" placeholder="00.000.000/0000-00"  required>
     
                         <div>
                             <button type="button" class="btnCancelar" onclick="exibeEditar(false)">Cancelar</button>

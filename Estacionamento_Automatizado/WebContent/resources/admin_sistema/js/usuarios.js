@@ -51,10 +51,11 @@ $(document).ready(function(){
             $(".maskcpf").mask("999.999.999-99");
         };
     };
+
     mascaraCpf=function(){
         $("#cpf").mask("999.999.999-99");
-
     };
+
     buscarUsuarioPorID = function(id){
         exibeEditar(true);
         var cfg = {
@@ -63,7 +64,7 @@ $(document).ready(function(){
             success: function (funcionario) {
                 $("#nomeEdit").val(funcionario.nome);
                 $("#cpfEdit").val(funcionario.usuario.cpf);                
-                $("#celularEdit").val(funcionario.celular);
+                $("#celularEdit").val(mtel(funcionario.celular));
                 $("#emailEdit").val(funcionario.email);
                 $("#empEdit").val(funcionario.empresa.id);
                 $("#btnSalvarEdit").val(funcionario.id);
@@ -74,7 +75,7 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-    }
+    };
     excluirUsuarioPorID = function(id){
         var cfg = {
             type: "POST",
@@ -87,7 +88,7 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-    }
+    };
     $('#btnSalvarEdit').click(function (e) {
         funcionario = new Object();
         empresa = new Object();
@@ -158,9 +159,9 @@ $(document).ready(function(){
                         for (var i = 0; i < listaEmpresas.length; i++) {
                             $('#emp').append("<option value='"+ listaEmpresas[i].id +"'>" + listaEmpresas[i].descricao + "</option>");
                             $('#empEdit').append("<option value='"+ listaEmpresas[i].id +"'>" + listaEmpresas[i].descricao + "</option>");
-                        }
-                    }
-                }
+                        };
+                    };
+                };
             },
             error: function (err) {
                 alert("Erro ao buscar dados: " + err.responseText);
