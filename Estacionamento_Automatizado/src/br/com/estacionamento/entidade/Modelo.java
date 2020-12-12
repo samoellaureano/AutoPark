@@ -21,9 +21,6 @@ public class Modelo extends Persistivel implements Serializable{
 	@JoinColumn(referencedColumnName = "id")
     @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     private Marca marca;
-	
-	@Column
-	private boolean ativo;
 
 	public String getDescricao() {
 		return descricao;
@@ -41,12 +38,6 @@ public class Modelo extends Persistivel implements Serializable{
 		this.marca = marca;
 	}
 
-	public boolean getAtivo() {
-		return ativo;
-	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	
+
 }
