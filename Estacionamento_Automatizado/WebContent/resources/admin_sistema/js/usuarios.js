@@ -96,6 +96,7 @@ $(document).ready(function(){
         usuario.cpf = $("#cpfEdit").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
+        usuario.perfil = 2;
         funcionario.usuario = usuario;
         funcionario.nome = $("#nomeEdit").val();
         funcionario.celular = $("#celularEdit").val();
