@@ -141,6 +141,7 @@ public class FuncionarioRest extends UtilRest{
 			funcionario.setEmpresa(new FuncionarioJPADAO().buscarPorId(funcionario.getId()).getEmpresa());
 			
 			funcionario.getUsuario().setPerfil(perfil);
+			funcionario.setAtivo(true);
 			
 			boolean	retorno = false;
 			
@@ -162,5 +163,67 @@ public class FuncionarioRest extends UtilRest{
 		}
 	}
 	
+	@POST
+	@Path("/editFuncionario")
+	@Consumes("application/*")
 
+	public Response editTipoVeiculo(String editFuncionario){
+
+		try {
+
+			Funcionario funcionario = new ObjectMapper().readValue(editFuncionario,Funcionario.class);
+			funcionario.setUsuario(new UsuarioJPADAO().buscarPorCpf(funcionario.getUsuario().getCpf()));
+			funcionario.setEmpresa(new EmpresaJPADAO().buscarPorId(funcionario.getEmpresa().getId()));
+			funcionario.setAtivo(true);
+			boolean	retorno = new FuncionarioJPADAO().atualizar(funcionario);
+
+			if(retorno){
+				// true = Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// false = ja existe
+				return this.buildErrorResponse("2");
+
+			}else {
+				// null = Erro ao cadastrar
+				return this.buildErrorResponse("0");			
+			}
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse(e.toString());
+		}
+
+	}
+	
+	@POST
+	@Path("/inativaFuncionario/{idFuncionario}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idFuncionario") int idFuncionario){
+
+		try {
+			Funcionario funcionario = new FuncionarioJPADAO().buscarPorId(idFuncionario);
+			funcionario.setAtivo(false);
+			boolean	retorno = false;
+			
+			retorno = new FuncionarioJPADAO().atualizar(funcionario);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+		}
+	}
+	
 }

@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.MarcaJPADAO;
+import br.com.estacionamento.dao.jpa.ModeloJPADAO;
 import br.com.estacionamento.entidade.Marca;
 import br.com.estacionamento.util.UtilRest;
 
@@ -29,6 +30,7 @@ public class MarcaRest extends UtilRest{
 		try {
 
 			Marca marca = new ObjectMapper().readValue(addMarca,Marca.class);
+			marca.setAtivo(true);
 			
 			boolean	retorno = new MarcaJPADAO().salvar(marca);
 
@@ -90,6 +92,7 @@ public class MarcaRest extends UtilRest{
 		try {
 
 			Marca marca = new ObjectMapper().readValue(editMarca,Marca.class);
+			marca.setAtivo(true);
 			boolean	retorno = new MarcaJPADAO().atualizar(marca);
 
 			if(retorno){
@@ -126,6 +129,35 @@ public class MarcaRest extends UtilRest{
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/inativaMarca/{idMarca}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response inativaFuncionario(@PathParam("idMarca") int idMarca){
+
+		try {
+			Marca marca = new MarcaJPADAO().buscarPorId(idMarca);
+			marca.setAtivo(false);
+			new ModeloJPADAO().inativarModelosPelaMarca(idMarca);
+			boolean	retorno = false;
+			
+			retorno = new MarcaJPADAO().atualizar(marca);
+			
+			if(retorno){
+				
+				return this.buildResponse("1");				
+			}else{
+				
+				return this.buildResponse("2");
+			}
+			
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao atualizar Funcionario");
 		}
 	}
 }

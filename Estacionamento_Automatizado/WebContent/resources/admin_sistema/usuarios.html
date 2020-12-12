@@ -20,10 +20,10 @@
                 <span>Voltar</span>
             </a>            
         </div>
-        <div><h1>Usuarios</h1></div>
+        <div><h1>Usuários</h1></div>
         <div class="corpo" id="corpo">
             <div class="lista">
-                <h2>Lista de Usuarios</h2>
+                <h2>Lista de Usuários</h2>
                 <table id="tabUsuarios">
                     <thead>
                         <th>Nome</th>
@@ -55,9 +55,9 @@
                         <input type="text" id="emailEdit" name="emailEdit" placeholder="Digite aqui.." required>
 
                         <label for="empEdit">Empresa</label>
-                        <select name="empEdit" id="empEdit" onclick="buscarEmpresas()"></select>
+                        <select name="empEdit" id="empEdit" ondblclick="buscarEmpresas()"></select>
                         <div>
-                            <button type="button" class="btnCancelar" onclick="exibeEditar()">Cancelar</button>
+                            <button type="button" class="btnCancelar" onclick="exibeEditar(false)">Cancelar</button>
                             <button type="button" class="btnSalvar" id="btnSalvarEdit">Salvar</button>
                         </div>
                     </form>

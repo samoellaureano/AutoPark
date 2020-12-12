@@ -16,7 +16,7 @@ public class FuncionarioJPADAO extends JPAAbstract<Funcionario>{
 	}
 	
 	public List<Funcionario> buscarPorDescricaoADM(String b) {
-		String jpql = "select c from " +getEntityName()+ " c where c.usuario.perfil = 2 ORDER BY c.nome ASC";
+		String jpql = "select c from " +getEntityName()+ " c where c.usuario.perfil = 2 AND c.ativo = 1 ORDER BY c.nome ASC";
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings("rawtypes")
 		List list = query.getResultList();

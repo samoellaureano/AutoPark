@@ -13,6 +13,9 @@ public class Marca extends Persistivel implements Serializable{
 
 	@Column(nullable = false,length = 45)
 	private String descricao;
+	
+	@Column
+	private boolean ativo;
 
 	public String getDescricao() {
 		return descricao;
@@ -22,4 +25,12 @@ public class Marca extends Persistivel implements Serializable{
 		this.descricao = descricao;
 	}
 
+	public boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 }
