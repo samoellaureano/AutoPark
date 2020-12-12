@@ -117,6 +117,7 @@ $(document).ready(function () {
 
         empresa.id = $("#empresa").val();
         usuario.cpf = $("#cpf").val();
+        usuario.perfil = 1;
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
         funcionario.celular = $("#celular").val();
