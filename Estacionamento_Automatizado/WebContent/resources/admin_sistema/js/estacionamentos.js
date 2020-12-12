@@ -75,8 +75,7 @@ $(document).ready(function(){
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").append("<option value='"+estacionamento.empresa.id+"' selected>" + estacionamento.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(estacionamento.id);
-                 mascaraCnpjEdit();
-                exibeEditar();               
+                 mascaraCnpjEdit();              
             },
 
             error: function (err) {
