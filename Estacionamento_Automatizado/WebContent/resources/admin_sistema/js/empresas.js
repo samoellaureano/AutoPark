@@ -8,18 +8,21 @@ $(document).ready(function () {
                 $("#editar").show();
                 $("#novo").hide();
                 $("#novo").val(true);
-            }
+            };
         } else {
             if ($("#novo").val()) {
                 $("#editar").hide();
                 $("#novo").show();
                 $("#novo").val(false);
-            }
+            };
         };
     };
-    mascaraCpf = function () {
+    mascaraCnpj = function(){
         $("#cnpj").mask("99.999.999/9999-99");
+    };
+    mascaraCnpjEdit = function(){    
 
+        $("#cnpjEdit").mask("99.999.999/9999-99"); 
     };
     buscarEmpresas = function () {
         var cfg = {
@@ -67,10 +70,10 @@ $(document).ready(function () {
             url: "../../rest/empresaRest/buscarEmpresaPorId/" + id,
             success: function (empresa) {
                 $("#razaoSocialEdit").val(empresa.descricao);
-                $("#cnpjEdit").val(empresa.cnpj);
-                $("#cnpjEdit").mask("99.999.999/9999-99");
+                $("#cnpjEdit").val(mCnpj(empresa.cnpj));                               
                 $("#btnSalvarEdit").val(empresa.id);
                 $("#ativoEdit").prop( "checked",empresa.ativo);
+                mascaraCnpjEdit();
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -90,7 +93,7 @@ $(document).ready(function () {
             }
         };
         autoPark.ajax.post(cfg);
-    }
+    };
     $('#btnSalvarEdit').click(function (e) {
         empresa = new Object();
         empresa.id = $("#btnSalvarEdit").val();
