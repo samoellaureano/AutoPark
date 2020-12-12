@@ -35,7 +35,6 @@ public class FuncionarioRest extends UtilRest{
 			Empresa empresa = funcionario.getEmpresa();
 
 			usuario.setAcesso(true);
-			usuario.setPerfil(1);
 			usuario.setSenhaCriptografada(usuario.getSenha());
 			
 			funcionario.setUsuario(usuario);
@@ -112,11 +111,7 @@ public class FuncionarioRest extends UtilRest{
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscaDados(@PathParam("idUsuario") int idUsuario){
 		try{
-			
-			Usuario usuario = new UsuarioJPADAO().buscarPorId(idUsuario);
-			Funcionario funcionario = new FuncionarioJPADAO().buscarPorIdUsuario(idUsuario);
-			
-			funcionario.setUsuario(usuario);
+			Funcionario funcionario = new FuncionarioJPADAO().buscarPorId(idUsuario);
 			
 			return this.buildResponse(funcionario);
 		}catch (Exception e){
