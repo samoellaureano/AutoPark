@@ -31,6 +31,9 @@ public class Estacionamento extends Persistivel implements Serializable{
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Empresa empresa;
+	
+	@Column
+	private boolean ativo;
 
 	public String getEndereco() {
 		return endereco;
@@ -70,6 +73,14 @@ public class Estacionamento extends Persistivel implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

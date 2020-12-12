@@ -1,19 +1,23 @@
 
-$(document).ready(function(){
-   
+$(document).ready(function () {
+
     $("#editar").hide();
-    exibeEditar = function(){
-        if($("#novo").val()){
-            $("#editar").hide();
-            $("#novo").show();
-            $("#novo").val(false);
-        }else{
-            $("#editar").show();
-            $("#novo").hide();
-            $("#novo").val(true);
-        };        
+    exibeEditar = function (val) {
+        if (val) {
+            if (!$("#novo").val()) {
+                $("#editar").show();
+                $("#novo").hide();
+                $("#novo").val(true);
+            }
+        } else {
+            if ($("#novo").val()) {
+                $("#editar").hide();
+                $("#novo").show();
+                $("#novo").val(false);
+            }
+        };
     };
-    mascaraCpf=function(){
+    mascaraCpf = function () {
         $("#cnpj").mask("99.999.999/9999-99");
 
     };
@@ -30,9 +34,9 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-    exibirEmpresas = function(listaEmpresas){
-        var tbody = $('#tabEmpresas');        
-        var html ="";
+    exibirEmpresas = function (listaEmpresas) {
+        var tbody = $('#tabEmpresas');
+        var html = "";
         if (listaEmpresas != undefined) {
             if (listaEmpresas.length > 0) {
                 for (var i = 0; i < listaEmpresas.length; i++) {
@@ -40,24 +44,24 @@ $(document).ready(function(){
                         $('<tr>')
                             .append($('<td>').append(listaEmpresas[i].descricao))
                             .append($("<td class='maskcnpj'>").append(listaEmpresas[i].cnpj))
-                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
+                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     );
                 };
             } else {
-                html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             };
-            $("#resultadoEmpresas").html(html);            
+            $("#resultadoEmpresas").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
         };
     };
-    buscarEmpresaPorID = function(id){
-        exibeEditar();
+    buscarEmpresaPorID = function (id) {
+        exibeEditar(true);
         var cfg = {
             type: "POST",
             url: "../../rest/empresaRest/buscarEmpresaPorId/" + id,
             success: function (empresa) {
                 $("#razaoSocialEdit").val(empresa.descricao);
-                $("#cnpjEdit").val(mCnpj(empresa.cnpj));
+                $("#cnpjEdit").val(empresa.cnpj);
                 $("#cnpjEdit").mask("99.999.999/9999-99");
                 $("#btnSalvarEdit").val(empresa.id);
             },

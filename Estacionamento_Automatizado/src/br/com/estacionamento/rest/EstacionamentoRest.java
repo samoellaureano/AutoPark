@@ -33,7 +33,7 @@ public class EstacionamentoRest extends UtilRest{
 		try {
 
 			Estacionamento estacionamento = new ObjectMapper().readValue(addEstacionamento,Estacionamento.class);
-			
+			estacionamento.setAtivo(true);
 			boolean	retorno = new EstacionamentoJPADAO().salvar(estacionamento);
 
 			if(retorno){
@@ -95,8 +95,9 @@ public class EstacionamentoRest extends UtilRest{
 
 			Estacionamento estacionamento = new ObjectMapper().readValue(editEstacionamento,Estacionamento.class);
 			Empresa empresa = new EmpresaJPADAO().buscarPorId(estacionamento.getEmpresa().getId());
+			estacionamento.setAtivo(true);
 			estacionamento.setEmpresa(empresa);
-
+			
 			boolean	retorno = new EstacionamentoJPADAO().atualizar(estacionamento);
 
 			if(retorno){

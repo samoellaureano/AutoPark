@@ -1,17 +1,20 @@
-$("#cnpjEdit").mask("99.999.999/9999-99"); 
-$("#cnpj").mask("99.999.999/9999-99"); 
+
 $(document).ready(function(){
     $("#editar").hide();
-    exibeEditar = function(){
-        if($("#novo").val()){
-            $("#editar").hide();
-            $("#novo").show();
-            $("#novo").val(false);
-        }else{
-            $("#editar").show();
-            $("#novo").hide();
-            $("#novo").val(true);
-        };        
+    exibeEditar = function (val) {
+        if (val) {
+            if (!$("#novo").val()) {
+                $("#editar").show();
+                $("#novo").hide();
+                $("#novo").val(true);
+            }
+        } else {
+            if ($("#novo").val()) {
+                $("#editar").hide();
+                $("#novo").show();
+                $("#novo").val(false);
+            }
+        };
     };
     buscarEstacionamentos = function () {
         var cfg = {
@@ -39,11 +42,11 @@ $(document).ready(function(){
                             .append($('<td>').append(listaEstacionamentos[i].endereco))
                             .append($('<td>').append(listaEstacionamentos[i].vagas))
                             .append($('<td>').append(listaEstacionamentos[i].empresa.descricao))
-                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
+                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
-                };
+                }
             } else {
-                html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='6' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoEstacionamentos").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
@@ -53,27 +56,30 @@ $(document).ready(function(){
         $("#cnpj").mask("99.999.999/9999-99");        
     };
     mascaraCnpjEdit = function(){
+     var cnpj =  $("#cnpjEdit").val(); 
 
-        $("#cnpjEdit").mask("99.999.999/9999-99");
+     if(cnpj>11){
+        $("#cnpjEdit").mask("99.999.999/9999-99"); 
+    }
+
     };
 
     buscarEstacionamentoPorID = function(id){
-        exibeEditar();
+        exibeEditar(true);
         var cfg = {
             type: "POST",
             url: "../../rest/estacionamentoRest/buscarEstacionamentoPorId/" + id,
             success: function (estacionamento) {
                 $("#descricaoEdit").val(estacionamento.descricao);
-                $("#cnpjEdit").val(mCnpj(estacionamento.cnpj)); 
-                mascaraCnpjEdit();                       
+                $("#cnpjEdit").val(estacionamento.cnpj);                          
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").append("<option value='"+estacionamento.empresa.id+"' selected>" + estacionamento.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(estacionamento.id);
-                 mascaraCnpjEdit();              
+                mascaraCnpjEdit(); 
+               
             },
-
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
             }
@@ -153,7 +159,7 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-   
+
     buscarEstacionamentos();
     buscarEmpresas();
 });

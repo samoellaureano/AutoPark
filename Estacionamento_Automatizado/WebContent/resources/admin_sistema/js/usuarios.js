@@ -1,15 +1,19 @@
 $(document).ready(function(){
     $("#editar").hide();
-    exibeEditar = function(){
-        if($("#novo").val()){
-            $("#editar").hide();
-            $("#novo").show();
-            $("#novo").val(false);
-        }else{
-            $("#editar").show();
-            $("#novo").hide();
-            $("#novo").val(true);
-        };        
+    exibeEditar = function (val) {
+        if (val) {
+            if (!$("#novo").val()) {
+                $("#editar").show();
+                $("#novo").hide();
+                $("#novo").val(true);
+            }
+        } else {
+            if ($("#novo").val()) {
+                $("#editar").hide();
+                $("#novo").show();
+                $("#novo").val(false);
+            }
+        };
     };
     buscarUsuarios = function () {
         var cfg = {
@@ -34,18 +38,17 @@ $(document).ready(function(){
                         $('<tr>')
                             .append($('<td>').append(listaUsuarios[i].nome))
                             .append($("<td class='maskcpf'>").append(listaUsuarios[i].usuario.cpf))
-                            .append($("<td class='maskTel'>").append(listaUsuarios[i].celular))
+                            .append($('<td>').append(listaUsuarios[i].celular))
                             .append($('<td>').append(listaUsuarios[i].email))
                             .append($('<td>').append(listaUsuarios[i].empresa.descricao))
-                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
+                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
                     )
                 }
             } else {
-                html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='6' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoUsuarios").html(html);
             $(".maskcpf").mask("999.999.999-99");
-            $(".maskTel").mask("(00) 0000-00009");
         };
     };
     mascaraCpf=function(){
@@ -53,21 +56,34 @@ $(document).ready(function(){
 
     };
     buscarUsuarioPorID = function(id){
-        exibeEditar();
+        exibeEditar(true);
         var cfg = {
             type: "POST",
             url: "../../rest/funcionarioRest/buscaDados/" + id,
             success: function (funcionario) {
                 $("#nomeEdit").val(funcionario.nome);
                 $("#cpfEdit").val(funcionario.usuario.cpf);                
-                $("#celularEdit").val(mtel(funcionario.celular));
+                $("#celularEdit").val(funcionario.celular);
                 $("#emailEdit").val(funcionario.email);
-                $("#empEdit").append("<option value='"+funcionario.empresa.id+"' selected>" + funcionario.empresa.descricao + "</option>");
+                $("#empEdit").val(funcionario.empresa.id);
                 $("#btnSalvarEdit").val(funcionario.id);
                 $("#cpfEdit").mask("999.999.999-99");
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
+    excluirUsuarioPorID = function(id){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/funcionarioRest/inativaFuncionario/" + id,
+            success: function (succJson) {
+                window.location.href = ("usuarios.html");
+            },
+            error: function (errJson) {
+                alert(errJson);
             }
         };
         autoPark.ajax.post(cfg);
@@ -130,6 +146,8 @@ $(document).ready(function(){
     buscarEmpresas = function () {
         $('#empEdit option').remove();
         $('#emp option').remove();
+        $('#emp').append("<option value=''>Selecione</option>");
+        $('#empEdit').append("<option value=''>Selecione</option>");
         var cfg = {
             type: "POST",
             url: "../../rest/empresaRest/buscaEmpresas/",
