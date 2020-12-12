@@ -10,6 +10,8 @@
     <script src="../../js/jquery.js"></script> 
     <script src="../../js/jquery.mask.min.js" ></script>       
     <script src="../../js/ajax.js"></script>
+    <script src="../../js/maskTelefone.js"></script>
+    <script src="../../js/mascaraCnpj.js"></script>
     <script src="js/usuarios.js"></script> 
 </head>
 
@@ -49,7 +51,8 @@
                         <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" onkeyup="mascaraCpf()"  required>
 
                         <label for="celularEdit">Celular</label>
-                        <input type="text" id="celularEdit" name="celularEdit" placeholder="Digite aqui.." required>
+                        <input type="text" id="celularEdit" name="celularEdit" placeholder="Digite aqui.." onkeydown="maskTel( this, mtel );"
+                        maxlength="15" required>
 
                         <label for="emailEdit">E-mail</label>
                         <input type="text" id="emailEdit" name="emailEdit" placeholder="Digite aqui.." required>
@@ -74,7 +77,8 @@
                         <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" onkeyup="mascaraCpf()"  required>
 
                         <label for="celular">Celular</label>
-                        <input type="text" id="celular" name="celular" placeholder="Digite aqui.." required>
+                        <input type="text" id="celular" name="celular" placeholder="Digite aqui.." onkeydown="maskTel( this, mtel );"
+                        maxlength="15" required>
 
                         <label for="email">E-mail</label>
                         <input type="text" id="email" name="email" placeholder="Digite aqui.." required>

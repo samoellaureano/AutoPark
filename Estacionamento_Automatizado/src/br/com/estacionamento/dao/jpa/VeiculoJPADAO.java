@@ -27,6 +27,7 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 		for (Object object: list) {
 			veiculo = ((Veiculo) object);
 		}
+		super.close();
 		return veiculo;
 	}
 
@@ -42,6 +43,7 @@ public class VeiculoJPADAO extends JPAAbstract<Veiculo> implements VeiculoDAO{
 		for (Object object: list) {
 			listaVeiculos.add((Veiculo) object);
 		}
+		super.close();
 		return listaVeiculos;
 	}
 	

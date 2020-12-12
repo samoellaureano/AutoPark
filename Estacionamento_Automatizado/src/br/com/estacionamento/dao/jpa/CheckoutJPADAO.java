@@ -28,6 +28,7 @@ public class CheckoutJPADAO extends JPAAbstract<Checkout> implements CheckoutDAO
 		for (Checkout objCheckout: list) {
 			checkout = objCheckout;
 		}
+		super.close();
 		return checkout;
 	}
 	
@@ -58,7 +59,7 @@ public class CheckoutJPADAO extends JPAAbstract<Checkout> implements CheckoutDAO
 				}
 			}		
 		}
-
+		super.close();
 		return receita;
 
 	}

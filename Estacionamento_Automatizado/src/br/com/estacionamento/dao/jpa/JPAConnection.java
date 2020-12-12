@@ -27,7 +27,13 @@ public class JPAConnection {
 	
 	// este m�todo ser� o nosso prepareStatement
 	protected Query getQuery(String jpql) {
+		
 		return this.getEntityManager().createQuery(jpql);
 	}
+
+	protected void close() {
+		this.conexao.close();
+	}
+	
 
 }

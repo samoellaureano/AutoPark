@@ -30,6 +30,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> {
 		for (Checkin object: list) {
 			checkin = object;
 		}
+		super.close();
 		return checkin;
 	}
 
@@ -53,7 +54,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> {
 				checkin = null;
 			}
 		}
-
+		super.close();
 		return checkin;
 
 	}
@@ -88,7 +89,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> {
 				}
 			}
 		}
-
+		super.close();
 		return listaVeiculos;
 	}
 
@@ -120,7 +121,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> {
 				}
 			}		
 		}
-
+		super.close();
 		return listaVeiculos;
 
 	}
@@ -155,7 +156,7 @@ public class CheckinJPADAO extends JPAAbstract<Checkin> {
 				}
 			}
 		}
-
+		super.close();
 		return listaCheckins;
 	}
 	

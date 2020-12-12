@@ -51,6 +51,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list) {			
 			return ((T) object);
 		}
+		super.close();
 		return null;
 	}
 
@@ -68,6 +69,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list) {			
 			listObjetos.add((T) object);
 		}
+		super.close();
 		return listObjetos;
 	}
 
@@ -85,6 +87,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list) {			
 			listObjetos.add((T) object);
 		}
+		super.close();
 		return listObjetos;
 	}
 
@@ -98,6 +101,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings({ "unchecked" })
 		List<T> list = query.getResultList();
+		super.close();
 		return list;
 	}
 
@@ -113,6 +117,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list) {
 			return ((T) object);
 		}
+		super.close();
 		return null;
 	}
 
@@ -128,6 +133,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list) {
 			obj = (T) object;
 		}
+		super.close();
 		return (T) obj;
 	}
 
@@ -144,6 +150,7 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		query.setParameter("DF", dataFinal);
 
 		List<T> list = query.getResultList();
+		super.close();
 		return list;
 	}
 

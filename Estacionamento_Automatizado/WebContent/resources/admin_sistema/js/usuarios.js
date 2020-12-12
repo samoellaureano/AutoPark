@@ -34,10 +34,10 @@ $(document).ready(function(){
                         $('<tr>')
                             .append($('<td>').append(listaUsuarios[i].nome))
                             .append($("<td class='maskcpf'>").append(listaUsuarios[i].usuario.cpf))
-                            .append($('<td>').append(listaUsuarios[i].celular))
+                            .append($("<td class='maskTel'>").append(listaUsuarios[i].celular))
                             .append($('<td>').append(listaUsuarios[i].email))
                             .append($('<td>').append(listaUsuarios[i].empresa.descricao))
-                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
+                            .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarUsuarioPorID(" + listaUsuarios[i].usuario.id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
                     )
                 }
             } else {
@@ -45,6 +45,7 @@ $(document).ready(function(){
             }
             $("#resultadoUsuarios").html(html);
             $(".maskcpf").mask("999.999.999-99");
+            $(".maskTel").mask("(00) 0000-00009");
         };
     };
     mascaraCpf=function(){
@@ -59,7 +60,7 @@ $(document).ready(function(){
             success: function (funcionario) {
                 $("#nomeEdit").val(funcionario.nome);
                 $("#cpfEdit").val(funcionario.usuario.cpf);                
-                $("#celularEdit").val(funcionario.celular);
+                $("#celularEdit").val(mtel(funcionario.celular));
                 $("#emailEdit").val(funcionario.email);
                 $("#empEdit").append("<option value='"+funcionario.empresa.id+"' selected>" + funcionario.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(funcionario.id);

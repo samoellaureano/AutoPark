@@ -27,6 +27,7 @@ public class EstacionamentoJPADAO extends JPAAbstract<Estacionamento> implements
 		for (Object object: list) {
 			listaEstacionamentos.add((Estacionamento) object);
 		}
+		super.close();
 		return listaEstacionamentos;
 	}
 

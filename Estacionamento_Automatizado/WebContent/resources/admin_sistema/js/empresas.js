@@ -57,7 +57,7 @@ $(document).ready(function(){
             url: "../../rest/empresaRest/buscarEmpresaPorId/" + id,
             success: function (empresa) {
                 $("#razaoSocialEdit").val(empresa.descricao);
-                $("#cnpjEdit").val(empresa.cnpj);
+                $("#cnpjEdit").val(mCnpj(empresa.cnpj));
                 $("#cnpjEdit").mask("99.999.999/9999-99");
                 $("#btnSalvarEdit").val(empresa.id);
             },

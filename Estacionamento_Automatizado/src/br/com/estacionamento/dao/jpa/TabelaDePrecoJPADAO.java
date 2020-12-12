@@ -30,7 +30,8 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 		List list = query.getResultList();
 		for (Object object: list) {
 			tabelaDePreco = ((TabelaDePreco) object);
-		}		
+		}
+		super.close();
 		return tabelaDePreco.getValor();	
 		
 	}
@@ -46,7 +47,8 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 		List list = query.getResultList();
 		for (Object object: list) {
 			listaPreco.add((TabelaDePreco) object);
-		}		
+		}	
+		super.close();
 		return listaPreco;	
 		
 	}
@@ -63,6 +65,7 @@ public List<TabelaDePreco> listaTodosValor() {
 		for (Object object: list) {
 			listaPreco.add((TabelaDePreco) object);
 		}		
+		super.close();
 		return listaPreco;			
 	}
 	

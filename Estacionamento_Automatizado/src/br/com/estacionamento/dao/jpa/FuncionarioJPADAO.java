@@ -25,6 +25,7 @@ public class FuncionarioJPADAO extends JPAAbstract<Funcionario>{
 		for (Object object: list) {			
 			listObjetos.add((Funcionario) object);
 		}
+		super.close();
 		return listObjetos;
 	}
 

@@ -1,14 +1,19 @@
-
+$("#cnpjEdit").mask("99.999.999/9999-99"); 
+$("#cnpj").mask("99.999.999/9999-99"); 
 $(document).ready(function(){
     $("#editar").hide();
     exibeEditar = function(){
+     
         if($("#novo").val()){
-            $("#editar").hide();
+
+            $("#editar").hide();          
             $("#novo").show();
             $("#novo").val(false);
+
         }else{
-            $("#editar").show();
-            $("#novo").hide();
+            
+            $("#editar").show();            
+            $("#novo").hide();            
             $("#novo").val(true);
         };        
     };
@@ -40,7 +45,7 @@ $(document).ready(function(){
                             .append($('<td>').append(listaEstacionamentos[i].empresa.descricao))
                             .append($('<td class="btnEdit">').append("<td data-toggle='modal' style='text-align-last: center; border: none;' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><button class='btn btn-outline-light btnEdit' type='button'><img src='img/editar.png' alt='Editar'></button></td>"))
                     )
-                }
+                };
             } else {
                 html += "<td colspan='5' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
@@ -52,30 +57,28 @@ $(document).ready(function(){
         $("#cnpj").mask("99.999.999/9999-99");        
     };
     mascaraCnpjEdit = function(){
-     var cnpj =  $("#cnpjEdit").val(); 
 
-     if(cnpj>11){
-        $("#cnpjEdit").mask("99.999.999/9999-99"); 
-    }
-
+        $("#cnpjEdit").mask("99.999.999/9999-99");
     };
 
     buscarEstacionamentoPorID = function(id){
-        exibeEditar();
+    
         var cfg = {
             type: "POST",
             url: "../../rest/estacionamentoRest/buscarEstacionamentoPorId/" + id,
             success: function (estacionamento) {
                 $("#descricaoEdit").val(estacionamento.descricao);
-                $("#cnpjEdit").val(estacionamento.cnpj);                          
+                $("#cnpjEdit").val(mCnpj(estacionamento.cnpj)); 
+                mascaraCnpjEdit();                       
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").append("<option value='"+estacionamento.empresa.id+"' selected>" + estacionamento.empresa.descricao + "</option>");
                 $("#btnSalvarEdit").val(estacionamento.id);
-                mascaraCnpjEdit(); 
-               
+                 mascaraCnpjEdit();
+                exibeEditar();               
             },
+            
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
             }
@@ -155,7 +158,7 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
-
+   
     buscarEstacionamentos();
     buscarEmpresas();
 });

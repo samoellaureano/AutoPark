@@ -28,6 +28,7 @@ public class ModeloJPADAO extends JPAAbstract<Modelo> implements ModeloDAO{
 		for (Object object: list) {
 			listaModelos.add((Modelo) object);
 		}
+		super.close();
 		return listaModelos;
 	}
 
