@@ -72,10 +72,11 @@ $(document).ready(function () {
                 html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             };
             $("#resultadoEmpresas").html(html);
-            $(".maskcnpj").mask("99.999.999/9999-99");
+           
         };
         paginar();
         ajustarBotoes();
+        $(".maskcnpj").mask("99.999.999/9999-99");
     };
     buscarEmpresaPorID = function (id) {
         exibeEditar(true);
@@ -109,48 +110,90 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
-    $('#btnSalvarEdit').click(function (e) {
+    $('#btnSalvarEdit').click(function (e) { // separa em duas funções captura dos campos e requizição
+        
         empresa = new Object();
         empresa.id = $("#btnSalvarEdit").val();
         empresa.cnpj = $("#cnpjEdit").val();
         empresa.descricao = $("#razaoSocialEdit").val();
+
         empresa.cnpj = empresa.cnpj.replace(/\./g, "");
         empresa.cnpj = empresa.cnpj.replace(/\//g, "");
         empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
-        empresa.ativo = $("#ativoEdit").is(':checked');
+        empresa.ativo = $("#ativoEdit").is(':checked');    
+        
+        if(empresa.descricao=="" || empresa.descricao ==null || empresa.descricao == undefined || empresa.descricao =="null"){
+            msg+="Campo Razão social não preenchido.<br/>";
+        };
+
+        if(empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.descricao =="null"){
+            msg+="Campo CNPJ não preenchido."+"\n";
+        };
+
+        if(msg==""){
+            atualizaEmpresa(empresa);
+        }else{
+            exibirMessagem(msg, 2);
+        };        
+    });
+      
+    atualizaEmpresa = function(empresa){
+      
         var cfg = {
             url: "../../rest/empresaRest/editEmpresa",
             data: JSON.stringify(empresa),
             success: function (succJson) {
-                window.location.href = ("empresas.html");
+                window.location.href = ("empresas.html");                
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao alterar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
-    $('#btnSalvar').click(function (e) {
+    $('#btnSalvar').click(function (e) {  // separa em duas funções captura dos campos e requizição
+        var msg = "";
         empresa = new Object();
+
         empresa.id = $("#btnSalvar").val();
         empresa.cnpj = $("#cnpj").val();
         empresa.descricao = $("#razaoSocial").val();
         empresa.cnpj = empresa.cnpj.replace(/\./g, "");
         empresa.cnpj = empresa.cnpj.replace(/\//g, "");
         empresa.cnpj = empresa.cnpj.replace(/\-/g, "");
+
+        if(empresa.descricao=="" || empresa.descricao ==null || empresa.descricao == undefined || empresa.descricao =="null"){
+            msg+="Campo Razão social não preenchido.<br/>";
+        };
+
+        if(empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.descricao =="null"){
+            msg+="Campo CNPJ não preenchido.";
+        };
+
+        if(msg==""){
+            salvarEmpresa(empresa);
+        }else{            
+            exibirMessagem(msg, 2);
+        };
+        
+    });
+
+    salvarEmpresa=function(empresa){
         var cfg = {
             url: "../../rest/empresaRest/addEmpresa",
             data: JSON.stringify(empresa),
-            success: function (succJson) {
-                window.location.href = ("empresas.html");
+            success: function (succJson){ 
+                window.location.href = ("empresas.html");                                
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao realizar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     paginar = function () {        
         $('#tabEmpresas > tbody > tr').remove();
@@ -161,12 +204,11 @@ $(document).ready(function () {
             tbody.append(
                 $('<tr>')
                     .append($('<td>').append(dados[i][0]))
-                    .append($('<td>').append(dados[i][1]))
+                    .append($("<td class='maskcnpj'>").append(dados[i][1]))
                     .append($('<td>').append(dados[i][2]))
                     .append($('<td>').append(dados[i][3]))
             )
         }
-
 
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {
