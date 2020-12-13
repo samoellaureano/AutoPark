@@ -35,9 +35,13 @@ $(document).ready(function(){
         };
     };
     buscarUsuarios = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/funcionarioRest/buscarFuncionarios/",
+            url: "../../rest/funcionarioRest/buscarFuncionariosPorDesc/"+busca,
             success: function (listaUsuarios) {
                 exibirUsuarios(listaUsuarios);
             },
@@ -62,7 +66,7 @@ $(document).ready(function(){
                     dados.push([listaUsuarios[i].nome, listaUsuarios[i].usuario.cpf, listaUsuarios[i].celular, listaUsuarios[i].email, listaUsuarios[i].empresa.descricao, listaUsuarios[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
-                html += "<td colspan='6' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='7' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoUsuarios").html(html);
             $(".maskcpf").mask("999.999.999-99");
@@ -107,9 +111,14 @@ $(document).ready(function(){
     excluirUsuarioPorID = function(id){
         var cfg = {
             type: "POST",
-            url: "../../rest/funcionarioRest/inativaFuncionario/" + id,
+            url: "../../rest/funcionarioRest/excluirFuncionario/" + id,
             success: function (succJson) {
-                window.location.href = ("usuarios.html");
+                if(succJson){
+                    window.location.href = ("usuarios.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
+                
             },
             error: function (errJson) {
                 alert(errJson);
@@ -191,7 +200,7 @@ $(document).ready(function(){
         $('#empEdit').append("<option value=''>Selecione</option>");
         var cfg = {
             type: "POST",
-            url: "../../rest/empresaRest/buscaEmpresas/",
+            url: "../../rest/empresaRest/buscaEmpresasPorDesc/null",
             success: function (listaEmpresas) {
                 if (listaEmpresas != undefined) {
                     if (listaEmpresas.length > 0) {

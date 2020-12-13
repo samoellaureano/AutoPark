@@ -55,11 +55,11 @@ public class TipoVeiculoRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/buscarTipoVeiculos")
+	@Path("/buscarTipoVeiculosPorDesc/{desc}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarTipoVeiculos(){
+	public Response buscarTipoVeiculosPorDesc(@PathParam("desc") String desc){
 		try{
-			List<TipoVeiculo> tipoVeiculos = new TipoVeiculoJPADAO().buscarPorDescricao("null");
+			List<TipoVeiculo> tipoVeiculos = new TipoVeiculoJPADAO().buscarPorDescricao(desc);
 			
 			return this.buildResponse(tipoVeiculos);
 		}catch (Exception e){
@@ -131,30 +131,28 @@ public class TipoVeiculoRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/inativaTipoVeiculo/{idTipoVeiculo}")
+	@Path("/excluirTipoVeiculo/{idTipoVeiculo}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response inativaFuncionario(@PathParam("idTipoVeiculo") int idTipoVeiculo){
 
 		try {
-			TipoVeiculo tipoVeiculo = new TipoVeiculoJPADAO().buscarPorId(idTipoVeiculo);
-			tipoVeiculo.setAtivo(false);
 			boolean	retorno = false;
 			
-			retorno = new TipoVeiculoJPADAO().atualizar(tipoVeiculo);
+			retorno = new TipoVeiculoJPADAO().excluirPorId(idTipoVeiculo);
 			
 			if(retorno){
 				
-				return this.buildResponse("1");				
+				return this.buildResponse(retorno);				
 			}else{
 				
-				return this.buildResponse("2");
+				return this.buildResponse(retorno);
 			}
 			
 
 		} catch (Exception e){
 			e.printStackTrace();
 
-			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+			return this.buildErrorResponse(e.toString());
 		}
 	}
 

@@ -166,3 +166,15 @@ th {
   border-radius: 3px;
   margin: 0rem 1rem;
 }
+
+.busca{
+  display: flex;
+  margin: 0.4rem 0rem;
+}
+.busca > input{
+  padding: 0.5rem;
+  width: 13rem;
+  opacity: 80%;
+  border: none;
+  border-radius: 0.1rem;
+}

@@ -37,9 +37,13 @@ $(document).ready(function(){
         };
     };
     buscarEstacionamentos = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/estacionamentoRest/buscaEstacionamentos/",
+            url: "../../rest/estacionamentoRest/buscaEstacionamentosPorDesc/"+busca,
             success: function (listaEstacionamentos) {
                 exibirEstacionamentos(listaEstacionamentos);
             },
@@ -64,7 +68,7 @@ $(document).ready(function(){
                     dados.push([listaEstacionamentos[i].descricao, listaEstacionamentos[i].cnpj, listaEstacionamentos[i].endereco, listaEstacionamentos[i].vagas, listaEstacionamentos[i].empresa.descricao, listaEstacionamentos[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 };
             } else {
-                html += "<td colspan='6' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='7' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             };
             $("#resultadoEstacionamentos").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
@@ -104,9 +108,13 @@ $(document).ready(function(){
     excluirEstacionamentoPorID = function(id){
         var cfg = {
             type: "POST",
-            url: "../../rest/estacionamentoRest/inativaEstacionamento/" + id,
+            url: "../../rest/estacionamentoRest/excluirEstacionamento/" + id,
             success: function (succJson) {
-                window.location.href = ("estacionamentos.html");
+                if(succJson){
+                    window.location.href = ("estacionamentos.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
             },
             error: function (errJson) {
                 alert(errJson);
@@ -171,7 +179,7 @@ $(document).ready(function(){
         $('#emp option').remove();
         var cfg = {
             type: "POST",
-            url: "../../rest/empresaRest/buscaEmpresas/",
+            url: "../../rest/empresaRest/buscaEmpresasPorDesc/null",
             success: function (listaEmpresas) {
                 if (listaEmpresas != undefined) {
                     if (listaEmpresas.length > 0) {

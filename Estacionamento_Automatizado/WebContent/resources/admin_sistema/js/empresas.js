@@ -42,9 +42,13 @@ $(document).ready(function () {
         $("#cnpjEdit").mask("99.999.999/9999-99");
     };
     buscarEmpresas = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/empresaRest/buscaEmpresas/",
+            url: "../../rest/empresaRest/buscaEmpresasPorDesc/"+busca,
             success: function (listaEmpresas) {
                 exibirEmpresas(listaEmpresas);
             },
@@ -69,7 +73,7 @@ $(document).ready(function () {
                     dados.push([listaEmpresas[i].descricao, listaEmpresas[i].cnpj, listaEmpresas[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 };
             } else {
-                html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='4' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             };
             $("#resultadoEmpresas").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
@@ -99,9 +103,13 @@ $(document).ready(function () {
     excluirEmpresaPorID = function (id) {
         var cfg = {
             type: "POST",
-            url: "../../rest/empresaRest/inativaEmpresa/" + id,
+            url: "../../rest/empresaRest/excluirEmpresa/" + id,
             success: function (succJson) {
-                window.location.href = ("empresas.html");
+                if(succJson){
+                    window.location.href = ("empresas.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
             },
             error: function (errJson) {
                 alert(errJson);

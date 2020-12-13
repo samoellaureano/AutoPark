@@ -35,9 +35,13 @@ $(document).ready(function(){
         };
     };
     buscarModelos = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/modeloRest/buscarModelos/",
+            url: "../../rest/modeloRest/buscarModelosPorDesc/"+busca,
             success: function (listaModelos) {
                 exibirModelos(listaModelos);
             },
@@ -62,7 +66,7 @@ $(document).ready(function(){
                     dados.push([listaModelos[i].descricao, listaModelos[i].marca.descricao, listaModelos[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirModeloPorID(" + listaModelos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
-                html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='4' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoModelos").html(html);
         }
@@ -89,9 +93,14 @@ $(document).ready(function(){
     excluirModeloPorID = function(id){
         var cfg = {
             type: "POST",
-            url: "../../rest/modeloRest/inativaModelo/" + id,
+            url: "../../rest/modeloRest/excluirModelo/" + id,
             success: function (succJson) {
-                window.location.href = ("modelos.html");
+                if(succJson){
+                    window.location.href = ("modelos.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
+                
             },
             error: function (errJson) {
                 alert(errJson);
@@ -144,7 +153,7 @@ $(document).ready(function(){
         $('#marca option').remove();
         var cfg = {
             type: "POST",
-            url: "../../rest/marcaRest/buscarMarcas/",
+            url: "../../rest/marcaRest/buscarMarcasPorDesc/null",
             success: function (listaMarcas) {
                 if (listaMarcas != undefined) {
                     if (listaMarcas.length > 0) {

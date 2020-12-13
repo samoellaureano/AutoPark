@@ -35,9 +35,13 @@ $(document).ready(function(){
         };
     };
     buscarMarcas = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/marcaRest/buscarMarcas/",
+            url: "../../rest/marcaRest/buscarMarcasPorDesc/"+busca,
             success: function (listaMarcas) {
                 exibirMarcas(listaMarcas);
             },
@@ -62,7 +66,7 @@ $(document).ready(function(){
                     dados.push([listaMarcas[i].descricao, listaMarcas[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
-                html += "<td colspan='2' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='3' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoMarcas").html(html);
         }
@@ -88,9 +92,13 @@ $(document).ready(function(){
     excluirMarcaPorID = function(id){
         var cfg = {
             type: "POST",
-            url: "../../rest/marcaRest/inativaMarca/" + id,
+            url: "../../rest/marcaRest/excluirMarca/" + id,
             success: function (succJson) {
-                window.location.href = ("marcas.html");
+                if(succJson){
+                    window.location.href = ("marcas.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
             },
             error: function (errJson) {
                 alert(errJson);

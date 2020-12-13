@@ -58,11 +58,11 @@ public class EstacionamentoRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/buscaEstacionamentos")
+	@Path("/buscaEstacionamentosPorDesc/{desc}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscaEstacionamentos(){
+	public Response buscaEstacionamentosPorDesc(@PathParam("desc") String desc){
 		try{
-			List<Estacionamento> listaEstacionamentos = new EstacionamentoJPADAO().buscarPorDescricao("null");
+			List<Estacionamento> listaEstacionamentos = new EstacionamentoJPADAO().buscarPorDescricao(desc);
 			
 			return this.buildResponse(listaEstacionamentos);
 		}catch (Exception e){
@@ -144,30 +144,28 @@ public class EstacionamentoRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/inativaEstacionamento/{idEstacionamento}")
+	@Path("/excluirEstacionamento/{idEstacionamento}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response inativaFuncionario(@PathParam("idEstacionamento") int idEstacionamento){
 
 		try {
-			Estacionamento estacionamento = new EstacionamentoJPADAO().buscarPorId(idEstacionamento);
-			estacionamento.setAtivo(false);
 			boolean	retorno = false;
 			
-			retorno = new EstacionamentoJPADAO().atualizar(estacionamento);
+			retorno = new EstacionamentoJPADAO().excluirPorId(idEstacionamento);
 			
 			if(retorno){
 				
-				return this.buildResponse("1");				
+				return this.buildResponse(retorno);				
 			}else{
 				
-				return this.buildResponse("2");
+				return this.buildResponse(retorno);
 			}
 			
 
 		} catch (Exception e){
 			e.printStackTrace();
 
-			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+			return this.buildErrorResponse(e.toString());
 		}
 	}
 	

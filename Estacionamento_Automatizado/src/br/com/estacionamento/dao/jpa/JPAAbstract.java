@@ -37,7 +37,25 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 		for (Object object: list){
 			return ((T) object);
 		}
+		super.close();
 		return null;
+	}
+
+	public boolean excluirPorId(int id) {
+		try {
+			EntityManager em = getEntityManager();
+			em.getTransaction().begin();
+			Query query = em.createQuery("DELETE "+getEntityName()+" c where c.id =:id ");
+			query.setParameter("id", id);
+			query.executeUpdate();
+			em.getTransaction().commit();
+			em.close();
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+
 	}
 
 

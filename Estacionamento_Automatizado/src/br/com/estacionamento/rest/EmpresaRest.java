@@ -53,11 +53,11 @@ public class EmpresaRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/buscaEmpresas")
+	@Path("/buscaEmpresasPorDesc/{desc}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscaEmpresas(){
+	public Response buscaEmpresasPorDesc(@PathParam("desc") String desc){
 		try{
-			List<Empresa> listaEmpresas = new EmpresaJPADAO().buscarPorDescricao("null");
+			List<Empresa> listaEmpresas = new EmpresaJPADAO().buscarPorDescricao(desc);
 			
 			return this.buildResponse(listaEmpresas);
 		}catch (Exception e){
@@ -113,23 +113,21 @@ public class EmpresaRest extends UtilRest{
 
 	}
 	@POST
-	@Path("/inativaEmpresa/{idEmpresa}")
+	@Path("/excluirEmpresa/{idEmpresa}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response inativaFuncionario(@PathParam("idEmpresa") int idEmpresa){
 
 		try {
-			Empresa empresa = new EmpresaJPADAO().buscarPorId(idEmpresa);
-			empresa.setAtivo(false);
 			boolean	retorno = false;
 			
-			retorno = new EmpresaJPADAO().atualizar(empresa);
+			retorno = new EmpresaJPADAO().excluirPorId(idEmpresa);
 			
 			if(retorno){
 				
-				return this.buildResponse("1");				
+				return this.buildResponse(retorno);				
 			}else{
 				
-				return this.buildResponse("2");
+				return this.buildResponse(retorno);
 			}
 			
 

@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.estacionamento.dao.jpa.MarcaJPADAO;
-import br.com.estacionamento.dao.jpa.ModeloJPADAO;
 import br.com.estacionamento.entidade.Marca;
 import br.com.estacionamento.util.UtilRest;
 
@@ -56,11 +55,11 @@ public class MarcaRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/buscarMarcas")
+	@Path("/buscarMarcasPorDesc/{desc}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarMarcas(){
+	public Response buscarMarcasPorDesc(@PathParam("desc") String desc){
 		try{
-			List<Marca> listaMarcas = new MarcaJPADAO().buscarPorDescricao("null");
+			List<Marca> listaMarcas = new MarcaJPADAO().buscarPorDescricao(desc);
 			
 			return this.buildResponse(listaMarcas);
 		}catch (Exception e){
@@ -132,31 +131,28 @@ public class MarcaRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/inativaMarca/{idMarca}")
+	@Path("/excluirMarca/{idMarca}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response inativaMarca(@PathParam("idMarca") int idMarca){
 
 		try {
-			Marca marca = new MarcaJPADAO().buscarPorId(idMarca);
-			marca.setAtivo(false);
-			new ModeloJPADAO().inativarModelosPelaMarca(idMarca);
 			boolean	retorno = false;
 			
-			retorno = new MarcaJPADAO().atualizar(marca);
+			retorno = new MarcaJPADAO().excluirPorId(idMarca);
 			
 			if(retorno){
 				
-				return this.buildResponse("1");				
+				return this.buildResponse(retorno);				
 			}else{
 				
-				return this.buildResponse("2");
+				return this.buildResponse(retorno);
 			}
 			
 
 		} catch (Exception e){
 			e.printStackTrace();
 
-			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+			return this.buildErrorResponse(e.toString());
 		}
 	}
 }

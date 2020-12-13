@@ -55,11 +55,11 @@ public class ModeloRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/buscarModelos")
+	@Path("/buscarModelosPorDesc/{desc}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarModelos(){
+	public Response buscarModelosPorDesc(@PathParam("desc") String desc){
 		try{
-			List<Modelo> listaModelos = new ModeloJPADAO().buscarPorDescricao("null");
+			List<Modelo> listaModelos = new ModeloJPADAO().buscarPorDescricao(desc);
 			
 			return this.buildResponse(listaModelos);
 		}catch (Exception e){
@@ -134,30 +134,28 @@ public class ModeloRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/inativaModelo/{idModelo}")
+	@Path("/excluirModelo/{idModelo}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response inativaFuncionario(@PathParam("idModelo") int idModelo){
 
 		try {
-			Modelo modelo = new ModeloJPADAO().buscarPorId(idModelo);
-			modelo.setAtivo(false);
 			boolean	retorno = false;
 			
-			retorno = new ModeloJPADAO().atualizar(modelo);
+			retorno = new ModeloJPADAO().excluirPorId(idModelo);
 			
 			if(retorno){
 				
-				return this.buildResponse("1");				
+				return this.buildResponse(retorno);				
 			}else{
 				
-				return this.buildResponse("2");
+				return this.buildResponse(retorno);
 			}
 			
 
 		} catch (Exception e){
 			e.printStackTrace();
 
-			return this.buildErrorResponse("Erro ao atualizar Funcionario");
+			return this.buildErrorResponse(e.toString());
 		}
 	}
 

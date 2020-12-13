@@ -35,9 +35,13 @@ $(document).ready(function(){
         };
     };
     buscarTipoVeiculos = function () {
+        var busca = $("#busca").val();
+        if(busca == ""){
+            busca = ("null");
+        }
         var cfg = {
             type: "POST",
-            url: "../../rest/tipoVeiculoRest/buscarTipoVeiculos/",
+            url: "../../rest/tipoVeiculoRest/buscarTipoVeiculosPorDesc/" + busca,
             success: function (listaTiposVeiculos) {
                 exibirTipoVeiculos(listaTiposVeiculos);
             },
@@ -62,7 +66,7 @@ $(document).ready(function(){
                     dados.push([listaTiposVeiculos[i].descricao, listaTiposVeiculos[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarTipoVeiculoPorID(" + listaTiposVeiculos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirTiposVeiculoPorID(" + listaTiposVeiculos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
-                html += "<td colspan='2' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
+                html += "<td colspan='3' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoTiposVeiculos").html(html);
         }
@@ -88,9 +92,14 @@ $(document).ready(function(){
     excluirTiposVeiculoPorID = function(id){
         var cfg = {
             type: "POST",
-            url: "../../rest/tipoVeiculoRest/inativaTipoVeiculo/" + id,
+            url: "../../rest/tipoVeiculoRest/excluirTipoVeiculo/" + id,
             success: function (succJson) {
-                window.location.href = ("tipoVeiculos.html");
+                if(succJson){
+                    window.location.href = ("tipoVeiculos.html");
+                }else{
+                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                }
+                
             },
             error: function (errJson) {
                 alert(errJson);
