@@ -1,4 +1,23 @@
+var dados = [];
+var tamanhoPagina = 7;
+var pagina = 0;
+var html;
 $(document).ready(function(){
+    $('#proximo').click(function () {
+        if (pagina < dados.length / tamanhoPagina - 1) {
+            pagina++;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $('#anterior').click(function () {
+        if (pagina > 0) {
+            pagina--;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $("#btnPaginacao").hide();
     $("#editar").hide();
     exibeEditar = function (val) {
         if (val) {
@@ -29,8 +48,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     exibirModelos = function(listaModelos){
-        var tbody = $('#tabModelos');        
-        var html ="";
+        pagina = 0;
+        dados = [];
+        html = "";
         if (listaModelos != undefined) {
             if (listaModelos.length > 0) {
                 for (var i = 0; i < listaModelos.length; i++) {
@@ -39,19 +59,15 @@ $(document).ready(function(){
                     }else{
                         listaModelos[i].ativo = "Inativo";
                     }
-                    tbody.append(
-                        $('<tr>')
-                            .append($('<td>').append(listaModelos[i].descricao))
-                            .append($('<td>').append(listaModelos[i].marca.descricao))
-                            .append($('<td>').append(listaModelos[i].ativo))
-                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirModeloPorID(" + listaModelos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
-                    )
+                    dados.push([listaModelos[i].descricao, listaModelos[i].marca.descricao, listaModelos[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarModeloPorID(" + listaModelos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirModeloPorID(" + listaModelos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
                 html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoModelos").html(html);
         }
+        paginar();
+        ajustarBotoes();
     }
     buscarModeloPorID = function(id){
         exibeEditar(true);
@@ -145,7 +161,45 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
+    paginar = function () {        
+        $('#tabModelos > tbody > tr').remove();
+        var tbody = $('#tabModelos > tbody');
+        var cont = 0;
+        for (var i = pagina * tamanhoPagina; i < dados.length && i < (pagina + 1) * tamanhoPagina; i++) {
+            cont++;
+            tbody.append(
+                $('<tr>')
+                    .append($('<td>').append(dados[i][0]))
+                    .append($('<td>').append(dados[i][1]))
+                    .append($('<td>').append(dados[i][2]))
+                    .append($('<td>').append(dados[i][3]))
+            )
+        }
 
+
+        if ((cont < tamanhoPagina) && (html == "")) {
+            for (var i = cont; i < tamanhoPagina; i++) {
+                tbody.append(
+                    $('<tr>')
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                )
+            }
+        }
+
+        if (html == "") {
+            $("#btnPaginacao").show();
+        }
+
+        $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(dados.length / tamanhoPagina));
+    }
+
+    ajustarBotoes = function () {
+        $('#proximo').prop('disabled', dados.length <= tamanhoPagina || pagina >= Math.ceil(dados.length / tamanhoPagina) - 1);
+        $('#anterior').prop('disabled', dados.length <= tamanhoPagina || pagina == 0);
+    }
     buscarModelos();
     buscarMarcas();
 });

@@ -1,6 +1,23 @@
-
+var dados = [];
+var tamanhoPagina = 7;
+var pagina = 0;
+var html;
 $(document).ready(function () {
-
+    $('#proximo').click(function () {
+        if (pagina < dados.length / tamanhoPagina - 1) {
+            pagina++;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $('#anterior').click(function () {
+        if (pagina > 0) {
+            pagina--;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $("#btnPaginacao").hide();
     $("#editar").hide();
     exibeEditar = function (val) {
         if (val) {
@@ -17,12 +34,12 @@ $(document).ready(function () {
             };
         };
     };
-    mascaraCnpj = function(){
+    mascaraCnpj = function () {
         $("#cnpj").mask("99.999.999/9999-99");
     };
-    mascaraCnpjEdit = function(){    
+    mascaraCnpjEdit = function () {
 
-        $("#cnpjEdit").mask("99.999.999/9999-99"); 
+        $("#cnpjEdit").mask("99.999.999/9999-99");
     };
     buscarEmpresas = function () {
         var cfg = {
@@ -38,23 +55,18 @@ $(document).ready(function () {
         autoPark.ajax.post(cfg);
     };
     exibirEmpresas = function (listaEmpresas) {
-        var tbody = $('#tabEmpresas');
-        var html = "";
+        pagina = 0;
+        dados = [];
+        html = "";
         if (listaEmpresas != undefined) {
             if (listaEmpresas.length > 0) {
                 for (var i = 0; i < listaEmpresas.length; i++) {
-                    if(listaEmpresas[i].ativo){
+                    if (listaEmpresas[i].ativo) {
                         listaEmpresas[i].ativo = "Ativo";
-                    }else{
+                    } else {
                         listaEmpresas[i].ativo = "Inativo";
                     }
-                    tbody.append(
-                        $('<tr>')
-                            .append($('<td>').append(listaEmpresas[i].descricao))
-                            .append($("<td class='maskcnpj'>").append(listaEmpresas[i].cnpj))
-                            .append($("<td>").append(listaEmpresas[i].ativo))
-                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
-                    );
+                    dados.push([listaEmpresas[i].descricao, listaEmpresas[i].cnpj, listaEmpresas[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEmpresaPorID(" + listaEmpresas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 };
             } else {
                 html += "<td colspan='3' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
@@ -62,6 +74,8 @@ $(document).ready(function () {
             $("#resultadoEmpresas").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
         };
+        paginar();
+        ajustarBotoes();
     };
     buscarEmpresaPorID = function (id) {
         exibeEditar(true);
@@ -70,9 +84,9 @@ $(document).ready(function () {
             url: "../../rest/empresaRest/buscarEmpresaPorId/" + id,
             success: function (empresa) {
                 $("#razaoSocialEdit").val(empresa.descricao);
-                $("#cnpjEdit").val(mCnpj(empresa.cnpj));                               
+                $("#cnpjEdit").val(mCnpj(empresa.cnpj));
                 $("#btnSalvarEdit").val(empresa.id);
-                $("#ativoEdit").prop( "checked",empresa.ativo);
+                $("#ativoEdit").prop("checked", empresa.ativo);
                 mascaraCnpjEdit();
             },
             error: function (err) {
@@ -81,7 +95,7 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     };
-    excluirEmpresaPorID = function(id){
+    excluirEmpresaPorID = function (id) {
         var cfg = {
             type: "POST",
             url: "../../rest/empresaRest/inativaEmpresa/" + id,
@@ -136,6 +150,46 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     });
+
+    paginar = function () {        
+        $('#tabEmpresas > tbody > tr').remove();
+        var tbody = $('#tabEmpresas > tbody');
+        var cont = 0;
+        for (var i = pagina * tamanhoPagina; i < dados.length && i < (pagina + 1) * tamanhoPagina; i++) {
+            cont++;
+            tbody.append(
+                $('<tr>')
+                    .append($('<td>').append(dados[i][0]))
+                    .append($('<td>').append(dados[i][1]))
+                    .append($('<td>').append(dados[i][2]))
+                    .append($('<td>').append(dados[i][3]))
+            )
+        }
+
+
+        if ((cont < tamanhoPagina) && (html == "")) {
+            for (var i = cont; i < tamanhoPagina; i++) {
+                tbody.append(
+                    $('<tr>')
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append("&nbsp;"))
+                )
+            }
+        }
+
+        if (html == "") {
+            $("#btnPaginacao").show();
+        }
+
+        $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(dados.length / tamanhoPagina));
+    }
+
+    ajustarBotoes = function () {
+        $('#proximo').prop('disabled', dados.length <= tamanhoPagina || pagina >= Math.ceil(dados.length / tamanhoPagina) - 1);
+        $('#anterior').prop('disabled', dados.length <= tamanhoPagina || pagina == 0);
+    }
 
     buscarEmpresas();
 });

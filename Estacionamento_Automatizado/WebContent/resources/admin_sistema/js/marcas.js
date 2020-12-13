@@ -1,4 +1,23 @@
+var dados = [];
+var tamanhoPagina = 7;
+var pagina = 0;
+var html;
 $(document).ready(function(){
+    $('#proximo').click(function () {
+        if (pagina < dados.length / tamanhoPagina - 1) {
+            pagina++;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $('#anterior').click(function () {
+        if (pagina > 0) {
+            pagina--;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $("#btnPaginacao").hide();
     $("#editar").hide();
     exibeEditar = function (val) {
         if (val) {
@@ -29,8 +48,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     exibirMarcas = function(listaMarcas){
-        var tbody = $('#tabMarcas');        
-        var html ="";
+        pagina = 0;
+        dados = [];
+        html = "";
         if (listaMarcas != undefined) {
             if (listaMarcas.length > 0) {
                 for (var i = 0; i < listaMarcas.length; i++) {
@@ -39,18 +59,15 @@ $(document).ready(function(){
                     }else{
                         listaMarcas[i].ativo = "Inativo";
                     }
-                    tbody.append(
-                        $('<tr>')
-                            .append($('<td>').append(listaMarcas[i].descricao))
-                            .append($('<td>').append(listaMarcas[i].ativo))
-                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
-                    )
+                    dados.push([listaMarcas[i].descricao, listaMarcas[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirMarcaPorID(" + listaMarcas[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
                 html += "<td colspan='2' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
             }
             $("#resultadoMarcas").html(html);
         }
+        paginar();
+        ajustarBotoes();
     }
     buscarMarcaPorID = function(id){
         exibeEditar(true);
@@ -114,5 +131,43 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     });
+
+    paginar = function () {        
+        $('#tabMarcas > tbody > tr').remove();
+        var tbody = $('#tabMarcas > tbody');
+        var cont = 0;
+        for (var i = pagina * tamanhoPagina; i < dados.length && i < (pagina + 1) * tamanhoPagina; i++) {
+            cont++;
+            tbody.append(
+                $('<tr>')
+                    .append($('<td>').append(dados[i][0]))
+                    .append($('<td>').append(dados[i][1]))
+                    .append($('<td>').append(dados[i][2]))
+            )
+        }
+
+
+        if ((cont < tamanhoPagina) && (html == "")) {
+            for (var i = cont; i < tamanhoPagina; i++) {
+                tbody.append(
+                    $('<tr>')
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                )
+            }
+        }
+
+        if (html == "") {
+            $("#btnPaginacao").show();
+        }
+
+        $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(dados.length / tamanhoPagina));
+    }
+
+    ajustarBotoes = function () {
+        $('#proximo').prop('disabled', dados.length <= tamanhoPagina || pagina >= Math.ceil(dados.length / tamanhoPagina) - 1);
+        $('#anterior').prop('disabled', dados.length <= tamanhoPagina || pagina == 0);
+    }
     buscarMarcas();
 });

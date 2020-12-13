@@ -1,5 +1,23 @@
-$("#cnpjEdit").mask("99.999.999/9999-99");
+var dados = [];
+var tamanhoPagina = 7;
+var pagina = 0;
+var html;
 $(document).ready(function(){
+    $('#proximo').click(function () {
+        if (pagina < dados.length / tamanhoPagina - 1) {
+            pagina++;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $('#anterior').click(function () {
+        if (pagina > 0) {
+            pagina--;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $("#btnPaginacao").hide();
     $("#cnpjEdit").mask("99.999.999/9999-99");
     $("#editar").hide();
     exibeEditar = function (val) {
@@ -31,8 +49,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     exibirEstacionamentos = function(listaEstacionamentos){
-        var tbody = $('#tabEstacionamentos');        
-        var html ="";
+        pagina = 0;
+        dados = [];
+        html = "";
         if (listaEstacionamentos != undefined) {
             if (listaEstacionamentos.length > 0) {
                 for (var i = 0; i < listaEstacionamentos.length; i++) {
@@ -41,16 +60,7 @@ $(document).ready(function(){
                     }else{
                         listaEstacionamentos[i].ativo = "Inativo";
                     }
-                    tbody.append(
-                        $('<tr>')
-                            .append($('<td>').append(listaEstacionamentos[i].descricao))
-                            .append($("<td class='maskcnpj'>").append(listaEstacionamentos[i].cnpj))
-                            .append($('<td>').append(listaEstacionamentos[i].endereco))
-                            .append($('<td>').append(listaEstacionamentos[i].vagas))
-                            .append($('<td>').append(listaEstacionamentos[i].empresa.descricao))
-                            .append($('<td>').append(listaEstacionamentos[i].ativo))
-                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
-                    );
+                    dados.push([listaEstacionamentos[i].descricao, listaEstacionamentos[i].cnpj, listaEstacionamentos[i].endereco, listaEstacionamentos[i].vagas, listaEstacionamentos[i].empresa.descricao, listaEstacionamentos[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirEstacionamentoPorID(" + listaEstacionamentos[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 };
             } else {
                 html += "<td colspan='6' style='text-align: center; padding-left: 14rem;'>Nenhum registro encontrado</td></tr>";
@@ -58,6 +68,8 @@ $(document).ready(function(){
             $("#resultadoEstacionamentos").html(html);
             $(".maskcnpj").mask("99.999.999/9999-99");
         };
+        paginar();
+        ajustarBotoes();
     };
     mascaraCnpj=function(){
         $("#cnpj").mask("99.999.999/9999-99");        
@@ -176,6 +188,52 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
+
+    paginar = function () {        
+        $('#tabEstacionamentos > tbody > tr').remove();
+        var tbody = $('#tabEstacionamentos > tbody');
+        var cont = 0;
+        for (var i = pagina * tamanhoPagina; i < dados.length && i < (pagina + 1) * tamanhoPagina; i++) {
+            cont++;
+            tbody.append(
+                $('<tr>')
+                    .append($('<td>').append(dados[i][0]))
+                    .append($('<td>').append(dados[i][1]))
+                    .append($('<td>').append(dados[i][2]))
+                    .append($('<td>').append(dados[i][3]))
+                    .append($('<td>').append(dados[i][4]))
+                    .append($('<td>').append(dados[i][5]))
+                    .append($('<td>').append(dados[i][6]))
+            )
+        }
+
+
+        if ((cont < tamanhoPagina) && (html == "")) {
+            for (var i = cont; i < tamanhoPagina; i++) {
+                tbody.append(
+                    $('<tr>')
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                )
+            }
+        }
+
+        if (html == "") {
+            $("#btnPaginacao").show();
+        }
+
+        $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(dados.length / tamanhoPagina));
+    }
+
+    ajustarBotoes = function () {
+        $('#proximo').prop('disabled', dados.length <= tamanhoPagina || pagina >= Math.ceil(dados.length / tamanhoPagina) - 1);
+        $('#anterior').prop('disabled', dados.length <= tamanhoPagina || pagina == 0);
+    }
 
     buscarEstacionamentos();
     buscarEmpresas();

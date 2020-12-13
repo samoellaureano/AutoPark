@@ -1,4 +1,23 @@
+var dados = [];
+var tamanhoPagina = 7;
+var pagina = 0;
+var html;
 $(document).ready(function(){
+    $('#proximo').click(function () {
+        if (pagina < dados.length / tamanhoPagina - 1) {
+            pagina++;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $('#anterior').click(function () {
+        if (pagina > 0) {
+            pagina--;
+            paginar();
+            ajustarBotoes();
+        }
+    });
+    $("#btnPaginacao").hide();
     $("#editar").hide();
     exibeEditar = function (val) {
         if (val) {
@@ -29,8 +48,9 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     exibirUsuarios = function(listaUsuarios){
-        var tbody = $('#tabUsuarios');        
-        var html ="";
+        pagina = 0;
+        dados = [];
+        html = "";
         if (listaUsuarios != undefined) {
             if (listaUsuarios.length > 0) {
                 for (var i = 0; i < listaUsuarios.length; i++) {
@@ -39,16 +59,7 @@ $(document).ready(function(){
                     }else{
                         listaUsuarios[i].ativo = "Inativo";
                     }
-                    tbody.append(
-                        $('<tr>')
-                            .append($('<td>').append(listaUsuarios[i].nome))
-                            .append($("<td class='maskcpf'>").append(listaUsuarios[i].usuario.cpf))
-                            .append($('<td>').append(listaUsuarios[i].celular))
-                            .append($('<td>').append(listaUsuarios[i].email))
-                            .append($('<td>').append(listaUsuarios[i].empresa.descricao))
-                            .append($('<td>').append(listaUsuarios[i].ativo))
-                            .append($('<td>').append("<div class='acoes'><a class='btnEdit' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"))
-                    )
+                    dados.push([listaUsuarios[i].nome, listaUsuarios[i].usuario.cpf, listaUsuarios[i].celular, listaUsuarios[i].email, listaUsuarios[i].empresa.descricao, listaUsuarios[i].ativo, "<div class='acoes'><a class='btnEdit' onclick='buscarUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/editar.png' alt='Editar'></a><a class='btnEdit' onclick='excluirUsuarioPorID(" + listaUsuarios[i].id + ")'><img src='img/apagar.png' alt='Apagar'></a><div>"]);
                 }
             } else {
                 html += "<td colspan='6' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
@@ -56,6 +67,8 @@ $(document).ready(function(){
             $("#resultadoUsuarios").html(html);
             $(".maskcpf").mask("999.999.999-99");
         };
+        paginar();
+        ajustarBotoes();
     };
 
     mascaraCpf=function(){
@@ -177,6 +190,51 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     };
+    paginar = function () {        
+        $('#tabUsuarios > tbody > tr').remove();
+        var tbody = $('#tabUsuarios > tbody');
+        var cont = 0;
+        for (var i = pagina * tamanhoPagina; i < dados.length && i < (pagina + 1) * tamanhoPagina; i++) {
+            cont++;
+            tbody.append(
+                $('<tr>')
+                    .append($('<td>').append(dados[i][0]))
+                    .append($('<td>').append(dados[i][1]))
+                    .append($('<td>').append(dados[i][2]))
+                    .append($('<td>').append(dados[i][3]))
+                    .append($('<td>').append(dados[i][4]))
+                    .append($('<td>').append(dados[i][5]))
+                    .append($('<td>').append(dados[i][6]))
+            )
+        }
+
+
+        if ((cont < tamanhoPagina) && (html == "")) {
+            for (var i = cont; i < tamanhoPagina; i++) {
+                tbody.append(
+                    $('<tr>')
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                        .append($('<td>').append(""))
+                )
+            }
+        }
+
+        if (html == "") {
+            $("#btnPaginacao").show();
+        }
+
+        $('#numeracao').text('Página ' + (pagina + 1) + ' de ' + Math.ceil(dados.length / tamanhoPagina));
+    }
+
+    ajustarBotoes = function () {
+        $('#proximo').prop('disabled', dados.length <= tamanhoPagina || pagina >= Math.ceil(dados.length / tamanhoPagina) - 1);
+        $('#anterior').prop('disabled', dados.length <= tamanhoPagina || pagina == 0);
+    }
 
     buscarUsuarios();
     buscarEmpresas();
