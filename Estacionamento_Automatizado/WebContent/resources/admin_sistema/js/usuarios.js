@@ -66,6 +66,7 @@ $(document).ready(function(){
             }
             $("#resultadoUsuarios").html(html);
             $(".maskcpf").mask("999.999.999-99");
+            $(".maskTell").mask("(00) 0000-00009");
         };
         paginar();
         ajustarBotoes();
@@ -75,6 +76,13 @@ $(document).ready(function(){
         $("#cpf").mask("999.999.999-99");
     };
 
+    maskTellEdit=function(){
+        $("#celularEdit").mask("(00) 0000-00009");
+    };
+    maskTell=function(){
+        $("#celular").mask("(00) 0000-00009");
+    };
+
     buscarUsuarioPorID = function(id){
         exibeEditar(true);
         var cfg = {
@@ -82,13 +90,13 @@ $(document).ready(function(){
             url: "../../rest/funcionarioRest/buscaDados/" + id,
             success: function (funcionario) {
                 $("#nomeEdit").val(funcionario.nome);
-                $("#cpfEdit").val(funcionario.usuario.cpf);                
+                $("#cpfEdit").val(mCPF(funcionario.usuario.cpf));                
                 $("#celularEdit").val(mtel(funcionario.celular));
                 $("#emailEdit").val(funcionario.email);
                 $("#empEdit").val(funcionario.empresa.id);
-                $("#btnSalvarEdit").val(funcionario.id);
-                $("#cpfEdit").mask("999.999.999-99");
+                $("#btnSalvarEdit").val(funcionario.id);                
                 $("#ativoEdit").prop( "checked",funcionario.ativo);
+                $("#cpfEdit").mask("999.999.999-99");
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
@@ -121,6 +129,7 @@ $(document).ready(function(){
         funcionario.usuario = usuario;
         funcionario.nome = $("#nomeEdit").val();
         funcionario.celular = $("#celularEdit").val();
+        funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
         empresa.id = $("#empEdit").val();
         funcionario.empresa = empresa;
         funcionario.email = $("#emailEdit").val();
@@ -146,13 +155,22 @@ $(document).ready(function(){
         usuario.cpf = $("#cpf").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
-        usuario.perfil = 2; 
+        
+        if($("#admSistema").is(':checked')){
+            usuario.perfil = 3; 
+        }else{
+            usuario.perfil = 2;
+        };
+
+        console.log(usuario.perfil);        
         funcionario.usuario = usuario;
         funcionario.nome = $("#nome").val();
         funcionario.celular = $("#celular").val();
+        funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
         empresa.id = $("#emp").val();
         funcionario.empresa = empresa;
         funcionario.email = $("#email").val();
+        
         var cfg = {
             url: "../../rest/funcionarioRest/addFuncionario",
             data: JSON.stringify(funcionario),
