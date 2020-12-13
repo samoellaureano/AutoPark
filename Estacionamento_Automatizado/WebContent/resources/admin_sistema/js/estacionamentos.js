@@ -1,19 +1,20 @@
-$("#cnpjEdit").mask("99.999.999/9999-99");
+
 $(document).ready(function(){
-    $("#cnpjEdit").mask("99.999.999/9999-99");
+    
     $("#editar").hide();
     exibeEditar = function (val) {
         if (val) {
             if (!$("#novo").val()) {
                 $("#editar").show();
                 $("#novo").hide();
-                $("#novo").val(true);
+                $("#novo").val(true);               
             };
         } else {
             if ($("#novo").val()) {
                 $("#editar").hide();
                 $("#novo").show();
                 $("#novo").val(false);
+                 
             };
         };
     };
@@ -73,14 +74,13 @@ $(document).ready(function(){
             url: "../../rest/estacionamentoRest/buscarEstacionamentoPorId/" + id,
             success: function (estacionamento) {
                 $("#descricaoEdit").val(estacionamento.descricao);              
-                $("#cnpjEdit").val(estacionamento.cnpj);
+                $("#cnpjEdit").val(cnpjMask(estacionamento.cnpj));                
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#enderecoEdit").val(estacionamento.endereco);
                 $("#vagasEdit").val(estacionamento.vagas);
                 $("#empEdit").val(estacionamento.empresa.id);
                 $("#btnSalvarEdit").val(estacionamento.id);
-                $("#ativoEdit").prop( "checked",estacionamento.ativo);
-                mascaraCnpjEdit(); 
+                $("#ativoEdit").prop( "checked",estacionamento.ativo);             
                
             },
             error: function (err) {

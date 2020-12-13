@@ -6,7 +6,7 @@ function maskTel(o,f){
 }
 function execmascara(){
     v_obj.value=v_fun(v_obj.value)
-}
+} 
 function mtel(v){
     v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
     v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos

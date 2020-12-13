@@ -69,11 +69,12 @@ $(document).ready(function () {
             type: "POST",
             url: "../../rest/empresaRest/buscarEmpresaPorId/" + id,
             success: function (empresa) {
-                $("#razaoSocialEdit").val(empresa.descricao);
-                $("#cnpjEdit").val(mCnpj(empresa.cnpj));                               
+                
+                $("#razaoSocialEdit").val(empresa.descricao);             
+                $("#cnpjEdit").val(cnpjMask(empresa.cnpj));                               
                 $("#btnSalvarEdit").val(empresa.id);
                 $("#ativoEdit").prop( "checked",empresa.ativo);
-                mascaraCnpjEdit();
+                
             },
             error: function (err) {
                 alert("Erro ao editar o servico!" + err.responseText);
