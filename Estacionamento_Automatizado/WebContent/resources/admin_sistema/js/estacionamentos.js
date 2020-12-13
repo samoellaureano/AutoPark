@@ -113,7 +113,7 @@ $(document).ready(function(){
                 if(succJson){
                     window.location.href = ("estacionamentos.html");
                 }else{
-                    alert("Este registro não pode ser excluido, pois já esta em uso!")
+                    exibirMessagem("Este registro não pode ser excluido, pois já esta em uso!", 2);
                 }
             },
             error: function (errJson) {
