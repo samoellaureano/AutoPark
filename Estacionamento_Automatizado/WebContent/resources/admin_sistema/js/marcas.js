@@ -107,10 +107,26 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     }
     $('#btnSalvarEdit').click(function (e) {
+        var msg = "";
         marca = new Object();
         marca.descricao = $("#descricaoEdit").val();
         marca.id = $("#btnSalvarEdit").val();
         marca.ativo = $("#ativoEdit").is(':checked');
+        
+        if(marca.descricao=="" || marca.descricao ==null || marca.descricao == undefined || marca.descricao =="null"){
+            msg+="Campo descrição não preenchido."+"\n";
+        };
+
+        if(msg==""){
+            alterarMarca(marca);
+        }else{
+            $("#msg").val('');
+            exibirMessagem(msg, 2);
+        };
+        
+    });
+
+    alterarMarca=function(marca){
         var cfg = {
             url: "../../rest/marcaRest/editMarca",
             data: JSON.stringify(marca),
@@ -122,12 +138,32 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     $('#btnSalvar').click(function (e) {
         marca = new Object();
-        marca.descricao = $("#descricao").val();
-        var cfg = {
+        marca.descricao = $("#descricao").val();   
+
+        if(marca.descricao=="" || marca.descricao ==null || marca.descricao == undefined || marca.descricao =="null"){
+            msg+="Campo descrição não preenchido."+"\n";
+        };
+
+        if(msg==""){
+            salvarMarca(marca);
+        }else{
+            $("#msg").val('');
+            exibirMessagem(msg, 2);
+        };
+        
+
+
+
+
+        
+    });
+
+    salvarMarca=function(marca){     
+           var cfg = {
             url: "../../rest/marcaRest/addMarca",
             data: JSON.stringify(marca),
             success: function (succJson) {
@@ -138,7 +174,8 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    }
+    ;
 
     paginar = function () {        
         $('#tabMarcas > tbody > tr').remove();

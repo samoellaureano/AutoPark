@@ -53,7 +53,8 @@ $(document).ready(function () {
                 exibirEmpresas(listaEmpresas);
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
@@ -96,7 +97,8 @@ $(document).ready(function () {
                 
             },
             error: function (err) {
-                alert("Erro ao editar o servico!" + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
@@ -113,7 +115,7 @@ $(document).ready(function () {
                 }
             },
             error: function (errJson) {
-                alert(errJson);
+                exibirMessagem("Este registro não pode ser excluido, pois já esta em uso!", 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -134,13 +136,14 @@ $(document).ready(function () {
             msg+="Campo Razão social não preenchido.<br/>";
         };
 
-        if(empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.descricao =="null"){
+        if(empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.cnpj =="null" || empresa.cnpj.length!=14){
             msg+="Campo CNPJ não preenchido."+"\n";
         };
 
         if(msg==""){
             atualizaEmpresa(empresa);
         }else{
+            $("#msg").val('');
             exibirMessagem(msg, 2);
         };        
     });
@@ -182,7 +185,8 @@ $(document).ready(function () {
 
         if(msg==""){
             salvarEmpresa(empresa);
-        }else{            
+        }else{
+            $("#msg").val('');
             exibirMessagem(msg, 2);
         };
         

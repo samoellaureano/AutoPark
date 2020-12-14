@@ -1,4 +1,5 @@
 function exibirMessagem(msg, tipo) {
+ 
   var msgDiv = $("#msg");
 
   switch (tipo) {
@@ -28,6 +29,8 @@ function exibirMessagem(msg, tipo) {
        }).fadeOut({
            duration: 300,
            queue: false
-       });       
+           
+       });
+       $("#msg").val('');       
    }, 1500);
 }

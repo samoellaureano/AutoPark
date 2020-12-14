@@ -160,6 +160,7 @@ $(document).ready(function(){
         funcionario = new Object();
         empresa = new Object();
         usuario = new Object();
+        
         funcionario.id = $("#btnSalvarEdit").val();
         usuario.cpf = $("#cpf").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
@@ -171,7 +172,6 @@ $(document).ready(function(){
             usuario.perfil = 2;
         };
 
-        console.log(usuario.perfil);        
         funcionario.usuario = usuario;
         funcionario.nome = $("#nome").val();
         funcionario.celular = $("#celular").val();
