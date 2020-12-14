@@ -1,5 +1,6 @@
 package br.com.estacionamento.rest;
 
+import java.util.Base64;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -35,7 +36,8 @@ public class FuncionarioRest extends UtilRest{
 			Empresa empresa = funcionario.getEmpresa();
 
 			usuario.setAcesso(true);
-			usuario.setSenhaCriptografada(usuario.getCpf());
+			
+			usuario.setSenhaCriptografada(Base64.getEncoder().encodeToString(usuario.getCpf().getBytes()));
 			
 			funcionario.setUsuario(usuario);			
 			funcionario.setAtivo(true);
