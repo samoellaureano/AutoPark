@@ -46,7 +46,8 @@ $(document).ready(function(){
                 exibirTipoVeiculos(listaTiposVeiculos);
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao buscar os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -84,7 +85,8 @@ $(document).ready(function(){
                 $("#ativoEdit").prop( "checked",tipoVeiculo.ativo);
             },
             error: function (err) {
-                alert("Erro ao editar o servico!" + err.responseText);
+                resp = ("Erro ao Buscar os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -98,20 +100,38 @@ $(document).ready(function(){
                     window.location.href = ("tipoVeiculos.html");
                 }else{
                     exibirMessagem("Este registro não pode ser excluido, pois já esta em uso!", 2);
-                }
-                
+                }                
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao Excluir os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
     }
     $('#btnSalvarEdit').click(function (e) {
+        var msg="";
         tipoVeiculo = new Object();
         tipoVeiculo.descricao = $("#descricaoEdit").val();
         tipoVeiculo.id = $("#btnSalvarEdit").val();
         tipoVeiculo.ativo = $("#ativoEdit").is(':checked');
+
+        if(tipoVeiculo.id=="" || tipoVeiculo.id ==null || tipoVeiculo.id == undefined || tipoVeiculo.id =="null"||tipoVeiculo.id == 'marca'){
+            msg+="Tipo veiculo não cadastrado.<br/>";
+        };
+       
+        if(tipoVeiculo.descricao=="" || tipoVeiculo.descricao ==null || tipoVeiculo.descricao == undefined || tipoVeiculo.descricao =="null"){
+            msg+="Campo descrição não preenchido.";
+        };
+
+        if(msg==""){
+            atualizarTipoVeiculo(tipoVeiculo);
+        }else{            
+            exibirMessagem(msg, 2);
+        };        
+    });
+
+    atualizarTipoVeiculo=function(tipoVeiculo){
         var cfg = {
             url: "../../rest/tipoVeiculoRest/editTipoVeiculo",
             data: JSON.stringify(tipoVeiculo),
@@ -119,29 +139,40 @@ $(document).ready(function(){
                 window.location.href = ("tipoVeiculos.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao alterar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     $('#btnSalvar').click(function (e) {
         tipoVeiculo = new Object();
         tipoVeiculo.descricao = $("#descricao").val();
-        if(tipoVeiculo.descricao != ""){
-            var cfg = {
-                url: "../../rest/tipoVeiculoRest/addTipoVeiculo",
-                data: JSON.stringify(tipoVeiculo),
-                success: function (succJson) {
-                    window.location.href = ("tipoVeiculos.html");
-                },
-                error: function (errJson) {
-                    alert(errJson);
-                }
-            };
-            autoPark.ajax.post(cfg);
-        }        
+        var msg = "";
+        if(tipoVeiculo.descricao=="" || tipoVeiculo.descricao ==null || tipoVeiculo.descricao == undefined || tipoVeiculo.descricao =="null"){
+            msg+="Campo descrição não preenchido.";
+        };
+        if(msg==""){
+            salvarTipoVeiculo(tipoVeiculo);
+        }else{            
+            exibirMessagem(msg, 2);
+        };
     });
+        salvarTipoVeiculo=function(tipoVeiculo){
+                var cfg = {
+                    url: "../../rest/tipoVeiculoRest/addTipoVeiculo",
+                    data: JSON.stringify(tipoVeiculo),
+                    success: function (succJson) {
+                        window.location.href = ("tipoVeiculos.html");
+                    },
+                    error: function (errJson) {
+                        resp = ("Erro ao salvar o cadastro!");
+                        exibirMessagem(resp, 2); 
+                    }
+                };
+                autoPark.ajax.post(cfg);            
+        };
 
     paginar = function () {        
         $('#tabTipoVeiculos > tbody > tr').remove();

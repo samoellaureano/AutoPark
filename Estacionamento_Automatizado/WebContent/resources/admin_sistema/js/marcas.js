@@ -46,7 +46,8 @@ $(document).ready(function(){
                 exibirMarcas(listaMarcas);
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -85,7 +86,8 @@ $(document).ready(function(){
                 $("#ativoEdit").prop( "checked",marca.ativo);
             },
             error: function (err) {
-                alert("Erro ao editar o servico!" + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);

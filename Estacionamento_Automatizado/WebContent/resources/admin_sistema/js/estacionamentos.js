@@ -47,7 +47,8 @@ $(document).ready(function(){
                 exibirEstacionamentos(listaEstacionamentos);
             },
             error: function (err) {
-                exibirMessagem("Este registro não pode ser excluido, pois já esta em uso!", 2);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
