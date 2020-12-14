@@ -35,10 +35,9 @@ public class FuncionarioRest extends UtilRest{
 			Empresa empresa = funcionario.getEmpresa();
 
 			usuario.setAcesso(true);
-			usuario.setSenhaCriptografada(usuario.getSenha());
+			usuario.setSenhaCriptografada(usuario.getCpf());
 			
-			funcionario.setUsuario(usuario);
-			
+			funcionario.setUsuario(usuario);			
 			funcionario.setAtivo(true);
 			
 			FuncionarioJPADAO funcionarioJpadao = new FuncionarioJPADAO();
