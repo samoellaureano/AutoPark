@@ -72,7 +72,8 @@ $(document).ready(function(){
         }
         paginar();
         ajustarBotoes();
-    }
+    };
+    
     buscarMarcaPorID = function(id){
         exibeEditar(true);
         var cfg = {
@@ -120,10 +121,9 @@ $(document).ready(function(){
         if(msg==""){
             alterarMarca(marca);
         }else{
-            $("#msg").val('');
+          
             exibirMessagem(msg, 2);
         };
-        
     });
 
     alterarMarca=function(marca){
@@ -134,13 +134,15 @@ $(document).ready(function(){
                 window.location.href = ("marcas.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao alterar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
     };
 
     $('#btnSalvar').click(function (e) {
+        var msg="";
         marca = new Object();
         marca.descricao = $("#descricao").val();   
 
@@ -150,16 +152,9 @@ $(document).ready(function(){
 
         if(msg==""){
             salvarMarca(marca);
-        }else{
-            $("#msg").val('');
+        }else{            
             exibirMessagem(msg, 2);
-        };
-        
-
-
-
-
-        
+        };        
     });
 
     salvarMarca=function(marca){     
@@ -170,12 +165,12 @@ $(document).ready(function(){
                 window.location.href = ("marcas.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao realizar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    }
-    ;
+    };
 
     paginar = function () {        
         $('#tabMarcas > tbody > tr').remove();
@@ -190,7 +185,6 @@ $(document).ready(function(){
                     .append($('<td>').append(dados[i][2]))
             )
         }
-
 
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {

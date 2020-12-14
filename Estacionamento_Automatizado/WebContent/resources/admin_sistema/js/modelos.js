@@ -185,7 +185,6 @@ $(document).ready(function(){
             )
         }
 
-
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {
                 tbody.append(
