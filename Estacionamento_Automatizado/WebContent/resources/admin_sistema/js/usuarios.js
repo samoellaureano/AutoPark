@@ -129,10 +129,11 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
     $('#btnSalvarEdit').click(function (e) {
+
         funcionario = new Object();
         empresa = new Object();
         usuario = new Object();
-        funcionario.id = $("#btnSalvarEdit").val();//
+        funcionario.id = $("#btnSalvarEdit").val();
         usuario.cpf = $("#cpfEdit").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
@@ -173,8 +174,6 @@ $(document).ready(function(){
         }else{           
             exibirMessagem(msg, 2);
         };
-
-    
     });
 
     atualizarFuncionario=function(funcionario){
@@ -193,16 +192,16 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     };
 
-    $('#btnSalvar').click(function (e) {
+    $('#btnSalvar').click(function (e){
         funcionario = new Object();
         empresa = new Object();
         usuario = new Object();
-        
+
         funcionario.id = $("#btnSalvarEdit").val();
         usuario.cpf = $("#cpf").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
-        
+
         if($("#admSistema").is(':checked')){
             usuario.perfil = 3; 
         }else{
@@ -244,12 +243,10 @@ $(document).ready(function(){
         }else{           
             exibirMessagem(msg, 2);
         };
-
     });
 
     salvarFuncionario=function(funcionario) {
-        
-          
+
         var cfg = {
             url: "../../rest/funcionarioRest/addFuncionario",
             data: JSON.stringify(funcionario),
@@ -306,7 +303,7 @@ $(document).ready(function(){
                     .append($('<td>').append(dados[i][6]))
             )
         }
-     
+
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {
                 tbody.append(
