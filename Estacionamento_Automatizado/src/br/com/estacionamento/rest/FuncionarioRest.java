@@ -112,7 +112,7 @@ public class FuncionarioRest extends UtilRest{
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscaDados(@PathParam("idUsuario") int idUsuario){
 		try{
-			Funcionario funcionario = new FuncionarioJPADAO().buscarPorId(idUsuario);
+			Funcionario funcionario = new FuncionarioJPADAO().buscarPorIdUsuario(idUsuario);
 			
 			return this.buildResponse(funcionario);
 		}catch (Exception e){

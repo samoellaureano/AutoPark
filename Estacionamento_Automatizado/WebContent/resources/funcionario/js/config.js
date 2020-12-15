@@ -5,7 +5,7 @@ var funcionario = null;
 var usuario2 = new Object();
 var funcionario2 = new Object();
 
-$("#cpfEdit").mask('000.000.000-00'); 
+ 
 $(document).ready(function(){
     $("#menu").load("menu.html"); 
 
@@ -23,17 +23,20 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg);
     }
 
+    mascaraCpf=function(){
+        $("#cpf").mask("999.999.999-99");
+    };
+
     exibirDados = function (funcionario) {
 
         $("#nomeEdit").val(funcionario.nome);
-        $("#cpfEdit").val(funcionario.usuario.cpf);
-        $("#cpfEdit").mask('000.000.000-00');    
+        $("#cpfEdit").val(mCPF(funcionario.usuario.cpf));          
         usuario2.senha = funcionario.usuario.senha;
         funcionario2.usuario = usuario2;
         $("#celEdit").val(mtel(funcionario.celular));
         $("#emailEdit").val(funcionario.email);        
         $("#salvarAlteracoes").val(funcionario.id);
-    }
+    };
 
     $('#salvarAlteracoes').click(function (e){
         usuario = new Object();
@@ -111,8 +114,6 @@ $(document).ready(function(){
       
         buscarDados();
 
-     }, 1000);
-  
-   
+     }, 1500);  
     
 });

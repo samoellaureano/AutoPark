@@ -47,10 +47,10 @@
                                 <input type="text" id="nomeEdit" name="nomeEdit" placeholder="Nome completo" required>
 
                                 <label for="cpfEdit">CPF</label>
-                                <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required>
+                                <input type="text" id="cpfEdit" name="cpfEdit"  placeholder="000.000.000-00" required>
 
                                 <label for="celEdit">Telefone</label>
-                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" onkeydown="maskTel( this, mtel );" required>
+                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" onkeyup="maskTel( this, mtel );" maxlength="15" required>
                                 <label for="emailEdit">E-mail</label>
                                 <input type="text" id="emailEdit" name="emailEdit" placeholder="E-mail" required>
                             </form>

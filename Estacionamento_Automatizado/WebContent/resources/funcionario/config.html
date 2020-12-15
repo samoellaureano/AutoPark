@@ -14,6 +14,7 @@
     <script src="../../js/jquery.js"></script>
     <script src="../../js/ajax.js"></script>
     <script src="../../js/jquery.mask.min.js" ></script>
+    <script src="../../js/mascaraCPF.js" ></script>
     <script src="../../js/maskTelefone.js"></script>
     <script src="../../js/msgToast.js"></script>
     <script src="../../js/sessao.js"></script>
@@ -47,10 +48,10 @@
                                 <input type="text" id="nomeEdit" name="nomeEdit" placeholder="Nome completo" required>
 
                                 <label for="cpfEdit">CPF</label>
-                                <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required>
+                                <input type="text" id="cpfEdit" name="cpfEdit" placeholder="000.000.000-00" required onkeyup="mascaraCpf()" maxlength="14">
 
                                 <label for="celEdit">Telefone</label>
-                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" onkeydown="maskTel( this, mtel );" required>
+                                <input type="text" id="celEdit" name="celEdit" placeholder="(00) 0 0000-0000" onkeydown="maskTel( this, mtel );" maxlength="15">
                                 <label for="emailEdit">E-mail</label>
                                 <input type="text" id="emailEdit" name="emailEdit" placeholder="E-mail" required>
                                
