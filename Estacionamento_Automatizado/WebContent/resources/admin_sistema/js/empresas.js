@@ -179,7 +179,7 @@ $(document).ready(function () {
             msg+="Campo Razão social não preenchido.<br/>";
         };
 
-        if(empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.descricao =="null"){
+        if(empresa.cnpj.length!=14||empresa.cnpj=="" || empresa.cnpj ==null || empresa.cnpj == undefined || empresa.descricao =="null"){
             msg+="Campo CNPJ não preenchido.";
         };
 
