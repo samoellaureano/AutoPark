@@ -121,7 +121,7 @@ $(document).ready(function () {
         autoPark.ajax.post(cfg);
     };
     $('#btnSalvarEdit').click(function (e) { // separa em duas funções captura dos campos e requizição
-        
+        var msg="";
         empresa = new Object();
         empresa.id = $("#btnSalvarEdit").val();
         empresa.cnpj = $("#cnpjEdit").val();
