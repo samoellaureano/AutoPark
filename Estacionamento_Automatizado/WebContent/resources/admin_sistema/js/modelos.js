@@ -46,7 +46,8 @@ $(document).ready(function(){
                 exibirModelos(listaModelos);
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -85,7 +86,8 @@ $(document).ready(function(){
                 $("#ativoEdit").prop( "checked",modelo.ativo);
             },
             error: function (err) {
-                alert("Erro ao editar o servico!" + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -100,15 +102,16 @@ $(document).ready(function(){
                 }else{
                     exibirMessagem("Este registro não pode ser excluido, pois já esta em uso!", 2);
                 }
-                
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao excluir o modelo");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
     }
     $('#btnSalvarEdit').click(function (e) {
+        var msg="";
         modelo = new Object();
         marca = new Object();
         modelo.id = $("#btnSalvarEdit").val();
@@ -116,6 +119,25 @@ $(document).ready(function(){
         marca.id = $("#marcaEdit").val();
         modelo.ativo = $("#ativoEdit").is(':checked');
         modelo.marca = marca;
+        atualizarModelo(modelo);
+
+        if(marca.id=="" || marca.id ==null || marca.id == undefined || marca.id =="null"||marca.id == 'marca'){
+            msg+="Selecione uma marca.<br/>";
+        };
+
+        if(modelo.descricao=="" || modelo.descricao ==null || modelo.descricao == undefined || modelo.descricao =="null"){
+            msg+="Campo descrição não preenchido.";
+        };
+
+        if(msg==""){
+            atualizarModelo(modelo);
+        }else{            
+            exibirMessagem(msg, 2);
+        };
+    });
+
+    atualizarModelo=function(modelo){
+
         var cfg = {
             url: "../../rest/modeloRest/editModelo",
             data: JSON.stringify(modelo),
@@ -123,18 +145,37 @@ $(document).ready(function(){
                 window.location.href = ("modelos.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao alterar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     $('#btnSalvar').click(function (e) {
+        var msg="";
         modelo = new Object();
         marca = new Object();
         modelo.descricao = $("#descricao").val();
         marca.id = $("#marca").val();
         modelo.marca = marca;
+
+        if(marca.id=="" || marca.id ==null || marca.id == undefined || marca.id =="null" || marca.id == 'marca'){
+            msg+="Selecione uma marca.<br/>";
+        };
+
+        if(modelo.descricao=="" || modelo.descricao ==null || modelo.descricao == undefined || modelo.descricao =="null"){
+            msg+="Campo descrição não preenchido.";
+        };
+
+        if(msg==""){
+            salvarModelo(modelo);
+        }else{            
+            exibirMessagem(msg, 2);
+        };        
+    });
+
+    salvarModelo=function(modelo){
         var cfg = {
             url: "../../rest/modeloRest/addModelo",
             data: JSON.stringify(modelo),
@@ -142,11 +183,12 @@ $(document).ready(function(){
                 window.location.href = ("modelos.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao realizar o cadastro!");
+                exibirMessagem(resp, 2); 
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     buscarMarcas = function () {
         $('#marcaEdit option').remove();
@@ -165,7 +207,8 @@ $(document).ready(function(){
                 }
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -184,7 +227,6 @@ $(document).ready(function(){
                     .append($('<td>').append(dados[i][3]))
             )
         }
-
 
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {

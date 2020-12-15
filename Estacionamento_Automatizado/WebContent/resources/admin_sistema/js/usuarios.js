@@ -68,12 +68,12 @@ $(document).ready(function(){
             } else {
                 html += "<td colspan='7' style='text-align: center;'>Nenhum registro encontrado</td></tr>";
             }
-            $("#resultadoUsuarios").html(html);
-            $(".maskcpf").mask("999.999.999-99");
-            $(".maskTell").mask("(00) 0000-00009");
+            $("#resultadoUsuarios").html(html);            
         };
         paginar();
         ajustarBotoes();
+        $(".maskcpf").mask("999.999.999-99");
+        $(".maskTell").mask("(00) 0000-00009");
     };
 
     mascaraCpf=function(){
@@ -103,7 +103,8 @@ $(document).ready(function(){
                 $("#cpfEdit").mask("999.999.999-99");
             },
             error: function (err) {
-                alert("Erro ao editar o servico!" + err.responseText);
+                resp = ("Erro ao realizar a busca!");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -121,7 +122,8 @@ $(document).ready(function(){
                 
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao Excluir os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -130,7 +132,7 @@ $(document).ready(function(){
         funcionario = new Object();
         empresa = new Object();
         usuario = new Object();
-        funcionario.id = $("#btnSalvarEdit").val();
+        funcionario.id = $("#btnSalvarEdit").val();//
         usuario.cpf = $("#cpfEdit").val();
         usuario.cpf = usuario.cpf.replace(/\./g, "");
         usuario.cpf = usuario.cpf.replace(/\-/g, "");
@@ -143,6 +145,40 @@ $(document).ready(function(){
         funcionario.empresa = empresa;
         funcionario.email = $("#emailEdit").val();
         funcionario.ativo = $("#ativoEdit").is(':checked');
+
+        var msg="";
+
+        if(usuario.cpf.length!=11||usuario.cpf=="" || usuario.cpf ==null || usuario.cpf == undefined || usuario.cpf =="null" || usuario.cpf.length<11 ){
+            msg+="Campo CPF não preenchido.<br/>";
+        };
+
+        if( funcionario.nome=="" ||  funcionario.nome ==null ||  funcionario.nome == undefined ||  funcionario.nome =="null"){
+            msg+="Campo nome não preenchido.<br/>";
+        };
+
+        if( funcionario.celular.length!=11||funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
+            msg+="Campo Telefone não preenchido.<br/>";
+        };
+
+        if( empresa.id=="selecione"){
+            msg+="Campo Empresa não seleconado.<br/>";
+        };
+
+        if( funcionario.email.indexOf("@") == -1 ||  funcionario.email.indexOf(".") == -1 ||   funcionario.email == ""){
+            msg+="Campo E-mail não preenchido.<br/>";
+        };
+
+        if(msg==""){
+            atualizarFuncionario(funcionario);
+        }else{           
+            exibirMessagem(msg, 2);
+        };
+
+    
+    });
+
+    atualizarFuncionario=function(funcionario){
+
         var cfg = {
             url: "../../rest/funcionarioRest/editFuncionario",
             data: JSON.stringify(funcionario),
@@ -150,11 +186,12 @@ $(document).ready(function(){
                 window.location.href = ("usuarios.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao Editar os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     $('#btnSalvar').click(function (e) {
         funcionario = new Object();
@@ -178,8 +215,41 @@ $(document).ready(function(){
         funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
         empresa.id = $("#emp").val();
         funcionario.empresa = empresa;
-        funcionario.email = $("#email").val();
+        funcionario.email = $("#email").val(); 
+
+        var msg="";
+
+        if(usuario.cpf.length!=11||usuario.cpf=="" || usuario.cpf ==null || usuario.cpf == undefined || usuario.cpf =="null" || usuario.cpf.length<11 ){
+            msg+="Campo CPF não preenchido.<br/>";
+        };
+
+        if( funcionario.nome=="" ||  funcionario.nome ==null ||  funcionario.nome == undefined ||  funcionario.nome =="null"){
+            msg+="Campo nome não preenchido.<br/>";
+        };
+
+        if( funcionario.celular.length!=11||funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
+            msg+="Campo Telefone não preenchido.<br/>";
+        };
+
+        if( empresa.id=="selecione"){
+            msg+="Campo Empresa não seleconado.<br/>";
+        };
+
+        if( funcionario.email.indexOf("@") == -1 ||  funcionario.email.indexOf(".") == -1 ||   funcionario.email == ""){
+            msg+="Campo E-mail não preenchido.<br/>";
+        };
+
+        if(msg==""){
+            salvarFuncionario(funcionario);
+        }else{           
+            exibirMessagem(msg, 2);
+        };
+
+    });
+
+    salvarFuncionario=function(funcionario) {
         
+          
         var cfg = {
             url: "../../rest/funcionarioRest/addFuncionario",
             data: JSON.stringify(funcionario),
@@ -187,17 +257,18 @@ $(document).ready(function(){
                 window.location.href = ("usuarios.html");
             },
             error: function (errJson) {
-                alert(errJson);
+                resp = ("Erro ao salvar os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
-    });
+    };
 
     buscarEmpresas = function () {
         $('#empEdit option').remove();
         $('#emp option').remove();
-        $('#emp').append("<option value=''>Selecione</option>");
-        $('#empEdit').append("<option value=''>Selecione</option>");
+        $('#emp').append("<option value='selecione'>Selecione</option>");
+        $('#empEdit').append("<option value='selecione'>Selecione</option>");
         var cfg = {
             type: "POST",
             url: "../../rest/empresaRest/buscaEmpresasPorDesc/null",
@@ -212,7 +283,8 @@ $(document).ready(function(){
                 };
             },
             error: function (err) {
-                alert("Erro ao buscar dados: " + err.responseText);
+                resp = ("Erro ao Bscar os dados");
+                exibirMessagem(resp, 2);
             }
         };
         autoPark.ajax.post(cfg);
@@ -226,16 +298,15 @@ $(document).ready(function(){
             tbody.append(
                 $('<tr>')
                     .append($('<td>').append(dados[i][0]))
-                    .append($('<td>').append(dados[i][1]))
-                    .append($('<td>').append(dados[i][2]))
+                    .append($("<td class='maskcpf'>").append(dados[i][1]))
+                    .append($("<td class='maskTell'>").append(dados[i][2]))
                     .append($('<td>').append(dados[i][3]))
                     .append($('<td>').append(dados[i][4]))
                     .append($('<td>').append(dados[i][5]))
                     .append($('<td>').append(dados[i][6]))
             )
         }
-
-
+     
         if ((cont < tamanhoPagina) && (html == "")) {
             for (var i = cont; i < tamanhoPagina; i++) {
                 tbody.append(

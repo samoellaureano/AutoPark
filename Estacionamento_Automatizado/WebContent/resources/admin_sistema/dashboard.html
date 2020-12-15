@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoPark</title>
     <link rel="stylesheet" href="css/admin_sistema.css">
+    <link rel="stylesheet" href="../../css/alertToast.css">
     <script src="../../js/jquery.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/msgToast.js"></script>
+    <script src="../../js/sessao.js"></script>    
+    <script src="js/dashboard.js"></script>
 </head>
 <body>
     <div class="container">
@@ -43,5 +48,16 @@
             <a href="../logoff"><img src="img/sair.png" alt="Sair"></a>            
         </div>
     </div>
+    <div class="chave">
+        <a onclick="formSenha()"><img src="img/chave.png" alt="Senha"><span>Alterar Senha</span></a>
+        <div id="divSenha" style="display: none;">
+            <form class="formSenha">
+                <label for="novaSenha">Nova Senha:</label><input type="password" id="novaSenha">
+                <label for="confSenha">Confirme a Senha:</label><input type="password" id="confSenha">
+            </form>
+            <button type="button" class="btnSalvar" id="btnSalvar">Salvar</button>
+        </div>         
+    </div>
+    <div id="msg" class="msg" style="display: none; z-index: 10;"></div>
 </body>
 </html>

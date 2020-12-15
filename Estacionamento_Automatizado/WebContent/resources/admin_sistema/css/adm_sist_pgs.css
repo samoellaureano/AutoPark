@@ -52,7 +52,7 @@ body {
   border-radius: 0.3rem;
   width: 13rem;
   padding: 1rem;
-  background-color: #18f300a8;
+  background-color: #f9fbf9a8;
   height: fit-content;
 }
 .editar {
@@ -82,11 +82,14 @@ body {
   font-size: 0.7rem;
   color: #fff;
   padding: 0.7rem;
-  background-color: #20101f;
+  background-color: #285617;
   border-radius: 0.3rem;
   border: none;
   user-select: none;
   cursor: pointer;
+}
+.btnSalvar:hover {
+  background-color: #419124;
 }
 .btnCancelar {
   margin: 1.5rem 0rem 0rem 0rem;
