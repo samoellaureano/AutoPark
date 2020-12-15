@@ -29,6 +29,7 @@ public class ModeloJPADAO extends JPAAbstract<Modelo> implements ModeloDAO{
 		for (Object object: list) {
 			listaModelos.add((Modelo) object);
 		}
+		super.close();
 		return listaModelos;
 	}
 	
@@ -40,7 +41,7 @@ public class ModeloJPADAO extends JPAAbstract<Modelo> implements ModeloDAO{
 		int rowsUpdated = query.executeUpdate();
 		System.out.println("entities Updated: " + rowsUpdated);
 		em.getTransaction().commit();
-	      em.close();
+	    em.close();
 	}
 
 }

@@ -12,7 +12,7 @@ $(document).ready(function(){
     buscarDados = function () {
         var cfg = {
             type: "POST",
-            url: "../../rest/funcionarioRest/buscaDados/" + dadosSessao.id,
+            url: "../../rest/funcionarioRest/buscaDadosPorUsuario/" + dadosSessao.id,
             success: function (funcionario) {
                 exibirDados(funcionario);
             },

@@ -53,9 +53,13 @@ h2{
   font-size: 0.7rem;
   color: #fff;
   padding: 0.7rem;
-  background-color: #07a72d;
+  background-color: #040e06;
   border-radius: 0.3rem;
   user-select: none;
+}
+
+.dados > a:hover{
+  background-color: #010302;
 }
 
 .topLista{

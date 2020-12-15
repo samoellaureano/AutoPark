@@ -168,12 +168,18 @@ public class CheckinRest extends UtilRest{
 	public Response validaCheckin(@PathParam("placa") String placa){
 
 		try {
+			boolean retorno= false;
+
 			Veiculo veiculo = new VeiculoJPADAO().buscarPorPlaca(placa);
-			Checkin checkin = new CheckinJPADAO().buscarPorIdVeiculo(veiculo.getId());
 
-			checkin.setValidado(true);
+			if(veiculo.getPlaca() != null) {
 
-			boolean retorno = new CheckinJPADAO().atualizar(checkin);
+				Checkin checkin = new CheckinJPADAO().buscarPorIdVeiculo(veiculo.getId());
+
+				checkin.setValidado(true);
+
+				retorno = new CheckinJPADAO().atualizar(checkin);
+			}
 
 			if(retorno){
 				// Cadastrado com sucesso.

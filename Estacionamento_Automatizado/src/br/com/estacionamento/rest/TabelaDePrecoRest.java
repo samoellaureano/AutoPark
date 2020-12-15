@@ -13,7 +13,10 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.estacionamento.dao.jpa.EstacionamentoJPADAO;
 import br.com.estacionamento.dao.jpa.TabelaDePrecoJPADAO;
+import br.com.estacionamento.dao.jpa.TipoVeiculoJPADAO;
+import br.com.estacionamento.entidade.Estacionamento;
 import br.com.estacionamento.entidade.TabelaDePreco;
 import br.com.estacionamento.util.UtilRest;
 
@@ -29,6 +32,9 @@ public class TabelaDePrecoRest extends UtilRest{
 
 			TabelaDePreco tabelaDePreco = new ObjectMapper().readValue(addPreco,TabelaDePreco.class);
 			TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
+			
+			tabelaDePreco.setTipoVeiculo(new TipoVeiculoJPADAO().buscarPorId(tabelaDePreco.getTipoVeiculo().getId()));
+			tabelaDePreco.setEstacionamento(new EstacionamentoJPADAO().buscarPorId(tabelaDePreco.getEstacionamento().getId()));
 
 			boolean	retorno = tabelaDePrecoJpadao.salvar(tabelaDePreco);
 
@@ -54,21 +60,24 @@ public class TabelaDePrecoRest extends UtilRest{
 
 
 	@POST
-	@Path("/buscarPrecos/{nomeEstacionamento}")
+	@Path("/buscarPrecos/{idEstacionamento}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarPrecos (@PathParam("nomeEstacionamento") String nomeEstacionamento){
+	public Response buscarPrecos (@PathParam("idEstacionamento") int idEstacionamento){
 		
 		try {
+			
 		
 			List<TabelaDePreco> listaPrecos = new ArrayList<TabelaDePreco>();
 			
-			if(nomeEstacionamento.equals("")||nomeEstacionamento.equals("null")) {
+			Estacionamento estacionamento = new EstacionamentoJPADAO().buscarPorId(idEstacionamento);
+			
+			if(estacionamento.getDescricao().equals("")||estacionamento.getDescricao().equals("null")) {
 				
 				listaPrecos = new TabelaDePrecoJPADAO().listaTodosValor();
 				
 			}else {
 				
-				listaPrecos = new TabelaDePrecoJPADAO().listaValorEstacionamento(nomeEstacionamento);
+				listaPrecos = new TabelaDePrecoJPADAO().listaValorEstacionamento(estacionamento.getDescricao());
 			}
 			
 			if(listaPrecos.size()>0 && listaPrecos!=null){

@@ -17,7 +17,6 @@
     <script src="../../js/ajax.js"></script>
     <script src="../../js/msgToast.js"></script>
     <script src="../../js/sessao.js"></script>
-    <script src="js/autoComplete.js"></script>
     <script src="js/tabelaPrecos.js"></script>
 </head>
 
@@ -41,26 +40,18 @@
                         <div class="box-novo">
                             <form action="">
                                 <h3>Novo Preço</h3>
-                                <label for="valor">Valor:200</label>
+                                <label for="valor">Valor:</label>
                                 <input type="number" id="valor">
                                 <label for="valor">Tipo de Veículo:</label>
-                                <select name="tipoVeiculo" id="tipoVeiculo">
-                                    <option value="carro">Carro</option>
-                                    <option value="002">Moto</option>
-                                    <option value="003">Outro</option>
-                                </select>
+                                <select name="tipoVeiculo" id="tipoVeiculo"></select>
                                 <label for="estacionamento">Estacionamento:</label>
-                                <select name="estacionamento" id="estacionamento">
-                                    <option value="001">Estacionamento 01</option>
-                                    <option value="002">Estacionamento 02</option>
-                                    <option value="003">Estacionamento 03</option>
-                                </select>
+                                <select name="estacionamento" id="estacionamento"></select>
                                 <label for="tipoCobranca">Tipo de Cobrança:</label>
                                 <select name="estacionamento" id="tipoCobranca">
                                     <option value="hora">Hora</option>
-                                    <option value="002">Dia</option>
-                                    <option value="003">Semana</option>
-                                    <option value="004">Mês</option>
+                                    <option value="Dia">Dia</option>
+                                    <option value="Semana">Semana</option>
+                                    <option value="Mês">Mês</option>
                                 </select>
                                 <div>
                                     <a href="">Cancelar</a>
@@ -69,8 +60,6 @@
                             </form>
                         </div>
                     </div>
-                    <label for="buscarEst">Buscar:</label>
-                    <input type="text" id="buscarEst" class="autocomplete" placeholder="Digite aqui..." />
                 </div>
                 <label for="">Lista de Preços:</label>
                 <ul class="fecharDados">

@@ -1,30 +1,25 @@
 var tabelaPreco = new Object();
+var es = new Object();
 $(document).ready(function(){
     $("#menu").load("menu.html");
 
     buscar = function(){
-        var valorBusca = $("#buscarEst").val();
-        if(valorBusca==""||valorBusca==null||valorBusca==undefined){
-            valorBusca=null;
-        };
-        console.log(valorBusca+":lol");
         var cfg = {
             type: "POST",
-            url: "../../rest/tabelaDePrecoRest/buscarPrecos/" + valorBusca,
+            url: "../../rest/tabelaDePrecoRest/buscarPrecos/" + dadosSessao.empresa,
             success: function (listaDePrecos) {
-                console.log(listaDePrecos);
-                buscaTipoVeiculo(listaDePrecos);                
+                exibirPrecos(listaDePrecos);                
             },
             error: function (err) {
-                alert("Erro ao buscar estacionamento: " + err.responseText);
+                alert("Erro ao buscar: " + err.responseText);
             }
         };
         autoPark.ajax.post(cfg);      
     }
 
-    exibirPrecos = function(listaDePrecos,listaOpcoes){
+    exibirPrecos = function(listaDePrecos){
         var precosHTML = "<ul class='itemEstac'>";
-        if (listaDePrecos != undefined && listaOpcoes != undefined) {
+        if (listaDePrecos != undefined) {
             if (listaDePrecos.length > 0) {
                 for (var i = 0; i < listaDePrecos.length; i++) {
                     
@@ -64,26 +59,18 @@ $(document).ready(function(){
         }
     }
 
-    buscaTipoVeiculo=function (listaDePrecos) {
-       var tipoVeicloHTML = "";            
-       var valorBusca = null;       
+    buscaTipoVeiculo=function () {
         var cfg = {
             type: "POST",
-            url: "../../rest/tipoVeiculoRest/buscaTipoVeiculos/" + valorBusca,
-            success: function (listaTipoVeiculo) {               
-                
+            url: "../../rest/tipoVeiculoRest/buscarTipoVeiculosPorDesc/null",
+            success: function (listaTipoVeiculo) { 
                 if (listaTipoVeiculo != undefined){
                     if (listaTipoVeiculo.length > 0) {
                         for (var i = 0; i < listaTipoVeiculo.length; i++) {
-                            
-                            tipoVeicloHTML+="<option value='"+listaTipoVeiculo[i].id+"'>"+listaTipoVeiculo[i].descricao+"</option>";
-        
+                            $("#tipoVeiculo").append("<option value='"+listaTipoVeiculo[i].id+"'>"+listaTipoVeiculo[i].descricao+"</option>");
                         };
-                        exibirPrecos(listaDePrecos,tipoVeicloHTML);
                     };
-                };        
-
-                return tipoVeicloHTML;
+                };
             },
             error: function (err) {
                 alert("Erro ao buscar tipo de veiculo: " + err.responseText);
@@ -91,7 +78,27 @@ $(document).ready(function(){
             }
         };
         autoPark.ajax.post(cfg); 
-     };       
+     };
+     buscaEstacionamento=function () {
+        var cfg = {
+            type: "POST",
+            url: "../../rest/estacionamentoRest/buscaEstacionamentosPorDesc/null",
+            success: function (listaEstacionamentos) { 
+                if (listaEstacionamentos != undefined){
+                    if (listaEstacionamentos.length > 0) {
+                        for (var i = 0; i < listaEstacionamentos.length; i++) {
+                            $("#estacionamento").append("<option value='"+listaEstacionamentos[i].id+"'>"+listaEstacionamentos[i].descricao+"</option>");
+                        };
+                    };
+                };
+            },
+            error: function (err) {
+                alert("Erro ao buscar tipo de veiculo: " + err.responseText);
+                return null;
+            }
+        };
+        autoPark.ajax.post(cfg); 
+     };      
 
     editarPreco = function(idI, idJ){
         tabelaPreco.valor = $("#valor"+idJ).val();
@@ -122,13 +129,14 @@ $(document).ready(function(){
     };
 
     $('#cadTabelaPreco').click(function(e){
+        var tabelaPreco = new Object();
         tabelaPreco.valor = $("#valor").val();
         tabelaPreco.tipoVeiculo = $("#tipoVeiculo").val();
         tabelaPreco.estacionamento = $("#estacionamento").val();
         tabelaPreco.tipoCobranca = $("#tipoCobranca").val();
 
         var cfg = {
-            url: "../rest/tabelaPrecoRest/addTabelaPreco",
+            url: "../../rest/tabelaDePrecoRest/addPreco",
             data: JSON.stringify(tabelaPreco),
             success: function (succJson) {
                 if (succJson == 1) {
@@ -150,6 +158,23 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     });
-    buscar();
+    buscaDados = function(){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/funcionarioRest/buscaDadosPorUsuario/" + dadosSessao.id,
+            success: function (funcionario) {
+                dadosSessao.empresa = funcionario.empresa.id;
+            },
+            error: function (err) {
+                alert("Erro ao buscar Funcionarios: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
+    setTimeout(function () {
+        buscaDados();
+        buscaTipoVeiculo();
+        buscaEstacionamento();
+    }, 1500);
 });
 

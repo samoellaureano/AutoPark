@@ -2,22 +2,22 @@ $(document).ready(function () {
     $("#menu").load("menu.html");
 
     buscarVagas = function () {
-
         var idEstacionamento = $("#estacionamento").val();
+        if(idEstacionamento != null){
+            var cfg = {
 
-        var cfg = {
-
-            type: "POST",
-            url: "../../rest/checkinRest/buscarVagas/" + idEstacionamento,
-            success: function (vagasDisponiveis) {
-                exibirVaga(vagasDisponiveis);
-                buscarClientesDoDia(idEstacionamento);
-            },
-            error: function (err) {
-                alert("Erro ao buscar dados dashboard: " + err.responseText);
-            }
-        };
-        autoPark.ajax.post(cfg);
+                type: "POST",
+                url: "../../rest/checkinRest/buscarVagas/" + idEstacionamento,
+                success: function (vagasDisponiveis) {
+                    exibirVaga(vagasDisponiveis);
+                    buscarClientesDoDia(idEstacionamento);
+                },
+                error: function (err) {
+                    alert("Erro ao buscar dados dashboard: " + err.responseText);
+                }
+            };
+            autoPark.ajax.post(cfg);
+        }
     };
 
     exibirVaga = function (vagasDisponiveis) {

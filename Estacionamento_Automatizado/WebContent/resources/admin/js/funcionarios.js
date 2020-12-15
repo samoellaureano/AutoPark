@@ -83,6 +83,7 @@ $(document).ready(function () {
         usuario = new Object();
         funcionario.nome = $("#nome" + i).val();
         funcionario.celular = $("#celular" + i).val();
+        funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
         funcionario.email = $("#email" + i).val();
         funcionario.ativo = $("#status" + i).val();
         funcionario.id = id;
@@ -115,7 +116,7 @@ $(document).ready(function () {
         empresa = new Object();
         usuario = new Object();
 
-        empresa.id = $("#empresa").val();
+        empresa.id = dadosSessao.empresa;
         usuario.cpf = $("#cpf").val();
         usuario.perfil = 1;
         usuario.cpf = usuario.cpf.replace(/\./g, "");
@@ -153,9 +154,24 @@ $(document).ready(function () {
         };
         autoPark.ajax.post(cfg);
     });
+
+    buscaDados = function(){
+        var cfg = {
+            type: "POST",
+            url: "../../rest/funcionarioRest/buscaDadosPorUsuario/" + dadosSessao.id,
+            success: function (funcionario) {
+                dadosSessao.empresa = funcionario.empresa.id;
+            },
+            error: function (err) {
+                alert("Erro ao buscar Funcionarios: " + err.responseText);
+            }
+        };
+        autoPark.ajax.post(cfg);
+    }
     setTimeout(function () {
         buscar();
-    }, 500);
+        buscaDados();
+    }, 1500);
 
     alteraStatus = function (i) {
         var status = $("#status" + i).val();

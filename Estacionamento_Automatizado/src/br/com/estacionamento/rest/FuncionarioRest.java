@@ -122,9 +122,23 @@ public class FuncionarioRest extends UtilRest{
 	}
 	
 	@POST
+	@Path("/buscaDadosPorUsuario/{idUsuario}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscaDadosPorUsuario(@PathParam("idUsuario") int idUsuario){
+		try{
+			Funcionario funcionario = new FuncionarioJPADAO().buscarPorIdUsuario(idUsuario);
+			
+			return this.buildResponse(funcionario);
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
 	@Path("/atualizaFuncionario")
 	@Consumes("application/*")
-	public Response atualizaCliente(String atualizaFuncionario){
+	public Response atualizaFuncionario(String atualizaFuncionario){
 
 		try {
 			int perfil = 0;

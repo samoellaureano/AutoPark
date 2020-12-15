@@ -14,7 +14,7 @@ $(document).ready(function(){
     buscarDados = function () {
         var cfg = {
             type: "POST",
-            url: "../../rest/funcionarioRest/buscaDados/" + dadosSessao.id,
+            url: "../../rest/funcionarioRest/buscaDadosPorUsuario/" + dadosSessao.id,
             success: function (funcionario) {
                 exibirDados(funcionario);
             },
@@ -50,8 +50,10 @@ $(document).ready(function(){
             funcionario.id = $("#salvarAlteracoes").val();
             funcionario.nome = $("#nomeEdit").val();
             usuario.id = dadosSessao.id;
+            usuario.perfil = dadosSessao.perfil;
             funcionario.usuario = usuario;
             funcionario.celular = $("#celEdit").val();
+            funcionario.celular = funcionario.celular.replace(/[^0-9]/g, '');
             funcionario.email = $("#emailEdit").val();
 
             cfg = {
@@ -66,8 +68,6 @@ $(document).ready(function(){
                         resp = ("Erro ao alterar o cadastro!");
                         exibirMessagem(resp, 2);
                     }
-
-                    buscarDados();
                 },
                 error: function (errJson) {
                     resp = ("Erro ao alterar o cadastro!");

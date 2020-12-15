@@ -20,6 +20,9 @@ public class TabelaDePreco extends Persistivel implements Serializable{
 
 	@Column(length = 45,nullable = false)
 	private  String descricao;
+	
+	@Column(length = 45)
+	private  String tipoCobranca;
 
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
