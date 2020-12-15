@@ -27,15 +27,56 @@ body {
   align-items: center;
   text-decoration: none;
   padding: 2rem;
-  color: rgb(216, 221, 217); 
+  color: rgb(213, 218, 214); 
 }
 .item > a:hover{
-  background-color: rgba(216, 207, 207, 0.795);
+  background-color: #aeb7ad42;
   border-radius: 1rem;
   color: rgb(0, 0, 0);
+  z-index: 1;
 }
 .item > a > span{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2rem;  
+}
+.chave{
+  position: absolute;
+  padding: 1rem;
+  background-color: #aeb7ad42;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  z-index: 2;
+}
+.chave > a{
+  display: block;
+  cursor: pointer;
+}
+.chave > a > span{
+  color:white;
+}
+.formSenha{
+  color: white;
+  
+}
+.formSenha > label{
+  margin: 0.7rem 0rem;
+  display: flex;
+}
+.btnSalvar {
+  margin: 1.5rem 0rem 0rem 0rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #fff;
+  padding: 0.7rem;
+  background-color: #20101f;
+  border-radius: 0.3rem;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+}
+.btnSalvar:hover{
+  background-color: #080408;
 }
 
