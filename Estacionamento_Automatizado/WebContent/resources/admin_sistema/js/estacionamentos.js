@@ -136,6 +136,7 @@ $(document).ready(function(){
         empresa.id = $("#empEdit").val();
         estacionamento.empresa = empresa;
         estacionamento.vagas = $("#vagasEdit").val();
+        estacionamento.vagas = estacionamento.vagas.replace(/[^0-9]/g,'');
         estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\-/g, "");
@@ -146,15 +147,15 @@ $(document).ready(function(){
             msg="Campo Razão social não preenchido.<br/>";
         };
 
-        if(estacionamento.cnpj=="" || estacionamento.cnpj ==null || estacionamento.cnpj == undefined || estacionamento.cnpj =="null" || estacionamento.cnpj.length != 14 ){
+        if(estacionamento.cnpj.length != 14 || estacionamento.cnpj=="" || estacionamento.cnpj ==null || estacionamento.cnpj == undefined || estacionamento.cnpj =="null"){
             msg+="Campo CNPJ não preenchido.<br/>";
         };
 
         if( estacionamento.endereco=="" ||  estacionamento.endereco ==null ||  estacionamento.endereco == undefined ||  estacionamento.endereco =="null"){
             msg+="Campo Endereço não preenchido.<br/>";
         };
-
-        if( estacionamento.vagas=="" ||  estacionamento.vagas ==null ||   estacionamento.vagas == undefined ||   estacionamento.vagas =="null" ||  estacionamento.vagas.length <0 ){
+        
+        if( estacionamento.vagas<1 || estacionamento.vagas=="" ||  estacionamento.vagas ==null ||   estacionamento.vagas == undefined ||   estacionamento.vagas =="null"){
             msg+="Campo Vagas não preenchido.<br/>";
         };
 
@@ -191,6 +192,7 @@ $(document).ready(function(){
         empresa.id = $("#emp").val();
         estacionamento.empresa = empresa;
         estacionamento.vagas = $("#vagas").val();
+        estacionamento.vagas = estacionamento.vagas.replace(/[^0-9]/g,'');
         estacionamento.cnpj = estacionamento.cnpj.replace(/\./g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\//g, "");
         estacionamento.cnpj = estacionamento.cnpj.replace(/\-/g, "");
@@ -199,7 +201,7 @@ $(document).ready(function(){
             msg="Campo Razão social não preenchido.<br/>";
         };
 
-        if(estacionamento.cnpj=="" || estacionamento.cnpj ==null || estacionamento.cnpj == undefined || estacionamento.cnpj =="null" || estacionamento.cnpj.length != 14 ){
+        if(estacionamento.cnpj.length != 14 || estacionamento.cnpj=="" || estacionamento.cnpj ==null || estacionamento.cnpj == undefined || estacionamento.cnpj =="null"){
             msg+="Campo CNPJ não preenchido.<br/>";
         };
 
@@ -207,7 +209,7 @@ $(document).ready(function(){
             msg+="Campo Endereço não preenchido.<br/>";
         };
 
-        if( estacionamento.vagas=="" ||  estacionamento.vagas ==null ||   estacionamento.vagas == undefined ||   estacionamento.vagas =="null" ||  estacionamento.vagas.length <0 ){
+        if( estacionamento.vagas<1 || estacionamento.vagas=="" ||  estacionamento.vagas ==null ||   estacionamento.vagas == undefined){
             msg+="Campo Vagas não preenchido.<br/>";
         };
 
