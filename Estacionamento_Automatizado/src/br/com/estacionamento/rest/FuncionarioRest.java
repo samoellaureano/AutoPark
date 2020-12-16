@@ -151,7 +151,6 @@ public class FuncionarioRest extends UtilRest{
 			funcionario.setEmpresa(new FuncionarioJPADAO().buscarPorId(funcionario.getId()).getEmpresa());
 			
 			funcionario.getUsuario().setPerfil(perfil);
-			funcionario.setAtivo(true);
 			
 			boolean	retorno = false;
 			

@@ -33,7 +33,7 @@ $(document).ready(function () {
                             + "<label for='reg" + i + "'>" + data.getUTCDate() + "/" + (data.getUTCMonth()+1) + "/" + data.getUTCFullYear() + "</label>"
                             + "<li>Veiculo:<span>" + listaDeRegistros.checkin[i].veiculo.placa + "</span></li>"
                             + "<li>Tempo de Uso:<span>" + (diferenca.getUTCDate() - 1) + "d " + diferenca.getUTCHours() + "h " + diferenca.getUTCMinutes() + "m</span></li>"
-                            + "<li>Valor:<span>" + listaDeRegistros.checkout[i].valor + "</span></li></ul>";
+                            + "<li>Valor: R$ <span>" + listaDeRegistros.checkout[i].valor + "</span></li></ul>";
                     }
                 };
             } else {

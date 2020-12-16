@@ -13,9 +13,11 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.estacionamento.dao.jpa.CheckinJPADAO;
 import br.com.estacionamento.dao.jpa.ClienteJPADAO;
 import br.com.estacionamento.dao.jpa.TipoVeiculoJPADAO;
 import br.com.estacionamento.dao.jpa.VeiculoJPADAO;
+import br.com.estacionamento.entidade.Checkin;
 import br.com.estacionamento.entidade.Cliente;
 import br.com.estacionamento.entidade.Veiculo;
 import br.com.estacionamento.util.UtilRest;
@@ -102,8 +104,14 @@ public class VeiculoRest extends UtilRest{
 
 			veiculo.setAtivo(false);
 			veiculo.setId(idVeiculo);
+			
+			Checkin checkin = new CheckinJPADAO().buscarPorIdVeiculo(idVeiculo);
+			boolean retorno = false;
+			if(checkin.getValidado() == true) {
+				retorno = veiculoJpadao.atualizar(veiculo);
+			}
 
-			boolean retorno = veiculoJpadao.atualizar(veiculo);
+			 
 
 			if(retorno){
 				// Cadastrado com sucesso.
