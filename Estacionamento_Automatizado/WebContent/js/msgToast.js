@@ -32,5 +32,5 @@ function exibirMessagem(msg, tipo) {
            
        });
        $("#msg").val('');       
-   }, 1500);
+   }, 2500);
 }

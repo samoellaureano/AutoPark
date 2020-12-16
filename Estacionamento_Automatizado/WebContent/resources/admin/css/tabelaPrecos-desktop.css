@@ -137,7 +137,7 @@ h2{
   font-size: 0.7rem;
   color: #fff;
   padding: 0.7rem;
-  background-color: #a91417;
+  background-color: #aeb7ad42;
   border-radius: 0.3rem;
   user-select: none;
 }
@@ -228,7 +228,7 @@ h2{
 }
 
 .itemEstac > li > ul > label{
-  background-color: #a7160a;
+  background-color: #000000;
     color: white;
     padding: 0.2rem 0rem;
     cursor: pointer;
@@ -237,6 +237,9 @@ h2{
     width: 4rem;
     margin: auto;
     user-select: none;
+}
+.itemEstac > li > ul > label:hover{
+  background-color: #272727;
 }
 
 .itemEstac > input:checked ~ li{

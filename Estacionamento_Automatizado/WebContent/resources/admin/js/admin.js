@@ -157,7 +157,14 @@ $(document).ready(function () {
             type: "POST",
             url: "../../rest/checkinRest/validaCheckin/" + placa,
             success: function (succJson) {
-                window.location.href = ("dashboard.html");
+                if (succJson == 1) {
+                    resp = ("Validado com sucesso!");
+                    exibirMessagem(resp, 1);
+                } else if (succJson == 2){
+                    resp = ("Erro ao validar!");
+                    exibirMessagem(resp, 2);
+                }
+                buscarVagas();
             },
             error: function (errJson) {
                 alert(errJson);

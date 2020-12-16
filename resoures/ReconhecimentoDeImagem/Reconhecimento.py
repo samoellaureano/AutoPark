@@ -51,8 +51,8 @@ def reconhecimentoImagem(path_img):
     print(texto)
     id = "1"
 
-    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
-    response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
+    response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
+    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
 
     #print(response.status_code)
 

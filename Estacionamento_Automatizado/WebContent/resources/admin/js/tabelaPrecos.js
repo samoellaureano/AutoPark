@@ -38,8 +38,8 @@ $(document).ready(function(){
                         +"<input min='0' type='text' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
                         +"<label for='tipoVeiculo"+j+"' >Tipo de Veículo:</label>"
                         +"<select name='tipoVeiculo' id='tipoVeiculo"+j+"'></select>"
-                        +"<label for='tipoCobrancaEdit"+j+"'>Tipo de Cobrança:</label>"
-                        +"<select name='tipoCobrancaEdit' id='tipoCobrancaEdit"+j+"'>"
+                        +"<label for='tipoCobrancaEdit"+j+"' hidden>Tipo de Cobrança:</label>"
+                        +"<select name='tipoCobrancaEdit' id='tipoCobrancaEdit"+j+"' hidden>"
                         +"<option value='hora'>Hora</option>"
                         +"<option value='dia'>Dia</option>"
                         +"<option value='semana'>Semana</option>"
@@ -122,7 +122,7 @@ $(document).ready(function(){
         var tabelaPreco = new Object();
 
         tabelaPreco.id = idPreco;
-        tabelaPreco.descricao = $("#tipoCobrancaEdit"+idJ).val();
+        tabelaPreco.descricao = "hora";
         estacionamento.id = $("#est"+idI).val();
         tipoVeiculo.id = $("#tipoVeiculo"+idJ).val();
         tabelaPreco.valor = $("#valor"+idJ).val();
@@ -138,6 +138,7 @@ $(document).ready(function(){
                 if (succJson == 1) {
                     resp = ("Preço editado com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("tabelaPrecos.html");
                 }else{
                     resp = ("Erro ao editar o preço!");
                     exibirMessagem(resp, 2);
@@ -159,7 +160,7 @@ $(document).ready(function(){
         tabelaPreco.valor = parseFloat($("#valor").val());
         tipoVeiculo.id = $("#tipoVeiculo").val();
         estacionamento.id = $("#estacionamento").val();
-        tabelaPreco.descricao = $("#tipoCobranca").val();
+        tabelaPreco.descricao = "hora";
         tabelaPreco.estacionamento = estacionamento;
         tabelaPreco.tipoVeiculo = tipoVeiculo;
 
@@ -170,6 +171,7 @@ $(document).ready(function(){
                 if (succJson == 1) {
                     resp = ("Item cadastrado com sucesso!");
                     exibirMessagem(resp, 1);
+                    window.location.href = ("tabelaPrecos.html");
                 } else if(succJson == 2){
                     resp = ("O item ja existe!");
                     exibirMessagem(resp, 2);

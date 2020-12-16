@@ -46,8 +46,8 @@
                                 <select name="tipoVeiculo" id="tipoVeiculo"></select>
                                 <label for="estacionamento">Estacionamento:</label>
                                 <select name="estacionamento" id="estacionamento"></select>
-                                <label for="tipoCobranca">Tipo de Cobrança:</label>
-                                <select name="estacionamento" id="tipoCobranca">
+                                <label for="tipoCobranca" hidden>Tipo de Cobrança:</label>
+                                <select name="estacionamento" id="tipoCobranca" hidden>
                                     <option value="hora">Hora</option>
                                     <option value="Dia">Dia</option>
                                     <option value="Semana">Semana</option>
@@ -67,7 +67,7 @@
                     <label for="menos">Fechar Dados</label>
                 </ul>
                 <div id="listaPrecosHTML"></div>
-                <a href="" id="carrega-listaPrecos">Ver Mais</a>
+                <a href="" id="carrega-listaPrecos" hidden>Ver Mais</a>
             </nav>
         </div>
     </div>
