@@ -59,8 +59,7 @@ $(document).ready(function(){
             } else {
                 precosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
-            $("#listaPrecosHTML").html(precosHTML);
-                       
+            $("#listaPrecosHTML").append(precosHTML);            
         }
     }
 

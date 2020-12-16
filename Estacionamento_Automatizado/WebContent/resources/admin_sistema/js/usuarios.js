@@ -157,7 +157,8 @@ $(document).ready(function(){
             msg+="Campo nome não preenchido.<br/>";
         };
 
-        if( funcionario.celular.length!=11||funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
+        if(  (funcionario.celular.length < 10 || funcionario.celular.length > 11)|| funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
+            
             msg+="Campo Telefone não preenchido.<br/>";
         };
 
@@ -226,7 +227,7 @@ $(document).ready(function(){
             msg+="Campo nome não preenchido.<br/>";
         };
 
-        if( funcionario.celular.length!=11||funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
+        if( (funcionario.celular.length < 10 || funcionario.celular.length > 11) ||funcionario.celular=="" ||  funcionario.celular ==null ||   funcionario.celular == undefined ||   funcionario.celular =="null" ||  funcionario.celular.length <0 ){
             msg+="Campo Telefone não preenchido.<br/>";
         };
 
