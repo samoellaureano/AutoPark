@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         var cfg = {
             type: "POST",
-            url: "../../rest/registroRest/buscaRegistro/" + dataInicial + "&" + dataFinal + "&"+estacionamento,
+            url: "../../rest/registroRest/buscaRelatorio/" + dataInicial + "&" + dataFinal + "&"+estacionamento,
             success: function (listaDeRegistros) {
                 visualizarRegistro(listaDeRegistros);
             },
@@ -23,7 +23,6 @@ $(document).ready(function () {
     });
 
     visualizarRegistro = function (listaDeRegistros){
-       console.log(listaDeRegistros);
         if (listaDeRegistros != undefined) {
             var registroHtml = "";
             if (listaDeRegistros.checkin.length > 0) {

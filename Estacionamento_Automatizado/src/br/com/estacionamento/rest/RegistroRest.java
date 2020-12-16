@@ -2,6 +2,7 @@ package br.com.estacionamento.rest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import br.com.estacionamento.util.UtilRest;
 
 @Path("registroRest")
 public class RegistroRest extends UtilRest{
-	
+
 	@POST
 	@Path("/buscaRegistro/{dataInicial}&{dataFinal}&{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -39,28 +40,74 @@ public class RegistroRest extends UtilRest{
 			}else {
 				cliente = new ClienteJPADAO().buscarPorIdUsuario(idUsuario);
 			}
-			 
-			List<Checkin> listaCheckin = new ArrayList<Checkin>();
-			List<Checkout> listaCheckout = new ArrayList<Checkout>();
-			Date DI = null;
-			Date DF = null;
-						
-			SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-			
-			if(!dataInicial.equals("undefined-undefined-") && !dataFinal.equals("undefined-undefined-")) {
+
+			if(cliente != null) {
+				List<Checkin> listaCheckin = new ArrayList<Checkin>();
+				List<Checkout> listaCheckout = new ArrayList<Checkout>();
+				Date DI = null;
+				Date DF = null;
+
+				SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+
+				if(!dataInicial.equals("undefined-undefined-") && !dataFinal.equals("undefined-undefined-")) {
 					DI = formato.parse(dataInicial);
 					DF = formato.parse(dataFinal);
+
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(DF);
+					cal.add(Calendar.DAY_OF_MONTH, +1);
+					DF = cal.getTime();
+
 					listaCheckin = new CheckinJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);					
 					listaCheckout = new CheckoutJPADAO().buscarPorIdClienteDataIF(cliente.getId(), DI, DF);
 					registro.setCheckin(listaCheckin);
 					registro.setCheckout(listaCheckout);			
-			}else {
-				listaCheckin = new CheckinJPADAO().buscarPorIdClienteLista(cliente.getId());
-				registro.setCheckin(listaCheckin);
-				listaCheckout = new CheckoutJPADAO().buscarPorIdClienteLista(cliente.getId());
-				registro.setCheckout(listaCheckout);
+				}else {
+					listaCheckin = new CheckinJPADAO().buscarPorIdClienteLista(cliente.getId());
+					registro.setCheckin(listaCheckin);
+					listaCheckout = new CheckoutJPADAO().buscarPorIdClienteLista(cliente.getId());
+					registro.setCheckout(listaCheckout);
+				}
 			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+		return this.buildResponse(registro);
+	}
+	
+	@POST
+	@Path("/buscaRelatorio/{dataInicial}&{dataFinal}&{idEstacionamento}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response buscaRelatorio(@PathParam("dataInicial") String dataInicial, @PathParam("dataFinal") String dataFinal, @PathParam("idEstacionamento") int idEstacionamento){
+		Registro registro = new Registro();
+		try{
+				List<Checkin> listaCheckin = new ArrayList<Checkin>();
+				List<Checkout> listaCheckout = new ArrayList<Checkout>();
+				Date DI = null;
+				Date DF = null;
 
+				SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+
+				if(!dataInicial.equals("undefined-undefined-") && !dataFinal.equals("undefined-undefined-")) {
+					DI = formato.parse(dataInicial);
+					DF = formato.parse(dataFinal);
+
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(DF);
+					cal.add(Calendar.DAY_OF_MONTH, +1);
+					DF = cal.getTime();
+
+					listaCheckin = new CheckinJPADAO().buscarPorIdEstacionamentoDataIF(idEstacionamento, DI, DF);					
+					listaCheckout = new CheckoutJPADAO().buscarPorIdEstacionamentoDataIF(idEstacionamento, DI, DF);
+					registro.setCheckin(listaCheckin);
+					registro.setCheckout(listaCheckout);			
+				}else {
+					listaCheckin = new CheckinJPADAO().buscarPorIdEstacionamentoLista(idEstacionamento);
+					registro.setCheckin(listaCheckin);
+					listaCheckout = new CheckoutJPADAO().buscarPorIdEstacionamentoLista(idEstacionamento);
+					registro.setCheckout(listaCheckout);
+				}
 		}catch (Exception e){
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
