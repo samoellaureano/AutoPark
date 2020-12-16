@@ -27,7 +27,7 @@ public class SendMail {
                     new javax.mail.Authenticator() {
                          protected PasswordAuthentication getPasswordAuthentication() 
                          {
-                               return new PasswordAuthentication("sendemailteste2020@gmail.com", "sendemailteste");
+                               return new PasswordAuthentication("email@email.com", "senha");
                          }
                     });
 
@@ -36,7 +36,7 @@ public class SendMail {
 
         try {
               Message message = new MimeMessage(session);
-              message.setFrom(new InternetAddress("sendemailteste2020@gmail.com")); //Remetente
+              message.setFrom(new InternetAddress("email@email.com")); //Remetente
 
               Address[] toUser = InternetAddress //Destinatário(s)
                          .parse(email); 
