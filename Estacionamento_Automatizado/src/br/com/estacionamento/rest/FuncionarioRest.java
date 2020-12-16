@@ -108,7 +108,7 @@ public class FuncionarioRest extends UtilRest{
 	}
 	
 	@POST
-	@Path("/w/{idUsuario}")
+	@Path("/buscaDados/{idUsuario}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response buscaDados(@PathParam("idUsuario") int idUsuario){
 		try{
