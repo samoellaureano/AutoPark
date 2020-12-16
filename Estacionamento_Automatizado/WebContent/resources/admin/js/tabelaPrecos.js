@@ -21,6 +21,8 @@ $(document).ready(function(){
         var precosHTML = "<ul class='itemEstac'>";
         if (listaDePrecos != undefined) {
             if (listaDePrecos.length > 0) {
+                var nomeCampo = [];
+                var valorCampo = [];
                 for (var i = 0; i < listaDePrecos.length; i++) {
                     
                     precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos[i].estacionamento.id+"' hidden>"
@@ -49,19 +51,27 @@ $(document).ready(function(){
                         +"</div></form></div></ul></li>";
                         
                         buscaTipoVeiculo(j);
-                        $("#statusEdit"+j).prop("checked",listaDePrecos[j].ativo);
-                        $("#tipoCobrancaEdit"+j).val(listaDePrecos[j].descricao);
-                        $("#tipoVeiculo"+j).val(listaDePrecos[j].tipoVeiculo.id);
-                        
+                        setCampos(j,listaDePrecos);
                     }
                     precosHTML +="</ul>";                                        
                 }
             } else {
                 precosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
-            $("#listaPrecosHTML").append(precosHTML);            
+            $("#listaPrecosHTML").append(precosHTML);           
         }
     }
+
+    setCampos=function(j,listaDePrecos){
+      
+        setTimeout(function () {
+
+          $("#statusEdit"+j).prop("checked",listaDePrecos[j].ativo);
+          $("#tipoCobrancaEdit"+j).val(listaDePrecos[j].descricao);
+          $("#tipoVeiculo"+j).val(listaDePrecos[j].tipoVeiculo.id);
+
+        },500);
+    };
 
     buscaTipoVeiculo=function (num) {
         $("#tipoVeiculo"+num+" option").remove();
