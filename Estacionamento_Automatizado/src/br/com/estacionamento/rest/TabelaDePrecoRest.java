@@ -35,6 +35,8 @@ public class TabelaDePrecoRest extends UtilRest{
 			
 			tabelaDePreco.setTipoVeiculo(new TipoVeiculoJPADAO().buscarPorId(tabelaDePreco.getTipoVeiculo().getId()));
 			tabelaDePreco.setEstacionamento(new EstacionamentoJPADAO().buscarPorId(tabelaDePreco.getEstacionamento().getId()));
+			
+			tabelaDePreco.setAtivo(true);
 
 			boolean	retorno = tabelaDePrecoJpadao.salvar(tabelaDePreco);
 
@@ -60,38 +62,65 @@ public class TabelaDePrecoRest extends UtilRest{
 
 
 	@POST
-	@Path("/buscarPrecos/{idEstacionamento}")
+	@Path("/buscarPrecos/{idEmpresa}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response buscarPrecos (@PathParam("idEstacionamento") int idEstacionamento){
+	public Response buscarPrecos (@PathParam("idEmpresa") int idEmpresa){
 		
 		try {
 			
 		
 			List<TabelaDePreco> listaPrecos = new ArrayList<TabelaDePreco>();
 			
-			Estacionamento estacionamento = new EstacionamentoJPADAO().buscarPorId(idEstacionamento);
+			List<Estacionamento> listaEstacionamentos = new EstacionamentoJPADAO().buscarPorIdEsmpresa(idEmpresa);
 			
-			if(estacionamento.getDescricao().equals("")||estacionamento.getDescricao().equals("null")) {
-				
-				listaPrecos = new TabelaDePrecoJPADAO().listaTodosValor();
-				
-			}else {
-				
-				listaPrecos = new TabelaDePrecoJPADAO().listaValorEstacionamento(estacionamento.getDescricao());
+			for (Estacionamento object: listaEstacionamentos) {
+				List<TabelaDePreco> listaTabelaPreco = new TabelaDePrecoJPADAO().listaValorEstacionamento(object.getDescricao());
+				for (TabelaDePreco object2: listaTabelaPreco) {
+					listaPrecos.add(object2);
+				}
 			}
-			
-			if(listaPrecos.size()>0 && listaPrecos!=null){
 				
-				return this.buildResponse(listaPrecos);
-
-			}else {
-				
-				return this.buildErrorResponse("Erro na busca");
-			}
+			return this.buildResponse(listaPrecos);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro na busca");
 		}		
 	}
+	
+	@POST
+	@Path("/editarPreco")
+	@Consumes("application/*")
+
+	public Response editarPreco(String editarPreco){
+
+		try {
+
+			TabelaDePreco tabelaDePreco = new ObjectMapper().readValue(editarPreco,TabelaDePreco.class);
+			TabelaDePrecoJPADAO tabelaDePrecoJpadao = new TabelaDePrecoJPADAO();
+			
+			tabelaDePreco.setTipoVeiculo(new TipoVeiculoJPADAO().buscarPorId(tabelaDePreco.getTipoVeiculo().getId()));
+			tabelaDePreco.setEstacionamento(new EstacionamentoJPADAO().buscarPorId(tabelaDePreco.getEstacionamento().getId()));
+
+			boolean	retorno = tabelaDePrecoJpadao.atualizar(tabelaDePreco);
+
+			if(retorno){
+				// true = Cadastrado com sucesso.
+				return this.buildResponse("1");				
+
+			}else if(retorno==false){
+				// false = ja existe
+				return this.buildErrorResponse("2");
+
+			}else {
+				// null = Erro ao cadastrar
+				return this.buildErrorResponse("0");			
+			}
+
+		} catch (Exception e){
+			e.printStackTrace();
+
+			return this.buildErrorResponse("Erro ao cadastrar");
+		}
+	}	
 }

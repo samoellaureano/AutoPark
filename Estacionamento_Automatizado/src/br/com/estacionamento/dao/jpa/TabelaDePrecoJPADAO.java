@@ -39,9 +39,8 @@ public class TabelaDePrecoJPADAO extends JPAAbstract<TabelaDePreco> implements T
 	public List<TabelaDePreco> listaValorEstacionamento(String estacionamento) {
 		
 		List<TabelaDePreco>listaPreco = new ArrayList<TabelaDePreco>();		
-		String jpql = "select c from "+getEntityName()+" c  where c.descricao := estacionamento ";
+		String jpql = "select c from "+getEntityName()+" c  where c.estacionamento.descricao LIKE '"+ estacionamento +"'";
 		Query query = super.getQuery(jpql);
-		query.setParameter("estacionamento", estacionamento);
 		
 		@SuppressWarnings("rawtypes")
 		List list = query.getResultList();

@@ -23,7 +23,7 @@ $(document).ready(function(){
             if (listaDePrecos.length > 0) {
                 for (var i = 0; i < listaDePrecos.length; i++) {
                     
-                    precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos[i].estacionamento.descricao+"' hidden>"
+                    precosHTML += "<input type='radio' name='estac' id='est"+i+"' value='"+listaDePrecos[i].estacionamento.id+"' hidden>"
                     +"<label for='est"+i+"'>"+listaDePrecos[i].estacionamento.descricao+"</label>";
                     
                     for (var j = 0; j < listaDePrecos.length; j++) {
@@ -33,33 +33,39 @@ $(document).ready(function(){
                         +"<label for='editar"+j+"'>Editar</label>"
                         +"<input type='checkbox' id='editar"+j+"' hidden>"
                         +"<div><form><label for='valor"+j+"'>Valor:</label>"
-                        +"<input min='0' type='number' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
-                        +"<label for='tipoVeiculo"+j+"'>Tipo de Veículo:</label>"
-                        +"<select name='tipoVeiculo' id='tipoVeiculo"+j+">"+listaOpcoes                          
-                        +"</select>"
-                        +"<label for='tipoCobranca"+j+"'>Tipo de Cobrança:</label>"
-                        +"<select name='estacionamento' id='tipoCobranca"+j+"'>"
+                        +"<input min='0' type='text' id='valor"+j+"' value='"+listaDePrecos[j].valor+"'>"
+                        +"<label for='tipoVeiculo"+j+"' >Tipo de Veículo:</label>"
+                        +"<select name='tipoVeiculo' id='tipoVeiculo"+j+"'></select>"
+                        +"<label for='tipoCobrancaEdit"+j+"'>Tipo de Cobrança:</label>"
+                        +"<select name='tipoCobrancaEdit' id='tipoCobrancaEdit"+j+"'>"
                         +"<option value='hora'>Hora</option>"
                         +"<option value='dia'>Dia</option>"
                         +"<option value='semana'>Semana</option>"
                         +"<option value='mes'>Mês</option></select>"
-                        +"<label for='status"+j+"'>Status:"
-                        +"<input type='checkbox' id='status"+j+"'checked'></label>"
-                        +"<div><a href=''>Cancelar</a>"
-                        +"<button onClick='editarPreco("+i+","+j+")'>Confirmar</button>"
-                        +"</div></form></div></ul></li>"
+                        +"<label for='statusEdit"+j+"'>Status:"
+                        +"<input type='checkbox' id='statusEdit"+j+"'></label>"
+                        +"<div><a href='tabelaPrecos.html'>Cancelar</a>"
+                        +"<button onClick='editarPreco("+i+","+j+","+listaDePrecos[j].id+")'>Confirmar</button>"
+                        +"</div></form></div></ul></li>";
+                        
+                        buscaTipoVeiculo(j);
+                        $("#statusEdit"+j).prop("checked",listaDePrecos[j].ativo);
+                        $("#tipoCobrancaEdit"+j).val(listaDePrecos[j].descricao);
+                        $("#tipoVeiculo"+j).val(listaDePrecos[j].tipoVeiculo.id);
+                        
                     }
-                    precosHTML +="</ul>";                   
+                    precosHTML +="</ul>";                                        
                 }
             } else {
                 precosHTML += "<li style='text-align: center'>Nenhum registro encontrado</li>";
             }
-            $("#listaPrecosHTML").append(precosHTML);
-            
+            $("#listaPrecosHTML").html(precosHTML);
+                       
         }
     }
 
-    buscaTipoVeiculo=function () {
+    buscaTipoVeiculo=function (num) {
+        $("#tipoVeiculo"+num+" option").remove();
         var cfg = {
             type: "POST",
             url: "../../rest/tipoVeiculoRest/buscarTipoVeiculosPorDesc/null",
@@ -67,7 +73,7 @@ $(document).ready(function(){
                 if (listaTipoVeiculo != undefined){
                     if (listaTipoVeiculo.length > 0) {
                         for (var i = 0; i < listaTipoVeiculo.length; i++) {
-                            $("#tipoVeiculo").append("<option value='"+listaTipoVeiculo[i].id+"'>"+listaTipoVeiculo[i].descricao+"</option>");
+                            $("#tipoVeiculo"+num).append("<option value='"+listaTipoVeiculo[i].id+"'>"+listaTipoVeiculo[i].descricao+"</option>");
                         };
                     };
                 };
@@ -100,15 +106,24 @@ $(document).ready(function(){
         autoPark.ajax.post(cfg); 
      };      
 
-    editarPreco = function(idI, idJ){
+    editarPreco = function(idI, idJ, idPreco){
+        var tabelaPreco = new Object();
+        var estacionamento = new Object();
+        var tipoVeiculo = new Object();
+        var tabelaPreco = new Object();
+
+        tabelaPreco.id = idPreco;
+        tabelaPreco.descricao = $("#tipoCobrancaEdit"+idJ).val();
+        estacionamento.id = $("#est"+idI).val();
+        tipoVeiculo.id = $("#tipoVeiculo"+idJ).val();
         tabelaPreco.valor = $("#valor"+idJ).val();
-        tabelaPreco.tipoVeiculo = $("#tipoVeiculo"+idJ).val();
-        tabelaPreco.tipoCobranca = $("#tipoCobranca"+idJ).val();
-        tabelaPreco.status = $("#status"+idJ).val();
-        tabelaPreco.estacionamento = $("#est"+idI).val();
+        tabelaPreco.ativo = $("#statusEdit"+idJ).is(':checked');
+
+        tabelaPreco.estacionamento = estacionamento;
+        tabelaPreco.tipoVeiculo = tipoVeiculo;        
 
         var cfg = {
-            url: "../rest/tabelaPrecoRest/editarPreco",
+            url: "../../rest/tabelaDePrecoRest/editarPreco",
             data: JSON.stringify(tabelaPreco),
             success: function (succJson) {
                 if (succJson == 1) {
@@ -118,7 +133,6 @@ $(document).ready(function(){
                     resp = ("Erro ao editar o preço!");
                     exibirMessagem(resp, 2);
                 }
-                buscar();
             },
             error: function (errJson) {
                 resp = ("Erro ao editar o preço!");
@@ -130,10 +144,15 @@ $(document).ready(function(){
 
     $('#cadTabelaPreco').click(function(e){
         var tabelaPreco = new Object();
-        tabelaPreco.valor = $("#valor").val();
-        tabelaPreco.tipoVeiculo = $("#tipoVeiculo").val();
-        tabelaPreco.estacionamento = $("#estacionamento").val();
-        tabelaPreco.tipoCobranca = $("#tipoCobranca").val();
+        var estacionamento = new Object();
+        var tipoVeiculo = new Object();
+        var tabelaPreco = new Object();
+        tabelaPreco.valor = parseFloat($("#valor").val());
+        tipoVeiculo.id = $("#tipoVeiculo").val();
+        estacionamento.id = $("#estacionamento").val();
+        tabelaPreco.descricao = $("#tipoCobranca").val();
+        tabelaPreco.estacionamento = estacionamento;
+        tabelaPreco.tipoVeiculo = tipoVeiculo;
 
         var cfg = {
             url: "../../rest/tabelaDePrecoRest/addPreco",
@@ -164,6 +183,7 @@ $(document).ready(function(){
             url: "../../rest/funcionarioRest/buscaDadosPorUsuario/" + dadosSessao.id,
             success: function (funcionario) {
                 dadosSessao.empresa = funcionario.empresa.id;
+                buscar();
             },
             error: function (err) {
                 alert("Erro ao buscar Funcionarios: " + err.responseText);
@@ -171,9 +191,10 @@ $(document).ready(function(){
         };
         autoPark.ajax.post(cfg);
     }
+    
     setTimeout(function () {
-        buscaDados();
-        buscaTipoVeiculo();
+        buscaDados();     
+        buscaTipoVeiculo("");
         buscaEstacionamento();
     }, 1500);
 });

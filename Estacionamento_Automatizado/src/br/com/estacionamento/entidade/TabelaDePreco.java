@@ -21,8 +21,8 @@ public class TabelaDePreco extends Persistivel implements Serializable{
 	@Column(length = 45,nullable = false)
 	private  String descricao;
 	
-	@Column(length = 45)
-	private  String tipoCobranca;
+	@Column
+	private  boolean ativo;
 
 	@JoinColumn(referencedColumnName = "id")
 	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -55,6 +55,13 @@ public class TabelaDePreco extends Persistivel implements Serializable{
 	}
 	public void setEstacionamento(Estacionamento estacionamento) {
 		this.estacionamento = estacionamento;
-	}    
+	}
+	public boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 
 }
