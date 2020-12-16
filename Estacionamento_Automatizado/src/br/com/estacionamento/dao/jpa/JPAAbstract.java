@@ -110,12 +110,16 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 	}
 
 	public List<T> buscarPorIdClienteLista(int id) {
-		String jpql = "";
-		if(id == 0) {
-			jpql = "select c from "+getEntityName()+" c";
-		}else {
-			jpql = "select c from "+getEntityName()+" c where c.cliente.id ="+id;
-		}
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id ="+id;
+		Query query = super.getQuery(jpql);
+		@SuppressWarnings({ "unchecked" })
+		List<T> list = query.getResultList();
+		super.close();
+		return list;
+	}
+	
+	public List<T> buscarPorIdEstacionamentoLista(int id) {
+		String jpql = "select c from "+getEntityName()+" c";
 		Query query = super.getQuery(jpql);
 		@SuppressWarnings({ "unchecked" })
 		List<T> list = query.getResultList();
@@ -157,12 +161,19 @@ public abstract class JPAAbstract <T> extends JPAConnection{
 
 	@SuppressWarnings("unchecked")
 	public List<T> buscarPorIdClienteDataIF(int id, Date dataInicial, Date dataFinal) {
-		String jpql = "";
-		if(id == 0) {
-			jpql = "select c from "+getEntityName()+" c where c.dataHora BETWEEN :DI AND :DF";
-		}else {
-			jpql = "select c from "+getEntityName()+" c where c.cliente.id ="+id+" AND c.dataHora BETWEEN :DI AND :DF";
-		}
+		String jpql = "select c from "+getEntityName()+" c where c.cliente.id ="+id+" AND c.dataHora BETWEEN :DI AND :DF";
+		Query query = super.getQuery(jpql);
+		query.setParameter("DI", dataInicial);
+		query.setParameter("DF", dataFinal);
+
+		List<T> list = query.getResultList();
+		super.close();
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> buscarPorIdEstacionamentoDataIF(int id, Date dataInicial, Date dataFinal) {
+		String jpql = "select c from "+getEntityName()+" c where c.dataHora BETWEEN :DI AND :DF";
 		Query query = super.getQuery(jpql);
 		query.setParameter("DI", dataInicial);
 		query.setParameter("DF", dataFinal);
