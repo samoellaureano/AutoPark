@@ -77,11 +77,22 @@ $(document).ready(function(){
     };
 
     mascaraCpf=function(){
+       
+
         $("#cpf").mask("999.999.999-99");
     };
 
     maskTellEdit=function(){
-        $("#celularEdit").mask("(00) 0000-00009");
+        
+        var vlTelefone = $("#celularEdit").val();
+        vlTelefone = vlTelefone.replace(/[^0-9]/g, '');
+
+        if(vlTelefone.length==11){
+            $("#celularEdit").mask("(00) 00000-0000");
+
+        }else{
+            $("#celularEdit").mask("(00) 0000-00000");
+        };        
     };
     maskTell=function(){
         $("#celular").mask("(00) 0000-00009");
