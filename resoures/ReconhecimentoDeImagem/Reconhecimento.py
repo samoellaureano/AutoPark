@@ -26,16 +26,16 @@ def reconhecimentoImagem(path_img):
 
     img = cv2.imread(path_img)
 
-    cv2.imshow("ENTRADA", img)
+    #cv2.imshow("ENTRADA", img)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("Escala Cinza", img)
+    #cv2.imshow("Escala Cinza", img)
 
     img = cv2.GaussianBlur(img, (5, 5), 0)
-    cv2.imshow("Desfoque", img)
+    #cv2.imshow("Desfoque", img)
 
     ret, img = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY)
-    cv2.imshow("Limiar", img)
+    #cv2.imshow("Limiar", img)
 
     cv2.imwrite(path_img + "-ocr.jpg", img)
     imagem = Image.open(path_img + "-ocr.jpg")
@@ -52,7 +52,7 @@ def reconhecimentoImagem(path_img):
     id = "1"
 
     #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkinRest/addCheckin/" + texto + "&" + id)
-    #response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
+    response = requests.post("http://localhost:8080/Estacionamento_Automatizado/rest/checkoutRest/addCheckout/" + texto + "&" + id)
 
     #print(response.status_code)
 
@@ -89,9 +89,9 @@ while video.isOpened():
     cv2.line(frame, (200, 0), (200, 1200), (0, 0, 255), 1)
     cv2.line(frame, (900, 0), (900, 1200), (0, 0, 255), 1)
 
-    cv2.imshow('FRAME', frame)
-    cv2.imshow('RES', area)
-    cv2.imshow("Proc", result)
+    #cv2.imshow('FRAME', frame)
+    #cv2.imshow('RES', area)
+    #cv2.imshow("Proc", result)
     localizarPlaca(contornos, area)
 
 
