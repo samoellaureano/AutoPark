@@ -23,7 +23,7 @@ As instruções a seguir irão lhe proporcionar uma cópia deste projeto e de co
 
 Após efetuar o clone do repositório, importar o projeto no IDE Eclipse JAVA. Criar o servidor Apache TomCat 9 e adicionar o projeto.
 
-Para executar a simulação do reconhecimento por imagem, cofigurar as definições do interpretador utilizando o ambiente virtualizado no PyCharm, validar as bibliotecas conforme a seguir:
+Para executar a simulação do reconhecimento por imagem, configurar as definições do interpretador utilizando o ambiente virtualizado no PyCharm, validar as bibliotecas conforme a seguir:
 
 * Pillow 8.0.1
 
